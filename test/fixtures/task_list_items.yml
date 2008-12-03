@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  task_id: 1
+  context_id: 1
+  context_type: MyString
+  position: 1
+
+two:
+  task_id: 1
+  context_id: 1
+  context_type: MyString
+  position: 1
