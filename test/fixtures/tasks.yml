@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  description: MyString
+  type: MyString
+  project_id: 1
+  due_date: 2008-12-03
+  estimate: 
+  creator_id: 1
+  asignee_id: 1
+  status: MyString
+
+two:
+  title: MyString
+  description: MyString
+  type: MyString
+  project_id: 1
+  due_date: 2008-12-03
+  estimate: 
+  creator_id: 1
+  asignee_id: 1
+  status: MyString
