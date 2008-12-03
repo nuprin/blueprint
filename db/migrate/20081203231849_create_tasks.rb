@@ -1,14 +1,14 @@
 class CreateTasks < ActiveRecord::Migration
   def self.up
     create_table :tasks do |t|
-      t.string :title
+      t.string :title, :null => false
       t.string :description, :limit => 5000
 
-      t.string :type, :limit => 32
-      t.string :status, :limit => 32
+      t.string :type, :limit => 32, :null => false
+      t.string :status, :limit => 32, :null => false
 
       t.integer :project_id
-      t.integer :creator_id
+      t.integer :creator_id, :null => false
       t.integer :asignee_id
 
       t.column :estimate, :tinyint

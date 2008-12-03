@@ -1,7 +1,7 @@
 class CreateProjects < ActiveRecord::Migration
   def self.up
     create_table :projects do |t|
-      t.string :title
+      t.string :title, :null => false
       t.string :description, :limit => 5000
 
       t.timestamps
