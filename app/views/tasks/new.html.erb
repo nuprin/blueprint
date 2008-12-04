@@ -1,6 +1,7 @@
 <h1>Add a <%= params[:kind].capitalize %></h1>
 <% form_for(@task) do |f| %>
   <%= f.error_messages %>
+  <%= f.hidden_field :status, :value => "assigned" %>
   <p>
     <label for="title">Title:</label><br />
     <%= f.text_field :title %>
