@@ -22,7 +22,8 @@ table.task_list td.drag_handle {
   padding: 0;
   width: 31px;
 }
-table.task_list td.task_assignee {
+table.task_list td.task_assignee,
+table.task_list td.task_project {
   width: 75px;
 }
 table.task_list td.task_due {
@@ -32,7 +33,7 @@ table.task_list td.task_estimate {
   width: 60px;
 }
 table.task_list td.task_name {
-  width: 427px;
+  width: 494px;
 }
 table.task_list td.task_assignee,
 table.task_list td.task_estimate,
