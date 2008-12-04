@@ -3,7 +3,6 @@ table.task_list {
   width: 600px;
 }
 table.task_list tbody td {
-  background-color: #eef;
   cursor: move;
 }
 table.task_list td {
