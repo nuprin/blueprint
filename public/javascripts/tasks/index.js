@@ -2,7 +2,6 @@ var Tasks = {
   makeSortable: function (id) {
     $('#' + id).sortable({
       axis: 'y',
-      containment: '#' + id,
       items: 'tbody > tr',
       update: function (evt, ui) {
         $.post("/tasks/reorder", {
