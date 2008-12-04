@@ -16,7 +16,7 @@
   </p>
   <p>
     <label for="description">Project:</label><br />
-    <%= f.select :project, Project.all.map{|p| [p.title, p.id]} %>
+    <%= f.select :project_id, Project.all.map{|p| [p.title, p.id]} %>
   </p>
   <p>
     <label for="description">Assign To:</label><br />

@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_filter :find_model
 
   def create
-    Task.create!(params[:task])
+    raise "You don't exist" unless viewer.real?
+    Task.create!(params[:task].merge(:creator_id => viewer.id))
     redirect_to tasks_url
   end
 
