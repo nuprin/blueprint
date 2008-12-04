@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
-  belongs_to :asignee, :class_name => 'User'
+  belongs_to :assignee, :class_name => 'User'
 
   validates_presence_of :creator
 
@@ -13,6 +13,6 @@ class Task < ActiveRecord::Base
 
   after_create do |task|
     task.project.add_to_list(task) if task.project
-    task.asignee.add_to_list(task) if task.asignee
+    task.assignee.add_to_list(task) if task.assignee
   end
 end

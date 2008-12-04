@@ -12,7 +12,7 @@ task_opts = {
   :status => 'assigned',
   :project => p1,
   :creator => u1,
-  :asignee => u2
+  :assignee => u2
 }
 
 Task.create! task_opts.merge(:title => "Add link tracking to announcements")
@@ -21,7 +21,7 @@ Task.create! task_opts.merge(
 Task.create! task_opts.merge(
   :title => "Allow site admins to remove petitions from causes")
 
-task_opts[:creator], task_opts[:asignee] = task_opts[:asignee],
+task_opts[:creator], task_opts[:assignee] = task_opts[:assignee],
                                            task_opts[:creator]
 
 Task.create! task_opts.merge(

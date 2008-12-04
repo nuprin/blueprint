@@ -8,7 +8,7 @@ one:
   due_date: 2008-12-03
   estimate: 
   creator_id: 1
-  asignee_id: 1
+  assignee_id: 1
   status: MyString
 
 two:
@@ -19,5 +19,5 @@ two:
   due_date: 2008-12-03
   estimate: 
   creator_id: 1
-  asignee_id: 1
+  assignee_id: 1
   status: MyString

@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration
 
       t.integer :project_id
       t.integer :creator_id, :null => false
-      t.integer :asignee_id
+      t.integer :assignee_id
 
       t.column :estimate, :tinyint
       t.date :due_date
