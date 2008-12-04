@@ -1,3 +1,10 @@
 db/schema.rb
 *.log
 log/*
+.DS_Store
+.project
+tags
+tmp/*
+tmtags
+.*.swp
+*~
