@@ -1,86 +1,31 @@
+<%= javascript_include_tag 'tasks/index' %>
 <%= stylesheet_link_tag 'tasks/index' %>
+
+<% @projects.each do |project| %>
+<% next if project.task_list_items.empty? %>
 <script type="text/javascript">
-$(function() {
-  $("#list_of_tasks").sortable({});
-  $("#tasks_form").submit(function () {
-    $.post($("#tasks_form").attr("action"),
-           $("#list_of_tasks").sortable("serialize"),
-           function (data) {
-             $("#output").text(data);
-           });
-    return false;
-  });
-  $("#project_5_tasks").sortable({
-    items: 'tr',
-    
-  });
-  $("#tasks_form_2").submit(function () {
-    $.post($("#tasks_form_2").attr("action"),
-           $("#project_5_tasks").sortable("serialize"),
-           function (data) {
-             $("#output").text(data);
-           });
-    return false;
-  });
+$(function () {
+  Tasks.makeSortable("project_<%= project.id %>_tasks");
 });
 </script>
-
-<% form_tag(tasks_path, :method => :post, :id => "tasks_form") do %>
-  <ul id="list_of_tasks">
-    <li id="task_1">Thing One</li>
-    <li id="task_2">Thing Two</li>
-    <li id="task_3">Thing Three</li>
-    <li id="task_4">Thing Four</li>
-  </ul>
-  <%= submit_tag "Submit" %>
+<table id="project_<%= project.id %>_tasks" class="task_list">
+  <thead>
+    <tr>
+      <th colspan="4"><%= h project.title %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% project.task_list_items.each do |list_item| %>
+    <% task = list_item.task %>
+    <tr id="list_item_<%= list_item.id %>">
+      <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
+      <td class="task_assignee"><%= h task.assignee.name %></td>
+      <td class="task_name"><%= link_to h(task.title), task_path(task) %></td>
+      <td class="task_estimate"><%= task.estimate %></td>
+      <td class="task_due"><%=
+        task.due_date.strftime("%b %e") if task.due_date %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>
-
-<% form_tag(tasks_path, :method => :post, :id => "tasks_form_2") do %>
-  <table id="project_5_tasks" class="task_list">
-    <thead>
-      <tr>
-        <th colspan="4">Petitions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr id="project_5_task_1">
-        <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
-        <td class="task_assignee">Brad</td>
-        <td class="task_name"><a href="#">Add link tracking to announcements</a></td>
-        <td class="task_estimate">5</td>
-        <td class="task_due">Dec 5</td>
-      </tr>
-      <tr id="project_5_task_2">
-        <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
-        <td class="task_assignee">Brad</td>
-        <td class="task_name"><a href="#">Display feature stats at top of stats page</a></td>
-        <td class="task_estimate">5</td>
-        <td class="task_due">Dec 5</td>
-      </tr>
-      <tr id="project_5_task_3">
-        <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
-        <td class="task_assignee">Kristján</td>
-        <td class="task_name"><a href="#">Implement 'Email All Signers' functionality</a></td>
-        <td class="task_estimate">5</td>
-        <td class="task_due">Dec 5</td>
-      </tr>
-      <tr id="project_5_task_4">
-        <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
-        <td class="task_assignee">Kristján</td>
-        <td class="task_name"><a href="#">Track status messages with Uhura</a></td>
-        <td class="task_estimate">5</td>
-        <td class="task_due">Dec 5</td>
-      </tr>
-      <tr id="project_5_task_5">
-        <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
-        <td class="task_assignee">Brad</td>
-        <td class="task_name"><a href="#">Allow site admins to remove petitions from causes</a></td>
-        <td class="task_estimate">5</td>
-        <td class="task_due">Dec 5</td>
-      </tr>
-    </tbody>
-  </table>
-  <%= submit_tag "Submit" %>
-<% end %>
-
-<pre id="output"></pre>
