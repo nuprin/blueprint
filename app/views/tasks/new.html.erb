@@ -1,5 +1,4 @@
-<h1>Create a Task</h1>
-
+<h1>Add a <%= params[:kind].capitalize %></h1>
 <% form_for(@task) do |f| %>
   <%= f.error_messages %>
   <p>
@@ -10,10 +9,14 @@
     <label for="description">Description:</label><br />
       <%= f.text_area :description %>
   </p>
-  <p>
-    <label for="description">Kind:</label><br />
-      <%= f.select :kind, [["Task", "task"], ["Bug", "bug"]] %>
-  </p>
+  <% if params[:kind] %>
+    <%= f.hidden_field :kind, :value => params[:kind] %>
+  <% else %>
+    <p>
+      <label for="description">Kind:</label><br />
+        <%= f.select :kind, [["Task", "task"], ["Bug", "bug"]] %>
+    </p>
+  <% end %>
   <p>
     <label for="description">Project:</label><br />
     <%= f.select :project_id, Project.all.map{|p| [p.title, p.id]} %>
