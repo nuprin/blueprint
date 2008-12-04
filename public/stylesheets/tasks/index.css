@@ -1,7 +1,7 @@
 table.task_list {
   border-collapse: collapse;
   margin: 10px 0;
-  width: 600px;
+  width: 760px;
 }
 table.task_list tbody {
   border-top: 1px solid #e9f1f5;
@@ -31,7 +31,7 @@ table.task_list td.task_estimate {
   width: 60px;
 }
 table.task_list td.task_name {
-  width: 335px;
+  width: 427px;
 }
 table.task_list td.task_assignee,
 table.task_list td.task_estimate,
