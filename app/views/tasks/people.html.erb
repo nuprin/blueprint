@@ -5,10 +5,10 @@
 <% next if user.task_list.empty? %>
 <script type="text/javascript">
 $(function () {
-  Tasks.makeSortable("project_<%= user.id %>_tasks");
+  Tasks.makeSortable("user_<%= user.id %>_tasks");
 });
 </script>
-<table id="project_<%= user.id %>_tasks" class="task_list">
+<table id="user_<%= user.id %>_tasks" class="task_list">
   <thead>
     <tr>
       <th colspan="5"><%= h user.name %></th>

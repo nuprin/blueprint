@@ -5,6 +5,8 @@ var Tasks = {
       containment: '#' + id,
       items: 'tbody > tr',
       update: function (evt, ui) {
+        console.log(ui.item)
+        console.log(ui.item.prevAll().length + 1)
         $.post("/tasks/reorder", {
           list_item_id: ui.item.attr('id').replace(/list_item_/, ''),
           list_item_position: ui.item.prevAll().length + 1
