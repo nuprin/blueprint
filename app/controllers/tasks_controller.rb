@@ -15,8 +15,6 @@ class TasksController < ApplicationController
   end
 
   def reorder
-    params[:list_item_id]
-    params[:list_item_position]
     list_item = TaskListItem.find(params[:list_item_id])
     list_item.update_position(params[:list_item_position])
     render :text => {:status => "ok"}.to_json
