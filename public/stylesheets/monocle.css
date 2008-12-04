@@ -11,9 +11,6 @@ body {
   margin: 0 auto;
   width: 800px;
 }
-h1 {
-  padding: 1.5em 20px 10px;
-}
 #add_links {
   float: right;
 }
@@ -33,6 +30,9 @@ h1 {
   background: #ddd;
   border: 1px solid #fff;
   font-size: 12px;
+}
+#header h1 {
+  padding: 1.5em 20px 10px;
 }
 #nav {
   border-top: 1px solid #fff;
