@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     # TODO: update the model with this new data
     params[:list_item_id]
     params[:list_item_position]
-    render :text => "ok"
+    render :text => {:status => "ok"}.to_json
   end
 
   def show

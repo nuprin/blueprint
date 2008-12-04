@@ -10,7 +10,7 @@ var Tasks = {
         function (data) {
           // don't do anything after the update is complete
           //$("#output").text("updated "+ ui.item.attr('id'));
-        });
+        }, "json");
       }
     });
   }
