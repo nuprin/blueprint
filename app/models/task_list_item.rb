@@ -32,7 +32,8 @@ class TaskListItem < ActiveRecord::Base
 
   def sync_project_list
     return unless context_type == 'User'
-    return if last?
+
+    other_item.move_to_bottom && return if last?
 
     my_list = self.class.for_context(context).after(position).with_tasks.
                          all(:order => :position)
@@ -46,7 +47,7 @@ class TaskListItem < ActiveRecord::Base
 
   def sync_assignee_list
     return unless context_type == 'Project'
-    return if last?
+    other_item.move_to_bottom && return if last?
     other_item.insert_at(lower_item.other_item.position)
   end
 
