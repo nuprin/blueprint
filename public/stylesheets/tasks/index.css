@@ -19,7 +19,8 @@ table.task_list td.add_task {
 table.task_list td.drag_handle {
   background-color: #f3f3f3;
   text-align: center;
-  width: 14px;
+  padding: 0;
+  width: 31px;
 }
 table.task_list td.task_assignee {
   width: 75px;
@@ -46,6 +47,7 @@ table.task_list th {
   color: #ccc;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
+  line-height: 25px;
   text-align: left;
   text-transform: uppercase;
 }
