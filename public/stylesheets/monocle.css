@@ -14,6 +14,12 @@ body {
 h1 {
   padding: 1.5em 20px 10px;
 }
+#add_links {
+  float: right;
+}
+#add_links a {
+  margin-right: 15px;
+}
 #container {
   background: #fff;
 }
@@ -31,11 +37,13 @@ h1 {
 #nav {
   border-top: 1px solid #fff;
 }
-#nav a {
+#nav {
+  line-height: 30px;
+}
+#filters a {
   border-right: 1px solid #fff;
   display: block;
   float: left;
   text-align: center;
-  line-height: 30px;
   width: 100px;
 }

@@ -17,7 +17,11 @@
       </div>
       <h1>Monocle</h1>
       <div id="nav">
-        <ul class="clearfix">
+        <div id="add_links">
+          <%= link_to "Add a Task", new_task_url(:kind => "task") %>
+          <%= link_to "Add a Bug", new_task_url(:kind => "bug") %>
+        </div>
+        <ul class="clearfix" id="filters">
           <li>
             <a href="">Features</a>
           </li>
