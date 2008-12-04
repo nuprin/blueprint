@@ -23,9 +23,8 @@ tasks << Task.create! task_opts.merge(
 tasks << Task.create! task_opts.merge(
   :title => "Allow site admins to remove petitions from causes")
 
-task_opts[:creator],
-task_opts[:assignee] = task_opts[:assignee],
-                      task_opts[:creator]
+task_opts[:creator], task_opts[:assignee] =
+task_opts[:assignee], task_opts[:creator]
 
 tasks << Task.create! task_opts.merge(
   :title => "Implement 'Email All Signers' functionality")
