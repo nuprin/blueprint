@@ -1,0 +1,15 @@
+body {
+  font-family: 'Lucida Grande', Tahoma, sans-serif;
+  font-size: 12px;
+}
+table.task_list {
+  border-collapse: collapse;
+}
+table.task_list td {
+  background-color: #eef;
+  cursor: move;
+  padding: 5px;
+}
+table.task_list td a {
+  cursor: pointer;
+}
