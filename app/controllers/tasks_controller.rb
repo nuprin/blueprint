@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_filter :find_model
 
   def create
-    render :text => params.to_json
+    Task.create!(params[:task])
+    redirect_to tasks_url
   end
 
   def index
@@ -10,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-
+    @task = Task.new
   end
 
   def reorder
