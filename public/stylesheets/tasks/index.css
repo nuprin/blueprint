@@ -6,10 +6,14 @@ table.task_list {
   border-collapse: collapse;
   width: 600px;
 }
-table.task_list td {
+table.task_list tbody td {
   background-color: #eef;
   cursor: move;
+}
+table.task_list td {
   padding: 5px;
+}
+table.task_list td.add_task {
 }
 table.task_list td.drag_handle {
   width: 14px;

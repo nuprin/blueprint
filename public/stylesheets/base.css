@@ -1,0 +1,29 @@
+a img {
+  border: none;
+}
+a:active, a:focus {
+  outline: none;
+}
+body, form, h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.clearfix:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0pt;
+  line-height: 0pt;
+  visibility: hidden;
+}
+html[xmlns] .clearfix {
+  display:block;
+}
+* html .clearfix {
+  height:1%;
+}

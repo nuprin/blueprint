@@ -5,13 +5,31 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>Monocle<%= ": #{@title}" if @title %></title>
   <script src="http://www.google.com/jsapi"></script>
+  <%= stylesheet_link_tag "base" %>
+  <%= stylesheet_link_tag "monocle" %>
   <%= javascript_include_tag 'jquery' %>
 </head>
 <body>
-
-  <p>I could have a menu here</p>
-
-  <%= yield %>
-
+  <div id="container">
+    <div id="header">
+      <div id="global_nav">
+        Monocle | <%= link_to "Mockr", "http://mockr" %>
+      </div>
+      <h1>Monocle</h1>
+      <div id="nav">
+        <ul class="clearfix">
+          <li>
+            <a href="">Features</a>
+          </li>
+          <li>
+            <a href="">People</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>
