@@ -10,4 +10,8 @@ class Project < ActiveRecord::Base
   def add_to_list(task)
     TaskListItem.create!(:task => task, :context => self)
   end
+
+  after_destroy do |project|
+    project.tasks.destroy_all
+  end
 end
