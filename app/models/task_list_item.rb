@@ -1,5 +1,7 @@
 class TaskListItem < ActiveRecord::Base
-  acts_as_list
+                         # THESE MUST ALL BE SINGLE QUOTES
+  acts_as_list :scope => ['context_id=#{context_id}',
+                          'context_type=\'#{context_type}\''].join(' and ')
 
   belongs_to :task
   belongs_to :context, :polymorphic => true
@@ -7,5 +9,4 @@ class TaskListItem < ActiveRecord::Base
   validates_presence_of :task
   validates_presence_of :context
 
-  validates_numericality_of :position, :in => 0..255
 end
