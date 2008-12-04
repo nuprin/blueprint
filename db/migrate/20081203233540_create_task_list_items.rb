@@ -5,8 +5,6 @@ class CreateTaskListItems < ActiveRecord::Migration
       t.integer :context_id, :null => false
       t.string :context_type, :limit => 32, :null => false
       t.column :position, :tinyint, :null => false
-
-      t.timestamps
     end
   end
 
