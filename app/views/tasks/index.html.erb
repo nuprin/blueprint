@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag 'tasks/index' %>
 
 <% @projects.each do |project| %>
-<% next if project.task_list_items.empty? %>
+<% next if project.task_list.empty? %>
 <script type="text/javascript">
 $(function () {
   Tasks.makeSortable("project_<%= project.id %>_tasks");
@@ -15,7 +15,7 @@ $(function () {
     </tr>
   </thead>
   <tbody>
-    <% project.task_list_items.each do |list_item| %>
+    <% project.task_list.each do |list_item| %>
     <% task = list_item.task %>
     <tr id="list_item_<%= list_item.id %>">
       <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>

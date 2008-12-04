@@ -4,11 +4,24 @@ body {
 }
 table.task_list {
   border-collapse: collapse;
+  width: 600px;
 }
 table.task_list td {
   background-color: #eef;
   cursor: move;
   padding: 5px;
+}
+table.task_list td.drag_handle {
+  width: 14px;
+}
+table.task_list td.task_assignee {
+  width: 75px;
+}
+table.task_list td.task_estimate {
+  width: 60px;
+}
+table.task_list td.task_due {
+  width: 60px;
 }
 table.task_list td a {
   cursor: pointer;

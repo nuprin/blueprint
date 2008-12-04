@@ -16,20 +16,20 @@ task_opts = {
 }
 
 tasks = []
-tasks << Task.create! task_opts.merge(
-  :title => "Add link tracking to announcements")
-tasks << Task.create! task_opts.merge(
-  :title => "Display feature stats at top of stats page")
-tasks << Task.create! task_opts.merge(
-  :title => "Allow site admins to remove petitions from causes")
+tasks << Task.create!(task_opts.merge(
+  :title => "Add link tracking to announcements"))
+tasks << Task.create!(task_opts.merge(
+  :title => "Display feature stats at top of stats page"))
+tasks << Task.create!(task_opts.merge(
+  :title => "Allow site admins to remove petitions from causes"))
 
 task_opts[:creator], task_opts[:assignee] =
 task_opts[:assignee], task_opts[:creator]
 
-tasks << Task.create! task_opts.merge(
-  :title => "Implement 'Email All Signers' functionality")
-tasks << Task.create! task_opts.merge(
-  :title => "Track status messages with Uhura")
+tasks << Task.create!(task_opts.merge(
+  :title => "Implement 'Email All Signers' functionality"))
+tasks << Task.create!(task_opts.merge(
+  :title => "Track status messages with Uhura"))
 
 tasks.each_with_index do |task, ix|
   TaskListItem.create! :task_id => task.id, :context_id => p1.id,
