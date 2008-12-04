@@ -30,8 +30,8 @@ $(function () {
           <%= image_tag 'drag_handle.gif' %>
         <% end %>
       </td>
-      <td class="task_assignee"><%= h task.assignee.name %></td>
       <td class="task_name"><%= link_to h(task.title), task_path(task) %></td>
+      <td class="task_assignee"><%= h task.assignee.name %></td>
       <td class="task_estimate"><%= task.estimate %></td>
       <td class="task_due"><%=
         task.due_date.strftime("%b %e") if task.due_date %></td>

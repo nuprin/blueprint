@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   def add_to_list(task)
     TaskListItem.create!(:task => task, :context => self)
   end
+
+  def real?
+    !self.id.nil?
+  end
 end

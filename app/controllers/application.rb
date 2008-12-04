@@ -5,10 +5,9 @@ class ApplicationController < ActionController::Base
   layout 'monocle'
   helper :all
 
-  helper_method :viewer
   def viewer
-    User.first
+    return User.first
+    @viewer = User.find_by_id(session[:user_id]) || User.new
   end
-
-  #protect_from_forgery
+  helper_method :viewer
 end

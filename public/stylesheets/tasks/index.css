@@ -2,7 +2,11 @@ table.task_list {
   border-collapse: collapse;
   width: 600px;
 }
+table.task_list tbody {
+  border-top: 1px solid #e9f1f5;
+}
 table.task_list tbody td {
+  border-bottom: 1px solid #e9f1f5;
   cursor: move;
 }
 table.task_list td {
@@ -11,16 +15,26 @@ table.task_list td {
 table.task_list td.add_task {
 }
 table.task_list td.drag_handle {
+  background-color: #f3f3f3;
+  text-align: center;
   width: 14px;
 }
 table.task_list td.task_assignee {
   width: 75px;
 }
+table.task_list td.task_due {
+  width: 60px;
+}
 table.task_list td.task_estimate {
   width: 60px;
 }
+table.task_list td.task_name {
+  width: 335px;
+}
+table.task_list td.task_assignee,
+table.task_list td.task_estimate,
 table.task_list td.task_due {
-  width: 60px;
+  color: #aaa;
 }
 table.task_list td a {
   cursor: pointer;
