@@ -6,5 +6,6 @@ class TaskListItem < ActiveRecord::Base
 
   validates_presence_of :task
   validates_presence_of :context
-  validates_numericality_of :position
+
+  validates_numericality_of :position, :in => 0..255
 end

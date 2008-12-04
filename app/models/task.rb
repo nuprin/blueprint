@@ -5,8 +5,9 @@ class Task < ActiveRecord::Base
 
   validates_presence_of :creator
 
-  validates_numericality_of :estimate, :less_than_or_equal_to => 20
+  validates_numericality_of :estimate, :less_than_or_equal_to => 20,
+                                       :allow_nil => true
 
-  validates_length_of :title, :in => [1...255]
-  validates_length_of :description, :maximum => 5000
+  validates_length_of :title, :in => 1...255
+  validates_length_of :description, :maximum => 5000, :allow_nil => true
 end
