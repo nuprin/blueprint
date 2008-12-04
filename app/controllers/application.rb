@@ -5,9 +5,14 @@ class ApplicationController < ActionController::Base
   layout 'monocle'
   helper :all
 
+  before_filter :require_login
+
   def viewer
-    return User.first
     @viewer = User.find_by_id(session[:user_id]) || User.new
   end
   helper_method :viewer
+
+  def require_login
+    redirect_to login_users_url unless viewer.real?
+  end
 end

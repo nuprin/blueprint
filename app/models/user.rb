@@ -14,4 +14,10 @@ class User < ActiveRecord::Base
   def real?
     !self.id.nil?
   end
+
+  def self.form_options
+    self.all.map{|u| [u.id, u.name]}.map do |(id, name)|
+      "<option value=\"#{id}\">#{name}</option>"
+    end.join
+  end
 end
