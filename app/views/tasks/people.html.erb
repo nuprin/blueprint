@@ -1,17 +1,17 @@
 <%= javascript_include_tag 'tasks/index' %>
 <%= stylesheet_link_tag 'tasks/index' %>
 
-<% @projects.each do |project| %>
-<% next if project.task_list.empty? %>
+<% @users.each do |user| %>
+<% next if user.task_list.empty? %>
 <script type="text/javascript">
 $(function () {
-  Tasks.makeSortable("project_<%= project.id %>_tasks");
+  Tasks.makeSortable("project_<%= user.id %>_tasks");
 });
 </script>
-<table id="project_<%= project.id %>_tasks" class="task_list">
+<table id="project_<%= user.id %>_tasks" class="task_list">
   <thead>
     <tr>
-      <th colspan="5"><%= h project.title %></th>
+      <th colspan="5"><%= h user.name %></th>
     </tr>
   </thead>
   <!--tfoot>
@@ -20,7 +20,7 @@ $(function () {
     </tr>
   </tfoot-->
   <tbody>
-    <% project.task_list.each do |list_item| %>
+    <% user.task_list.each do |list_item| %>
     <% task = list_item.task %>
     <tr id="list_item_<%= list_item.id %>">
       <td class="drag_handle">
@@ -31,7 +31,7 @@ $(function () {
         <% end %>
       </td>
       <td class="task_name"><%= link_to h(task.title), task_path(task) %></td>
-      <td class="task_assignee"><%= h task.assignee.name %></td>
+      <td class="task_project"><%= h task.project.title %></td>
       <td class="task_estimate"><%= task.estimate %></td>
       <td class="task_due"><%=
         task.due_date.strftime("%b %e") if task.due_date %></td>
