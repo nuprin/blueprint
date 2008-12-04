@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   before_filter :find_model
 
+  def create
+    render :text => params[:task].to_json
+  end
+
   def index
 
   end

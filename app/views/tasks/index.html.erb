@@ -1,1 +1,25 @@
-hi there
+<script type="text/javascript">
+$(function() {
+  $("#list_of_tasks").sortable({});
+  $("#tasks_form").submit(function () {
+    $.post($("#tasks_form").attr("action"),
+           $("#list_of_tasks").sortable("serialize"),
+           function (data) {
+             $("#output").text(data);
+           });
+    return false;
+  });
+});
+</script>
+
+<% form_tag(tasks_path, :method => :post, :id => "tasks_form") do %>
+  <ul id="list_of_tasks">
+    <li id="task_1">Thing One</li>
+    <li id="task_2">Thing Two</li>
+    <li id="task_3">Thing Three</li>
+    <li id="task_4">Thing Four</li>
+  </ul>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<pre id="output"></pre>
