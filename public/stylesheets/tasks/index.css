@@ -1,5 +1,6 @@
 table.task_list {
   border-collapse: collapse;
+  margin: 10px 0;
   width: 600px;
 }
 table.task_list tbody {
