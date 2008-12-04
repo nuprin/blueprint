@@ -11,14 +11,25 @@ $(function () {
 <table id="project_<%= project.id %>_tasks" class="task_list">
   <thead>
     <tr>
-      <th colspan="4"><%= h project.title %></th>
+      <th colspan="5"><%= h project.title %></th>
     </tr>
   </thead>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="add_task">Add task</td>
+    </tr>
+  </tfoot>
   <tbody>
     <% project.task_list.each do |list_item| %>
     <% task = list_item.task %>
     <tr id="list_item_<%= list_item.id %>">
-      <td class="drag_handle"><%= image_tag 'drag_handle.gif' %></td>
+      <td class="drag_handle">
+        <% if task.assignee == viewer %>
+          <%= check_box_tag "complete_#{list_item.id}", '' %>
+        <% else %>
+          <%= image_tag 'drag_handle.gif' %>
+        <% end %>
+      </td>
       <td class="task_assignee"><%= h task.assignee.name %></td>
       <td class="task_name"><%= link_to h(task.title), task_path(task) %></td>
       <td class="task_estimate"><%= task.estimate %></td>

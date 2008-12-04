@@ -1,3 +1,7 @@
+User.destroy_all
+Project.destroy_all
+Task.destroy_all
+TaskListItem.destroy_all
 
 u1 = User.create! :name => "Brad"
 u2 = User.create! :name => "Kristján"
@@ -17,21 +21,21 @@ task_opts = {
 
 tasks = []
 tasks << Task.create!(task_opts.merge(
-  :title => "Add link tracking to announcements"))
+  :title => "Add link tracking to announcements", :estimate => 3,
+  :due_date => Date.today + rand(90)))
 tasks << Task.create!(task_opts.merge(
-  :title => "Display feature stats at top of stats page"))
+  :title => "Display feature stats at top of stats page", :estimate => 10,
+  :due_date => Date.today + rand(90)))
 tasks << Task.create!(task_opts.merge(
-  :title => "Allow site admins to remove petitions from causes"))
+  :title => "Allow site admins to remove petitions from causes",
+  :estimate => 1, :due_date => Date.today + rand(90)))
 
 task_opts[:creator], task_opts[:assignee] =
 task_opts[:assignee], task_opts[:creator]
 
 tasks << Task.create!(task_opts.merge(
-  :title => "Implement 'Email All Signers' functionality"))
+  :title => "Implement 'Email All Signers' functionality",
+  :due_date => Date.today + rand(90)))
 tasks << Task.create!(task_opts.merge(
-  :title => "Track status messages with Uhura"))
-
-tasks.each_with_index do |task, ix|
-  TaskListItem.create! :task_id => task.id, :context_id => p1.id,
-                       :context_type => p1.class.name, :position => ix
-end
+  :title => "Track status messages with Uhura", :estimate => 5,
+  :due_date => Date.today + rand(90)))

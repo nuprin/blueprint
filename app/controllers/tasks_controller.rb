@@ -15,10 +15,13 @@ class TasksController < ApplicationController
   end
 
   def reorder
-    # TODO: update the model with this new data
     params[:list_item_id]
     params[:list_item_position]
+    list_item = TaskListItem.find(params[:list_item_id])
+    list_item.update_position(params[:list_item_position])
     render :text => {:status => "ok"}.to_json
+  rescue ActiveRecord::RecordNotFound
+    render :text => {:status => "item not found"}.to_json
   end
 
   def show
