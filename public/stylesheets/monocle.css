@@ -6,6 +6,8 @@ a:visited {
 }
 body {
   background: #f2f2f2;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 11px;
   margin: 0 auto;
   width: 800px;
 }
@@ -13,25 +15,24 @@ h1 {
   padding: 1.5em 20px 10px;
 }
 #container {
-  background: white;
+  background: #fff;
 }
 #content {
-  font-family: Verdana, sans-serif;
-  font-size: 11px;
+  padding: 20px;
 }
 #global_nav {
   padding: 10px 20px;
 }
 #header {
   background: #eef;
-  border: 1px solid white;
+  border: 1px solid #fff;
   font-size: 12px;
 }
 #nav {
-  border-top: 1px solid white;
+  border-top: 1px solid #fff;
 }
 #nav a {
-  border-right: 1px solid white;
+  border-right: 1px solid #fff;
   display: block;
   float: left;
   text-align: center;
