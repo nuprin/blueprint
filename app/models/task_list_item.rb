@@ -50,6 +50,8 @@ class TaskListItem < ActiveRecord::Base
     other_item.insert_at(lower_item.other_item.position)
   end
 
+protected
+
   # Returns the item containing the same task in the other (Project/User) list
   def other_item
     return @other_item.first if @other_item
@@ -58,6 +60,8 @@ class TaskListItem < ActiveRecord::Base
     end if other_context
     (@other_item = [other]).first
   end
+
+private
 
   def other_context
     (@other_context ||= [task.send(other_context_method)]).first
