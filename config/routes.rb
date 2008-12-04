@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :tasks
 
   map.root :controller => "tasks", :action => "index"
 
@@ -7,6 +6,6 @@ ActionController::Routing::Routes.draw do |map|
                 :collection => {:login => :get,
                                 :save_login => :post}
   map.resources :tasks,
-                :collection => {:reorder => :post}
+                :collection => {:people => :get, :reorder => :post}
 
 end
