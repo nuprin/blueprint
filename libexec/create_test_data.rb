@@ -8,7 +8,7 @@ p1 = Project.create! :title => "Petitions",
                      change.).squish
 
 task_opts = {
-  :type => 'task',
+  :kind => 'task',
   :status => 'assigned',
   :project => p1,
   :creator => u1,

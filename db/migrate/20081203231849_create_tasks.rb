@@ -4,7 +4,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string :title, :null => false
       t.string :description, :limit => 5000
 
-      t.string :type, :limit => 32, :null => false
+      t.string :kind, :limit => 32, :null => false
       t.string :status, :limit => 32, :null => false
 
       t.integer :project_id
