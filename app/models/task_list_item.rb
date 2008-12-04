@@ -38,7 +38,7 @@ class TaskListItem < ActiveRecord::Base
                          all(:order => :position)
 
     next_in_project = my_list.find do |i|
-      i.task.project_id = self.task.project_id
+      i.task.project_id == self.task.project_id
     end
 
     other_item.insert_at(next_in_project.other_item.position)
