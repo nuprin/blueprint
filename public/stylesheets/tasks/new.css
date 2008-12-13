@@ -5,6 +5,7 @@ h1 {
   margin-bottom: 2em;
 }
 input[type=text], textarea {
+  border: 2px solid #ddd;
   margin: 5px 0 10px;
   width: 590px;
 }

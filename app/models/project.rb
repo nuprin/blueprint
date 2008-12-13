@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
     TaskListItem.create!(:task => task, :context => self)
   end
 
+  def self.all_for_select
+    self.all.sort_by(&:title).map{|p| [p.title, p.id]}
+  end
+  
   after_destroy do |project|
     project.tasks.destroy_all
   end
