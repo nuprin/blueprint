@@ -3,8 +3,18 @@ Project.destroy_all
 Task.destroy_all
 TaskListItem.destroy_all
 
-u1 = User.create! :name => "Brad"
-u2 = User.create! :name => "Kristján"
+names = [
+  "Brad", "Chase", "Chris", "Jennifer", "Jimmy", "Joe", "Kevin", "Kristján", "Matt", "Susan"
+]
+
+users = []
+names.map do |name|
+  users << User.create!(:name => name)
+end
+
+u1 = users[0]
+u2 = users[1]
+
 projects = []
 projects << Project.create!(:title => "Petitions",
                      :description => %(A feature that lets people sign their
