@@ -4,7 +4,11 @@ class TasksController < ApplicationController
   def create
     raise "You don't exist" unless viewer.real?
     Task.create!(params[:task].merge(:creator_id => viewer.id))
-    redirect_to tasks_url
+    if params[:commit] == "Create and Add Another"
+      redirect_to new_task_url(:kind => params[:task][:kind])
+    else
+      redirect_to tasks_url
+    end
   end
 
   def index
