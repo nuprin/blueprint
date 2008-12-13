@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :require_login
 
-private
+  private
 
   def viewer
     @viewer = User.find_by_id(session[:user_id]) || User.new

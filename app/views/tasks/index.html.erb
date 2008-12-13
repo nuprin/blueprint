@@ -11,7 +11,7 @@ $(function () {
 <table id="project_<%= project.id %>_tasks" class="task_list">
   <thead>
     <tr>
-      <th colspan="5"><%= h project.title %></th>
+      <th colspan="5"><%= link_to project.title, project_url(project) %></th>
     </tr>
   </thead>
   <!--tfoot>
@@ -25,7 +25,10 @@ $(function () {
     <tr id="list_item_<%= list_item.id %>">
       <td class="drag_handle">
         <% if task.assignee == viewer %>
-          <%= check_box_tag "complete_#{list_item.id}", '' %>
+          <% form_tag complete_task_url(task) do %>
+            <%= check_box_tag "complete_task_id", false, false,
+              :onclick => "$(this).parents('form').submit(); return false;" %>
+          <% end %>
         <% else %>
           <%= image_tag 'drag_handle.gif' %>
         <% end %>

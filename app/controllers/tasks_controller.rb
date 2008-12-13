@@ -20,6 +20,12 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def complete
+    task = Task.find(params[:id])
+    task.complete!
+    redirect_to :back
+  end
+
   def reorder
     list_item = TaskListItem.find(params[:list_item_id])
     list_item.update_position(params[:list_item_position])
