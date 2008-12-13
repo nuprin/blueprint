@@ -13,6 +13,17 @@ class Task < ActiveRecord::Base
   validates_length_of :title, :in => 1...255
   validates_length_of :description, :maximum => 5000, :allow_nil => true
 
+  def completed?
+    self.status == "completed"
+  end
+
+  def complete!
+    self.status = "completed"
+    self.completed_at = Time.now.getutc
+    self.list_items.map(&:destroy)
+    self.save!
+  end
+
   after_create do |task|
     task.project.add_to_list(task) if task.project
     task.assignee.add_to_list(task) if task.assignee

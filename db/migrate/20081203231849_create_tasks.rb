@@ -13,7 +13,7 @@ class CreateTasks < ActiveRecord::Migration
 
       t.column :estimate, :tinyint
       t.date :due_date
-
+      t.datetime :completed_at
       t.timestamps
     end
   end
