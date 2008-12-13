@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  <title>Monocle<%= ": #{@title}" if @title %></title>
+  <title>Blueprint<%= ": #{@title}" if @title %></title>
   <script src="http://www.google.com/jsapi"></script>
   <%= stylesheet_link_tag "base" %>
   <%= stylesheet_link_tag "monocle" %>
@@ -12,10 +12,6 @@
 <body>
   <div id="container">
     <div id="header">
-      <div id="global_nav">
-        Monocle | <%= link_to "Mockr", "http://mockr" %>
-      </div>
-      <h1>Monocle</h1>
       <div id="nav">
         <div id="add_links">
           <%= link_to "Add a Task", new_task_url(:kind => "task") %>
@@ -23,7 +19,7 @@
         </div>
         <ul class="clearfix" id="filters">
           <li>
-            <%= link_to "Features", tasks_url %>
+            <%= link_to "Projects", tasks_url %>
           </li>
           <li>
             <%= link_to "People", people_tasks_url %>
