@@ -1,38 +1,44 @@
-<h1>Add a <%= params[:kind].capitalize %></h1>
-<% form_for(@task) do |f| %>
-  <%= f.error_messages %>
-  <%= f.hidden_field :status, :value => "assigned" %>
-  <p>
-    <label for="title">Title:</label><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <label for="description">Description:</label><br />
-      <%= f.text_area :description %>
-  </p>
-  <% if params[:kind] %>
-    <%= f.hidden_field :kind, :value => params[:kind] %>
-  <% else %>
-    <p>
-      <label for="description">Kind:</label><br />
-        <%= f.select :kind, [["Task", "task"], ["Bug", "bug"]] %>
-    </p>
-  <% end %>
-  <p>
-    <label for="description">Project:</label><br />
-    <%= f.select :project_id, Project.all.map{|p| [p.title, p.id]} %>
-  </p>
-  <p>
-    <label for="description">Assign To:</label><br />
-      <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]} %>
-  </p>
-  <p>
-    <label for="description">Due Date:</label><br />
-      <%= f.date_select :due_date %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= stylesheet_link_tag "shared/form" %>
+<%= stylesheet_link_tag "tasks/new" %>
 
-<%= link_to 'Back', tasks_path %>
+<h1>Add a <%= params[:kind].capitalize %></h1>
+<div id="form_container">
+  <% form_for(@task) do |f| %>
+    <%= f.error_messages %>
+    <%= f.hidden_field :status, :value => "assigned" %>
+    <p>
+      <label for="title">Title:</label><br />
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <label for="description">Description:</label><br />
+        <%= f.text_area :description %>
+    </p>
+    <% if params[:kind] %>
+      <%= f.hidden_field :kind, :value => params[:kind] %>
+    <% else %>
+      <p>
+        <label for="description">Kind:</label><br />
+          <%= f.select :kind, [["Task", "task"], ["Bug", "bug"]] %>
+      </p>
+    <% end %>
+    <ul class="clearfix" id="secondary_fields">
+      <li>
+        <label for="description">Project:</label><br />
+        <%= f.select :project_id, Project.all.map{|p| [p.title, p.id]} %>
+      </li>
+      <li>
+        <label for="description">Assign To:</label><br />
+          <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]} %>
+      </li>
+      <li>
+        <label for="description">Due Date:</label><br />
+          <%= f.date_select :due_date %>
+      </li>
+    </ul>
+    <ul class="clearfix" id="submit_tags">
+      <li><%= f.submit "Create #{params[:kind].capitalize}" %></li>
+      <li><%= f.submit "Create and Add Another" %></li>
+    </ul>
+  <% end %>
+</div>

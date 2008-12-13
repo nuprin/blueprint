@@ -1,0 +1,35 @@
+form ul {
+  margin: 0 0 1em;
+}
+h1 {
+  margin-bottom: 2em;
+}
+input[type=text], textarea {
+  margin: 5px 0 10px;
+  width: 590px;
+}
+select {
+  margin-top: 4px;
+}
+textarea {
+  height: 200px;
+}
+#form_container {
+  background: #f0f0f0;
+  border-bottom: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
+  margin: 20px -20px 0;
+  padding: 30px 100px 40px;
+}
+#secondary_fields li, #submit_tags li {
+  float: left;
+}
+#secondary_fields {
+  margin-bottom: 2em;
+}
+#secondary_fields li {
+  margin-right: 30px;
+}
+#submit_tags li {
+  margin-right: 5px;
+}

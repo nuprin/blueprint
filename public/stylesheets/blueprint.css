@@ -1,0 +1,51 @@
+a, a:visited {
+  color: #036;
+}
+a {
+  text-decoration: none;
+}
+body, input[type=text], textarea {
+  color: #333;
+  font-family: Helvetica, Verdana, Tahoma, sans-serif;
+}
+body {
+  background-image: url("../images/layout.gif");
+  font-size: 12px;
+  margin-left: 200px;
+  width: 800px;
+}
+input[type=text], textarea {
+  border: 1px solid #aaa;
+  font-size: 18px;
+  padding: 6px 4px;
+}
+#add_links {
+  float: right;
+}
+#add_links a {
+  margin-left: 15px;
+}
+#container {
+  background: #fff;
+}
+#content {
+  padding: 20px;
+}
+#header {
+  background: #ddd;
+  font-size: 12px;
+}
+#header h1 {
+  padding: 1.5em 20px 10px;
+}
+#nav {
+  font-family: Helvetica;
+  line-height: 36px;
+  padding: 0 20px;
+}
+#filters li {
+  float: left;
+}
+#filters a {
+  margin-right: 15px;
+}

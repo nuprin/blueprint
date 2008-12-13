@@ -6,7 +6,7 @@
   <title>Blueprint<%= ": #{@title}" if @title %></title>
   <script src="http://www.google.com/jsapi"></script>
   <%= stylesheet_link_tag "base" %>
-  <%= stylesheet_link_tag "monocle" %>
+  <%= stylesheet_link_tag "blueprint" %>
   <%= javascript_include_tag 'jquery' %>
 </head>
 <body>
@@ -14,15 +14,18 @@
     <div id="header">
       <div id="nav">
         <div id="add_links">
-          <%= link_to "Add a Task", new_task_url(:kind => "task") %>
-          <%= link_to "Add a Bug", new_task_url(:kind => "bug") %>
+          <%= link_to "ADD A TASK", new_task_url(:kind => "task") %>
+          <%= link_to "ADD A BUG", new_task_url(:kind => "bug") %>
         </div>
         <ul class="clearfix" id="filters">
           <li>
-            <%= link_to "Projects", tasks_url %>
+            <%= link_to "PROJECTS", tasks_url %>
           </li>
           <li>
-            <%= link_to "People", people_tasks_url %>
+            <%= link_to "PEOPLE", people_tasks_url %>
+          </li>
+          <li>
+            <%= link_to "YOU", "" %>
           </li>
         </ul>
       </div>
