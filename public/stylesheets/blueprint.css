@@ -19,6 +19,13 @@ input[type=text], textarea {
   font-size: 18px;
   padding: 6px 4px;
 }
+.notice {
+  background: green;
+  color: white;
+  line-height: 40px;
+  margin: 0;
+  padding: 0 20px;
+}
 #add_links {
   float: right;
 }

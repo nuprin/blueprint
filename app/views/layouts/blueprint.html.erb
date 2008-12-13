@@ -30,6 +30,9 @@
         </ul>
       </div>
     </div>
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
     <div id="content">
       <%= yield %>
     </div>
