@@ -8,6 +8,10 @@ class Project < ActiveRecord::Base
                              :conditions => "completed_at IS NOT NULL",
                              :order      => "completed_at DESC"
 
+  has_many :parked_tasks, :class_name  => "Task",
+                          :conditions  => "status = 'parked'",
+                          :order       => "updated_at DESC"
+
   validates_length_of :title, :in => 1...255
   validates_length_of :description, :maximum => 5000, :allow_nil => true
 

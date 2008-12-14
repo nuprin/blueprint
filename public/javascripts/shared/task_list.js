@@ -23,9 +23,18 @@ var Tasks = {
     $("a.quick_cancel_link").click(function() {
       $(this).parents("tfoot:eq(0)").removeClass('editing');
     });
+  },
+  setupActions: function() {
+    $("table.task_list tr").hover(function(){
+      $(this).find(".task_links").fadeIn(50);
+    }, function(){
+      $(this).find(".task_links").fadeOut(50);
+    });
   }
 };
+
 $(function() {
   Tasks.makeSortable();
   Tasks.setupQuickAdd();
+  Tasks.setupActions();
 });

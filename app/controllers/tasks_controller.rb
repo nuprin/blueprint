@@ -35,8 +35,18 @@ class TasksController < ApplicationController
     redirect_to :back
   end
 
+  def park
+    @task.park!
+    redirect_to :back
+  end
+
   def prioritize
     @task.prioritize!
+    redirect_to :back
+  end
+
+  def destroy
+    @task.destroy
     redirect_to :back
   end
 

@@ -75,3 +75,12 @@ table.task_list .editing .quick_add_form {
   font-weight: normal;
   margin-top: 10px;
 }
+.task_links {
+  color: #aaa;
+  float: right;
+  font-size: 11px;
+  margin-right: 20px;
+}
+.task_links a {
+  color: #4067ad;
+}

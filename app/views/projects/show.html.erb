@@ -13,3 +13,8 @@
            :locals => {:title => "RECENTLY COMPLETED",
                        :tasks => @project.completed_tasks,
                        :context => @project} %>
+
+<%= render :partial => "/shared/task_list",
+           :locals => {:title => "PARKING LOT",
+                       :tasks => @project.parked_tasks,
+                       :context => @project} %>
