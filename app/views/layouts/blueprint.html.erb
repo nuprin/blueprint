@@ -19,43 +19,45 @@
       <div id="nav">
         <ul class="sf-menu clearfix" id="add_links">
           <li>
-            <%= link_to "ADD A TASK", new_task_url(:kind => "task") %>
+            <%= link_to "ADD A TASK", new_task_path(:kind => "task") %>
             <ul>
               <% User.all.each do |u| %>
                 <li><%= link_to "#{u.name}",
-                  new_task_url(:kind => "task", :assignee_id => u.id) %></li>
+                  new_task_path(:kind => "task", :assignee_id => u.id) %></li>
               <% end %>
             </ul>
           </li>
           <li>
-            <%= link_to "ADD A BUG", new_task_url(:kind => "bug") %>
+            <%= link_to "ADD A BUG", new_task_path(:kind => "bug") %>
             <ul>
               <% User.all.each do |u| %>
               <li><%= link_to "#{u.name}",
-                new_task_url(:kind => "bug", :assignee_id => u.id) %></li>
+                new_task_path(:kind => "bug", :assignee_id => u.id) %></li>
               <% end %>
             </ul>
           </li>
         </ul>
         <ul class="nav sf-menu clearfix" id="filters">
           <li>
-            <%= link_to "PROJECTS", tasks_url %>
+            <%= link_to "PROJECTS", tasks_path %>
             <ul>
               <% Project.sorted.each do |p| %>
-                <li><%= link_to p.title, project_url(p) %></li>
+                <li><%= link_to p.title, project_path(p) %></li>
               <% end %>
-              <li><%= link_to "Create a Project...", new_project_url %></li>
+              <li><%= link_to "Create a Project...", new_project_path %></li>
             </ul>
           </li>
           <li>
-            <%= link_to "PEOPLE", people_tasks_url %>
+            <%= link_to "PEOPLE", people_tasks_path %>
             <ul>
               <% User.all.each do |u| %>
-                <li><%= link_to "#{u.name}", "" %></li>
+                <li><%= link_to "#{u.name}", user_path(u) %></li>
               <% end %>
             </ul>
           </li>
-          <li><%= link_to "YOU", "" %></li>
+          <% if viewer.real? %>
+            <li><%= link_to "YOU", user_url(viewer) %></li>
+          <% end %>
         </ul>
       </div>
     </div>
