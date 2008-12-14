@@ -26,7 +26,11 @@
         <tr id="list_item_<%= task.id %>">
           <td class="drag_handle">
             <% if task.completed? %>
-              <%= image_tag "check.gif" %>
+              <% form_tag undo_complete_task_url(task) do %>
+                <%= link_to_function image_tag("check.gif"),
+                "$(this).parents('form').submit();",
+                :title => "Mark Incomplete" %>
+              <% end %>
             <% elsif task.assignee == viewer %>
               <% form_tag complete_task_url(task) do %>
                 <%= check_box_tag "complete_task_id", false, false,

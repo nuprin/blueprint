@@ -24,9 +24,20 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
+  def undo_complete!
+    self.status = "assigned"
+    self.completed_at = nil
+    self.save!
+    self.add_to_lists
+  end
+
+  def add_to_lists
+    self.project.add_to_list(self) if self.project_id
+    self.assignee.add_to_list(self) if self.assignee_id
+  end
+
   after_create do |task|
-    task.project.add_to_list(task) if task.project
-    task.assignee.add_to_list(task) if task.assignee
+    task.add_to_lists
   end
 
   after_destroy do |task|

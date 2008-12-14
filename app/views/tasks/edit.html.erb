@@ -1,12 +1,41 @@
-<h1>Editing task</h1>
+<%= stylesheet_link_tag "tasks/new" %>
 
-<% form_for(@task) do |f| %>
-  <%= f.error_messages %>
+<% @title = "Edit Task" %>
 
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<div id="form_container">
+  <% form_for(@task) do |f| %>
+    <%= f.error_messages %>
+    <%= f.hidden_field :status, :value => "assigned" %>
+    <p>
+      <label for="title">Title:</label><br />
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <label for="description">Description:</label><br />
+        <%= f.text_area :description %>
+    </p>
+    <%= f.hidden_field :kind, :value => params[:kind] %>
+    <ul class="clearfix" id="secondary_fields">
+      <li>
+        <label for="description">Project:</label><br />
+        <%= f.select :project_id, Project.all_for_select, :prompt => "None" %>
+      </li>
+      <li>
+        <label for="description">Assign To:</label><br />
+          <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]},
+            :prompt => "Nobody",
+            :selected => @task.assignee_id || params[:assignee_id].to_i %>
+      </li>
+      <li>
+        <label for="description">Due Date:</label><br />
+          <%= f.date_select :due_date, :start_year => Time.now.year,
+            :end_year => Time.now.year + 1, :order => [:month, :day, :year] %>
+      </li>
+    </ul>
+    <ul class="clearfix" id="submit_tags">
+      <li><%= f.submit "Save Changes" %></li>
+      <li>or <%= link_to 'Back to Task', task_path(@task) %></li>
+    </ul>
+  <% end %>
+</div>
 
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>
