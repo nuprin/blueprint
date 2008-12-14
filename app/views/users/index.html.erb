@@ -1,8 +1,7 @@
-<%= javascript_include_tag 'tasks/index' %>
-<%= stylesheet_link_tag 'tasks/index' %>
+<%= javascript_include_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/task_list' %>
 
 <% @title = "People" %>
-<h1>People</h1>
 
 <% @users.each do |user| %>
   <%= render :partial => "/shared/task_list",

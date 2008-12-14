@@ -21,6 +21,9 @@
       <p class="notice"><%= flash[:notice] %></p>
     <% end %>
     <div id="content">
+      <% if @title %>
+        <h1><%= @title %></h1>
+      <% end %>
       <%= yield %>
     </div>
   </div>

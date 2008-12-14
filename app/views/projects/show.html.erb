@@ -1,8 +1,7 @@
-<%= stylesheet_link_tag 'tasks/index' %>
-<%= javascript_include_tag "tasks/index" %>
+<%= javascript_include_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/task_list' %>
 
 <% @title = @project.title %>
-<h1><%= @title %></h1>
 
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "UPCOMING",
