@@ -22,26 +22,21 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  def edit
-    @task = Task.find(params[:id])
-  end
+  def edit; end
   
   def update
-    task = Task.find(params[:id])
-    task.update_attributes(params[:task])
+    @task.update_attributes(params[:task])
     flash[:notice] = "Your changes have been saved."
-    redirect_to task_url(task)
+    redirect_to task_url(@task)
   end
 
   def complete
-    task = Task.find(params[:id])
-    task.complete!
+    @task.complete!
     redirect_to :back
   end
 
   def prioritize
-    task = Task.find(params[:id])
-    task.prioritize!
+    @task.prioritize!
     redirect_to :back
   end
 

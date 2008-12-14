@@ -4,7 +4,8 @@ Task.destroy_all
 TaskListItem.destroy_all
 
 names = [
-  "Brad", "Chase", "Chris", "Jennifer", "Jimmy", "Joe", "Kevin", "Kristján", "Matt", "Susan"
+  "Brad", "Chase", "Chris", "Jennifer", "Jimmy", "Joe", "Kevin", "Kristján", 
+  "Matt", "Sarah", "Susan"
 ]
 
 users = []
@@ -30,7 +31,7 @@ projects.each do |p|
 
   task_opts = {
     :kind => 'task',
-    :status => 'assigned',
+    :status => 'prioritized',
     :project => p,
     :creator => u1,
     :assignee => u2

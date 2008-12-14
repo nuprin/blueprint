@@ -30,18 +30,7 @@
         <% end %>
         <tr id="list_item_<%= task_list_item_or_task.id %>">
           <td class="drag_handle">
-            <% if task.completed? %>
-              <% form_tag prioritize_task_url(task) do %>
-                <%= link_to_function image_tag("check.gif"),
-                "$(this).parents('form').submit();",
-                :title => "Mark Incomplete" %>
-              <% end %>
-            <% elsif task.parked? %>
-              <% form_tag prioritize_task_url(task) do %>
-                <%= link_to_function("Prioritize",
-                  "$(this).parents('form').submit();") %>
-              <% end %>
-            <% elsif task.assignee == viewer %>
+            <% if task.assignee == viewer %>
               <% form_tag complete_task_url(task) do %>
                 <%= check_box_tag "complete_task_id", false, false,
                   :onclick => "$(this).parents('form').submit(); return false;" %>
@@ -52,6 +41,15 @@
           </td>
           <td class="task_name">
             <%= link_to h(task.title), task_path(task) %>
+            <% if task.completed? %>
+              <%= link_to "Mark Incomplete", prioritized_task_url(task),
+                :method => :post %>            
+            <% elsif task.parked? %>
+              <%= link_to "Prioritize", prioritize_task_url(task),
+                :method => :post %>
+            <% elsif task.prioritized? %>
+              <%= link_to "Park", park_task_path(task), :method => :post %>            
+            <% end %>
           </td>
           <td class="task_project">
             <% if task.project_id && !context.is_a?(Project) %>

@@ -17,6 +17,14 @@ class Task < ActiveRecord::Base
     self.status == "completed"
   end
 
+  def parked?
+    self.status == "parked"
+  end
+  
+  def prioritized?
+    self.status == "prioritized"
+  end
+
   def complete!
     self.status = "completed"
     self.completed_at = Time.now.getutc
@@ -24,9 +32,7 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
-  def parked?
-    self.status == "parked"
-  end
+
 
   def park!
     self.status = "parked"
@@ -39,7 +45,7 @@ class Task < ActiveRecord::Base
   end
   
   def undo_complete!
-    self.status = "assigned"
+    self.status = "prioritized"
     self.completed_at = nil
     self.save!
     self.add_to_lists
