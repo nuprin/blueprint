@@ -6,27 +6,56 @@
   <title>Blueprint<%= ": #{@title}" if @title %></title>
   <script src="http://www.google.com/jsapi"></script>
   <%= stylesheet_link_tag "base" %>
+  <%= stylesheet_link_tag "superfish" %>
   <%= stylesheet_link_tag "blueprint" %>
-  <%= javascript_include_tag 'jquery' %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "hoverIntent" %>
+  <%= javascript_include_tag "superfish" %>
+  <%= javascript_include_tag "blueprint" %>
 </head>
 <body>
   <div id="container">
     <div id="header">
       <div id="nav">
-        <div id="add_links">
-          <%= link_to "ADD A TASK", new_task_url(:kind => "task") %>
-          <%= link_to "ADD A BUG", new_task_url(:kind => "bug") %>
-        </div>
-        <ul class="clearfix" id="filters">
+        <ul class="sf-menu clearfix" id="add_links">
+          <li>
+            <%= link_to "ADD A TASK", new_task_url(:kind => "task") %>
+            <ul>
+              <% User.all.each do |u| %>
+                <li><%= link_to "#{u.name}",
+                  new_task_url(:kind => "task", :assignee_id => u.id) %></li>
+              <% end %>
+            </ul>
+          </li>
+          <li>
+            <%= link_to "ADD A BUG", new_task_url(:kind => "bug") %>
+            <ul>
+              <% User.all.each do |u| %>
+              <li><%= link_to "#{u.name}",
+                new_task_url(:kind => "bug", :assignee_id => u.id) %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav sf-menu clearfix" id="filters">
           <li>
             <%= link_to "PROJECTS", tasks_url %>
+            <ul>
+              <% Project.sorted.each do |p| %>
+                <li><%= link_to p.title, project_url(p) %></li>
+              <% end %>
+              <li><%= link_to "Create a Project...", new_project_url %></li>
+            </ul>
           </li>
           <li>
             <%= link_to "PEOPLE", people_tasks_url %>
+            <ul>
+              <% User.all.each do |u| %>
+                <li><%= link_to "#{u.name}", "" %></li>
+              <% end %>
+            </ul>
           </li>
-          <li>
-            <%= link_to "YOU", "" %>
-          </li>
+          <li><%= link_to "YOU", "" %></li>
         </ul>
       </div>
     </div>

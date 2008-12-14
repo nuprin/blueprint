@@ -19,6 +19,14 @@ input[type=text], textarea {
   font-size: 18px;
   padding: 6px 4px;
 }
+.sf-menu ul {
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-width: 0 1px 1px 0;
+  line-height: 25px;
+  position: absolute;
+  width: 140px;
+}
 .notice {
   background: green;
   color: white;
@@ -26,11 +34,54 @@ input[type=text], textarea {
   margin: 0;
   padding: 0 20px;
 }
+.sf-menu a {
+  display: block;
+  padding: 0 10px;
+}
+.sf-menu>li:first-child {
+  border-width: 0 1px;
+}
+.sf-menu>li {
+  border-color: #aaa;
+  border-style: solid;
+  border-width: 0 1px 0 0;
+  float: left;
+  width: 120px;
+}
+.sf-menu>li>a {
+  padding: 9px 10px 7px;
+}
+.sf-menu ul {
+  z-index: 9999;
+}
+.sf-sub-indicator {
+  background-image: url(../images/arrow.gif);
+  background-position: right top;
+  background-repeat: no-repeat;
+  display: block;
+  height: 7px;
+  overflow: hidden;
+  position: absolute;
+  top: 13px;
+  right: 8px;
+  text-indent: -9999px;
+  width: 15px;
+}
+.sf-with-ul {
+  position: relative;
+}
+.sfHover ul a:hover {
+  background: #678;
+  color: white;
+}
 #add_links {
   float: right;
 }
-#add_links a {
-  margin-left: 15px;
+#add_links li {
+  position: relative;
+}
+#add_links ul {
+  right: 0;
 }
 #container {
   background: #fff;
@@ -46,13 +97,7 @@ input[type=text], textarea {
   padding: 1.5em 20px 10px;
 }
 #nav {
+  border-bottom: 1px dotted #bbb;
   font-family: Helvetica;
-  line-height: 36px;
   padding: 0 20px;
-}
-#filters li {
-  float: left;
-}
-#filters a {
-  margin-right: 15px;
 }

@@ -1,0 +1,14 @@
+<h1>Create a Project</h1>
+
+<% form_for(@project) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <label>Title:</label><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', projects_path %>
