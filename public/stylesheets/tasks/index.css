@@ -43,10 +43,10 @@ table.task_list td a {
   cursor: pointer;
 }
 table.task_list th {
-  color: #ccc;
+  color: #aaa;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
-  line-height: 25px;
+  line-height: 29px;
   text-align: left;
   text-transform: uppercase;
 }

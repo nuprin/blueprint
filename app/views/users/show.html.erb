@@ -1,10 +1,13 @@
+<%= javascript_include_tag 'tasks/index' %>
 <%= stylesheet_link_tag 'tasks/index' %>
 <% @title = "#{@user.name.possessive} Tasks"%>
 <h1><%= @title %></h1>
 
 <%= render :partial => "/projects/task_list",
            :locals => {:title => "UPCOMING",
-                       :tasks => @user.task_list.map(&:task)} %>
+                       :tasks => @user.task_list.map(&:task),
+                       :exclude => [:assignee]} %>
 <%= render :partial => "/projects/task_list",
            :locals => {:title => "RECENTLY COMPLETED",
-                       :tasks => @user.completed_tasks} %>
+                       :tasks => @user.completed_tasks,
+                       :exclude => [:assignee]} %>

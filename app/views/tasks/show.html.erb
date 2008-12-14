@@ -1,3 +1,11 @@
+<% @title = @task.title %>
+<h1><%= @title %></h1>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<% unless @task.description.blank? %>
+  <h2>Description</h2>
+  <%= @task.description %>
+<% end %>
+
+<p>
+  <%= link_to 'Edit', edit_task_path(@task) %>
+</p>

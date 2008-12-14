@@ -28,7 +28,7 @@ input[type=text], textarea {
   width: 140px;
 }
 .notice {
-  background: green;
+  background: #060;
   color: white;
   line-height: 40px;
   margin: 0;

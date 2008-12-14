@@ -1,8 +1,13 @@
 <%= stylesheet_link_tag 'tasks/index' %>
 
+<% @title = @project.title %>
+<h1><%= @title %></h1>
+
 <%= render :partial => "task_list",
            :locals => {:title => "UPCOMING",
-                       :tasks => @project.task_list.map(&:task)} %>
+                       :tasks => @project.task_list.map(&:task),
+                       :exclude => [:project]} %>
 <%= render :partial => "task_list",
            :locals => {:title => "RECENTLY COMPLETED",
-                       :tasks => @project.completed_tasks} %>
+                       :tasks => @project.completed_tasks,
+                       :exclude => [:project]} %>

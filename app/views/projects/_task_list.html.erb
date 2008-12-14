@@ -1,5 +1,10 @@
 <% if tasks.any? %>
-  <table class="task_list">
+  <script type="text/javascript">
+    $(function() {
+      Tasks.makeSortable("<%= title.dehumanize %>");
+    });
+  </script>
+  <table class="task_list" id="<%= title.dehumanize %>">
     <thead>
       <tr>
         <th colspan="5"><%= title %></th>
@@ -23,7 +28,16 @@
           <td class="task_name">
             <%= link_to h(task.title), task_path(task) %>
           </td>
-          <td class="task_assignee"><%= h task.assignee.name %></td>
+          <td class="task_project">
+            <% if task.project_id && !exclude.include?(:project) %>
+              <%= h task.project.title %>          
+            <% end %>
+          </td>
+          <td class="task_assignee">
+            <% if task.assignee_id && !exclude.include?(:assignee) %>
+              <%= h task.assignee.name %>
+            <% end %>
+          </td>
           <td class="task_estimate"><%= task.estimate %></td>
           <td class="task_due"><%=
             task.due_date.strftime("%b %e") if task.due_date %></td>
