@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   skip_before_filter :require_login
 
+  def index
+    @users = User.all
+    @projects = Project.all # TODO: only show active projects
+  end
+
   def show
     @user = User.find(params[:id])
   end

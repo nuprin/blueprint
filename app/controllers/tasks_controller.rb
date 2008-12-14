@@ -18,15 +18,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def index
-    @projects = Project.all # TODO: only show active projects
-  end
-
-  def people
-    @users = User.all
-    @projects = Project.all # TODO: only show active projects
-  end
-
   def new
     @task = Task.new
   end

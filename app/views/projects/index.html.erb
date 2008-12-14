@@ -1,18 +1,14 @@
-<h1>Listing projects</h1>
+<%= javascript_include_tag 'tasks/index' %>
+<%= stylesheet_link_tag 'tasks/index' %>
 
-<table>
-  <tr>
-  </tr>
+<% @title = "Projects" %>
+<h1><%= @title %></h1>
 
-<% for projects in @projects %>
-  <tr>
-    <td><%= link_to 'Show', projects %></td>
-    <td><%= link_to 'Edit', edit_projects_path(projects) %></td>
-    <td><%= link_to 'Destroy', projects, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @projects.each do |project| %>
+  <%= render :partial => "/shared/task_list",
+             :locals => {:title       => project.title,
+                         :see_all_url => project_path(project),
+                         :tasks       => project.task_list.map(&:task),
+                         :exclude     => [:project],
+                         :quick_add   => true} %>                       
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New projects', new_projects_path %>
