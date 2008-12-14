@@ -3,7 +3,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects
 
   map.resources :tasks,
-                :member => {:complete => :post, :undo_complete => :post},
+                :member => {
+                  :complete => :post,
+                  :prioritize => :post
+                },
                 :collection => {:people => :get, :reorder => :post}
 
   map.resources :users,

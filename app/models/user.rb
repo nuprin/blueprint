@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
                              :order       => "completed_at DESC",
                              :foreign_key => :assignee_id
 
+  has_many :parked_tasks, :class_name  => "Task",
+                          :conditions  => "status = 'parked'",
+                          :order       => "updated_at DESC",
+                          :foreign_key => :assignee_id
+
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true
 

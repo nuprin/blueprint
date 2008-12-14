@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'shared/task_list' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
 
-<% @title = "#{@user.name.possessive} Tasks"%>
+<% @title = viewer == @user ? "Your Tasks" : "#{@user.name.possessive} Tasks"%>
 
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "UPCOMING",
@@ -11,4 +11,9 @@
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "RECENTLY COMPLETED",
                        :tasks => @user.completed_tasks,
+                       :context => @user} %>
+
+<%= render :partial => "/shared/task_list",
+           :locals => {:title => "PARKING LOT",
+                       :tasks => @user.parked_tasks,
                        :context => @user} %>

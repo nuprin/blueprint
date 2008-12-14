@@ -24,6 +24,20 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
+  def parked?
+    self.status == "parked"
+  end
+
+  def park!
+    self.status = "parked"
+    self.list_items.map(&:destroy)
+    self.save!
+  end
+
+  def prioritize!
+    self.undo_complete!
+  end
+  
   def undo_complete!
     self.status = "assigned"
     self.completed_at = nil

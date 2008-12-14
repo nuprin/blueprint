@@ -31,10 +31,15 @@
         <tr id="list_item_<%= task_list_item_or_task.id %>">
           <td class="drag_handle">
             <% if task.completed? %>
-              <% form_tag undo_complete_task_url(task) do %>
+              <% form_tag prioritize_task_url(task) do %>
                 <%= link_to_function image_tag("check.gif"),
                 "$(this).parents('form').submit();",
                 :title => "Mark Incomplete" %>
+              <% end %>
+            <% elsif task.parked? %>
+              <% form_tag prioritize_task_url(task) do %>
+                <%= link_to_function("Prioritize",
+                  "$(this).parents('form').submit();") %>
               <% end %>
             <% elsif task.assignee == viewer %>
               <% form_tag complete_task_url(task) do %>

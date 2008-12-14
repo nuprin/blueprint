@@ -39,9 +39,9 @@ class TasksController < ApplicationController
     redirect_to :back
   end
 
-  def undo_complete
+  def prioritize
     task = Task.find(params[:id])
-    task.undo_complete!
+    task.prioritize!
     redirect_to :back
   end
 
