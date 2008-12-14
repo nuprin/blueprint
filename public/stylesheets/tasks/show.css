@@ -26,6 +26,7 @@ h2 {
 #secondary_fields li {
   border-left: 1px solid #ddd;
   float: left;
+  height: 32px;
   width: 98px;
 }
 #secondary_fields li:first-child {

@@ -26,19 +26,21 @@
         <%= link_to @task.creator.name, user_path(@task.creator) %>
       </li>
       <li>
-        <h2>ASSIGNED TO</h2>
-        <%= link_to @task.assignee.name, user_path(@task.assignee) %>
+        <% if @task.assignee_id %>
+          <h2>ASSIGNED TO</h2>
+          <%= link_to @task.assignee.name, user_path(@task.assignee) %>
+        <% end %>
       </li>
       <li>
-        <h2>DUE DATE</h2>
-        <%= @task.due_date.strftime("%b %e") %>
+        <% if @task.due_date %>
+          <h2>DUE DATE</h2>
+          <%= @task.due_date.strftime("%b %e") %>
+        <% end %>
       </li>
       <li>
         <% if @task.estimate %>
           <h2>ESTIMATE</h2>
           <%= pluralize(@task.estimate, "hour") %>
-        <% else %>
-          <h2>&nbsp;</h2>&nbsp;
         <% end %>
       </li>
     </ul>

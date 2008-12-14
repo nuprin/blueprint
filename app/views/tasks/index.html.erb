@@ -5,9 +5,10 @@
 <h1><%= @title %></h1>
 
 <% @projects.each do |project| %>
-  <%= render :partial => "/projects/task_list",
+  <%= render :partial => "/shared/task_list",
              :locals => {:title       => project.title,
                          :see_all_url => project_path(project),
                          :tasks       => project.task_list.map(&:task),
-                         :exclude     => [:project]} %>                       
+                         :exclude     => [:project],
+                         :quick_add   => true} %>                       
 <% end %>

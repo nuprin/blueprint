@@ -13,8 +13,18 @@ var Tasks = {
       }, "json");
       }
     });
+  },
+  setupQuickAdd: function() {
+    $("a.quick_add_link").click(function() {
+      $(this).parents("tfoot:eq(0)").addClass('editing');
+      $(this).prev().children("input[type=text]").focus();
+    });
+    $("a.quick_cancel_link").click(function() {
+      $(this).parents("tfoot:eq(0)").removeClass('editing');
+    });
   }
 };
 $(function() {
   Tasks.makeSortable();
+  Tasks.setupQuickAdd();
 });

@@ -11,6 +11,16 @@
         </th>
       </tr>
     </thead>
+    <% if local_assigns[:quick_add] %>
+      <tfoot>
+        <tr>
+          <th colspan="5">
+            <%= render :partial => "/shared/quick_add_form",
+                       :locals => {:exclude => exclude, :tasks => tasks} %>
+          </th>
+        </tr>
+      </tfoot>
+    <% end %>
     <tbody>
       <% tasks.each do |task| %>
         <tr id="list_item_<%= task.id %>">

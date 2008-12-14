@@ -5,9 +5,10 @@
 <h1>People</h1>
 
 <% @users.each do |user| %>
-  <%= render :partial => "/projects/task_list",
+  <%= render :partial => "/shared/task_list",
              :locals => {:title => user.name,
                          :see_all_url => user_path(user),
                          :tasks => user.task_list.map(&:task),
-                         :exclude => [:assignee]} %>                       
+                         :exclude => [:assignee],
+                         :quick_add => true} %>                       
 <% end %>

@@ -7,6 +7,8 @@ class TasksController < ApplicationController
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
       redirect_to new_task_url(:kind => params[:task][:kind])
+    elsif params[:commit] == "Add Task"
+      redirect_to :back
     elsif task.project_id
       redirect_to project_url(task.project_id)
     elsif task.assignee_id

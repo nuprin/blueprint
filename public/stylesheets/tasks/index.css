@@ -52,3 +52,10 @@ table.task_list th {
   text-align: left;
   text-transform: uppercase;
 }
+table.task_list .quick_add_form,
+table.task_list .editing .quick_add_link {
+  display: none;
+}
+table.task_list .editing .quick_add_form {
+  display: inline;
+}
