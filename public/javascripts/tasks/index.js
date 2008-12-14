@@ -13,3 +13,6 @@ var Tasks = {
     });
   }
 };
+$(document).ready(function() {
+  Tasks.makeSortable();
+});

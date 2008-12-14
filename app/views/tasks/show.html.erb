@@ -1,11 +1,55 @@
+<%= stylesheet_link_tag "tasks/show" %>
 <% @title = @task.title %>
-<h1><%= @title %></h1>
 
-<% unless @task.description.blank? %>
-  <h2>Description</h2>
-  <%= @task.description %>
-<% end %>
-
-<p>
-  <%= link_to 'Edit', edit_task_path(@task) %>
-</p>
+<div id="task_container">
+  <div id="task">
+    <h1 class="task_field">
+      <span class="kind">
+        <% if @task.project_id %>
+          <%= @task.project.title.upcase %>
+        <% end %>
+        <% if @task.kind != "task" %>
+          <%= @task.kind.upcase %>
+        <% else %>
+          &nbsp;
+        <% end %>
+      </span>
+      <%= @title %>
+    </h1>
+    <ul class="task_field clearfix" id="secondary_fields">
+      <li>
+        <h2>STATUS</h2>
+        <%= @task.status.capitalize %>
+      </li>
+      <li>
+        <h2>CREATOR</h2>
+        <%= link_to @task.creator.name, user_path(@task.creator) %>
+      </li>
+      <li>
+        <h2>ASSIGNED TO</h2>
+        <%= link_to @task.assignee.name, user_path(@task.assignee) %>
+      </li>
+      <li>
+        <h2>DUE DATE</h2>
+        <%= @task.due_date.strftime("%b %e") %>
+      </li>
+      <li>
+        <% if @task.estimate %>
+          <h2>ESTIMATE</h2>
+          <%= pluralize(@task.estimate, "hour") %>
+        <% else %>
+          <h2>&nbsp;</h2>&nbsp;
+        <% end %>
+      </li>
+    </ul>
+    <% unless @task.description.blank? %>
+      <div class="task_field" id="description">
+        <h2>DESCRIPTION</h2>
+        <%= @task.description %>
+      </div>
+    <% end %>
+  </div>
+  <p>
+    <%= link_to 'Edit Task', edit_task_path(@task) %>
+  </p>
+</div>

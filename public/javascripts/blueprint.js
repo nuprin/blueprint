@@ -3,5 +3,4 @@ $(document).ready(function() {
     delay:      0,
     speed:      'fast'
   });
-  Tasks.makeSortable();
 })
