@@ -11,10 +11,8 @@ table.task_list tbody td {
   cursor: move;
 }
 table.task_list td {
-  padding: 5px;
+  padding: 9px 5px 7px;
   white-space: nowrap;
-}
-table.task_list td.add_task {
 }
 table.task_list td.drag_handle {
   background-color: #f3f3f3;
