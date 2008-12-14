@@ -1,14 +1,13 @@
-<%# TODO [chris]: "exclude" is confusing. %>
 <% form_for :task, :url => {:controller => "tasks", :action => "create"},
             :html => {:class => "quick_add_form"} do |f| %>
 
   <%= f.hidden_field :kind,   :value => "task" %>
   <%= f.hidden_field :status, :value => "assigned" %>
   
-  <% if exclude.include?(:project) %>
-    <%= f.hidden_field :project_id, :value => tasks.first.project_id %>
-  <% elsif exclude.include?(:assignee) %>
-    <%= f.hidden_field :assignee_id, :value => tasks.first.assignee_id %>
+  <% if context.is_a?(Project) %>
+    <%= f.hidden_field :project_id, :value => context.id %>
+  <% elsif context.is_a?(User) %>
+    <%= f.hidden_field :assignee_id, :value => context.id %>
   <% end %>
 
   <%= f.text_field :title %>

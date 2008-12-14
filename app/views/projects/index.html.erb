@@ -7,7 +7,7 @@
   <%= render :partial => "/shared/task_list",
              :locals => {:title       => project.title,
                          :see_all_url => project_path(project),
-                         :tasks       => project.task_list.map(&:task),
-                         :exclude     => [:project],
+                         :tasks       => project.task_list,
+                         :context     => project,
                          :quick_add   => true} %>                       
 <% end %>

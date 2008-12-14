@@ -16,14 +16,19 @@
         <tr>
           <th colspan="5">
             <%= render :partial => "/shared/quick_add_form",
-                       :locals => {:exclude => exclude, :tasks => tasks} %>
+                       :locals => {:context => context, :tasks => tasks} %>
           </th>
         </tr>
       </tfoot>
     <% end %>
     <tbody>
-      <% tasks.each do |task| %>
-        <tr id="list_item_<%= task.id %>">
+      <% tasks.each do |task_list_item_or_task| %>
+        <% if task_list_item_or_task.is_a?(TaskListItem) %>
+          <% task = task_list_item_or_task.task %>
+        <% else %>
+          <% task = task_list_item_or_task %>
+        <% end %>
+        <tr id="list_item_<%= task_list_item_or_task.id %>">
           <td class="drag_handle">
             <% if task.completed? %>
               <% form_tag undo_complete_task_url(task) do %>
@@ -44,12 +49,12 @@
             <%= link_to h(task.title), task_path(task) %>
           </td>
           <td class="task_project">
-            <% if task.project_id && !exclude.include?(:project) %>
+            <% if task.project_id && !context.is_a?(Project) %>
               <%= h task.project.title %>          
             <% end %>
           </td>
           <td class="task_assignee">
-            <% if task.assignee_id && !exclude.include?(:assignee) %>
+            <% if task.assignee_id && !context.is_a?(User) %>
               <%= h task.assignee.name %>
             <% end %>
           </td>

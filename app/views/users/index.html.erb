@@ -7,7 +7,7 @@
   <%= render :partial => "/shared/task_list",
              :locals => {:title => user.name,
                          :see_all_url => user_path(user),
-                         :tasks => user.task_list.map(&:task),
-                         :exclude => [:assignee],
+                         :tasks => user.task_list,
+                         :context => user,
                          :quick_add => true} %>                       
 <% end %>

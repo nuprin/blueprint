@@ -5,10 +5,10 @@
 
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "UPCOMING",
-                       :tasks => @user.task_list.map(&:task),
-                       :exclude => [:assignee],
+                       :tasks => @user.task_list,
+                       :context => @user,
                        :quick_add => true} %>
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "RECENTLY COMPLETED",
                        :tasks => @user.completed_tasks,
-                       :exclude => [:assignee]} %>
+                       :context => @user} %>
