@@ -44,18 +44,34 @@ table.task_list td.task_project {
 table.task_list td a {
   cursor: pointer;
 }
+table.task_list tfoot a {
+  color: #40678d;
+  font-weight: normal;
+}
 table.task_list th {
   color: #aaa;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 29px;
   text-align: left;
+}
+table.task_list thead th {
   text-transform: uppercase;
 }
 table.task_list .quick_add_form,
 table.task_list .editing .quick_add_link {
   display: none;
 }
+table.task_list .quick_add_form input[type=text] {
+  font-size: 13px;
+  padding: 3px;
+  width: 300px;
+}
+table.task_list .quick_add_link {
+  font-size: 11px;
+}
 table.task_list .editing .quick_add_form {
-  display: inline;
+  display: block;
+  font-weight: normal;
+  margin-top: 10px;
 }

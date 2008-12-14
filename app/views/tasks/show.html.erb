@@ -1,5 +1,8 @@
 <%= stylesheet_link_tag "tasks/show" %>
-<% @title = @task.title %>
+<% 
+  @title = @task.title 
+  @hide_layout_title = true
+%>
 
 <div id="task_container">
   <div id="task">

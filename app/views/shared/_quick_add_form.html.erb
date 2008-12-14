@@ -1,5 +1,5 @@
 <%# TODO [chris]: "exclude" is confusing. %>
-<% form_for :task, :url => {:action => "create"},
+<% form_for :task, :url => {:controller => "tasks", :action => "create"},
             :html => {:class => "quick_add_form"} do |f| %>
 
   <%= f.hidden_field :kind,   :value => "task" %>
@@ -13,7 +13,7 @@
 
   <%= f.text_field :title %>
   <%= submit_tag "Add Task" %> or
-  <%= link_to_function "Cancel", "", :class => "quick_cancel_link" %>
+  <%= link_to_function "cancel", "", :class => "quick_cancel_link" %>
 <% end %>
 
 <%= link_to_function "Add a Task", "", :class => "quick_add_link" %>
