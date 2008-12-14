@@ -1,4 +1,6 @@
 <%= stylesheet_link_tag 'tasks/index' %>
+<% @title = "#{@user.name.possessive} Tasks"%>
+<h1><%= @title %></h1>
 
 <%= render :partial => "/projects/task_list",
            :locals => {:title => "UPCOMING",
