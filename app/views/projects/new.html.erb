@@ -3,11 +3,11 @@
 <% form_for(@project) do |f| %>
   <%= f.error_messages %>
   <p>
-    <label>Title:</label><br />
+    <label for="project_title">Title:</label><br />
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.submit "Create" %>
+    <%= f.submit "Create Project" %>
   </p>
 <% end %>
 
