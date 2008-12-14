@@ -1,6 +1,6 @@
 var Tasks = {
-  makeSortable: function (id) {
-    $('#' + id).sortable({
+  makeSortable: function (elem) {
+    $(elem).sortable({
       axis: 'y',
       items: 'tbody > tr',
       update: function (evt, ui) {

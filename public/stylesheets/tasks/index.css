@@ -1,12 +1,13 @@
 table.task_list {
   border-collapse: collapse;
   margin: 10px 0;
-  width: 760px;
+  width: 100%;
 }
 table.task_list tbody {
   border-top: 1px solid #e9f1f5;
 }
 table.task_list tbody td {
+  background: white;
   border-bottom: 1px solid #e9f1f5;
   cursor: move;
 }

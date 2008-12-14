@@ -3,4 +3,7 @@ $(document).ready(function() {
     delay:      0,
     speed:      'fast'
   });
+  $('table.task_list').each(function(i, elem) {
+    Tasks.makeSortable(elem);
+  });
 })

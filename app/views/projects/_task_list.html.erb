@@ -1,9 +1,4 @@
 <% if tasks.any? %>
-  <script type="text/javascript">
-    $(function() {
-      Tasks.makeSortable("<%= title.dehumanize %>");
-    });
-  </script>
   <table class="task_list" id="<%= title.dehumanize %>">
     <thead>
       <tr>
