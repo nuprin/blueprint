@@ -17,7 +17,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: monocle_development
+  database: blueprint_development
   username: root
   password:
   host: localhost
@@ -29,7 +29,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: monocle_test
+  database: blueprint_test
   username: root
   password:
   socket: /tmp/mysql.sock
@@ -37,7 +37,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: monocle_production
+  database: blueprint_production
   username: root
   password: 
   socket: /tmp/mysql.sock
