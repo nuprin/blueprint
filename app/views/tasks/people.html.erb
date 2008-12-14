@@ -1,9 +1,13 @@
 <%= javascript_include_tag 'tasks/index' %>
 <%= stylesheet_link_tag 'tasks/index' %>
 
+<% @title = "People" %>
+<h1>People</h1>
+
 <% @users.each do |user| %>
   <%= render :partial => "/projects/task_list",
              :locals => {:title => user.name,
+                         :see_all_url => user_path(user),
                          :tasks => user.task_list.map(&:task),
                          :exclude => [:assignee]} %>                       
 <% end %>

@@ -2,7 +2,13 @@
   <table class="task_list" id="<%= title.dehumanize %>">
     <thead>
       <tr>
-        <th colspan="5"><%= title %></th>
+        <th colspan="5">
+          <% if local_assigns[:see_all_url] %>
+            <%= link_to title, see_all_url %>
+          <% else %>
+            <%= title %>
+          <% end %>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -33,9 +39,16 @@
               <%= h task.assignee.name %>
             <% end %>
           </td>
-          <td class="task_estimate"><%= task.estimate %></td>
-          <td class="task_due"><%=
-            task.due_date.strftime("%b %e") if task.due_date %></td>
+          <td class="task_estimate">
+            <% if task.estimate %>
+                <%= pluralize(task.estimate, "hour") %>
+            <% end %>
+          </td>
+          <td class="task_due">
+            <% if task.due_date %>
+              Due <%= task.due_date.strftime("%b %e")  %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

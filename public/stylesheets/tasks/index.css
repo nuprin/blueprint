@@ -29,6 +29,7 @@ table.task_list td.task_due {
   width: 60px;
 }
 table.task_list td.task_estimate {
+  text-align: right;
   width: 60px;
 }
 table.task_list td.task_name {
