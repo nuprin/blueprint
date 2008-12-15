@@ -43,6 +43,7 @@
           </td>
           <td class="task_name">
             <span class="task_links" style="display: none">
+              <%= link_to "Edit", edit_task_path(task) %> | 
               <% if task.completed? %>
                 <%= link_to "Mark Incomplete", prioritize_task_url(task),
                   :method => :post %>            
