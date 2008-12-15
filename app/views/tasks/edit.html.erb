@@ -14,7 +14,7 @@
       <label for="description">Description:</label><br />
         <%= f.text_area :description %>
     </p>
-    <%= f.hidden_field :kind, :value => params[:kind] %>
+    <%= f.hidden_field :kind %>
     <ul class="clearfix" id="secondary_fields">
       <li>
         <label for="description">Project:</label><br />
@@ -28,8 +28,7 @@
       </li>
       <li>
         <label for="description">Due Date:</label><br />
-          <%= f.date_select :due_date, :start_year => Time.now.year,
-            :end_year => Time.now.year + 1, :order => [:month, :day, :year] %>
+          <%= f.date_select :due_date, :order => [:month, :day] %>
       </li>
     </ul>
     <ul class="clearfix" id="submit_tags">

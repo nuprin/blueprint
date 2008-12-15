@@ -14,6 +14,9 @@ h1 span {
 h1, #description, #secondary_fields li {
   padding: 10px;
 }
+h1.task_field {
+  padding-bottom: 40px;
+}
 h2 {
   margin-bottom: 5px;
 }
@@ -43,6 +46,10 @@ h2 {
   float: left;
   width: 120px;
 }
+#content {
+  padding-left: 0;
+  padding-right: 0;
+}
 #description, #secondary_fields {
   border-top: none;
 }
@@ -62,11 +69,14 @@ h2 {
   border-left: none;
 }
 #task {
+  background: white;
   margin-bottom: 30px;
 }
 #task_links {
 }
-#task_container {
-  margin: 40px auto;
+#content {
+  background-image: url("../../images/task-background.gif");
+  border-bottom: 1px solid #eee;
+  padding: 80px 100px 100px;
   width: 600px;
 }

@@ -14,24 +14,24 @@
     </p>
     <p>
       <label for="description">Description:</label><br />
-        <%= f.text_area :description %>
+      <%= f.text_area :description %>
     </p>
     <%= f.hidden_field :kind, :value => params[:kind] %>
     <ul class="clearfix" id="secondary_fields">
       <li>
         <label for="description">Project:</label><br />
-        <%= f.select :project_id, Project.all_for_select, :prompt => "None" %>
+        <%= f.select :project_id, Project.all_for_select,
+          :include_blank => "None" %>
       </li>
       <li>
         <label for="description">Assign To:</label><br />
           <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]},
-            :prompt => "Nobody",
-            :selected => @task.assignee_id || params[:assignee_id].to_i %>
+            :include_blank => "Nobody",
+            :selected => (@task.assignee_id || params[:assignee_id].to_i) %>
       </li>
       <li>
         <label for="description">Due Date:</label><br />
-          <%= f.date_select :due_date, :start_year => Time.now.year,
-            :end_year => Time.now.year + 1, :order => [:month, :day, :year] %>
+          <%= f.date_select :due_date, :order => [:month, :day] %>
       </li>
     </ul>
     <ul class="clearfix" id="submit_tags">
