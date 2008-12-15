@@ -9,6 +9,7 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
+  background-attachment: fixed;
   background-image: url("../images/layout.gif");
   font-size: 12px;
   margin-left: 200px;
