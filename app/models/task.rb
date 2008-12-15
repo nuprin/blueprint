@@ -55,6 +55,18 @@ class Task < ActiveRecord::Base
     self.assignee.add_to_list(self) if self.assignee_id
   end
 
+  before_save do |task|
+    # Do the right thing when it comes to year boundaries.
+    if task.due_date
+      if task.due_date > Date.today + 1.year
+        task.due_date -= 1.year
+      end
+      if task.due_date < Date.today
+        task.due_date += 1.year
+      end
+    end
+  end
+
   after_create do |task|
     if task.prioritized?
       task.add_to_lists
