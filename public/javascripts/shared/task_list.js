@@ -32,23 +32,28 @@ var Tasks = {
     });
   },
   // TODO: This assumes one typeahead per page when there can be two or more.
-  setupTypeahead: function() {
-    $("#task_title").autocompleteArray(PROJECTS[0], {
-      onItemSelect: function(e) {
-        projectTitle = e.innerHTML;
-        i = jQuery.inArray(projectTitle, PROJECTS[0]);
-        projectId = PROJECTS[1][i];
-        $("#task_project_id").val(projectId);
-        $("#task_title").removeAttr("value");
-        $(".quick_add_project").text(projectTitle).show();
-        $("#task_title").focus();
-      }
+  setupTypeaheads: function() {
+    $(".quick_add_form").each(function(i, form) {
+      var f = form;
+      $("#task_title", f).autocompleteArray(AUTOCOMPLETE_DATA[0], {
+        onItemSelect: function(e) {
+          projectTitle = e.innerHTML;
+          i = $.inArray(projectTitle, AUTOCOMPLETE_DATA[0]);
+          formFieldId = "task_" + AUTOCOMPLETE_DATA[1][i]
+          projectId = AUTOCOMPLETE_DATA[2][i];
+          $("#" + formFieldId, f).val(projectId);
+          $("#task_title", f).val("");
+          $("<li id='quick_add_" + formFieldId + "'>" +
+            projectTitle + "</li>").appendTo($(".quick_add_items", f));
+          $("#quick_add_" + formFieldId, f).click(function() {
+            field = $(this).remove().attr('id').replace(/quick_add_/, '');
+            $("#" + field, f).val("");
+            $("#task_title", f).focus();
+          });
+          $("#task_title", f).focus();        
+        }
+      });
     });
-    $(".quick_add_project").click(function() {
-      $("#task_project_id").removeAttr("value");
-      $(".quick_add_project").hide();
-      $("#task_title").focus();
-    })
   }
 };
 
@@ -56,5 +61,5 @@ $(function() {
   Tasks.makeSortable();
   Tasks.setupQuickAdd();
   Tasks.setupActions();
-  Tasks.setupTypeahead();
+  Tasks.setupTypeaheads();
 });

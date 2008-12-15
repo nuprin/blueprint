@@ -14,10 +14,12 @@
     <%= javascript_include_tag "superfish" %>
     <%= javascript_include_tag "blueprint" %>
     <script type="text/javascript">
-      var PROJECTS = <%= 
-        Project.all.map do |project|
-          [project.title, project.id]
-        end.transpose.to_json %>;
+      var AUTOCOMPLETE_DATA = <%= 
+        ([["bug", "kind", "bug"]] + (User.all.map do |u| 
+          [u.name, "assignee_id", u.id]
+        end) + (Project.all.map do |project|
+          [project.title, "project_id", project.id]
+        end)).transpose.to_json %>;
     </script>
   </head>
   <body>

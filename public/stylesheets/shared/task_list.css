@@ -79,7 +79,7 @@ table.task_list .editing .quick_add_form {
   font-weight: normal;
   margin-top: 10px;
 }
-.quick_add_project {
+.quick_add_items li {
   background-color: #678;
   background-image: url("../../images/quick-add-x.gif");
   background-position: right 2px;

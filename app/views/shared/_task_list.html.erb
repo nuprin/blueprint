@@ -2,7 +2,7 @@
   <table class="task_list" id="<%= title.dehumanize %>">
     <thead>
       <tr>
-        <th colspan="5">
+        <th colspan="6">
           <% if local_assigns[:see_all_url] %>
             <%= link_to title, see_all_url %>
           <% else %>
@@ -75,7 +75,7 @@
           </td>
           <td class="task_due">
             <% if task.due_date %>
-              Due <%= task.due_date.strftime("%b %e")  %>
+              <%= task.due_date.strftime("%b %e")  %>
             <% end %>
           </td>
         </tr>
