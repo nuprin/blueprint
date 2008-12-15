@@ -25,6 +25,10 @@ table.task_list td.task_assignee,
 table.task_list td.task_project {
   width: 75px;
 }
+table.task_list td.task_assignee a,
+table.task_list td.task_project a{
+  color: #40678d;
+}
 table.task_list td.task_due {
   width: 60px;
 }
@@ -99,5 +103,5 @@ table.task_list .editing .quick_add_form {
   margin-right: 20px;
 }
 .task_links a {
-  color: #4067ad;
+  color: #40678d;
 }

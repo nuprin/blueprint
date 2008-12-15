@@ -59,12 +59,12 @@
           </td>
           <td class="task_project">
             <% if task.project_id && !context.is_a?(Project) %>
-              <%= h task.project.title %>          
+              <%= link_to_project task.project %>
             <% end %>
           </td>
           <td class="task_assignee">
             <% if task.assignee_id && !context.is_a?(User) %>
-              <%= h task.assignee.name %>
+              <%= link_to_user task.assignee %>
             <% end %>
           </td>
           <td class="task_estimate">
