@@ -4,7 +4,7 @@
       <li>
         <%= link_to "ADD A TASK", new_task_path(:kind => "task") %>
         <ul>
-          <% User.all.each do |u| %>
+          <% User.sorted.each do |u| %>
             <li><%= link_to "#{u.name}",
               new_task_path(:kind => "task", :assignee_id => u.id) %></li>
           <% end %>
@@ -13,7 +13,7 @@
       <li>
         <%= link_to "ADD A BUG", new_task_path(:kind => "bug") %>
         <ul>
-          <% User.all.each do |u| %>
+          <% User.sorted.each do |u| %>
           <li><%= link_to "#{u.name}",
             new_task_path(:kind => "bug", :assignee_id => u.id) %></li>
           <% end %>
@@ -33,7 +33,7 @@
       <li>
         <%= link_to "PEOPLE", users_path %>
         <ul>
-          <% User.all.each do |u| %>
+          <% User.sorted.each do |u| %>
             <li><%= link_to "#{u.name}", user_path(u) %></li>
           <% end %>
         </ul>

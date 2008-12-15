@@ -16,6 +16,16 @@ class User < ActiveRecord::Base
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true
 
+  def self.form_options
+    self.all.map{|u| [u.id, u.name]}.map do |(id, name)|
+      "<option value=\"#{id}\">#{name}</option>"
+    end.join
+  end
+
+  def self.sorted
+    self.all.sort_by(&:name)
+  end
+
   def add_to_list(task)
     TaskListItem.create!(:task => task, :context => self)
   end
@@ -24,9 +34,4 @@ class User < ActiveRecord::Base
     !self.id.nil?
   end
 
-  def self.form_options
-    self.all.map{|u| [u.id, u.name]}.map do |(id, name)|
-      "<option value=\"#{id}\">#{name}</option>"
-    end.join
-  end
 end
