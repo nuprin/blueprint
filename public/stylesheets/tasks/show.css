@@ -17,11 +17,33 @@ h1, #description, #secondary_fields li {
 h2 {
   margin-bottom: 5px;
 }
-.task_field {
+.task_field, #comments {
   border: 1px solid #ddd;
+}
+#comments {
+  line-height: 140%;
+  padding: 10px;
+}
+#comments textarea {
+  font-size: 13px;
+  height: 4em;
+  vertical-align: bottom;
+  width: 400px;
+}
+#comments_list li {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+#comments_list .meta {
+  float: left;
+  width: 120px;
 }
 #description, #secondary_fields {
   border-top: none;
+}
+#secondary_fields {
+  margin-bottom: 1px;
 }
 #secondary_fields li {
   border-left: 1px solid #ddd;
@@ -34,6 +56,9 @@ h2 {
 }
 #task {
   margin-bottom: 30px;
+}
+#task_links {
+  text-align: right;
 }
 #task_container {
   margin: 40px auto;

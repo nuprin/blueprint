@@ -59,7 +59,7 @@ class TasksController < ApplicationController
   end
 
   def show
-
+    @comment = Comment.new(:task_id => params[:id], :author_id => viewer.id)
   end
 
   private
