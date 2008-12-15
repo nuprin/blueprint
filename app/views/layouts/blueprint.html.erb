@@ -1,30 +1,37 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
   "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  <title>Blueprint<%= ": #{@title}" if @title %></title>
-  <script src="http://www.google.com/jsapi"></script>
-  <%= stylesheet_link_tag "base" %>
-  <%= stylesheet_link_tag "blueprint" %>
-  <%= javascript_include_tag "jquery" %>
-  <%= javascript_include_tag "sortable" %>
-  <%= javascript_include_tag "hoverIntent" %>
-  <%= javascript_include_tag "superfish" %>
-  <%= javascript_include_tag "blueprint" %>
-</head>
-<body>
-  <div id="container">
-    <%= render :partial => "/global/nav" %>
-    <% if flash[:notice] %>
-      <p class="notice"><%= flash[:notice] %></p>
-    <% end %>
-    <div id="content">
-      <% if @title && !@hide_layout_title %>
-        <h1><%= @title %></h1>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Blueprint<%= ": #{@title}" if @title %></title>
+    <%= stylesheet_link_tag "base" %>
+    <%= stylesheet_link_tag "blueprint" %>
+    <%= stylesheet_link_tag "autocomplete" %>
+    <%= javascript_include_tag "jquery" %>
+    <%= javascript_include_tag 'autocomplete' %>
+    <%= javascript_include_tag "sortable" %>
+    <%= javascript_include_tag "hoverIntent" %>
+    <%= javascript_include_tag "superfish" %>
+    <%= javascript_include_tag "blueprint" %>
+    <script type="text/javascript">
+      var PROJECTS = <%= 
+        Project.all.map do |project|
+          [project.title, project.id]
+        end.transpose.to_json %>;
+    </script>
+  </head>
+  <body>
+    <div id="container">
+      <%= render :partial => "/global/nav" %>
+      <% if flash[:notice] %>
+        <p class="notice"><%= flash[:notice] %></p>
       <% end %>
-      <%= yield %>
+      <div id="content">
+        <% if @title && !@hide_layout_title %>
+          <h1><%= @title %></h1>
+        <% end %>
+        <%= yield %>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

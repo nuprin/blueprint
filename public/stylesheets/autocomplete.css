@@ -1,0 +1,13 @@
+.ac_results {
+  background: #eee;
+  border: 1px solid #ddd;
+  border-width: 0 1px 1px 1px;
+}
+.ac_results li {
+  line-height: 25px;
+  padding: 0 5px;
+}
+.ac_over {
+  background-color: #678;
+  color: white;
+}
