@@ -3,17 +3,27 @@
 
 <% @title = viewer == @user ? "Your Tasks" : "#{@user.name.possessive} Tasks"%>
 
+<% 
+  task_object = Task.new(:kind => "task", :status => "prioritized",
+                         :assignee_id => @user.id)
+%>
 <%= render :partial => "/shared/task_list",
-           :locals => {:title => "UPCOMING",
-                       :tasks => @user.task_list,
-                       :context => @user,
-                       :quick_add => true} %>
+           :locals => {:title       => "UPCOMING",
+                       :tasks       => @user.task_list,
+                       :context     => @user,
+                       :task_object => task_object} %>
+
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "RECENTLY COMPLETED",
                        :tasks => @user.completed_tasks,
                        :context => @user} %>
 
+<% 
+  task_object = Task.new(:kind => "task", :status => "parked",
+                         :assignee_id => @user.id)
+%>
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "PARKING LOT",
                        :tasks => @user.parked_tasks,
-                       :context => @user} %>
+                       :context => @user,
+                       :task_object => task_object} %>

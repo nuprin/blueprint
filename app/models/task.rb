@@ -32,8 +32,6 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
-
-
   def park!
     self.status = "parked"
     self.list_items.map(&:destroy)
@@ -57,7 +55,9 @@ class Task < ActiveRecord::Base
   end
 
   after_create do |task|
-    task.add_to_lists
+    if task.prioritized?
+      task.add_to_lists
+    end
   end
 
   after_destroy do |task|

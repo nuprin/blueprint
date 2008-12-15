@@ -3,18 +3,24 @@
 
 <% @title = @project.title %>
 
+<% task_object = Task.new(:kind => "task", :status => "prioritized",
+                          :project_id => @project.id) %>
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "UPCOMING",
                        :tasks => @project.task_list,
                        :context => @project,
-                       :quick_add => true} %>
+                       :task_object => task_object} %>
 
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "RECENTLY COMPLETED",
                        :tasks => @project.completed_tasks,
                        :context => @project} %>
 
+<% task_object = Task.new(:kind => "task", :status => "parked",
+                          :project_id => @project.id) %>
+
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "PARKING LOT",
                        :tasks => @project.parked_tasks,
-                       :context => @project} %>
+                       :context => @project,
+                       :task_object => task_object} %>

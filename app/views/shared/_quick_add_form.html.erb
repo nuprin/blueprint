@@ -1,16 +1,14 @@
-<% form_for :task, :url => {:controller => "tasks", :action => "create"},
+<% form_for :task, task_object,
+            :url  => {:controller => "tasks", :action => "create"},
             :html => {:class => "quick_add_form"} do |f| %>
 
-  <%= f.hidden_field :kind,   :value => "task" %>
-  <%= f.hidden_field :status, :value => "prioritized" %>
-  
-  <% if context.is_a?(Project) %>
-    <%= f.hidden_field :project_id, :value => context.id %>
-  <% elsif context.is_a?(User) %>
-    <%= f.hidden_field :assignee_id, :value => context.id %>
-  <% end %>
+  <%= f.hidden_field :kind        %>
+  <%= f.hidden_field :status      %>  
+  <%= f.hidden_field :project_id  %>
+  <%= f.hidden_field :assignee_id %>
 
   <%= f.text_field :title %>
+
   <%= submit_tag "Add Task" %> or
   <%= link_to_function "cancel", "", :class => "quick_cancel_link" %>
 <% end %>

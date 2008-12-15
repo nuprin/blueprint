@@ -1,4 +1,4 @@
-<% if tasks.any? %>
+<% if tasks.any? || local_assigns[:task_object] %>
   <table class="task_list" id="<%= title.dehumanize %>">
     <thead>
       <tr>
@@ -11,12 +11,12 @@
         </th>
       </tr>
     </thead>
-    <% if local_assigns[:quick_add] %>
+    <% if local_assigns[:task_object] %>
       <tfoot>
         <tr>
           <th colspan="5">
             <%= render :partial => "/shared/quick_add_form",
-                       :locals => {:context => context, :tasks => tasks} %>
+                       :locals => {:task_object => task_object} %>
           </th>
         </tr>
       </tfoot>
@@ -52,7 +52,8 @@
               <% elsif task.prioritized? %>
                 <%= link_to "Park", park_task_path(task), :method => :post %>            
               <% end %>
-              | <%= link_to "Delete", task_path(task), :method => :delete %>
+              | <%= link_to "Delete", task_path(task), :method => :delete,
+                  :confirm => "Are you sure you want to delete this task?" %>
             </span>
             <%= link_to h(task.title), task_path(task) %>
           </td>

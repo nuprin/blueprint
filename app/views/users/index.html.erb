@@ -4,10 +4,14 @@
 <% @title = "People" %>
 
 <% @users.each do |user| %>
+  <% 
+    task_object = Task.new(:kind => "task", :status => "prioritized",
+                           :assignee_id => user.id)
+  %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:title => user.name,
+             :locals => {:title       => user.name,
                          :see_all_url => user_path(user),
-                         :tasks => user.task_list,
-                         :context => user,
-                         :quick_add => true} %>                       
+                         :tasks       => user.task_list,
+                         :context     => user,
+                         :task_object => task_object} %>                       
 <% end %>
