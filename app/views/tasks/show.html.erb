@@ -65,7 +65,9 @@
               <strong><%= link_to_user(comment.author) %></strong><br />
               <span class="date">
                 <%= comment.created_at.strftime("%b %e") %>
-              </span>
+              </span> -
+              <%= link_to "Delete", comment_path(comment), :method => :delete,
+                :confirm => "Are you sure you want to delete this comment?" %>
             </div>
             <div class="text"><%= format_text(comment.text) %></div>
           </li>
