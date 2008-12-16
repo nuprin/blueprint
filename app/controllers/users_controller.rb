@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @projects = Project.all # TODO: only show active projects
   end
 
   def show
@@ -14,8 +13,7 @@ class UsersController < ApplicationController
     redirect_to user_url(viewer.id)
   end
 
-  def login
-  end
+  def login; end
 
   def save_login
     user = User.find(params[:user_id])
