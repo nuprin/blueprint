@@ -4,19 +4,20 @@ class Project < ActiveRecord::Base
                        :order      => :position
 
   has_many :tasks
-  has_many :completed_tasks, :class_name => 'Task',
-                             :conditions => "completed_at IS NOT NULL",
-                             :order      => "completed_at DESC"
-
-  has_many :parked_tasks, :class_name  => "Task",
-                          :conditions  => "status = 'parked'",
-                          :order       => "updated_at DESC"
 
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
 
   validates_length_of :title, :in => 1...255
   validates_length_of :description, :maximum => 5000, :allow_nil => true
+
+  def completed_tasks
+    Task.completed.recently_completed.for_project(self).with_details
+  end
+
+  def parked_tasks
+    Task.parked.recently_updated.for_project(self).with_details
+  end
 
   def active?
     self.status == "active"

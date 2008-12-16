@@ -3,21 +3,16 @@ class User < ActiveRecord::Base
                        :as => :context,
                        :order => :position
   has_many :tasks
-  has_many :completed_tasks, :class_name  => 'Task',
-                             :conditions  => "completed_at IS NOT NULL",
-                             :order       => "completed_at DESC",
-                             :foreign_key => :assignee_id
-
-  has_many :parked_tasks, :class_name  => "Task",
-                          :conditions  => "status = 'parked'",
-                          :order       => "updated_at DESC",
-                          :foreign_key => :assignee_id
 
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true
 
+  def parked_tasks
+    Task.parked.recently_updated.assigned_to(self).with_details
+  end
+
   def completed_tasks_today
-    Task.assigned_to(self).completed_today.recently_completed
+    Task.assigned_to(self).completed_today.recently_completed.with_details
   end
 
   def self.form_options

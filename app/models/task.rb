@@ -11,12 +11,18 @@ class Task < ActiveRecord::Base
   named_scope :assigned_to, lambda{|user| {
     :conditions => {:assignee_id => user.id}
   }}
-  
   named_scope :completed_today,
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc + 6.hours]
-
+  named_scope :completed, :conditions => {:status => "completed"}
+  named_scope :for_project, lambda{|project| {
+    :conditions => {:project_id => project.id}
+  }}
+  named_scope :parked, :conditions => {:status => "parked"}
   named_scope :recently_completed, :order => "completed_at DESC"
+  named_scope :recently_updated, :order => "updated_at DESC"
+  named_scope :with_details, :include => [:assignee, :project]
+
 
   validates_presence_of :creator
 
