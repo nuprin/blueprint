@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag "jquery.wysiwyg.css" %>
+<%= stylesheet_link_tag "projects/spec" %>
+
+<%= javascript_include_tag "jquery.wysiwyg.js" %>
+<%= javascript_include_tag "projects/spec" %>
+
+<% @title = "#{@project.title} Spec" %>
+<% form_for :project, :url => {:action => :update_spec}, :html => {:method => :put} do |f| %>
+  <%= f.text_area :description, :rows => nil %>
+  <%= f.submit "Save Changes" %>
+<% end %>
