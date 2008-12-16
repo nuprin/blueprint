@@ -16,7 +16,9 @@
     <%= javascript_include_tag "blueprint" %>
     <script type="text/javascript">
       var AUTOCOMPLETE_DATA = <%= 
-        ([["bug", "kind", "bug"]] + (User.all.map do |u| 
+        ((Task::KINDS.map do |kind|
+          [kind, "kind", kind]
+        end) + (User.all.map do |u| 
           [u.name, "assignee_id", u.id]
         end) + (Project.all.map do |project|
           [project.title, "project_id", project.id]

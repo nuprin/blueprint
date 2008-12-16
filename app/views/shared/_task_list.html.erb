@@ -57,6 +57,11 @@
                   :confirm => "Are you sure you want to delete this task?" %>
             </span>
             <%= link_to h(task.title), task_path(task) %>
+            <span class="tags">
+              <% if !task.kind.blank? && task.kind != "task" %>
+                <span><%= task.kind %></span>
+              <% end %>
+            </span>
           </td>
           <td class="task_project">
             <% if task.project_id && !context.is_a?(Project) %>
