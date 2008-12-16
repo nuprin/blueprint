@@ -1,5 +1,5 @@
 <% if tasks.any? || local_assigns[:task_object] %>
-  <table class="task_list<%= " sortable" if local_assigns[:task_object] %>"
+  <table class="task_list<%= " unsortable" if !local_assigns[:task_object] %>"
          id="<%= title.dehumanize %>">
     <thead>
       <tr>

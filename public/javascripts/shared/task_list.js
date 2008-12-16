@@ -1,8 +1,8 @@
 var Tasks = {
   makeSortable: function() {
-    $("table.sortable").sortable({
+    $(document.body).sortable({
       axis:  'y',
-      items: 'table.task_list tbody>tr',
+      items: 'table.task_list:not(.unsortable) tbody>tr',
       update: function (evt, ui) {
         context = ui.item.attr('class').split('_');
         $.post("/tasks/reorder", {
