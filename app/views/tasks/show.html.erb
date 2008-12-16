@@ -45,12 +45,17 @@
         <% end %>
       </li>
     </ul>
-    <% unless @task.description.blank? %>
-      <div class="task_field" id="description">
-        <h2>DESCRIPTION</h2>
-        <%= format_text(@task.description) %>
-      </div>
-    <% end %>
+    <div class="task_field" id="description">
+      <h2>DESCRIPTION</h2>
+      <% if @task.description.blank? %>
+        <% form_for @task, :url => {:action => "update"} do |f| %>
+          <%= f.text_area :description, :rows => nil %>
+          <%= f.submit "Save Description" %>
+        <% end %>
+      <% else %>
+          <%= format_text(@task.description) %>
+      <% end %>
+    </div>
     <div id="comments">
       <h2>COMMENTS</h2>
       <ul id="comments_list">

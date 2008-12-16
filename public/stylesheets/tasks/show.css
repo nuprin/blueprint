@@ -29,6 +29,7 @@ h2 {
 }
 #comments {
   line-height: 140%;
+  margin-top: 1px;
   padding: 10px;
 }
 #comments textarea {
@@ -56,11 +57,12 @@ h2 {
 #description, #secondary_fields {
   border-top: none;
 }
+#description textarea {
+  margin-bottom: 10px;
+  width: 568px;
+}
 #primary_action {
   float: right;
-}
-#secondary_fields {
-  margin-bottom: 1px;
 }
 #secondary_fields li {
   border-left: 1px solid #ddd;
