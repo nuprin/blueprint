@@ -6,3 +6,11 @@
   margin-bottom: 10px;
   width: 750px;
 }
+#saving {
+  color: #999;
+  line-height: 19px;
+  text-align: right;
+}
+body {
+  font-family: Helvetica;
+}

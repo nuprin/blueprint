@@ -388,7 +388,6 @@
         {
             var self = this;
             var style = '';
-
             /**
              * @link http://code.google.com/p/jwysiwyg/issues/detail?id=14
              */

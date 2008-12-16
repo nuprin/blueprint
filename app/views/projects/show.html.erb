@@ -5,28 +5,31 @@
 
 <% @title = @project.title %>
 
-<% task_object = Task.new(:kind => "task", :status => "prioritized",
-                          :project_id => @project.id) %>
-<%= render :partial => "/shared/task_list",
-           :locals => {:title => "UPCOMING",
-                       :tasks => @project.task_list,
-                       :context => @project,
-                       :task_object => task_object} %>
+<%= render :partial => "project_nav", :locals => {:project => @project} %>
 
-<%= render :partial => "/shared/task_list",
-           :locals => {:title => "RECENTLY COMPLETED",
-                       :tasks => @project.completed_tasks,
-                       :context => @project} %>
+<div id="project_content">
+  <% task_object = Task.new(:kind => "task", :status => "prioritized",
+                            :project_id => @project.id) %>
+  <%= render :partial => "/shared/task_list",
+             :locals => {:title => "UPCOMING",
+                         :tasks => @project.task_list,
+                         :context => @project,
+                         :task_object => task_object} %>
 
-<% task_object = Task.new(:kind => "task", :status => "parked",
-                          :project_id => @project.id) %>
+  <%= render :partial => "/shared/task_list",
+             :locals => {:title => "RECENTLY COMPLETED",
+                         :tasks => @project.completed_tasks,
+                         :context => @project} %>
 
-<%= render :partial => "/shared/task_list",
-           :locals => {:title => "PARKING LOT",
-                       :tasks => @project.parked_tasks,
-                       :context => @project,
-                       :task_object => task_object} %>
+  <% task_object = Task.new(:kind => "task", :status => "parked",
+                            :project_id => @project.id) %>
 
+  <%= render :partial => "/shared/task_list",
+             :locals => {:title => "PARKING LOT",
+                         :tasks => @project.parked_tasks,
+                         :context => @project,
+                         :task_object => task_object} %>
+</div>
 <div id="project_footer">
   <% if @project.active? %>
     <%= link_to "Remove from Active Projects",

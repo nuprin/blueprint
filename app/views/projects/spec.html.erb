@@ -1,12 +1,16 @@
 <%= stylesheet_link_tag "jquery.wysiwyg.css" %>
 <%= stylesheet_link_tag "projects/spec" %>
 
+<%= javascript_include_tag "plugins/form" %>
 <%= javascript_include_tag "jquery.wysiwyg.js" %>
 <%= javascript_include_tag "projects/spec" %>
 
-<% @title = "#{@project.title} Spec" %>
+<% @title = @project.title %>
+
+<%= render :partial => "project_nav", :locals => {:project => @project} %>
+
 <% form_for :project, :url => {:action => :update_spec},
-  :html => {:method => :put} do |f| %>
+  :html => {:method => :put, :id => "spec_form"} do |f| %>
   <%= f.text_area :description, :rows => nil %>
-  <%= f.submit "Save Changes" %>
 <% end %>
+<div id="saving" style="visibility: hidden;">Saving changes...</div>

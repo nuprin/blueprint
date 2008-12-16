@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag "projects/nav" %>
+<ul class="clearfix" id="project_nav">
+  <%
+    [
+      ["Tasks", project_path(@project)],
+      ["Spec",  spec_project_path(@project)]
+    ].each do |name, path|
+  %>
+    <li<%= ' class="current"' if current_page?(path) %>>
+      <%= link_to name, path %>
+    </li>
+  <% end %>
+</ul>
