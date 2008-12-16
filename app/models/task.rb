@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  KINDS = ["bug", "experiment", "stats"]
+  KINDS = ["bug", "design", "experiment", "spec", "stats"]
 
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
