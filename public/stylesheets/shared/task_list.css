@@ -1,6 +1,16 @@
+h2 {
+  color: #aaa;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  margin-bottom: 0;
+  text-align: left;
+}
 table.task_list {
   border-collapse: collapse;
-  margin: 10px 0;
+  margin: 0 0 30px;
+  table-layout: fixed;
+  white-space: nowrap;
   width: 100%;
 }
 table.task_list tbody {
@@ -15,29 +25,29 @@ table.task_list td {
   padding: 9px 5px 7px;
   white-space: nowrap;
 }
-table.task_list td.drag_handle {
+table.task_list .drag_handle {
   background-color: #f3f3f3;
   text-align: center;
   padding: 0;
   width: 31px;
 }
-table.task_list td.task_assignee,
-table.task_list td.task_project {
+table.task_list .task_assignee,
+table.task_list .task_project {
   width: 75px;
 }
 table.task_list td.task_assignee a,
-table.task_list td.task_project a{
+table.task_list td.task_project a {
   color: #40678d;
 }
-table.task_list td.task_due {
+table.task_list .task_due {
   width: 60px;
 }
-table.task_list td.task_estimate {
+table.task_list .task_estimate {
   text-align: right;
   width: 60px;
 }
 table.task_list td.task_name {
-  width: 494px;
+  overflow: hidden;
 }
 table.task_list td.task_assignee,
 table.task_list td.task_estimate,
@@ -48,19 +58,16 @@ table.task_list td.task_project {
 table.task_list td a {
   cursor: pointer;
 }
+table.task_list th {
+  line-height: 29px;
+  text-align: left;
+}
 table.task_list tfoot a {
   color: #40678d;
   font-weight: normal;
 }
 table.task_list th {
-  color: #aaa;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 29px;
-  text-align: left;
-}
-table.task_list thead th {
-  text-transform: uppercase;
+
 }
 table.task_list .quick_add_form,
 table.task_list .editing .quick_add_link {
@@ -115,6 +122,7 @@ table.unsortable td {
   -moz-border-radius: 2px;
 }
 .task_links {
+  background: white;
   color: #aaa;
   float: right;
   font-size: 11px;
