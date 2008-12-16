@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   def update
     # In the event that a project is added to a task, it should be added to
     # the task's project list.
-    if !@task.project_id && params[:task][:project_id]
+    if !@task.project_id && !params[:task][:project_id].blank?
       p = Project.find(params[:task][:project_id])
       p.add_to_list(@task)
     end
