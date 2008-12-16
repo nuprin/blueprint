@@ -1,6 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :projects
+  map.resources :projects,
+                :member => {
+                  :set_active   => :put,
+                  :set_inactive => :put
+                }
   map.resources :comments
   map.resources :tasks,
                 :member => {

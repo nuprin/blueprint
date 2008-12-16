@@ -12,8 +12,15 @@ class Project < ActiveRecord::Base
                           :conditions  => "status = 'parked'",
                           :order       => "updated_at DESC"
 
+  named_scope :active, :conditions => {:status => "active"},
+                       :order => "title ASC"
+
   validates_length_of :title, :in => 1...255
   validates_length_of :description, :maximum => 5000, :allow_nil => true
+
+  def active?
+    self.status == "active"
+  end
 
   def add_to_list(task)
     TaskListItem.create!(:task => task, :context => self)

@@ -1,0 +1,9 @@
+#project_footer {
+  background: #eee;
+  border-top: 2px solid #ddd;
+  padding: 10px;
+  margin-top: 60px;
+}
+#project_footer a {
+  float: right;
+}
