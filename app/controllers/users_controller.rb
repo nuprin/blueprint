@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_login
+  skip_before_filter :require_login, :except => :you
 
   def index
     @users = User.all
@@ -8,6 +8,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def you
+    redirect_to user_url(viewer.id)
   end
 
   def login

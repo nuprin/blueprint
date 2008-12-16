@@ -12,6 +12,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :users,
                 :collection => {:login => :get, :save_login => :post}
-  map.root :controller => "projects", :action => "index"
+  map.root :controller => "users", :action => "you"
 
 end
