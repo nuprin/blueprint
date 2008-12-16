@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true
 
+  def completed_tasks_today
+    Task.assigned_to(self).completed_today.recently_completed
+  end
+
   def self.form_options
     self.all.map{|u| [u.id, u.name]}.map do |(id, name)|
       "<option value=\"#{id}\">#{name}</option>"

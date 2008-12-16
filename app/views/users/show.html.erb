@@ -14,9 +14,10 @@
                        :task_object => task_object} %>
 
 <%= render :partial => "/shared/task_list",
-           :locals => {:title => "RECENTLY COMPLETED",
-                       :tasks => @user.completed_tasks,
-                       :context => @user} %>
+           :locals => {
+             :title => "COMPLETED TODAY (#{@user.completed_tasks_today.size})",
+             :tasks => @user.completed_tasks_today,
+             :context => @user} %>
 
 <% 
   task_object = Task.new(:kind => "task", :status => "parked",
