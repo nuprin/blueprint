@@ -9,9 +9,9 @@ table.task_list tbody {
 table.task_list tbody td {
   background: white;
   border-bottom: 1px solid #e9f1f5;
-  cursor: move;
 }
 table.task_list td {
+  cursor: move;
   padding: 9px 5px 7px;
   white-space: nowrap;
 }
@@ -78,6 +78,9 @@ table.task_list .editing .quick_add_form {
   display: block;
   font-weight: normal;
   margin-top: 10px;
+}
+table.unsortable td {
+  cursor: default;
 }
 .quick_add_items li {
   background-color: #678;
