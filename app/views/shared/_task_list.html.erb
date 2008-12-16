@@ -1,5 +1,6 @@
 <% if tasks.any? || local_assigns[:task_object] %>
-  <table class="task_list" id="<%= title.dehumanize %>">
+  <table class="task_list<%= " sortable" if local_assigns[:task_object] %>"
+         id="<%= title.dehumanize %>">
     <thead>
       <tr>
         <th colspan="6">
@@ -43,15 +44,15 @@
           </td>
           <td class="task_name">
             <span class="task_links" style="display: none">
-              <%= link_to "Edit", edit_task_path(task) %> | 
+              <%= link_to "Edit", edit_task_path(task) %> |
               <% if task.completed? %>
                 <%= link_to "Mark Incomplete", prioritize_task_url(task),
-                  :method => :post %>            
+                  :method => :post %>
               <% elsif task.parked? %>
                 <%= link_to "Prioritize", prioritize_task_url(task),
                   :method => :post %>
               <% elsif task.prioritized? %>
-                <%= link_to "Park", park_task_path(task), :method => :post %>            
+                <%= link_to "Park", park_task_path(task), :method => :post %>
               <% end %>
               | <%= link_to "Delete", task_path(task), :method => :delete,
                   :confirm => "Are you sure you want to delete this task?" %>

@@ -1,6 +1,6 @@
 var Tasks = {
   makeSortable: function() {
-    $(document.body).sortable({
+    $("table.sortable").sortable({
       axis:  'y',
       items: 'table.task_list tbody>tr',
       update: function (evt, ui) {
@@ -10,7 +10,7 @@ var Tasks = {
           list_item_position: ui.item.prevAll().length + 1
         },
         function (data) {
-        
+
         }, "json");
       }
     });
@@ -39,7 +39,7 @@ var Tasks = {
         onItemSelect: function(e) {
           projectTitle = e.innerHTML;
           i = $.inArray(projectTitle, AUTOCOMPLETE_DATA[0]);
-          formFieldId = "task_" + AUTOCOMPLETE_DATA[1][i]
+          formFieldId = "task_" + AUTOCOMPLETE_DATA[1][i];
           projectId = AUTOCOMPLETE_DATA[2][i];
           $("#" + formFieldId, f).val(projectId);
           $("#task_title", f).val("");
@@ -50,7 +50,7 @@ var Tasks = {
             $("#" + field, f).val("");
             $("#task_title", f).focus();
           });
-          $("#task_title", f).focus();        
+          $("#task_title", f).focus();
         }
       });
     });
