@@ -32,7 +32,7 @@
           <td class="drag_handle">
             <% if task.completed? %>
               <%= image_tag 'check.gif' %>
-            <% elsif task.assignee == viewer %>
+            <% elsif task.assignee == viewer || task.assignee_id.nil? %>
               <% form_tag complete_task_url(task) do %>
                 <%= check_box_tag "complete_task_id", false, false,
                   :onclick => "$(this).parents('form').submit(); return false;" %>
