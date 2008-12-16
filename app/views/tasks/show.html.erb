@@ -48,7 +48,7 @@
     <% unless @task.description.blank? %>
       <div class="task_field" id="description">
         <h2>DESCRIPTION</h2>
-        <%= @task.description %>
+        <%= format_text(@task.description) %>
       </div>
     <% end %>
     <div id="comments">
@@ -62,7 +62,7 @@
                 <%= comment.created_at.strftime("%b %e") %>
               </span>
             </div>
-            <div class="text"><%= comment.text %></div>
+            <div class="text"><%= format_text(comment.text) %></div>
           </li>
         <% end %>
       </ul>
