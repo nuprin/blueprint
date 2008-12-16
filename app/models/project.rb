@@ -5,6 +5,8 @@ class Project < ActiveRecord::Base
 
   has_many :tasks
 
+  has_one :spec
+
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
 
@@ -34,7 +36,11 @@ class Project < ActiveRecord::Base
   def self.all_for_select
     self.sorted.map{|p| [p.title, p.id]}
   end
-  
+
+  after_create do |project|
+    Spec.create(:project_id => project.id)
+  end
+
   after_destroy do |project|
     project.tasks.destroy_all
   end

@@ -9,8 +9,9 @@
 
 <%= render :partial => "project_nav", :locals => {:project => @project} %>
 
-<% form_for :project, :url => {:action => :update_spec},
+<% form_for :spec,
+  :url => {:controller => "projects", :action => :update_spec},
   :html => {:method => :put, :id => "spec_form"} do |f| %>
-  <%= f.text_area :description, :rows => nil %>
+  <%= f.text_area :body, :rows => nil %>
 <% end %>
 <div id="saving" style="visibility: hidden;">Saving changes...</div>

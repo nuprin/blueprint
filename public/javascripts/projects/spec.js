@@ -1,10 +1,10 @@
 $(function() {
-  $("#project_description").wysiwyg({
+  $("#spec_body").wysiwyg({
     controls: {
       insertOrderedList:   {visible: true},
       insertUnorderedList: {visible: true},
-      css: "projects/spec.css"
-    }
+    },
+    css: "/stylesheets/projects/spec/body.css"
   });
   setInterval(function() {
     $("#saving").attr("style", "visibility: visible");

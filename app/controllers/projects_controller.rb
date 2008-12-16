@@ -11,11 +11,13 @@ class ProjectsController < ApplicationController
 
   def spec
     @project = Project.find(params[:id])
+    @spec = @project.spec
   end
 
   def update_spec
     project = Project.find(params[:id])
-    project.update_attribute(:description, params[:project][:description])
+    spec = project.spec
+    spec.update_attribute(:body, params[:spec][:body])
     flash[:notice] = "Your changes have been saved."
     redirect_to spec_project_url(project)
   end

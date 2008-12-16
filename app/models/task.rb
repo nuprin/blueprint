@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
 
+  has_one :spec
   has_many :comments
   has_many :list_items, :class_name => 'TaskListItem'
 
