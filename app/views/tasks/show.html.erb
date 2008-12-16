@@ -70,7 +70,7 @@
         :url => {:controller => "comments", :action => :create} do |f| %>
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
-        <%= f.text_area :text %>
+        <%= f.text_area :text, :rows => nil, :cols => nil %>
         <%= f.submit "Save Comment" %>
       <% end %>
     </div>
