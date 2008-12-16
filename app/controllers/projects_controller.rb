@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   layout 'blueprint'
-  # TODO: only show active projects
+
   def index
-    @projects = Project.all 
+    @projects = Project.active
   end
 
   def new
