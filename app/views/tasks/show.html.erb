@@ -70,20 +70,28 @@
               <%= link_to "Delete", comment_path(comment), :method => :delete,
                 :confirm => "Are you sure you want to delete this comment?" %>
             </div>
-            <div class="text"><%= format_text(comment.text) %></div>
-            <% if comment.image.exists? %>
-              <%= link_to image_tag(comment.image.url(:small)), comment.image.url %>
-            <% end %>
+            <div class="text">
+              <%= format_text(comment.text) %>
+              <% if comment.image.exists? %>
+                <%= link_to image_tag(comment.image.url(:large)),
+                            comment.image.url %>
+              <% end %>
+            </div>
           </li>
         <% end %>
       </ul>
       <% form_for :comment, @comment,
-        :url => {:controller => "comments", :action => :create}, :html => {:multipart => true} do |f| %>
+        :url => {:controller => "comments", :action => :create},
+        :html => {:multipart => true, :id => "add_comment_form"} do |f| %>
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
         <%= f.text_area :text, :rows => nil, :cols => nil %>
-        <div><%= f.file_field :image %></div>
-        <%= f.submit "Save" %>
+        <div class="submit_bar">
+          <div class="file_field">
+            <label>Add a picture:</label> <%= f.file_field :image %>
+          </div>
+          <%= f.submit "Save" %>
+        </div>
       <% end %>
     </div>
   </div>

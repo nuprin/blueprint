@@ -33,17 +33,26 @@ h2 {
 .task_field, #comments {
   border: 1px solid #ddd;
 }
+#add_comment_form {
+  padding: 10px 0;
+}
+#add_comment_form textarea {
+  height: 4em;
+  margin-bottom: 10px;
+  width: 568px;
+}
+#add_comment_form .submit_bar {
+  text-align: right;
+}
+#add_comment_form .file_field {
+  float: left;
+}
 #comments, #description {
   line-height: 140%;
 }
 #comments {
   margin-top: 1px;
   padding: 10px;
-}
-#comments textarea {
-  height: 4em;
-  vertical-align: bottom;
-  width: 400px;
 }
 #comments_list li {
   border-bottom: 1px solid #ddd;
@@ -56,6 +65,12 @@ h2 {
 }
 #comments_list .text {
   margin-left: 200px;
+}
+#comments_list .text img {
+  background: #eee;
+  display: block;
+  margin: 10px 0;
+  padding: 9px;
 }
 #content {
   padding-left: 0;
