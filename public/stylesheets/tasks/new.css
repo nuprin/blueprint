@@ -34,3 +34,6 @@ textarea {
 #submit_tags li {
   margin-right: 5px;
 }
+#task_description, #task_title {
+  font-size: 16px;
+}
