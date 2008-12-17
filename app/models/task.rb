@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
   }}
   named_scope :completed_today,
     :conditions => ["completed_at >= ?",
-      (Time.now - 6.hours).at_midnight.getutc + 6.hours]
+      (Time.now - 6.hours).at_midnight.getutc]
   named_scope :completed, :conditions => {:status => "completed"}
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
