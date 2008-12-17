@@ -24,16 +24,23 @@ h2 {
   color: #aaa;
   font-weight: bold;
 }
+.edit_task input {
+  display: none;
+}
+.edit_task.editing input {
+  display: block;
+}
 .task_field, #comments {
   border: 1px solid #ddd;
 }
-#comments {
+#comments, #description {
   line-height: 140%;
+}
+#comments {
   margin-top: 1px;
   padding: 10px;
 }
 #comments textarea {
-  font-size: 13px;
   height: 4em;
   vertical-align: bottom;
   width: 400px;
@@ -58,8 +65,14 @@ h2 {
   border-top: none;
 }
 #description textarea {
+  background: #e3e3e3;
+  border: 1px solid #ccc;
   margin-bottom: 10px;
   width: 568px;
+}
+#description .editing textarea {
+  background: #fff;
+  height: 12em;
 }
 #primary_action {
   float: right;

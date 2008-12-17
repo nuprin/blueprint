@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "tasks/show" %>
+<%= javascript_include_tag "tasks/show" %>
 <% 
   @title = @task.title 
   @hide_layout_title = true
@@ -57,7 +58,7 @@
       <% end %>
     </div>
     <div id="comments">
-      <h2>COMMENTS</h2>
+      <h2>DISCUSSION</h2>
       <ul id="comments_list">
         <% @task.comments.each do |comment| %>
           <li class="clearfix">
@@ -78,7 +79,7 @@
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
         <%= f.text_area :text, :rows => nil, :cols => nil %>
-        <%= f.submit "Save Comment" %>
+        <%= f.submit "Save" %>
       <% end %>
     </div>
   </div>
