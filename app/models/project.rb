@@ -29,6 +29,11 @@ class Project < ActiveRecord::Base
     TaskListItem.create!(:task => task, :context => self)
   end
 
+  def remove_from_list(task)
+    TaskListItem.destroy_all :task_id => task, :context_id => self.id,
+                             :context_type => self.class.name
+  end
+
   def self.sorted
     self.all.sort_by(&:title)
   end

@@ -74,8 +74,8 @@ class Task < ActiveRecord::Base
     self.assignee.add_to_list(self) if self.assignee_id
   end
 
-  before_save :adjust_year
-  
+  before_save :adjust_year, :update_lists
+
   def adjust_year
     # Do the right thing when it comes to year boundaries.
     if self.due_date
@@ -86,6 +86,22 @@ class Task < ActiveRecord::Base
         self.due_date += 1.year
       end
     end
+  end
+
+  def update_lists
+    unless self.new_record?
+      # TODO [chris]: :( This should not pull from the database.
+      old_task = Task.find(self.id)
+      if old_task.project_id != self.project_id
+        old_task.project.remove_from_list(old_task) if old_task.project_id
+        self.project.add_to_list(self) if self.project_id
+      end
+      if old_task.assignee_id != self.assignee_id
+        old_task.assignee.remove_from_list(old_task) if old_task.assignee_id
+        self.assignee.add_to_list(self) if self.assignee_id
+      end
+    end
+    true
   end
 
   after_create do |task|
