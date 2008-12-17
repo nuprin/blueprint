@@ -74,14 +74,16 @@ class Task < ActiveRecord::Base
     self.assignee.add_to_list(self) if self.assignee_id
   end
 
-  before_save do |task|
+  before_save :adjust_year
+  
+  def adjust_year
     # Do the right thing when it comes to year boundaries.
-    if task.due_date
-      if task.due_date > Date.today + 1.year
-        task.due_date -= 1.year
+    if self.due_date
+      if self.due_date > Date.today + 1.year
+        self.due_date -= 1.year
       end
-      if task.due_date < Date.today
-        task.due_date += 1.year
+      if self.due_date < Date.today
+        self.due_date += 1.year
       end
     end
   end
