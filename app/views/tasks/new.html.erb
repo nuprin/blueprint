@@ -10,21 +10,21 @@
     <%= f.hidden_field :status,     :value => "prioritized" %>
     <%= f.hidden_field :creator_id, :value => viewer.id %>
     <p>
-      <label for="title">Title:</label><br />
+      <label for="task_title">Title:</label><br />
       <%= f.text_field :title %>
     </p>
     <p>
-      <label for="description">Description:</label><br />
+      <label for="task_description">Description:</label><br />
       <%= f.text_area :description %>
     </p>
     <ul class="clearfix" id="secondary_fields">
       <li>
-        <label for="description">Project:</label><br />
+        <label for="task_project_id">Project:</label><br />
         <%= f.select :project_id, Project.all_for_select,
           :include_blank => "None" %>
       </li>
       <li>
-        <label for="description">Assign To:</label><br />
+        <label for="task_assignee_id">Assign To:</label><br />
           <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]},
             :include_blank => "Nobody",
             :selected => (@task.assignee_id || params[:assignee_id].to_i) %>
@@ -35,12 +35,11 @@
         <li>
           <label for="task_kind">Kind:</label><br />
           <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
-            :include_blank => "",
-            :selected => params[:kind] %>
+            :include_blank => "", :selected => params[:kind] %>
         </li>      
       <% end %>
       <li>
-        <label for="description">Due Date:</label><br />
+        <label for="task_due_date">Due Date:</label><br />
           <%= f.date_select :due_date, :order => [:month, :day] %>
       </li>
     </ul>

@@ -9,19 +9,8 @@ var Tasks = {
           list_item_id: ui.item.attr('id').replace(/list_item_/, ''),
           list_item_position: ui.item.prevAll().length + 1
         },
-        function (data) {
-
-        }, "json");
+        function (data) {}, "json");
       }
-    });
-  },
-  setupQuickAdd: function() {
-    $("a.quick_add_link").click(function() {
-      $(this).parents("tfoot:eq(0)").addClass('editing');
-      $(this).prev().children("input[type=text]").focus();
-    });
-    $("a.quick_cancel_link").click(function() {
-      $(this).parents("tfoot:eq(0)").removeClass('editing');
     });
   },
   setupActions: function() {
@@ -30,8 +19,22 @@ var Tasks = {
     }, function(){
       $(this).find(".task_links").fadeOut(50);
     });
+  }
+};
+
+var QuickAdd = {
+  open: function() {
+    $(this).parents("tfoot").addClass('editing');
+    $(this).prev().children("input[type=text]").focus().select();
   },
-  // TODO: This assumes one typeahead per page when there can be two or more.
+  close: function() {
+    $(this).parents("tfoot").removeClass('editing');    
+  },
+  setup: function() {
+    $("a.quick_add_link").click(this.open);
+    $("a.quick_cancel_link").click(this.close);
+    this.setupTypeaheads();
+  },
   setupTypeaheads: function() {
     $(".quick_add_form").each(function(i, form) {
       var f = form;
@@ -58,20 +61,48 @@ var Tasks = {
         $(this).ajaxSubmit(function(data){
           var table = $(e.target).parents("table.task_list")
           if ($("#task_status", table).val() == "parked") {
-            $(data).prependTo($("tbody", table));            
+            $(data).prependTo($("tbody", table)).hide().fadeIn("fast");            
           } else {
-            $(data).appendTo($("tbody", table));
+            $(data).appendTo($("tbody", table)).hide().fadeIn("fast");
           }
           $("#task_title", table).focus().select();
         });
       })
     })
   }
-};
+}
+
+var KeyboardShortcuts = {
+  setupFields: function() {
+    $('input[type=text],textarea').focus(function() {
+      $(document.body).addClass("typing");
+    });
+    $('input[type=text],textarea').blur(function() {
+      $(document.body).removeClass("typing");
+    });
+  },
+  setup: function() {
+    this.setupFields();
+    $(window).keydown(function(event) {
+      if (!$(document.body).hasClass("typing")) {
+        if (user.keyboard.character() == "A") {
+          event.preventDefault();
+          $(".quick_add_link:eq(0)").trigger("click");
+        }
+      }
+      if (user.keyboard.character() == "esc") {
+        event.preventDefault();
+        $("#task_title").blur();
+        $(".quick_cancel_link:eq(0)").trigger("click")
+      }
+    })
+  }
+}
 
 $(function() {
   Tasks.makeSortable();
-  Tasks.setupQuickAdd();
   Tasks.setupActions();
-  Tasks.setupTypeaheads();
+  QuickAdd.setup();
+  KeyboardShortcuts.setup();
 });
+
