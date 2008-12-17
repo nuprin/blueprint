@@ -8,7 +8,7 @@ var Spec = {
     })  
   },
   addEditLinks: function() {
-    $("h3", "#spec").
+    $("h1,h2,h3", "#spec").
       append("<a class='edit_links' href='" + EDIT_SPEC_PATH + "'>(Edit)</a>");    
   },
   makeBlankLinks: function() {

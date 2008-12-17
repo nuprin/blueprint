@@ -2,6 +2,7 @@ class SpecsController < ApplicationController
   def show
     @spec = Spec.find(params[:id])
     @project = @spec.project
+    redirect_to edit_project_spec_path(@project, @spec) if @spec.body.blank?
   end
 
   def edit
