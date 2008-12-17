@@ -1,8 +1,10 @@
 <%= stylesheet_link_tag "specs/show" %>
 <%= javascript_include_tag "specs/show" %>
+
 <script type="text/javascript">
   var EDIT_SPEC_PATH = <%= edit_project_spec_url(@project, @spec).to_json %>;
 </script>
+
 <% @title = @project.title %>
 
 <%= render :partial => "/projects/project_nav",
