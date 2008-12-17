@@ -70,14 +70,18 @@
                 :confirm => "Are you sure you want to delete this comment?" %>
             </div>
             <div class="text"><%= format_text(comment.text) %></div>
+            <% if comment.image %>
+              <%= link_to image_tag(comment.image.url(:small)), comment.image.url %>
+            <% end %>
           </li>
         <% end %>
       </ul>
       <% form_for :comment, @comment,
-        :url => {:controller => "comments", :action => :create} do |f| %>
+        :url => {:controller => "comments", :action => :create}, :html => {:multipart => true} do |f| %>
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
         <%= f.text_area :text, :rows => nil, :cols => nil %>
+        <div><%= f.file_field :image %></div>
         <%= f.submit "Save Comment" %>
       <% end %>
     </div>
