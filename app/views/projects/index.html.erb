@@ -11,6 +11,6 @@
              :locals => {:title       => project.title,
                          :see_all_url => project_path(project),
                          :tasks       => project.task_list,
-                         :context     => project,
+                         :context     => project.class.name,
                          :task_object => task_object} %>                       
 <% end %>

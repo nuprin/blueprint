@@ -13,13 +13,13 @@
   <%= render :partial => "/shared/task_list",
              :locals => {:title => "UPCOMING",
                          :tasks => @project.task_list,
-                         :context => @project,
+                         :context => @project.class.name,
                          :task_object => task_object} %>
 
   <%= render :partial => "/shared/task_list",
              :locals => {:title => "RECENTLY COMPLETED",
                          :tasks => @project.completed_tasks,
-                         :context => @project} %>
+                         :context => @project.class.name} %>
 
   <% task_object = Task.new(:kind => "task", :status => "parked",
                             :project_id => @project.id) %>
@@ -27,7 +27,7 @@
   <%= render :partial => "/shared/task_list",
              :locals => {:title => "PARKING LOT",
                          :tasks => @project.parked_tasks,
-                         :context => @project,
+                         :context => @project.class.name,
                          :task_object => task_object} %>
 </div>
 <div id="project_footer">

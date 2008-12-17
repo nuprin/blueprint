@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
 
+  has_one :spec
   has_many :comments
   has_many :list_items, :class_name => 'TaskListItem'
 
@@ -13,7 +14,7 @@ class Task < ActiveRecord::Base
   }}
   named_scope :completed_today,
     :conditions => ["completed_at >= ?",
-      (Time.now - 6.hours).at_midnight.getutc + 6.hours]
+      (Time.now - 6.hours).at_midnight.getutc]
   named_scope :completed, :conditions => {:status => "completed"}
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
@@ -73,16 +74,34 @@ class Task < ActiveRecord::Base
     self.assignee.add_to_list(self) if self.assignee_id
   end
 
-  before_save do |task|
+  before_save :adjust_year, :update_lists
+
+  def adjust_year
     # Do the right thing when it comes to year boundaries.
-    if task.due_date
-      if task.due_date > Date.today + 1.year
-        task.due_date -= 1.year
+    if self.due_date
+      if self.due_date > Date.today + 1.year
+        self.due_date -= 1.year
       end
-      if task.due_date < Date.today
-        task.due_date += 1.year
+      if self.due_date < Date.today
+        self.due_date += 1.year
       end
     end
+  end
+
+  def update_lists
+    unless self.new_record?
+      # TODO [chris]: :( This should not pull from the database.
+      old_task = Task.find(self.id)
+      if old_task.project_id != self.project_id
+        old_task.project.remove_from_list(old_task) if old_task.project_id
+        self.project.add_to_list(self) if self.project_id
+      end
+      if old_task.assignee_id != self.assignee_id
+        old_task.assignee.remove_from_list(old_task) if old_task.assignee_id
+        self.assignee.add_to_list(self) if self.assignee_id
+      end
+    end
+    true
   end
 
   after_create do |task|

@@ -9,17 +9,6 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
-  def spec
-    @project = Project.find(params[:id])
-  end
-
-  def update_spec
-    project = Project.find(params[:id])
-    project.update_attribute(:description, params[:project][:description])
-    flash[:notice] = "Your changes have been saved."
-    redirect_to spec_project_url(project)
-  end
-
   def set_active
     project = Project.find(params[:id])
     project.update_attribute(:status, "active")

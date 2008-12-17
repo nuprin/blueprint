@@ -3,12 +3,10 @@ class TasksController < ApplicationController
 
   def create
     raise "You don't exist" unless viewer.real?
-    task = Task.create!(params[:task].merge(:creator_id => viewer.id))
+    task = Task.create!(params[:task])
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
       redirect_to new_task_url(:kind => params[:task][:kind])
-    elsif params[:commit] == "Add Task"
-      redirect_to :back
     elsif task.project_id
       redirect_to project_url(task.project_id)
     elsif task.assignee_id
@@ -18,6 +16,24 @@ class TasksController < ApplicationController
     end
   end
 
+  def quick_create
+    task = Task.create!(params[:task].merge(:creator_id => viewer.id))
+    context = params[:context]
+    if context == "User"
+      li = TaskListItem.for_context(viewer).first(:conditions => {
+        :task_id => task.id
+      })
+    else
+      li = TaskListItem.for_context(task.project).first(:conditions => {
+        :task_id => task.id
+      })
+    end
+    render :partial => "/shared/task", :locals => {
+      :task_list_item_or_task => (li || task),
+      :context => context
+    }    
+  end
+
   def new
     @task = Task.new
   end
@@ -25,12 +41,6 @@ class TasksController < ApplicationController
   def edit; end
   
   def update
-    # In the event that a project is added to a task, it should be added to
-    # the task's project list.
-    if !@task.project_id && !params[:task][:project_id].blank?
-      p = Project.find(params[:task][:project_id])
-      p.add_to_list(@task)
-    end
     @task.update_attributes(params[:task])
     flash[:notice] = "Your changes have been saved."
     redirect_to task_url(@task)

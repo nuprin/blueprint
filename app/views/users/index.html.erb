@@ -12,6 +12,6 @@
              :locals => {:title       => user.name,
                          :see_all_url => user_path(user),
                          :tasks       => user.task_list,
-                         :context     => user,
+                         :context     => user.class.name,
                          :task_object => task_object} %>                       
 <% end %>
