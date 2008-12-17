@@ -13,74 +13,18 @@
         <tr>
           <th colspan="5">
             <%= render :partial => "/shared/quick_add_form",
-                       :locals => {:task_object => task_object} %>
+                       :locals => {:task_object => task_object,
+                                   :context => context} %>
           </th>
         </tr>
       </tfoot>
     <% end %>
     <tbody>
       <% tasks.each do |task_list_item_or_task| %>
-        <% if task_list_item_or_task.is_a?(TaskListItem) %>
-          <% task = task_list_item_or_task.task %>
-        <% else %>
-          <% task = task_list_item_or_task %>
-        <% end %>
-        <tr class="task" id="list_item_<%= task_list_item_or_task.id %>">
-          <td class="drag_handle">
-            <% if task.completed? %>
-              <%= image_tag 'check.gif' %>
-            <% elsif task.assignee == viewer || task.assignee_id.nil? %>
-              <% form_tag complete_task_url(task) do %>
-                <%= check_box_tag "complete_task_id", false, false,
-                  :onclick => "$(this).parents('form').submit(); return false;" %>
-              <% end %>
-            <% else %>
-              <%= image_tag 'drag_handle.gif' %>
-            <% end %>
-          </td>
-          <td class="task_name">
-            <span class="task_links" style="display: none">
-              <%= link_to "Edit", edit_task_path(task) %> |
-              <% if task.completed? %>
-                <%= link_to "Mark Incomplete", prioritize_task_url(task),
-                  :method => :post %>
-              <% elsif task.parked? %>
-                <%= link_to "Prioritize", prioritize_task_url(task),
-                  :method => :post %>
-              <% elsif task.prioritized? %>
-                <%= link_to "Park", park_task_path(task), :method => :post %>
-              <% end %>
-              | <%= link_to "Delete", task_path(task), :method => :delete,
-                  :confirm => "Are you sure you want to delete this task?" %>
-            </span>
-            <%= link_to h(task.title), task_path(task) %>
-            <span class="tags">
-              <% if !task.kind.blank? && task.kind != "task" %>
-                <span><%= task.kind %></span>
-              <% end %>
-            </span>
-          </td>
-          <td class="task_project">
-            <% if task.project_id && !context.is_a?(Project) %>
-              <%= link_to_project task.project %>
-            <% end %>
-          </td>
-          <td class="task_assignee">
-            <% if task.assignee_id && !context.is_a?(User) %>
-              <%= link_to_user task.assignee %>
-            <% end %>
-          </td>
-          <td class="task_estimate">
-            <% if task.estimate %>
-                <%= pluralize(task.estimate, "hour") %>
-            <% end %>
-          </td>
-          <td class="task_due">
-            <% if task.due_date %>
-              <%= task.due_date.strftime("%b %e")  %>
-            <% end %>
-          </td>
-        </tr>
+        <%= render :partial => "/shared/task", :locals => {
+            :task_list_item_or_task => task_list_item_or_task,
+            :context => context
+          } %>
       <% end %>
     </tbody>
   </table>

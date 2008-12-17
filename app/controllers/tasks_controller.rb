@@ -7,8 +7,6 @@ class TasksController < ApplicationController
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
       redirect_to new_task_url(:kind => params[:task][:kind])
-    elsif params[:commit] == "Add Task"
-      redirect_to :back
     elsif task.project_id
       redirect_to project_url(task.project_id)
     elsif task.assignee_id
@@ -16,6 +14,24 @@ class TasksController < ApplicationController
     else
       redirect_to tasks_url
     end
+  end
+
+  def quick_create
+    task = Task.create!(params[:task].merge(:creator_id => viewer.id))
+    context = params[:context]
+    if context == "User"
+      li = TaskListItem.for_context(viewer).first(:conditions => {
+        :task_id => task.id
+      })
+    else
+      li = TaskListItem.for_context(task.project).first(:conditions => {
+        :task_id => task.id
+      })
+    end
+    render :partial => "/shared/task", :locals => {
+      :task_list_item_or_task => (li || task),
+      :context => context
+    }    
   end
 
   def new

@@ -10,14 +10,14 @@
 <%= render :partial => "/shared/task_list",
            :locals => {:title       => "UPCOMING",
                        :tasks       => @user.task_list,
-                       :context     => @user,
+                       :context     => @user.class.name,
                        :task_object => task_object} %>
 
 <%= render :partial => "/shared/task_list",
            :locals => {
              :title => "COMPLETED TODAY (#{@user.completed_tasks_today.size})",
              :tasks => @user.completed_tasks_today,
-             :context => @user} %>
+             :context => @user.class.name} %>
 
 <% 
   task_object = Task.new(:kind => "task", :status => "parked",
@@ -26,5 +26,5 @@
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "PARKING LOT",
                        :tasks => @user.parked_tasks,
-                       :context => @user,
+                       :context => @user.class.name,
                        :task_object => task_object} %>

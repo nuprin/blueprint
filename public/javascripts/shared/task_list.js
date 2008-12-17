@@ -53,7 +53,19 @@ var Tasks = {
           $("#task_title", f).focus();
         }
       });
-    });
+      $(this).submit(function(e) {
+        e.preventDefault();
+        $(this).ajaxSubmit(function(data){
+          var table = $(e.target).parents("table.task_list")
+          if ($("#task_status", table).val() == "parked") {
+            $(data).prependTo($("tbody", table));            
+          } else {
+            $(data).appendTo($("tbody", table));
+          }
+          $("#task_title", table).focus().select();
+        });
+      })
+    })
   }
 };
 
