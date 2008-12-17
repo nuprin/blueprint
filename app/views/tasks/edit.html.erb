@@ -14,7 +14,6 @@
       <label for="description">Description:</label><br />
         <%= f.text_area :description %>
     </p>
-    <%= f.hidden_field :kind %>
     <ul class="clearfix" id="secondary_fields">
       <li>
         <label for="description">Project:</label><br />
@@ -26,6 +25,12 @@
             :prompt => "Nobody",
             :selected => @task.assignee_id || params[:assignee_id].to_i %>
       </li>
+      <li>
+        <label for="task_kind">Kind:</label><br />
+        <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
+          :include_blank => "",
+          :selected => params[:kind] %>
+      </li>      
       <li>
         <label for="description">Due Date:</label><br />
           <%= f.date_select :due_date, :order => [:month, :day] %>

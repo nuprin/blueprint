@@ -7,7 +7,8 @@
 <div id="form_container">
   <% form_for(@task) do |f| %>
     <%= f.error_messages %>
-    <%= f.hidden_field :status, :value => "prioritized" %>
+    <%= f.hidden_field :status,     :value => "prioritized" %>
+    <%= f.hidden_field :creator_id, :value => viewer.id %>
     <p>
       <label for="title">Title:</label><br />
       <%= f.text_field :title %>
@@ -16,7 +17,6 @@
       <label for="description">Description:</label><br />
       <%= f.text_area :description %>
     </p>
-    <%= f.hidden_field :kind, :value => params[:kind] %>
     <ul class="clearfix" id="secondary_fields">
       <li>
         <label for="description">Project:</label><br />
@@ -29,6 +29,16 @@
             :include_blank => "Nobody",
             :selected => (@task.assignee_id || params[:assignee_id].to_i) %>
       </li>
+      <% if params[:kind] == "bug" %>
+        <%= f.hidden_field :kind, :value => "bug" %>
+      <% else %>
+        <li>
+          <label for="task_kind">Kind:</label><br />
+          <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
+            :include_blank => "",
+            :selected => params[:kind] %>
+        </li>      
+      <% end %>
       <li>
         <label for="description">Due Date:</label><br />
           <%= f.date_select :due_date, :order => [:month, :day] %>
