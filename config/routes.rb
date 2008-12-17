@@ -13,10 +13,13 @@ ActionController::Routing::Routes.draw do |map|
                 :member => {
                   :complete => :post,
                   :park => :post,
-                  :prioritize => :post,
-                  :quick_create => :post
+                  :prioritize => :post
                 },
-                :collection => {:people => :get, :reorder => :post}
+                :collection => {
+                  :people => :get,
+                  :quick_create => :post, 
+                  :reorder => :post
+                }
 
   map.resources :users,
                 :collection => {:login => :get, :save_login => :post}
