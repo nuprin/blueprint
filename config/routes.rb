@@ -1,13 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :projects,
-                :member => {
+  map.resources :projects, :member => {
                   :set_active   => :put,
                   :set_inactive => :put,
-                  # TODO [chris]: This is a nested resource.
-                  :spec         => :get, 
-                  :update_spec  => :put
-                }
+                } do |projects|
+                  projects.resources :specs
+                end
+
   map.resources :comments
   map.resources :tasks,
                 :member => {

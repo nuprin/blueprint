@@ -6,11 +6,11 @@
 
 <% @title = @project.title %>
 
-<%= render :partial => "project_nav", :locals => {:project => @project} %>
+<%= render :partial => "/projects/project_nav",
+           :locals => {:project => @project} %>
 
-<% form_for :spec,
-  :url => {:controller => "projects", :action => :update_spec},
+<% form_for :spec, :url => project_spec_url(@project, @spec),
   :html => {:method => :put, :id => "spec_form"} do |f| %>
   <%= f.text_area :body, :rows => nil %>
+  <%= f.submit("Save Changes") %>
 <% end %>
-<div id="saving" style="visibility: hidden;">Saving changes...</div>
