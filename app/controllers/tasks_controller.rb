@@ -3,10 +3,16 @@ class TasksController < ApplicationController
 
   def create
     raise "You don't exist" unless viewer.real?
-    task = Task.create!(params[:task])
+    begin
+      task = Task.create!(params[:task])
+    rescue ActiveRecord::RecordInvalid
+      flash[:notice] = "Please be sure to include a title."
+      render :action => "new"
+      return
+    end
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
-      redirect_to new_task_url(:kind => params[:task][:kind])
+      redirect_to new_task_url(params[:task])
     elsif task.project_id
       redirect_to project_url(task.project_id)
     elsif task.assignee_id

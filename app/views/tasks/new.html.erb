@@ -3,9 +3,10 @@
 
 <%= javascript_include_tag "tasks/new" %>
 
-<h1>Add a <%= params[:kind].capitalize %></h1>
+<% kind = params[:kind] ? params[:kind].capitalize : "Task" %>
+<h1>Add a <%= kind %></h1>
 <div id="form_container">
-  <% form_for(@task) do |f| %>
+  <% form_for :task do |f| %>
     <%= f.error_messages %>
     <%= f.hidden_field :status,     :value => "prioritized" %>
     <%= f.hidden_field :creator_id, :value => viewer.id %>
@@ -21,13 +22,14 @@
       <li>
         <label for="task_project_id">Project:</label><br />
         <%= f.select :project_id, Project.all_for_select,
-          :include_blank => "None" %>
+          :include_blank => "None", :selected => params[:project_id].to_i %>
       </li>
       <li>
         <label for="task_assignee_id">Assign To:</label><br />
           <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]},
             :include_blank => "Nobody",
-            :selected => (@task.assignee_id || params[:assignee_id].to_i) %>
+            :selected => (
+              (@task && @task.assignee_id) || params[:assignee_id].to_i) %>
       </li>
       <% if params[:kind] == "bug" %>
         <%= f.hidden_field :kind, :value => "bug" %>
@@ -44,7 +46,7 @@
       </li>
     </ul>
     <ul class="clearfix" id="submit_tags">
-      <li><%= f.submit "Create #{params[:kind].capitalize}" %></li>
+      <li><%= f.submit "Create #{kind}" %></li>
       <li><%= f.submit "Create and Add Another" %></li>
     </ul>
   <% end %>
