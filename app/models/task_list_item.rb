@@ -47,8 +47,25 @@ class TaskListItem < ActiveRecord::Base
 
   def sync_assignee_list
     return unless context_type == 'Project'
-    other_item.move_to_bottom && return if last?
-    other_item.insert_at(lower_item.other_item.position)
+
+    if last?
+      other_list = other_item.class.for_context(other_context).
+                                    after(other_item.position).
+                                    with_tasks.
+                                    all(:order => :position)
+
+      first_not_in_project = other_list.find do |i|
+        i.task.project_id != self.task.project_id
+      end
+      
+      if first_not_in_project
+        other_item.insert_at(first_not_in_project.position-1)
+      else
+        other_item.move_to_bottom
+      end
+    else
+      other_item.insert_at(lower_item.other_item.position)
+    end
   end
 
 protected

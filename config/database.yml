@@ -32,7 +32,7 @@ test:
   database: blueprint_test
   username: root
   password:
-  socket: /tmp/mysql.sock
+  #socket: /tmp/mysql.sock
 
 production:
   adapter: mysql
