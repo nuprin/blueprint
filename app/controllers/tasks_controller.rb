@@ -59,16 +59,21 @@ class TasksController < ApplicationController
 
   def park
     @task.park!
+    flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been parked."
     redirect_to :back
   end
 
   def prioritize
     @task.prioritize!
+    flash[:notice] =
+      "The task &ldquo;#{@task.title}&rdquo; has been prioritized."
     redirect_to :back
   end
 
   def destroy
     @task.destroy
+    flash[:notice] =
+      "The task &ldquo;#{@task.title}&rdquo; has been deleted."
     redirect_to :back
   end
 
