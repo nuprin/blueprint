@@ -11,6 +11,7 @@ body, input[type=text], textarea {
 body {
   background-attachment: fixed;
   background-image: url("../images/layout.gif");
+  background-repeat: no-repeat;
   font-size: 12px;
   margin-left: 200px;
   width: 800px;
