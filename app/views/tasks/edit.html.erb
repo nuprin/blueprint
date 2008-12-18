@@ -1,11 +1,13 @@
 <%= stylesheet_link_tag "tasks/new" %>
+<%= javascript_include_tag "tasks/form" %>
 
 <% @title = "Edit Task" %>
 
 <div id="form_container">
   <% form_for(@task) do |f| %>
     <%= f.error_messages %>
-    <%= f.hidden_field :status, :value => "prioritized" %>
+    <%= f.hidden_field :status,     :value => "prioritized" %>
+    <%= f.hidden_field :creator_id, :value => viewer.id %>
     <p>
       <label for="title">Title:</label><br />
       <%= f.text_field :title %>
@@ -32,6 +34,7 @@
       </li>      
       <li>
         <label for="description">Due Date:</label><br />
+          <%= check_box_tag :use_due_date %>
           <%= f.date_select :due_date, :order => [:month, :day] %>
       </li>
     </ul>

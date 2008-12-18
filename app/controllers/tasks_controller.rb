@@ -30,7 +30,7 @@ class TasksController < ApplicationController
   end
 
   def quick_create
-    task = Task.create!(params[:task].merge(:creator_id => viewer.id))
+    task = Task.create!(params[:task])
     context = params[:context]
     if context == "User"
       li = TaskListItem.for_context(viewer).first(:conditions => {
@@ -55,6 +55,9 @@ class TasksController < ApplicationController
   
   def update
     @task.update_attributes(params[:task])
+    if params[:use_due_date].to_i == 0
+      @task.update_attribute(:due_date, nil)
+    end
     flash[:notice] = "Your changes have been saved."
     redirect_to @task
   end
