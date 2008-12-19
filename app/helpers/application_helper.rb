@@ -12,7 +12,7 @@ module ApplicationHelper
     auto_link(text, :all, :target => "_blank")
   end
   def auto_link_tasks(text)
-    text.gsub /\s#(\d)+/ do |task|
+    text.gsub /(?:^|\s)#(\d+)/ do |task|
       link_to task, task_path($1)
     end
   end
