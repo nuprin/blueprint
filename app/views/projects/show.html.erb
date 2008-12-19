@@ -11,7 +11,7 @@
   <% task_object = Task.new(:kind => "task", :status => "prioritized",
                             :project_id => @project.id) %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:title => "UPCOMING",
+             :locals => {:title => "PRIORITIZED",
                          :tasks => @project.task_list,
                          :context => @project.class.name,
                          :task_object => task_object} %>

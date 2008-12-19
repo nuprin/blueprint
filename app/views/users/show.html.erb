@@ -8,7 +8,7 @@
                          :assignee_id => @user.id)
 %>
 <%= render :partial => "/shared/task_list",
-           :locals => {:title       => "UPCOMING",
+           :locals => {:title       => "PRIORITIZED",
                        :tasks       => @user.task_list,
                        :context     => @user.class.name,
                        :task_object => task_object} %>
