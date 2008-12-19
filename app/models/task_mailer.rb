@@ -1,9 +1,11 @@
 class TaskMailer < ActionMailer::Base
 
+  FROM_ADDRESS = "Blueprint <blueprint@causes.com>"
+
   default_url_options[:host] = HOST
   def task_creation(recipient, task)
     recipients recipient_email(recipient)
-    from       "blueprint@causes.com"
+    from       FROM_ADDRESS
     type = task.kind.empty? ? 'task' : task.kind
     if task.assignee== recipient
       subject "You have a new #{type}: '#{task.title}'"
@@ -16,7 +18,7 @@ class TaskMailer < ActionMailer::Base
 
   def task_comment(recipient, comment)
     recipients recipient_email(recipient)
-    from       "blueprint@causes.com"
+    from       FROM_ADDRESS
     task = comment.task
     type = task.kind.empty? ? 'task' : task.kind
     if task.assignee == recipient
@@ -31,7 +33,7 @@ class TaskMailer < ActionMailer::Base
 
   def task_duedate_changed(recipient, task)
     recipients recipient_email(recipient)
-    from       "blueprint@causes.com"
+    from       FROM_ADDRESS
     type = task.kind.empty? ? 'task' : task.kind
     #Do we want to include the new duedate in the subject?
     content_type 'text/html'
@@ -41,7 +43,7 @@ class TaskMailer < ActionMailer::Base
   
   def task_reassigned(recipient, task)
     recipients recipient_email(recipient)
-    from       "blueprint@causes.com"
+    from       FROM_ADDRESS
     type = task.kind.empty? ? 'task' : task.kind
     if task.assignee == recipient
       subject "A #{type} has been reassigned to you: '#{task.title}'"
