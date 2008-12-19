@@ -40,6 +40,7 @@ var QuickAdd = {
     $(".quick_add_form").each(function(i, form) {
       var f = form;
       $("#task_title", f).autocompleteArray(AUTOCOMPLETE_DATA[0], {
+        delay: 100,
         selectFirst: true,
         onItemSelect: function(e) {
           projectTitle = e.innerHTML;
