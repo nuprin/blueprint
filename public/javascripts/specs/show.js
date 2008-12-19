@@ -2,8 +2,8 @@ var Spec = {
   replaceMockrLinks: function() {
     $("a[href^=http://mockr]").each(function(i, elem){
       var src =
-        $(elem).attr("href").replace("http://mockr:9300", 
-                                  "http://mockr:9300/images/mocks/");
+        $(elem).attr("href").replace(/http:\/\/mockr(:?\d*)/, 
+                                     "http://mockr$1/images/mocks/");
       $(elem).html($("<img src='" + src + "' width='100' />"));
     })  
   },
