@@ -31,6 +31,13 @@ table.task_list .drag_handle {
   padding: 0;
   width: 31px;
 }
+table.task_list .task_bug_indicator {
+  width: 20px;
+  overflow: hidden;
+  background-image: url("../../images/bug_sm.png");
+  background-repeat: no-repeat;
+  background-position: 0px 11px;
+}
 table.task_list .task_assignee,
 table.task_list .task_project {
   width: 75px;

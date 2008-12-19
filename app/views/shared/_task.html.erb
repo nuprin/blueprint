@@ -33,11 +33,12 @@
     </span>
     <%= link_to h(task.title), task_path(task) %>
     <span class="tags">
-      <% if !task.kind.blank? && task.kind != "task" %>
+      <% if !task.kind.blank? && !['task', 'bug'].include?(task.kind) %>
         <span><%= task.kind %></span>
       <% end %>
     </span>
   </td>
+  <td class="<%= 'task_bug_indicator' if task.kind == 'bug' %>" />
   <td class="task_project">
     <% if task.project_id && !(context == "Project") %>
       <%= link_to_project task.project %>
