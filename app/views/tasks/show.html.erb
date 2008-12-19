@@ -85,12 +85,13 @@
         :html => {:multipart => true, :id => "add_comment_form"} do |f| %>
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
-        <%= f.text_area :text, :rows => nil, :cols => nil %>
+        <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 1 %>
         <div class="submit_bar">
           <div class="file_field">
-            <label>Add a picture:</label> <%= f.file_field :image %>
+            <label>Add a picture:</label> <%= f.file_field :image,
+                                                           :tabindex => 3 %>
           </div>
-          <%= f.submit "Save" %>
+          <%= f.submit "Save", :tabindex => 2 %>
         </div>
       <% end %>
     </div>
