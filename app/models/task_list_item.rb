@@ -20,54 +20,61 @@ class TaskListItem < ActiveRecord::Base
   end)
 
   def update_position(pos)
+    puts "\n\nUpdating"
+    return if pos == position
+
     insert_at(pos)
 
-    if other_item
-      case context
-      when User: sync_project_list
-      when Project: sync_assignee_list
-      end
+    if other_item && other_item.list.size > 1
+      puts "My cpos: #{contextual_position}"
+      other_item.update_contextual_position(contextual_position)
     end
+    puts "Done\n\n"
   end
 
-  def sync_project_list
-    return unless context_type == 'User'
+  def update_contextual_position(pos)
+    return if contextual_position == pos
+    moving_up = pos < contextual_position
 
-    other_item.move_to_bottom && return if last?
+    puts "Other item cpos: #{contextual_position}"
+    puts "Moving to #{pos}"
+    puts "Moving up: #{moving_up}"
+    puts "Item is: #{contextual_item_at(pos).task.title}"
 
-    my_list = self.class.for_context(context).after(position).with_tasks.
-                         all(:order => :position)
-
-    next_in_project = my_list.find do |i|
-      i.task.project_id == self.task.project_id
-    end
-
-    other_item.insert_at(next_in_project.other_item.position)
-  end
-
-  def sync_assignee_list
-    return unless context_type == 'Project'
-
-    if last?
-      other_list = other_item.class.for_context(other_context).
-                                    after(other_item.position).
-                                    with_tasks.
-                                    all(:order => :position)
-
-      first_not_in_project = other_list.find do |i|
-        i.task.project_id != self.task.project_id
-      end
-      
-      if first_not_in_project
-        other_item.insert_at(first_not_in_project.position-1)
-      else
-        other_item.move_to_bottom
-      end
+    remove_from_list
+    if moving_up
+      puts "Moving to: #{contextual_item_at(pos).position}"
+      insert_at(contextual_item_at(pos).position)
     else
-      other_item.insert_at(lower_item.other_item.position)
+      clear_list
+      puts "Moving to: #{contextual_item_at(pos).position + 1}"
+      insert_at(contextual_item_at(pos).position + 1)
     end
   end
 
+  def list
+    @list ||=
+      self.class.for_context(context).with_tasks.all(:order => :position)
+  end
+  def clear_list
+    @list = nil
+  end
+
+  def contextual_list
+    list.select do |i|
+      i.task.send(other_context_method) == other_context
+    end
+  end
+
+  def contextual_position
+    # Maintain 1-based indexing
+    contextual_list.index(self) + 1
+  end
+
+  def contextual_item_at(pos)
+    # pos is 1-based
+    contextual_list[pos-1]
+  end
 protected
 
   # Returns the item containing the same task in the other (Project/User) list

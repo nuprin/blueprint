@@ -2,7 +2,11 @@ require 'test_helper'
 
 class TaskListItemBase < ActiveSupport::TestCase
   def titles(context)
-    context.task_list.map(&:task).map(&:title)
+    list_titles(context.task_list)
+  end
+
+  def list_titles(list)
+    list.map {|li| li.task.title}
   end
 
   def puts(s)
@@ -10,7 +14,7 @@ class TaskListItemBase < ActiveSupport::TestCase
   end
 end
 
-class TaskListItemBasicTest < TaskListItemBase
+class TaskListItemEasyTest < TaskListItemBase
 
   TASK_TITLES = %w{A B C}
 
@@ -30,6 +34,15 @@ class TaskListItemBasicTest < TaskListItemBase
 
   def test_assignee_list_creation
     assert_equal TASK_TITLES, titles(@kristjan)
+  end
+
+  def test_list
+    assert_equal %w{A B C}, list_titles(@kristjan.task_list.all.first.list)
+  end
+
+  def test_contextual_list_matches
+    assert_equal %w{A B C},
+                 list_titles(@kristjan.task_list.all.first.contextual_list)
   end
 
   def test_changing_assignee_list_updates_project_list
@@ -59,7 +72,7 @@ class TaskListItemBasicTest < TaskListItemBase
 
 end
 
-class TaskListItemAdvancedTest < TaskListItemBase
+class TaskListItemMediumTest < TaskListItemBase
 
   TASK_TITLES = [%w{A B C}, %w{1 2 3}]
 
@@ -87,11 +100,38 @@ class TaskListItemAdvancedTest < TaskListItemBase
   def test_assignee_list_creation
     assert_equal TASK_TITLES[0] + TASK_TITLES[1], titles(@kristjan)
   end
+
+  def test_list
+    assert_equal %w{A B C 1 2 3},
+                 list_titles(@kristjan.task_list.all.first.list)
+  end
+
+  def test_contextual_list_matches
+    assert_equal %w{A B C},
+                 list_titles(@kristjan.task_list.all.first.contextual_list)
+    assert_equal %w{1 2 3},
+                 list_titles(@kristjan.task_list.all.last.contextual_list)
+  end
   
   def test_move_to_bottom_of_project
-    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size+1)
+    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size)
     @blueprint.reload
     assert_equal %w{B C A}, titles(@blueprint)
     assert_equal %w{B C A 1 2 3}, titles(@kristjan)
+  end
+
+  def test_move_to_last_of_project_in_user_queue
+    @kristjan.task_list.all.first.update_position(3)
+    @kristjan.reload
+    assert_equal %w{B C A 1 2 3}, titles(@kristjan)
+    assert_equal %w{B C A}, titles(@blueprint)
+  end
+
+  def test_move_up_one_from_last_in_user_queue
+    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size)
+    @kristjan.task_list[2].update_position(@blueprint.task_list.size-1)
+    @blueprint.reload; @kristjan.reload
+    assert_equal %w{B A C 1 2 3}, titles(@kristjan)
+    assert_equal %w{B A C}, titles(@blueprint)
   end
 end
