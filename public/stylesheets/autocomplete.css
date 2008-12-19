@@ -7,7 +7,8 @@
   line-height: 25px;
   padding: 0 5px;
 }
-.ac_over {
+.ac_over,
+.ac_results li:first-child {
   background-color: #678;
   color: white;
 }
