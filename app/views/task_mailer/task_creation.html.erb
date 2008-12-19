@@ -1,15 +1,15 @@
 <%= @task.title %>
-
+<br/><br/>
 Created by:  <%= @task.creator.name %>
 <% if @task.due_date %>
-
+<br/><br/>
 Due Date: <%= @task.due_date %>
-
+<br/><br/>
 <% end %>
 <% if @task.description %>
-
+<br/><br/>
   <%= @task.description %>
- 
+<br/><br/>
 <% end %>
-
+<br/><br/>
 See Task:  <%= link_to nil, task_url(@task) %>

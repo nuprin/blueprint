@@ -10,6 +10,7 @@ class TaskMailer < ActionMailer::Base
     else
       subject "A new #{type} has been assigned to #{task.assignee.name}"
     end
+    content_type 'text/html'
     body :task => task
   end
 
