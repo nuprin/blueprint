@@ -50,7 +50,7 @@
       <h2>DESCRIPTION</h2>
       <% if @task.description.blank? %>
         <% form_for @task, :url => {:action => "update"} do |f| %>
-          <%= f.text_area :description, :rows => nil %>
+          <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
           <%= f.submit "Save Description" %>
         <% end %>
       <% else %>
@@ -85,12 +85,13 @@
         :html => {:multipart => true, :id => "add_comment_form"} do |f| %>
         <%= f.hidden_field :task_id   %>
         <%= f.hidden_field :author_id %>
-        <%= f.text_area :text, :rows => nil, :cols => nil %>
+        <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 10 %>
         <div class="submit_bar">
           <div class="file_field">
-            <label>Add a picture:</label> <%= f.file_field :image %>
+            <label>Add a picture:</label> <%= f.file_field :image,
+                                                           :tabindex => 12 %>
           </div>
-          <%= f.submit "Save" %>
+          <%= f.submit "Save", :tabindex => 11 %>
         </div>
       <% end %>
     </div>
