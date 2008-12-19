@@ -28,8 +28,7 @@
       <li>
         <label for="task_kind">Kind:</label><br />
         <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
-          :include_blank => "",
-          :selected => params[:kind] %>
+          :include_blank => "" %>
       </li>      
       <li>
         <label for="description">Due Date:</label><br />
