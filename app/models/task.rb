@@ -75,6 +75,14 @@ class Task < ActiveRecord::Base
     self.assignee.add_to_list(self) if self.assignee_id
   end
 
+  def subscribed_users
+    self.task_subscriptions.map(&:user).compact.uniq
+  end
+
+  def subscribed_user_names
+    self.subscribed_users.map(&:name).to_sentence
+  end
+
   before_save :adjust_year, :update_lists
 
   def adjust_year
@@ -108,7 +116,7 @@ class Task < ActiveRecord::Base
   after_create do |task|
     if task.prioritized?
       task.add_to_lists
-      unless task.assignee == task.creator
+      if task.assignee_id && !(task.assignee_id == task.creator_id)
         TaskMailer.deliver_task_creation(task.assignee, task)
       end
     end
@@ -117,7 +125,7 @@ class Task < ActiveRecord::Base
 
   def send_creation_email_to_subscribers
     if self.prioritized?
-      list = self.task_subscriptions.map(&:user).compact.uniq
+      list = self.subscribed_users
       list.delete(self.creator)
       list.each do |sub|
         TaskMailer.deliver_task_creation(sub, self)
