@@ -108,6 +108,19 @@ class Task < ActiveRecord::Base
   after_create do |task|
     if task.prioritized?
       task.add_to_lists
+      unless task.assignee == task.creator
+        TaskMailer.deliver_task_creation(task.assignee, task)
+      end
+    end
+  end
+
+  def send_creation_email_to_subscribers
+    if self.prioritized?
+      list = self.task_subscriptions.map(&:user).compact.uniq
+      list.delete(self.creator)
+      list.each do |sub|
+        TaskMailer.deliver_task_creation(sub, self)
+      end
     end
   end
 

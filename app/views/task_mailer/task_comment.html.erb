@@ -1,0 +1,5 @@
+<%= @comment.text %>
+<% if @comment.image_file_name %>
+
+  <%= image_tag @comment.image.url %>
+<% end %> 

@@ -1,0 +1,13 @@
+<%= @task.title %>
+
+Created by:  <%= @task.creator.name %>
+<% if @task.due_date %>
+
+Due Date: <%= @task.due_date %>
+
+<% end %>
+<% if @task.description %>
+
+  <%= @task.description %>
+ 
+<% end %>

@@ -14,6 +14,9 @@ class TasksController < ApplicationController
       render :action => "new"
       return
     end
+    #this is hokey... but I'm not sure how to do the subscriptions before
+    #the after_create, which is where I'd like to send these
+    task.send_creation_email_to_subscribers
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
       redirect_to new_task_path(params[:task])
