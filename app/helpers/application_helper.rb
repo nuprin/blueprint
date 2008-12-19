@@ -8,7 +8,13 @@ module ApplicationHelper
   end
   def format_text(text)
     text = nl2br(text)
+    text = auto_link_tasks(text)
     auto_link(text, :all, :target => "_blank")
+  end
+  def auto_link_tasks(text)
+    text.gsub /\s#(\d)+/ do |task|
+      link_to task, task_path($1)
+    end
   end
   def nl2br(text)
     text.gsub(/\r\n?/, "\n").gsub(/\n/, '<br />')
