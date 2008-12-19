@@ -3,7 +3,7 @@
     <div id="nav">
         <ul class="sf-menu clearfix" id="add_links">
           <li>
-            <%= link_to "ADD A TASK", new_task_path(:kind => "task") %>
+            <%= link_to "ADD A TASK", new_task_path %>
             <ul style="display: none">
               <% User.sorted.each do |u| %>
                 <li><%= link_to "#{u.name}",
@@ -11,17 +11,9 @@
               <% end %>
             </ul>
           </li>
-          <li>
-            <%= link_to "ADD A BUG", new_task_path(:kind => "bug") %>
-            <ul style="display: none">
-              <% User.sorted.each do |u| %>
-              <li><%= link_to "#{u.name}",
-                new_task_path(:kind => "bug", :assignee_id => u.id) %></li>
-              <% end %>
-            </ul>
-          </li>
         </ul>
       <ul class="nav sf-menu clearfix" id="filters">
+        <li><%= link_to "YOU", user_path(viewer) %></li>
         <li>
           <%= link_to "PROJECTS", projects_path %>
           <ul style="display: none">
@@ -39,9 +31,6 @@
             <% end %>
           </ul>
         </li>
-        <% if viewer.real? %>
-          <li><%= link_to "YOU", user_path(viewer) %></li>
-        <% end %>
       </ul>
     </div>
   </div>
