@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "tasks/show" %>
+<%= stylesheet_link_tag "shared/cc_list" %>
 <%= javascript_include_tag "tasks/show" %>
+<%= javascript_include_tag "shared/cc_list" %>
 <% 
   @title = @task.title 
   @hide_layout_title = true
@@ -46,6 +48,26 @@
         <% end %>
       </li>
     </ul>
+    <div class='task_field' id='cc'>
+      <h2>CC LIST</h2>
+      <ul id='cc_list'>
+        <% @task.task_subscriptions.each do |cc| %>
+          <li id='cc_<%= cc.id %>'><%= cc.user.name %></li>
+        <% end %>
+      </ul>
+      <% form_for :cc_deletion, :url => task_subscription_url(0),
+                  :html => {:method => 'delete', 
+                            :id => 'cc_deletion_form'} do |f| %>
+      <% end %>
+      <% form_for :task_subscription, :url => task_subscriptions_url,
+                  :html => {:id => 'cc_form'} do |f| %>
+         <%= f.hidden_field :task_id, :value => @task.id %>
+         <div>
+           <%= f.text_field :user_name %>
+           <%= f.submit "Add CC" %>
+         </div>
+      <% end %>
+    </div>
     <div class="task_field" id="description">
       <h2>DESCRIPTION</h2>
       <% if @task.description.blank? %>

@@ -18,6 +18,7 @@ ActionController::Routing::Routes.draw do |map|
                   :quick_create => :post, 
                   :reorder => :post
                 }
+  map.resources :task_subscriptions
 
   map.resources :users,
                 :collection => {:login => :get, :save_login => :post}

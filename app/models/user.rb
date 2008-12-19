@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
                        :as => :context,
                        :order => :position
   has_many :tasks
+  has_many :task_subscriptions
 
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true

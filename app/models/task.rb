@@ -7,6 +7,7 @@ class Task < ActiveRecord::Base
 
   has_one :spec
   has_many :comments
+  has_many :task_subscriptions
   has_many :list_items, :class_name => 'TaskListItem'
 
   named_scope :assigned_to, lambda{|user| {
