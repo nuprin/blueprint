@@ -112,6 +112,7 @@ class Task < ActiveRecord::Base
         TaskMailer.deliver_task_creation(task.assignee, task)
       end
     end
+    TaskSubscription.create(:user => task.creator, :task => task)
   end
 
   def send_creation_email_to_subscribers
