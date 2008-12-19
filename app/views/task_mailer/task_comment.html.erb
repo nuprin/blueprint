@@ -3,3 +3,5 @@
 
   <%= image_tag @comment.image.url %>
 <% end %> 
+
+Comment on this task:  <%= link_to task_url (@comment.task) %>
