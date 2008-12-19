@@ -24,4 +24,5 @@ ActionController::Routing::Routes.draw do |map|
                 :collection => {:login => :get, :save_login => :post}
   map.root :controller => "users", :action => "you"
 
+  map.connect ':controller/:action/:id'
 end
