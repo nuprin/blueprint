@@ -1,5 +1,6 @@
 class TaskMailer < ActionMailer::Base
 
+  default_url_options[:host] = HOST
   def task_creation(recipient, task)
     recipients recipient_email(recipient)
     from       "blueprint@causes.com"
