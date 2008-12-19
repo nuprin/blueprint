@@ -99,11 +99,12 @@
   <div id="task_links">
     <div id="primary_action">
       <% if @task.completed? %>
-        <%= link_to "Mark Incomplete", prioritize_task_url(@task),
+        <%= link_to "Mark Incomplete", prioritize_task_path(@task),
            :method => :post %>
       <% else %>
         <%= link_to image_tag("mark-complete.gif"),
-          complete_task_url(@task), :method => :post, :class => "call_to_action"
+          complete_task_path(@task), :method => :post,
+          :class => "call_to_action"
         %>
       <% end %>
     </div>

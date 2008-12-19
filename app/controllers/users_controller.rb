@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def you
-    redirect_to user_url(viewer.id)
+    redirect_to viewer
   end
 
   def login; end
@@ -20,6 +20,6 @@ class UsersController < ApplicationController
     session[:user_id] = user.id
     redirect_to ''
   rescue ActiveRecord::RecordNotFound
-    redirect_to login_users_url
+    redirect_to login_users_path
   end
 end

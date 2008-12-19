@@ -6,7 +6,7 @@
 <% kind = params[:kind] ? params[:kind].capitalize : "Task" %>
 <h1>Add a <%= kind %></h1>
 <div id="form_container">
-  <% form_for :task do |f| %>
+  <% form_for(@task) do |f| %>
     <%= f.error_messages %>
     <%= f.hidden_field :status,     :value => "prioritized" %>
     <%= f.hidden_field :creator_id, :value => viewer.id %>

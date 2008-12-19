@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     flash[:notice] =
       "#{project.title} is now an active project. It has been added to the " +
       "Projects menu and the Projects home page."
-    redirect_to project_path(project)
+    redirect_to project
   end
   
   def set_inactive
@@ -24,13 +24,13 @@ class ProjectsController < ApplicationController
     flash[:notice] =
       "#{project.title} has been set to inactive. It will no longer show up " +
       " in the Projects menu or the Projects home page."
-    redirect_to project_path(project)
+    redirect_to project
   end
 
   def create
     @project = Project.create!(params[:project])
     flash[:notice] = "#{@project.title} has been created."
-    redirect_to project_url(@project)
+    redirect_to @project
   end
   
   def show

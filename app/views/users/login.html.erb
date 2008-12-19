@@ -1,5 +1,5 @@
 <h1>Login</h1>
-<% form_tag save_login_users_url do |f| %>
+<% form_tag save_login_users_path do |f| %>
   <%= select_tag :user_id, User.form_options %>
   <%= submit_tag %>
 <% end %>

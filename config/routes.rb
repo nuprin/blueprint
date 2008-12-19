@@ -6,7 +6,6 @@ ActionController::Routing::Routes.draw do |map|
                 } do |projects|
                   projects.resources :specs
                 end
-
   map.resources :comments
   map.resources :tasks,
                 :member => {

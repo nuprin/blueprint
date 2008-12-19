@@ -8,7 +8,7 @@
     <% if task.completed? %>
       <%= image_tag 'check.gif' %>
     <% elsif task.assignee == viewer || task.assignee_id.nil? %>
-      <% form_tag complete_task_url(task) do %>
+      <% form_tag complete_task_path(task) do %>
         <%= check_box_tag "complete_task_id", false, false,
           :onclick => "$(this).parents('form').submit(); return false;" %>
       <% end %>
@@ -20,10 +20,10 @@
     <span class="task_links" style="display: none">
       <%= link_to "Edit", edit_task_path(task) %> |
       <% if task.completed? %>
-        <%= link_to "Mark Incomplete", prioritize_task_url(task),
+        <%= link_to "Mark Incomplete", prioritize_task_path(task),
           :method => :post %>
       <% elsif task.parked? %>
-        <%= link_to "Prioritize", prioritize_task_url(task),
+        <%= link_to "Prioritize", prioritize_task_path(task),
           :method => :post %>
       <% elsif task.prioritized? %>
         <%= link_to "Park", park_task_path(task), :method => :post %>

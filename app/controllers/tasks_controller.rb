@@ -12,13 +12,13 @@ class TasksController < ApplicationController
     end
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
-      redirect_to new_task_url(params[:task])
+      redirect_to new_task_path(params[:task])
     elsif task.project_id
-      redirect_to project_url(task.project_id)
+      redirect_to task.project
     elsif task.assignee_id
-      redirect_to user_url(task.assignee_id)
+      redirect_to task.assignee
     else
-      redirect_to tasks_url
+      redirect_to task
     end
   end
 
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
   def update
     @task.update_attributes(params[:task])
     flash[:notice] = "Your changes have been saved."
-    redirect_to task_url(@task)
+    redirect_to @task
   end
 
   def complete
@@ -76,9 +76,9 @@ class TasksController < ApplicationController
       "The task &ldquo;#{@task.title}&rdquo; has been deleted."
     if request.env["HTTP_REFERER"].include?(task_path(@task.id))
       if @task.project_id
-        redirect_to project_url(@task.project_id)
+        redirect_to @task.project
       else
-        redirect_to user_url(@task.assignee_id)
+        redirect_to @task.assignee
       end
     else
       redirect_to :back

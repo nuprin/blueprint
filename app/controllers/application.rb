@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   helper_method :viewer
 
   def require_login
-    redirect_to login_users_url unless viewer.real?
+    redirect_to login_users_path unless viewer.real?
   end
 end

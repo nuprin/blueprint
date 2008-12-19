@@ -2,7 +2,7 @@
 <%= javascript_include_tag "specs/show" %>
 
 <script type="text/javascript">
-  var EDIT_SPEC_PATH = <%= edit_project_spec_url(@project, @spec).to_json %>;
+  var EDIT_SPEC_PATH = <%= edit_project_spec_path(@project, @spec).to_json %>;
 </script>
 
 <% @title = @project.title %>
@@ -14,5 +14,5 @@
   <%= @spec.body %>
 </div>
 <div class="edit">
-  <%= link_to "Edit Spec", edit_project_spec_url(@project, @spec) %>
+  <%= link_to "Edit Spec", edit_project_spec_path(@project, @spec) %>
 </div>
