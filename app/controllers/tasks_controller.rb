@@ -63,6 +63,12 @@ class TasksController < ApplicationController
     redirect_to :back
   end
 
+  def defer
+    @task.defer!
+    flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been deferred."
+    redirect_to :back
+  end
+  
   def prioritize
     @task.prioritize!
     flash[:notice] =

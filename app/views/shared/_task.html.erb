@@ -27,6 +27,8 @@
           :method => :post %>
       <% elsif task.prioritized? %>
         <%= link_to "Park", park_task_path(task), :method => :post %>
+        |
+        <%= link_to "Defer", defer_task_path(task), :method => :post %>
       <% end %>
       | <%= link_to "Delete", task_path(task), :method => :delete,
           :confirm => "Are you sure you want to delete this task?" %>
