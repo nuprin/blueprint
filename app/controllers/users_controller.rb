@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :require_login, :except => :you
+  before_filter :require_login, :except => [:login, :save_login]
 
   def index
     @users = User.all
