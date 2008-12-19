@@ -13,8 +13,9 @@ var Tasks = {
       }
     });
   },
-  setupActions: function() {
-    $("table.task_list tr").hover(function(){
+  setupActions: function(trElem) {
+    trElem = trElem || $("table.task_list tr")
+    trElem.hover(function(){
       $(this).find(".task_links").fadeIn(50);
     }, function(){
       $(this).find(".task_links").fadeOut(50);
@@ -60,10 +61,12 @@ var QuickAdd = {
         e.preventDefault();
         $(this).ajaxSubmit(function(data){
           var table = $(e.target).parents("table.task_list")
+          var trElem = $(data);
+          Tasks.setupActions(trElem);
           if ($("#task_status", table).val() == "parked") {
-            $(data).prependTo($("tbody", table)).hide().fadeIn("fast");            
+            trElem.prependTo($("tbody", table)).hide().fadeIn("fast");            
           } else {
-            $(data).appendTo($("tbody", table)).hide().fadeIn("fast");
+            trElem.appendTo($("tbody", table)).hide().fadeIn("fast");
           }
           $("#task_title", table).focus().select();
         });
