@@ -74,7 +74,15 @@ class TasksController < ApplicationController
     @task.destroy
     flash[:notice] =
       "The task &ldquo;#{@task.title}&rdquo; has been deleted."
-    redirect_to :back
+    if request.env["HTTP_REFERER"].include?(task_path(@task.id))
+      if @task.project_id
+        redirect_to project_url(@task.project_id)
+      else
+        redirect_to user_url(@task.assignee_id)
+      end
+    else
+      redirect_to :back
+    end
   end
 
   def reorder
