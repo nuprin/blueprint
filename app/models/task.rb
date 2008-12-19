@@ -52,11 +52,6 @@ class Task < ActiveRecord::Base
     self.save!
   end
 
-  def defer!
-    self.assignee.remove_from_list(self)
-    self.assignee.add_to_list(self)
-  end
-
   def park!
     self.status = "parked"
     self.list_items.map(&:destroy)
