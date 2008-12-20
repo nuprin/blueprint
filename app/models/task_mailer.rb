@@ -47,6 +47,10 @@ class TaskMailer < ActionMailer::Base
     body :task
   end
 
+  # This should email the entire cc list.
+  # def task_completed
+  # end
+
   private
   
   def task_subject(task)
