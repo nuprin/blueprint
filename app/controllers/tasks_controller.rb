@@ -10,6 +10,7 @@ class TasksController < ApplicationController
         TaskSubscription.create(:user_id => cc, :task_id => task.id)
       end
     rescue ActiveRecord::RecordInvalid
+      @task = Task.new(params[:task])
       flash[:notice] = "Please be sure to include a title."
       render :action => "new"
       return
@@ -55,9 +56,6 @@ class TasksController < ApplicationController
   
   def update
     @task.update_attributes(params[:task])
-    if params[:use_due_date].to_i == 0
-      @task.update_attribute(:due_date, nil)
-    end
     flash[:notice] = "Your changes have been saved."
     redirect_to @task
   end

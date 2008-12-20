@@ -83,7 +83,18 @@ class Task < ActiveRecord::Base
     self.subscribed_users.map(&:name).to_sentence
   end
 
-  before_save :adjust_year, :update_lists
+  attr_writer :use_due_date
+  def use_due_date
+    !!self.due_date
+  end
+
+  before_save :adjust_year, :update_lists, :check_use_due_date
+
+  def check_use_due_date
+    if @use_due_date.to_i == 0
+      self.due_date = nil
+    end
+  end
 
   def adjust_year
     # Do the right thing when it comes to year boundaries.

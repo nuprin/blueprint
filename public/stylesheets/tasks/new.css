@@ -43,3 +43,7 @@ textarea {
 #task_description, #task_title {
   font-size: 16px;
 }
+#task_use_due_date {
+  float: left;
+  margin: 7px 10px 0 0;
+}
