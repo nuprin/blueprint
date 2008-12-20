@@ -6,11 +6,10 @@
     <li id='cc_<%= cc.id %>'><%= cc.user.name %></li>
   <% end %>
 </ul>
-<% form_for :cc_deletion, :url => task_subscription_url(0),
-            :html => {:method => 'delete', 
-                      :id => 'cc_deletion_form'} do |f| %>
+<% form_for :cc_deletion, :url => task_subscription_path(0),
+  :html => {:method => 'delete', :id => 'cc_deletion_form'} do |f| %>
 <% end %>
-<% form_for :task_subscription, :url => task_subscriptions_url,
+<% form_for :task_subscription, :url => task_subscriptions_path,
             :html => {:id => 'cc_form'} do |f| %>
    <%= f.hidden_field :task_id, :value => task.id %>
    <div>
