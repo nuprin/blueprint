@@ -147,6 +147,11 @@ table.unsortable td {
   border-color: #a3c2e0;
   color: #039;
 }
+.tags .spec {
+  background: #e5d896;
+  border-color: #aca271;
+  color: #402e0a;
+}
 .tags .stats {
   background: #cfc;
   border-color: #add6ad;

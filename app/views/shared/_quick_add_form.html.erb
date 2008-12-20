@@ -6,6 +6,7 @@
   <%= f.hidden_field :kind,        :autocomplete => :off %>
   <%= f.hidden_field :project_id,  :autocomplete => :off %>
   <%= f.hidden_field :assignee_id, :autocomplete => :off %>
+  <%= f.hidden_field :creator_id, :value => viewer.id %>
   <%= hidden_field_tag :context, context %>
 
   <ul class="quick_add_items"></ul>
