@@ -1,11 +1,9 @@
-<%= @comment.author.name %> added to the discussion:
-<br/><br/>
 <%= @comment.text %>
-<% if @comment.image_file_name %>
 
-  <%= image_tag @comment.image.url %>
-<% end %> 
-<br/><br/>
-Follow up by visiting the task:  <%= link_to nil, task_url(@comment.task) %>
-<br/>
-Coming soon:  Respond by email
+<% if @comment.image_file_name -%>
+Photo:
+<%= @comment.image.url -%>
+<% end -%>
+
+Reply to the discussion:
+<%= task_url(@comment.task) %>
