@@ -12,7 +12,7 @@
     <div id="cc_list_container">
       <label for='cc_text'>CC List:</label><br />
       <ul id='cc_list'>
-        <% task.task_subscriptions.each do |cc| %>
+        <% @task.task_subscriptions.each do |cc| %>
           <li>
             <%= cc.user.name %>
             <%= hidden_field_tag 'cc[]', cc.user.id %></li>
