@@ -26,8 +26,9 @@ h2 {
 .edit_task.editing input {
   display: block;
 }
-.task_field, #comments {
+.task_field {
   border: 1px solid #ddd;
+  border-top: none;
 }
 #add_comment_form {
   padding: 10px 0;
@@ -64,6 +65,7 @@ h2 {
   line-height: 140%;
 }
 #comments {
+  border-top: 1px solid #ddd;
   margin-top: 1px;
   padding: 10px;
 }
@@ -80,11 +82,13 @@ h2 {
   color: #666;
   margin-bottom: 5px;
 }
-#comments_list .meta {
+#comments_list .meta,
+#description h2 {
   float: left;
   width: 120px;
 }
-#comments_list .text {
+#comments_list .text,
+#description .text {
   margin-left: 120px;
 }
 #comments_list .text img {
@@ -124,6 +128,7 @@ h2 {
 }
 #task {
   background: white;
+  border-top: 1px solid #ddd;
   margin-bottom: 30px;
 }
 #content {

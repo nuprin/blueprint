@@ -49,18 +49,20 @@
     <div class='task_field' id='cc'>
       <%= render :partial => 'cc_list', :locals => {:task => @task} %>
     </div>
-    <div class="task_field" id="description">
+    <div class="task_field clearfix" id="description">
       <h2>DESCRIPTION</h2>
-      <% if @task.description.blank? %>
-        <% form_for @task, :url => {:action => "update"} do |f| %>
-          <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
-          <%= f.submit "Save Description" %>
+      <div class="text">
+        <% if @task.description.blank? %>
+          <% form_for @task, :url => {:action => "update"} do |f| %>
+            <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
+            <%= f.submit "Save Description" %>
+          <% end %>
+        <% else %>
+            <%= format_text(@task.description) %>
         <% end %>
-      <% else %>
-          <%= format_text(@task.description) %>
-      <% end %>
+      </div>
     </div>
-    <div id="comments">
+    <div class="task_field" id="comments">
       <h2>DISCUSSION</h2>
       <ul id="comments_list">
         <% @task.comments.each do |comment| %>
