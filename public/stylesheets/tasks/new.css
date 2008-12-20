@@ -15,6 +15,12 @@ select {
 textarea {
   height: 200px;
 }
+#cc_list {
+  margin-bottom: 0;
+}
+#cc_list_container {
+  margin-bottom: 2em;
+}
 #form_container {
   background: #f0f0f0;
   border-bottom: 1px solid #e3e3e3;
@@ -26,7 +32,7 @@ textarea {
   float: left;
 }
 #secondary_fields {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 #secondary_fields li {
   margin-right: 30px;

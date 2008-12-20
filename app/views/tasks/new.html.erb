@@ -41,8 +41,9 @@
         <label for="task_due_date">Due Date:</label><br />
           <%= f.date_select :due_date, :order => [:month, :day] %>
       </li>
-      <li>
-        <label for='task_cc_text'>CC List:</label><br />
+    </ul>
+    <div id="cc_list_container">
+      <label for='task_cc_text'>CC List:</label><br />
         <ul id='cc_list'>
           <% if @task_subscriptions %>
             <% @task_subscriptions.each do |cc| %>
@@ -53,9 +54,8 @@
             <% end %>
           <% end %>
         </ul>
-        <%= text_field_tag 'cc_text' %>
-       </li>
-    </ul>
+      <%= text_field_tag 'cc_text' %>
+     </div>
     <ul class="clearfix" id="submit_tags">
       <li><%= f.submit "Create #{kind}" %></li>
       <li><%= f.submit "Create and Add Another" %></li>
