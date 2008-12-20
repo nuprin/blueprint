@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     task.send_creation_email_to_subscribers
     flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
-      redirect_to new_task_path(params[:task])
+      redirect_to new_task_path(:task => params[:task])
     elsif task.project_id
       redirect_to task.project
     elsif task.assignee_id
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(params[:task])
   end
 
   def edit; end

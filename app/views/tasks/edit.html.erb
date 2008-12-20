@@ -23,9 +23,8 @@
       </li>
       <li>
         <label for="description">Assign To:</label><br />
-          <%= f.select :assignee_id, User.all.map{|u| [u.name, u.id]},
-            :prompt => "Nobody",
-            :selected => @task.assignee_id || params[:assignee_id].to_i %>
+          <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},
+            :prompt => "Nobody" %>
       </li>
       <li>
         <label for="task_kind">Kind:</label><br />
@@ -44,4 +43,3 @@
     </ul>
   <% end %>
 </div>
-

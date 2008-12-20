@@ -7,7 +7,7 @@
             <ul style="display: none">
               <% User.sorted.each do |u| %>
                 <li><%= link_to "#{u.name}",
-                  new_task_path(:kind => "task", :assignee_id => u.id) %></li>
+                  new_task_path(:task => {:assignee_id => u.id}) %></li>
               <% end %>
             </ul>
           </li>
