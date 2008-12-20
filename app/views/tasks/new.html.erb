@@ -7,52 +7,8 @@
 <h1>Add a Task</h1>
 <div id="form_container">
   <% form_for(@task) do |f| %>
-    <%= f.error_messages %>
-    <%= f.hidden_field :status,     :value => "prioritized" %>
-    <%= f.hidden_field :creator_id, :value => viewer.id %>
-    <p>
-      <label for="task_title">Title:</label><br />
-      <%= f.text_field :title %>
-    </p>
-    <p>
-      <label for="task_description">Description:</label><br />
-      <%= f.text_area :description %>
-    </p>
-    <ul class="clearfix" id="secondary_fields">
-      <li>
-        <label for="task_project_id">Project:</label><br />
-        <%= f.select :project_id, Project.all_for_select,
-          :include_blank => "None" %>
-      </li>
-      <li>
-        <label for="task_assignee_id">Assign To:</label><br />
-          <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},
-            :include_blank => "Nobody" %>
-      </li>
-      <li>
-        <label for="task_kind">Kind:</label><br />
-        <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
-          :include_blank => "" %>
-      </li>      
-      <li>
-        <label for="task_due_date">Due Date:</label><br />
-          <%= f.date_select :due_date, :order => [:month, :day] %>
-      </li>
-    </ul>
-    <div id="cc_list_container">
-      <label for='task_cc_text'>CC List:</label><br />
-        <ul id='cc_list'>
-          <% if @task_subscriptions %>
-            <% @task_subscriptions.each do |cc| %>
-              <li>
-                <%= cc.user.name %>
-                <%= hidden_field_tag 'cc[]', cc.user.id %></li>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-      <%= text_field_tag 'cc_text' %>
-     </div>
+    <%= render :partial => "task_form_fields",
+               :locals => {:f => f, :task => @task} %>
     <ul class="clearfix" id="submit_tags">
       <li><%= f.submit "Create Task" %></li>
       <li><%= f.submit "Create and Add Another" %></li>

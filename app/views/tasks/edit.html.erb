@@ -5,38 +5,8 @@
 
 <div id="form_container">
   <% form_for(@task) do |f| %>
-    <%= f.error_messages %>
-    <%= f.hidden_field :status,     :value => "prioritized" %>
-    <%= f.hidden_field :creator_id, :value => viewer.id %>
-    <p>
-      <label for="title">Title:</label><br />
-      <%= f.text_field :title %>
-    </p>
-    <p>
-      <label for="description">Description:</label><br />
-        <%= f.text_area :description %>
-    </p>
-    <ul class="clearfix" id="secondary_fields">
-      <li>
-        <label for="description">Project:</label><br />
-        <%= f.select :project_id, Project.all_for_select, :prompt => "None" %>
-      </li>
-      <li>
-        <label for="description">Assign To:</label><br />
-          <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},
-            :prompt => "Nobody" %>
-      </li>
-      <li>
-        <label for="task_kind">Kind:</label><br />
-        <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
-          :include_blank => "" %>
-      </li>      
-      <li>
-        <label for="description">Due Date:</label><br />
-          <%= check_box_tag :use_due_date %>
-          <%= f.date_select :due_date, :order => [:month, :day] %>
-      </li>
-    </ul>
+    <%= render :partial => "task_form_fields",
+               :locals => {:f => f, :task => task} %>
     <ul class="clearfix" id="submit_tags">
       <li><%= f.submit "Save Changes" %></li>
       <li>or <%= link_to 'Back to Task', task_path(@task) %></li>
