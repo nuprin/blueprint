@@ -4,8 +4,7 @@
 
 <%= javascript_include_tag "tasks/new" %>
 
-<% kind = params[:kind] ? params[:kind].capitalize : "Task" %>
-<h1>Add a <%= kind %></h1>
+<h1>Add a Task</h1>
 <div id="form_container">
   <% form_for(@task) do |f| %>
     <%= f.error_messages %>
@@ -55,7 +54,7 @@
       <%= text_field_tag 'cc_text' %>
      </div>
     <ul class="clearfix" id="submit_tags">
-      <li><%= f.submit "Create #{kind}" %></li>
+      <li><%= f.submit "Create Task" %></li>
       <li><%= f.submit "Create and Add Another" %></li>
     </ul>
   <% end %>
