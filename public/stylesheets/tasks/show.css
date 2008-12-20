@@ -43,6 +43,23 @@ h2 {
 #add_comment_form .file_field {
   float: left;
 }
+#cc {
+  padding: 10px;
+}
+/* Default overrides */
+#cc #cc_list li {
+  background: #e3e3e3;
+  border: 1px solid #ddd;
+  color: #666;
+}
+#cc #cc_list .cc {
+  margin-right: 5px;
+}
+#cc #cc_list .remove_link {
+  color: #036;
+  cursor: pointer;
+  font-size: 9px;
+}
 #comments, #description {
   line-height: 140%;
 }

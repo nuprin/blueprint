@@ -6,7 +6,7 @@ var CCList = {
   },
   submitter: function(f) {
     $(f).ajaxSubmit(function(data){
-      $(data).prependTo($('ul#cc_list')).hide().fadeIn("fast").
+      $(data).prependTo($('#cc_list')).hide().fadeIn("fast").
         click(function() {
           CCList.destructionHandler(this)
         });
@@ -22,7 +22,7 @@ var CCList = {
       this.action = this.action.slice(0,-1 * id_size) + id;
       $(this).ajaxSubmit()
     });
-    $(elem).fadeOut("fast").remove();
+    $(elem).parent().remove();
   },
   setupTypeaheads: function() {
     $("#cc_form").each(function() {
@@ -50,7 +50,7 @@ var CCList = {
     });
   },
   setupDestruction: function() {
-    $('#cc_list').find('li').click(function() {
+    $('#cc_list').find('.remove_link').click(function() {
       CCList.destructionHandler(this);
     });
   }

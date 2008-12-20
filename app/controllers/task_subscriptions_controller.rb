@@ -6,7 +6,9 @@ class TaskSubscriptionsController < ApplicationController
           User.find_by_name(cc['user_name'])
     sub = TaskSubscription.create(:task_id => cc['task_id'],
                              :user => user) 
-    render :text => "<li id='cc_#{sub.id}'>#{user.name}</li>"
+    render :text =>
+      "<span class='cc' id='cc_#{sub.id}'>#{user.name} " +
+      "<span class='remove_link'>(Remove)</span></span>"
   end
   def destroy
     sub = TaskSubscription.find_by_id(params[:id])
