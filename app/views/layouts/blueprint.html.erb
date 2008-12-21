@@ -28,6 +28,7 @@
   </head>
   <body>
     <div id="container">
+      <%= render :partial => "/global/header" %>
       <%= render :partial => "/global/nav" %>
       <% if flash[:notice] %>
         <p class="notice"><%= flash[:notice] %></p>

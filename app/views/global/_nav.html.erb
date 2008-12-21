@@ -1,37 +1,34 @@
 <% if viewer.real? %>
-  <div id="header">
-    <div id="nav">
-        <ul class="sf-menu clearfix" id="add_links">
-          <li>
-            <%= link_to "ADD A TASK", new_task_path %>
-            <ul style="display: none">
-              <% User.sorted.each do |u| %>
-                <li><%= link_to "#{u.name}",
-                  new_task_path(:task => {:assignee_id => u.id}) %></li>
-              <% end %>
-            </ul>
-          </li>
-        </ul>
-      <ul class="nav sf-menu clearfix" id="filters">
-        <li><%= link_to "YOU", user_path(viewer) %></li>
-        <li>
-          <%= link_to "PROJECTS", projects_path %>
-          <ul style="display: none">
-            <% Project.active.each do |p| %>
-              <li><%= link_to p.title, project_path(p) %></li>
-            <% end %>
-            <li><%= link_to "Create a Project...", new_project_path %></li>
-          </ul>
-        </li>
-        <li>
-          <%= link_to "PEOPLE", users_path %>
-          <ul style="display: none">
-            <% User.sorted.each do |u| %>
-              <li><%= link_to "#{u.name}", user_path(u) %></li>
-            <% end %>
-          </ul>
-        </li>
+  <div id="nav">
+    <div id="add_button">
+      <%= link_to image_tag("add-task.gif", :alt => "Add a Task"),
+        new_task_path %>
+      <ul style="display: none">
+        <% User.sorted.each do |u| %>
+          <li><%= link_to "#{u.name}",
+            new_task_path(:task => {:assignee_id => u.id}) %></li>
+        <% end %>
       </ul>
     </div>
+    <ul class="nav sf-menu clearfix" id="filters">
+      <li><%= link_to "YOU", user_path(viewer) %></li>
+      <li>
+        <%= link_to "PROJECTS", projects_path %>
+        <ul style="display: none">
+          <% Project.active.each do |p| %>
+            <li><%= link_to p.title, project_path(p) %></li>
+          <% end %>
+          <li><%= link_to "Create a Project...", new_project_path %></li>
+        </ul>
+      </li>
+      <li>
+        <%= link_to "PEOPLE", users_path %>
+        <ul style="display: none">
+          <% User.sorted.each do |u| %>
+            <li><%= link_to "#{u.name}", user_path(u) %></li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
   </div>
 <% end %>

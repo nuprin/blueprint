@@ -4,11 +4,6 @@ form ul {
 h1 {
   margin-bottom: 2em;
 }
-input[type=text], textarea {
-  border: 2px solid #ddd;
-  margin: 5px 0 10px;
-  width: 590px;
-}
 select {
   margin-top: 4px;
 }
@@ -20,6 +15,12 @@ textarea {
 }
 #cc_list_container {
   margin-bottom: 2em;
+}
+#content input[type=text],
+#content textarea {
+  border: 2px solid #ddd;
+  margin: 5px 0 10px;
+  width: 590px;
 }
 #form_container {
   background: #f0f0f0;

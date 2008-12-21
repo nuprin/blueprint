@@ -10,10 +10,10 @@ body, input[type=text], textarea {
 }
 body {
   background-attachment: fixed;
-  background-image: url("../images/layout.gif");
+  background-color: #012;
   background-repeat: no-repeat;
   font-size: 12px;
-  margin-left: 200px;
+  margin: 0 auto;
   width: 800px;
 }
 input[type=text], textarea {
@@ -23,7 +23,7 @@ input[type=text], textarea {
 }
 .sf-menu ul {
   background: #ddd;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   border-width: 0 1px 1px 0;
   line-height: 25px;
   position: absolute;
@@ -40,18 +40,13 @@ input[type=text], textarea {
   display: block;
   padding: 0 10px;
 }
-.sf-menu>li:first-child {
-  border-width: 0 1px;
-}
 .sf-menu>li {
-  border-color: #aaa;
-  border-style: solid;
-  border-width: 0 1px 0 0;
+  border-right: 1px solid #012;
   float: left;
   width: 120px;
 }
 .sf-menu>li>a {
-  padding: 9px 10px 7px;
+  padding: 11px 10px 9px;
 }
 .sf-menu ul {
   z-index: 9999;
@@ -61,11 +56,10 @@ input[type=text], textarea {
   background-position: right top;
   background-repeat: no-repeat;
   display: block;
-  height: 7px;
   overflow: hidden;
   position: absolute;
-  top: 13px;
-  right: 8px;
+  top: 14px;
+  right: 10px;
   text-indent: -9999px;
   width: 15px;
 }
@@ -73,8 +67,11 @@ input[type=text], textarea {
   position: relative;
 }
 .sfHover ul a:hover {
-  background: #678;
+  background: #3c4650;
   color: white;
+}
+#add_button img {
+  margin: 5px 5px 0 0;
 }
 #add_links {
   float: right;
@@ -91,15 +88,38 @@ input[type=text], textarea {
 #content {
   padding: 20px;
 }
-#header {
-  background: #ddd;
-  font-size: 12px;
+#filters>li>a {
+  background-image: url(../images/nav-bkgd.gif);
+  color: #ccc;
+  font-weight: bold;
 }
-#header h1 {
-  padding: 1.5em 20px 10px;
+#header {
+  background: #012;
+  padding-bottom: 15px;
+  text-align: right;
+}
+#header a {
+  display: block;
+  float: left;
+  height: 23px;
+  overflow: hidden;
+  text-indent: -9999px;  
+  width: 200px;
 }
 #nav {
-  border-bottom: 1px dotted #bbb;
+  background: #3c4650;
+  border-bottom: 1px solid #012;
   font-family: Helvetica;
-  padding: 0 20px;
+}
+#nav #add_button {
+  float: right;
+}
+#nav #filters>li>a {
+  color: white;
+}
+#search {
+  color: white;
+}
+#search input[type=text] {
+  padding: 4px;
 }

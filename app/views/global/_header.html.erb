@@ -1,0 +1,10 @@
+<div id="header">
+  <h1><%= link_to image_tag("logo.gif"), user_path(viewer) %></h1>
+
+  <div id="search">
+    <% form_tag do %>
+      <label for="search">Search:</label>
+      <%= text_field_tag :search %>
+    <% end %>
+  </div>
+</div>
