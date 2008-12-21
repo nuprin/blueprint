@@ -1,21 +1,20 @@
-<%= stylesheet_link_tag "shared/cc_list" %>
 <%= javascript_include_tag "shared/cc_list" %>
 <h2>CC LIST</h2>
-<div id='cc_list'>
-  <% task.task_subscriptions.map do |cc| %>
-    <span class='cc' id="cc_<%= cc.id %>">
-      <%= cc.user.name %> <span class="remove_link">(Remove)</span>
-    </span>
-  <% end.join(",") %>
+<div class="text">
+  <ul class="clearfix" id='cc_list'>
+    <% task.task_subscriptions.each do |ts| %>
+      <%= render :partial => "task_subscription_name",
+                 :locals => {:ts => ts} %>
+    <% end %>
+  </ul>
+  <% if_any(task.unsubscribed_users) do |users| %>
+    <%= link_to_function "Add to List",
+      "$(this).parent().addClass('adding')", :class => "add_link" %>
+    <% form_for :task_subscription, :url => task_subscriptions_path,
+                :html => {:id => 'cc_form'} do |f| %>
+       <%= f.hidden_field :task_id, :value => task.id %>
+       <%= f.select :user_id, users.map{|u| [u.name, u.id]},
+         :include_blank => "Add a name..." %>
+    <% end %>
+  <% end %>
 </div>
-<% form_for :cc_deletion, :url => task_subscription_path(0),
-  :html => {:method => 'delete', :id => 'cc_deletion_form'} do |f| %>
-<% end %>
-<% form_for :task_subscription, :url => task_subscriptions_path,
-            :html => {:id => 'cc_form'} do |f| %>
-   <%= f.hidden_field :task_id, :value => task.id %>
-   <div>
-     <%= f.text_field :user_name %>
-     <%= f.submit "Add CC" %>
-   </div>
-<% end %>

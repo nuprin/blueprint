@@ -79,6 +79,10 @@ class Task < ActiveRecord::Base
     self.task_subscriptions.map(&:user).compact.uniq
   end
 
+  def unsubscribed_users
+    (User.all - subscribed_users).sort_by(&:name)
+  end
+
   def subscribed_user_names
     self.subscribed_users.map(&:name).to_sentence
   end

@@ -55,7 +55,7 @@
         <% if @task.description.blank? %>
           <% form_for @task, :url => {:action => "update"} do |f| %>
             <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
-            <%= f.submit "Save Description" %>
+            <%= f.submit "Save Description", :tabindex => 2 %>
           <% end %>
         <% else %>
             <%= format_text(@task.description) %>

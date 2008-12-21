@@ -1,18 +1,18 @@
 class TaskSubscriptionsController < ApplicationController
   def create
-    
-    cc = params[:task_subscription]
-    user = User.find_by_id(cc['user_id']) || 
-          User.find_by_name(cc['user_name'])
-    sub = TaskSubscription.create(:task_id => cc['task_id'],
-                             :user => user) 
-    render :text =>
-      "<span class='cc' id='cc_#{sub.id}'>#{user.name} " +
-      "<span class='remove_link'>(Remove)</span></span>"
+    begin
+      ts = TaskSubscription.create!(params[:task_subscription])
+      render :partial => "/tasks/task_subscription_name", :locals => {:ts => ts}      
+    rescue ActiveRecord::RecordInvalid
+      render :text => ""
+    end
   end
+
   def destroy
-    sub = TaskSubscription.find_by_id(params[:id])
-    sub.destroy if sub
-    render :text => 'ok'
+    sub = TaskSubscription.find(params[:id])
+    sub.destroy
+    flash[:notice] =
+      "You have been unsubscribed from receiving emails about this task."
+    redirect_to sub.task
   end
 end

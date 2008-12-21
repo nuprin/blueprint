@@ -1,4 +1,5 @@
-# Methods added to this helper will be available to all templates in the application.
+# Methods added to this helper will be available to all templates in the
+# application.
 module ApplicationHelper
   def link_to_user(user)
     link_to user.name, user_path(user)
@@ -18,5 +19,10 @@ module ApplicationHelper
   end
   def nl2br(text)
     text.gsub(/\r\n?/, "\n").gsub(/\n/, '<br />')
+  end
+  def if_any(collection)
+    if collection.any?
+      yield collection
+    end
   end
 end

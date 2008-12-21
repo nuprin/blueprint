@@ -1,60 +1,27 @@
 var CCList = {
-
   setup: function() {
-    this.setupTypeaheads();
-    this.setupDestruction();
+    this.setupDropDown();
   },
-  submitter: function(f) {
-    $(f).ajaxSubmit(function(data){
-      $(data).prependTo($('#cc_list')).hide().fadeIn("fast").
-        click(function() {
-          CCList.destructionHandler(this)
-        });
-    });
-    $(f).find('input.ac_input').val('').focus();
+  setupDropDown: function() {
+    $("#cc_form").find("select").change(function() {
+      CCList.submitter($(this));
+    })
   },
-  destructionHandler: function(elem) {
-    var id = elem.id.split('_')[1];
-    $('#cc_deletion_form').each(function() {
-      //todo[kball] : clean this up
-      var tmp = this.action.split('/');
-      var id_size = tmp[tmp.length - 1].length
-      this.action = this.action.slice(0,-1 * id_size) + id;
-      $(this).ajaxSubmit()
-    });
-    $(elem).parent().remove();
-  },
-  setupTypeaheads: function() {
-    $("#cc_form").each(function() {
-      var f = this;
-      $("#task_subscription_user_name", f).
-        autocompleteArray(AUTOCOMPLETE_DATA[0], {
-          onItemSelect: function(e) {
-            var name = e.innerHTML;
-            i = $.inArray(name, AUTOCOMPLETE_DATA[0])
-            var type = AUTOCOMPLETE_DATA[1][i];
-          //hack to deal with autocomplete containing all.  Maybe should slice it
-            if(type == 'kind')
-              alert("Can't CC a kind");
-            else if (type == 'project_id')
-              alert("Can't CC a project");
-            else {
-              CCList.submitter(f);
-            }
-          }
-      });
-      $(this).submit(function(e) {
-        e.preventDefault();
-        CCList.submitter(this);
-      });
-    });
-  },
-  setupDestruction: function() {
-    $('#cc_list').find('.remove_link').click(function() {
-      CCList.destructionHandler(this);
+  submitter: function(selectElem) {
+    $('#cc_form').ajaxSubmit(function(data){
+      $(data).appendTo($('#cc_list'));
+      selectElem.children().each(function(i, elem) {
+        if (elem.value == selectElem.val()) {
+          $(elem).remove();
+        }
+      })
+      if (selectElem.children().length == 1) {
+        selectElem.remove();
+      }
     });
   }
 }
+
 $(function() {
   CCList.setup();
 });

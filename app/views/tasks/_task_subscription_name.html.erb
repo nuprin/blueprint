@@ -1,0 +1,10 @@
+<li class='cc'>
+  <% if ts.user_id == viewer.id %>
+    <strong><%= ts.user.name %></strong>
+    <%= link_to "Remove", task_subscription_path(ts), :method => "delete",
+      :confirm => "Are you sure? You will no longer receive emails " +
+                  "about this task.", :class => "remove_link" %>
+  <% else %>
+    <%= ts.user.name %>
+  <% end %>
+</li>

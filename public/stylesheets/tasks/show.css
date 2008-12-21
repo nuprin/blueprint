@@ -20,6 +20,13 @@ h1.task_field {
 h2 {
   margin-bottom: 5px;
 }
+#cc select,
+#cc .adding .add_link {
+  display: none;
+}
+#cc .adding select {
+  display: block;
+}
 .edit_task input {
   display: none;
 }
@@ -48,13 +55,10 @@ h2 {
   padding: 10px;
 }
 /* Default overrides */
-#cc #cc_list li {
-  background: #e3e3e3;
-  border: 1px solid #ddd;
-  color: #666;
-}
 #cc #cc_list .cc {
-  margin-right: 5px;
+  display: block;
+  float: left;
+  margin: 0 5px 5px 0;
 }
 #cc #cc_list .remove_link {
   color: #036;
@@ -82,11 +86,13 @@ h2 {
   color: #666;
   margin-bottom: 5px;
 }
+#cc h2,
 #comments_list .meta,
 #description h2 {
   float: left;
   width: 120px;
 }
+#cc .text,
 #comments_list .text,
 #description .text {
   margin-left: 120px;
@@ -108,7 +114,7 @@ h2 {
   background: #e3e3e3;
   border: 1px solid #ccc;
   margin-bottom: 10px;
-  width: 568px;
+  width: 448px;
 }
 #description .editing textarea {
   background: #fff;
