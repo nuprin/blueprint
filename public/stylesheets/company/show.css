@@ -1,0 +1,68 @@
+.initiative {
+  margin-bottom: 30px;
+}
+.initiative h2 {
+  border-bottom: 1px solid #a3b8cc;
+  border-left: 1px solid #cfdae6;
+  border-right: 1px solid #cfdae6;
+  border-top: 3px double #cfdae6;
+  font-size: 13px;
+  margin-bottom: 0;
+  padding: 24px 10px 8px;
+  text-transform: uppercase;
+}
+.initiative h2 span {
+  float: right;
+  font-weight: normal;
+  text-transform: none;
+}
+.initiative table {
+  border-collapse: collapse;
+  width: 500px;
+}
+.initiative td, .initiative th {
+  border-style: dotted solid;
+  border-width: 0 1px 1px;
+  padding: 10px;
+}
+.initiative td {
+  border-color: #cfdae6;
+}
+.initiative th {
+  background: #f7f7f7;
+  border-color: #ccc #cfdae6;
+  color: #666;
+  font-weight: normal;
+  text-align: right;
+  width: 92px;
+}
+#current {
+  background: #eee;
+  border-color: #ddd;
+  border-style: double solid;
+  border-width: 3px 1px;
+  padding: 10px;
+}
+#current li {
+  border-top: 1px solid #cfdae6;
+  line-height: 130%;
+  padding: 6px 0;
+}
+#current li:first-child {
+  border-top: none;
+}
+#current .task {
+  font-weight: bold;
+}
+#inactive_initiatives h2 {
+  margin-bottom: 0;
+}
+#inactive_initiatives li {
+  display: block;
+  float: left;
+  line-height: 33px;
+  margin-right: 20px;
+}
+#initiatives {
+  margin-bottom: 40px;
+}

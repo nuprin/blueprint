@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resource  :company
   map.resources :projects, :member => {
                   :set_active   => :put,
                   :set_inactive => :put,

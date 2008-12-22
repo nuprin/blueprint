@@ -23,6 +23,7 @@ class Task < ActiveRecord::Base
   named_scope :parked, :conditions => {:status => "parked"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
+  named_scope :with_due_date, :conditions => "due_date IS NOT NULL"
   named_scope :with_details, :include => [:assignee, :project]
 
 

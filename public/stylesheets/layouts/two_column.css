@@ -1,0 +1,8 @@
+#primary_column {
+  float: left;
+  width: 500px;
+}
+#secondary_column {
+  float: right;
+  width: 240px;
+}

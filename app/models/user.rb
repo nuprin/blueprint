@@ -35,6 +35,11 @@ class User < ActiveRecord::Base
                              :context_type => self.class.name
   end
 
+  def current_task
+    task_list_item = self.task_list.first
+    task_list_item ? task_list_item.task : nil
+  end
+
   def real?
     !self.id.nil?
   end

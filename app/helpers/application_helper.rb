@@ -7,6 +7,9 @@ module ApplicationHelper
   def link_to_project(project)
     link_to project.title, project_path(project)
   end
+  def link_to_task(task)
+    link_to task.title, task_path(task)
+  end
   def format_text(text)
     text = nl2br(text)
     text = auto_link_tasks(text)
@@ -24,5 +27,12 @@ module ApplicationHelper
     if collection.any?
       yield collection
     end
+  end
+  def with_layout(layout_name, locals = {}, &block)
+    render_content = {
+      :layout => layout_name, :text => capture(&block), :locals => locals
+    }
+    content = render(render_content)
+    concat(content, block.binding)
   end
 end

@@ -1,0 +1,9 @@
+<%= stylesheet_link_tag "layouts/two_column" %>
+<div class="clearfix" id="columns">
+  <div id="primary_column">
+    <%= yield :primary_column %>
+  </div>
+  <div id="secondary_column">
+    <%= yield :secondary_column %>
+  </div>
+</div>

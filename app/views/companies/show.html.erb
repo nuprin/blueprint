@@ -1,0 +1,59 @@
+<%= stylesheet_link_tag "company/show" %>
+
+<% @title = Time.now.at_beginning_of_week.strftime("%b %e, %Y") + "—" +
+  1.week.from_now.at_end_of_week.strftime("%b %e, %Y") %>
+
+<% with_layout "layouts/two_column" do %>
+  <% content_for :primary_column do %>
+    <div id="initiatives">
+      <% Initiative.active.each do |initiative| %>
+        <div class="initiative">
+          <h2>
+            <span>
+              <%= initiative.assignees.sort_by(&:name).map do |user|
+                  link_to_user(user)
+                end.join(", ") %>
+            </span>
+            <%= link_to_project initiative %></h2>
+          <table>
+            <% initiative.deliverables_by_day.each do |day, deliverables| %>
+              <tr>
+                <th rowspan="<%= deliverables.size %>">
+                  <%= day.to_time.strftime("%b %e") %>
+                </th>
+                <% deliverables.each do |deliverable| %>
+                  <td>
+                    <%= link_to_task deliverable %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      <% end %>
+    </div>
+    <div id="inactive_initiatives">
+      <h2>Other Initiatives</h2>
+      <ul class="clearfix">
+      <% Initiative.inactive.each do |initiative| %>
+        <%# TODO [chris]: Rename project_path to initiative_path. %>
+        <li><%= link_to_project initiative %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% content_for :secondary_column do %>
+    <div id="current">
+      <ul>
+        <% User.sorted.each do |u| %>
+          <li>
+            <%= link_to_user u %>
+            <% if u.current_task %>
+              <div class="task"><%= link_to_task u.current_task %></div>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
