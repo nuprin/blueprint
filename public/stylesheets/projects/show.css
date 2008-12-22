@@ -1,12 +1,18 @@
-.involved {
+#project_fields {
   float: right;
   font-size: 13px;
   font-weight: normal;
-  margin-right: 100px;
 }
-.involved h2 {
-  line-height: 13px;
-  margin-bottom: 6px;
+#project_fields li {
+  float: right;
+  margin-left: 30px;
+  text-align: right;
+}
+#project_fields div {
+  margin-top: 5px;
+}
+#project_fields span {
+  color: #666;
 }
 #project_footer {
   background: #eee;
