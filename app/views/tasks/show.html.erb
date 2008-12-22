@@ -128,7 +128,7 @@
         <% end %>
       </div>
       <% if @task.is_a?(Deliverable) %>
-        <%= link_to "Add Task",
+        <%= link_to "Add Task to Deliverable",
           new_task_path(:task => {:parent_id => @task.id}) %> -
       <% end %>
       <%= link_to "Edit #{@task.type}", edit_task_path(@task) %> - 

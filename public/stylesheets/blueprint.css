@@ -9,11 +9,10 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
-  background-attachment: fixed;
   background-color: #012;
-  background-repeat: no-repeat;
   font-size: 12px;
   margin: 0 auto;
+  padding: 0;
   width: 800px;
 }
 h1 {
@@ -87,6 +86,7 @@ input[type=text], textarea {
 }
 #container {
   background: #fff;
+  position: relative;
 }
 #content {
   padding: 20px;
@@ -110,6 +110,14 @@ input[type=text], textarea {
   float: left;
   font-family: "Gill Sans";
   letter-spacing: 0.2em;
+}
+#globe {
+  background-image: url(../images/globe.gif);
+  height: 124px;
+  left: -132px;
+  position: absolute;
+  top: 0;
+  width: 122px;
 }
 #header {
   background: #012;
@@ -139,5 +147,9 @@ input[type=text], textarea {
   color: white;
 }
 #search input[type=text] {
+  background: #33414e;
+  border: 1px solid #666;
+  color: white;
+  margin-left: 8px;
   padding: 4px;
 }
