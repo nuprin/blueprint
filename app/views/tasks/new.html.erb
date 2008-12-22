@@ -12,6 +12,9 @@
 <h1>Add a Task</h1>
 <div id="form_container">
   <% form_for(@task) do |f| %>
+    <% if @task.parent_id %>
+      <p>Deliverable: <strong><%= link_to_task @task.parent %></strong></p>
+    <% end %>
     <%= render :partial => "task_form_fields",
                :locals => {:f => f, :task => @task} %>
     <div id="cc_list_container">

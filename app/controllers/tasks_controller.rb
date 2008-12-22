@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     elsif task.assignee_id
       redirect_to task.assignee
     else
-      redirect_to task
+      redirect_to task_path(task)
     end
   end
 
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   def update
     @task.update_attributes(params[:task])
     flash[:notice] = "Your changes have been saved."
-    redirect_to @task
+    redirect_to task_path(@task)
   end
 
   def complete

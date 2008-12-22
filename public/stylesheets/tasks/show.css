@@ -51,6 +51,12 @@ h2 {
 #add_comment_form .file_field {
   float: left;
 }
+#breadcrumbs {
+  border-top: 3px double #ddd;
+  line-height: 30px;
+  margin-bottom: 30px;
+  padding: 0 5px;
+}
 #cc {
   padding: 10px;
 }
@@ -135,11 +141,47 @@ h2 {
 #task {
   background: white;
   border-top: 1px solid #ddd;
-  margin-bottom: 30px;
+  margin: 0 0 30px 110px;
+}
+#content, #task_links {
+  background-image: url("../../images/task-background.gif");
 }
 #content {
-  background-image: url("../../images/task-background.gif");
   border-bottom: 1px solid #eee;
-  padding: 80px 100px 100px;
-  width: 600px;
+  padding: 40px 45px 100px;
+  width: 710px;
+}
+#task_identifier {
+  background: #eee;
+  border: 1px solid #ddd;
+  float: left;
+  padding: 10px 0 4px;
+  text-align: center;
+  width: 100px;
+}
+#task_identifier hr {
+  background-color: #ccc;
+  border: none;
+  height: 1px;
+  margin-bottom: 8px;
+  margin-top: 0;
+  width: 40px;
+}
+#task_identifier .num {
+  font-size: 30px;
+  font-weight: bold;
+}
+#task_identifier .type {
+  font-size: 9px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+#task_identifier .pound {
+  font-size: 16px;
+  font-weight: normal;
+  margin-right: 2px;
+  vertical-align: middle;
+}
+#task_links {
+  padding-top: 20px;
 }

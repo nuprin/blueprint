@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-
+  map.resources :comments
   map.resource  :company
   map.resources :projects, :member => {
                   :set_active   => :put,
@@ -7,7 +7,8 @@ ActionController::Routing::Routes.draw do |map|
                 } do |projects|
                   projects.resources :specs
                 end
-  map.resources :comments
+  map.resource  :search
+  map.resources :task_subscriptions
   map.resources :tasks,
                 :member => {
                   :complete => :post,
@@ -19,11 +20,8 @@ ActionController::Routing::Routes.draw do |map|
                   :quick_create => :post, 
                   :reorder => :post
                 }
-  map.resources :task_subscriptions
-
   map.resources :users,
                 :collection => {:login => :get, :save_login => :post}
   map.root :controller => "users", :action => "you"
-
   map.connect ':controller/:action/:id'
 end

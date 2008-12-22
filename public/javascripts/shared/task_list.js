@@ -110,4 +110,3 @@ $(function() {
   QuickAdd.setup();
   KeyboardShortcuts.setup();
 });
-

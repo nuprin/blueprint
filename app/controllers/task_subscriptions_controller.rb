@@ -13,6 +13,6 @@ class TaskSubscriptionsController < ApplicationController
     sub.destroy
     flash[:notice] =
       "You have been unsubscribed from receiving emails about this task."
-    redirect_to sub.task
+    redirect_to task_path(sub.task_id)
   end
 end
