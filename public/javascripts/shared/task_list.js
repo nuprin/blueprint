@@ -70,7 +70,7 @@ var QuickAdd = {
           } else {
             trElem.appendTo($("tbody", table)).hide().fadeIn("fast");
           }
-          $("#task_title", table).focus().select();
+          $("#task_title", table).val("").focus();
         });
       })
     })
