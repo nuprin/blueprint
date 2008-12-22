@@ -1,12 +1,12 @@
-h1, #project_nav {
+#content h1, #project_nav {
   background: url(../../images/task-background.gif);
-}
-h1 {
-  padding: 20px 20px 2em;
-  margin-bottom: 0;
 }
 #content {
   padding: 0;
+}
+#content h1 {
+  padding: 20px 20px 2em;
+  margin-bottom: 0;
 }
 #project_content {
   padding: 0 20px;

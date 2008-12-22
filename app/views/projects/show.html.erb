@@ -32,12 +32,12 @@
 </div>
 <div id="project_footer">
   <% if @project.active? %>
-    <%= link_to "Remove from Active Projects",
+    <%= link_to "Remove from Active Initiatives",
       set_inactive_project_path(@project), :method => :put %>
-    Project Status: <strong>Active</strong>
+    Initiative Status: <strong>Active</strong>
   <% else %>
-    <%= link_to "Add to Active Projects",
+    <%= link_to "Add to Active Initiatives",
       set_active_project_path(@project), :method => :put %>
-    Project Status: <strong>Inactive</strong>
+    Initiative Status: <strong>Inactive</strong>
   <% end %>
 </div>
