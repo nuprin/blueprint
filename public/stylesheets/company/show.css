@@ -5,7 +5,9 @@
   border-bottom: 1px solid #a3b8cc;
   border-left: 1px solid #cfdae6;
   border-right: 1px solid #cfdae6;
-  border-top: 3px double #cfdae6;
+  background-image: url(../../images/initiative-header-bkgd.gif);
+  background-position: top left;
+  background-repeat: repeat-x;
   font-size: 13px;
   margin-bottom: 0;
   padding: 24px 10px 8px;
