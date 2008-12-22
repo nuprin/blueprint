@@ -4,7 +4,11 @@
 
 <%= javascript_include_tag "tasks/new" %>
 <%= javascript_include_tag "tasks/form" %>
-
+<script type="text/javascript">
+  var NAME_DATA = <%= (User.all.map do |u|
+    [u.name, u.id]
+  end).transpose.to_json %>;
+</script>
 <h1>Add a Task</h1>
 <div id="form_container">
   <% form_for(@task) do |f| %>

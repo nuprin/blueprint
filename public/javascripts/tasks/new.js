@@ -17,20 +17,12 @@ var CCList = {
   },
   setupTypeaheads: function() {
     $("#cc_text").
-      autocompleteArray(AUTOCOMPLETE_DATA[0], {
+      autocompleteArray(NAME_DATA[0], {
         onItemSelect: function(e) {
           var name = e.innerHTML;
-          var i = $.inArray(name, AUTOCOMPLETE_DATA[0])
-          var type = AUTOCOMPLETE_DATA[1][i];
-          var id = AUTOCOMPLETE_DATA[2][i];
-        //hack to deal with autocomplete containing all.  Maybe should slice it
-          if(type == 'kind')
-            alert("Can't CC a kind");
-          else if (type == 'project_id')
-            alert("Can't CC a project");
-          else {
-            CCList.add(name, id);
-          }
+          var i = $.inArray(name, NAME_DATA[0])
+          var id = NAME_DATA[1][i];
+          CCList.add(name, id);
         }
     });
   },
