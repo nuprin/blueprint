@@ -3,7 +3,20 @@
 
 <%= stylesheet_link_tag "projects/show" %>
 
-<% @title = @project.title %>
+<% 
+  @hide_layout_title = true
+  @title = @project.title
+%>
+
+<h1>
+  <div class="involved">
+    <h2>Involved People:</h2>
+    <%= @project.assignees.map do |u|
+       link_to_user u
+     end.join(", ") %>
+  </div>
+  <%= @title %>
+</h1>
 
 <%= render :partial => "project_nav", :locals => {:project => @project} %>
 

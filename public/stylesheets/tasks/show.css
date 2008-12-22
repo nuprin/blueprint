@@ -1,20 +1,20 @@
-h1 {
+#content h1 {
   font-size: 32px;
   margin-bottom: 0;
 }
-h1 span, h2 {
+#content h1 span, h2 {
   display: block;
   color: #999;
   font-size: 13px;
   font-weight: normal;
 }
-h1 span {
+#content h1 span {
   margin: 2px 0 6px;
 }
-h1, #description, #secondary_fields li {
+#content h1, #description, #secondary_fields li {
   padding: 10px;
 }
-h1.task_field {
+#content h1.task_field {
   padding-bottom: 40px;
 }
 h2 {

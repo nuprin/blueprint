@@ -22,15 +22,16 @@
 }
 .initiative td, .initiative th {
   border-style: dotted solid;
-  border-width: 0 1px 1px;
+  border-width: 0 1px 1px 0;
   padding: 10px;
 }
 .initiative td {
   border-color: #cfdae6;
 }
 .initiative th {
-  background: #f7f7f7;
+  background: #eee;
   border-color: #ccc #cfdae6;
+  border-right-width: 0;
   color: #666;
   font-weight: normal;
   text-align: right;

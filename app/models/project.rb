@@ -1,8 +1,9 @@
 class Project < ActiveRecord::Base
+  has_many :assignees, :through => :tasks, :uniq => true, :order => :name
+
   has_many :task_list, :class_name => 'TaskListItem',
                        :as         => :context,
                        :order      => :position
-
   has_many :tasks
 
   has_one :spec

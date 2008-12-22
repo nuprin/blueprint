@@ -1,3 +1,13 @@
+.involved {
+  float: right;
+  font-size: 13px;
+  font-weight: normal;
+  margin-right: 100px;
+}
+.involved h2 {
+  line-height: 13px;
+  margin-bottom: 6px;
+}
 #project_footer {
   background: #eee;
   border-top: 2px solid #ddd;
