@@ -93,6 +93,9 @@ input[type=text], textarea {
   color: #ccc;
   font-weight: bold;
 }
+#filters>li>a:hover {
+  background-image: url(../images/nav-bkgd-hover.gif);  
+}
 #header {
   background: #012;
   padding-bottom: 15px;
