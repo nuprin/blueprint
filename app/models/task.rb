@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
+  belongs_to :parent, :class_name => "Task"
 
   has_one :spec
   has_many :comments
@@ -93,7 +94,13 @@ class Task < ActiveRecord::Base
     !!self.due_date
   end
 
-  before_save :adjust_year, :update_lists, :check_use_due_date
+  before_save :adjust_year, :update_lists, :check_use_due_date, :set_type
+
+  def set_type
+    if self.parent_id
+      self.type = "SubTask"
+    end
+  end
 
   def check_use_due_date
     if @use_due_date.to_i == 0
