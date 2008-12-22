@@ -1,6 +1,4 @@
 class ProjectsController < ApplicationController
-  layout 'blueprint'
-
   def index
     @projects = Project.active
   end
