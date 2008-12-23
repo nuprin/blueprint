@@ -39,6 +39,10 @@ class Task < ActiveRecord::Base
 
   indexes_columns :title, :description, :using => :ferret
 
+  def to_s
+    title
+  end
+
   def completed?
     self.status == "completed"
   end

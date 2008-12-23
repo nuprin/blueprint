@@ -1,0 +1,6 @@
+<% @all_results.each do |(type, results)| %>
+  <% if results.any? %>
+    <%= render :partial => 'result_set',
+               :locals => {:type => type, :results => results} %>
+  <% end %>
+<% end %>

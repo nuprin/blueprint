@@ -10,6 +10,10 @@ class Comment < ActiveRecord::Base
     :path =>
       ":rails_root/public/assets/comments/:id/:style/:basename.:extension"
 
+  def to_s
+    text
+  end
+
   after_create do |comment|
     comment.author.subscribe_to(comment.task)
     comment.task.mass_mailer.ignoring(comment.author).

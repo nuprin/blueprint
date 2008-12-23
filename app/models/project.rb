@@ -16,6 +16,10 @@ class Project < ActiveRecord::Base
 
   indexes_columns :title, :description, :using => :ferret
 
+  def to_s
+    title
+  end
+
   def completed_tasks
     Task.completed.recently_completed.for_project(self).with_details
   end
