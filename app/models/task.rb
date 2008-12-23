@@ -53,6 +53,7 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.list_items.map(&:destroy)
+    self.mass_mailer.ignoring(self.assignee).deliver_task_completion
     self.save!
   end
 
@@ -137,24 +138,18 @@ class Task < ActiveRecord::Base
     true
   end
 
+  def mass_mailer
+    MassMailer.new(self)
+  end
+
   after_create do |task|
-    if task.prioritized?
-      task.add_to_lists
-    end
     if task.assignee_id
       task.assignee.subscribe_to(task)
     end
     task.creator.subscribe_to(task)
-    task.send_creation_email_to_subscribers
-  end
-
-  def send_creation_email_to_subscribers
-    if self.prioritized?
-      list = self.subscribed_users
-      list.delete(self.creator)
-      list.each do |sub|
-        TaskMailer.deliver_task_creation(sub, self)
-      end
+    if task.prioritized?
+      task.add_to_lists
+      task.mass_mailer.ignoring(task.creator).deliver_task_creation
     end
   end
 

@@ -1,0 +1,12 @@
+<%= @task.assignee_id ? @task.assignee.name : "Someone"
+%> completed the <%= task_type(@task) %>.
+
+<% if @task.kind == "bug" -%>
+Please let any affected users know that the bug has been resolved.
+
+<% end -%>
+View this task:
+<%= task_url(@task) %>
+
+----
+<%= task_footer(@task) %>

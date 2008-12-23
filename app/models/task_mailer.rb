@@ -14,11 +14,11 @@ class TaskMailer < ActionMailer::Base
     body       :task => task, :recipient => recipient
   end
 
-  def task_comment(recipient, comment)
+  def task_comment(recipient, task, comment)
     recipients recipient_email(recipient)
     from       "#{comment.author.name} <#{FROM_EMAIL}>"
     subject    task_subject(comment.task)
-    body       :comment => comment
+    body       :comment => comment, :task => task
   end
 
   def task_duedate_changed(recipient, task)
@@ -47,9 +47,12 @@ class TaskMailer < ActionMailer::Base
     body :task
   end
 
-  # This should email the entire cc list.
-  # def task_completed
-  # end
+  def task_completion(recipient, task)
+    recipients recipient_email(recipient)
+    from       FROM_EMAIL_WITH_NAME
+    subject    task_subject(task)
+    body       :task => task
+  end
 
   private
   

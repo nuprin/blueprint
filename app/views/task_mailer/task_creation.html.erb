@@ -7,12 +7,11 @@
 <%= @task.title.upcase %>
 
 <% unless @task.description.blank? -%>
-  <%= @task.description %>
-<% end -%>
+<%= @task.description %>
 
+<% end -%>
 View this task:
 <%= task_url(@task) %>
 
-<% if @task.project_id || @task.due_date || !@task.subscribed_user_names.blank? -%>
 ----
-<% if !@task.subscribed_user_names.blank? -%>Subscribed: <%= @task.subscribed_user_names %> | <% end -%><% if @task.project_id -%>Project: <%= @task.project.title -%> | <% end -%><% if @task.due_date -%>Due Date: <%= @task.due_date.strftime("%b %e") -%><% end -%><% end -%>
+<%= task_footer(@task) %>

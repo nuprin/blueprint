@@ -10,14 +10,7 @@ class Comment < ActiveRecord::Base
 
   after_create do |comment|
     comment.author.subscribe_to(comment.task)
-    comment.deliver_comment_creation_emails
-  end
-  
-  def deliver_comment_creation_emails
-    list = self.task.subscribed_users
-    list.delete(self.author)
-    list.each do |rec|
-      TaskMailer.deliver_task_comment(rec, self)
-    end    
-  end
+    comment.task.mass_mailer.ignoring(comment.author).
+      deliver_task_comment(comment)
+  end  
 end
