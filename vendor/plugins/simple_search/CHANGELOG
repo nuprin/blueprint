@@ -1,0 +1,46 @@
+== SVN
+* A multitude of small reorganization in an attempt to make this work again
+
+* Wrapping search term binding addition in begin/rescue so that no duplicates are inserted
+
+* Started on Ferret fixes
+
+* And fixed it for PostgreSQL
+
+* Fixed inclusive searching with TermIndexer when searching for more than one term
+
+* Fixed a bug in boolean keyword stripping (thx Ben Curtis)
+
+* TermIndexer: fixed the situation where the indexer might start searching for an empty set.
+  This was not critical for SQLite and MySQL but critical for Postgres
+
+* Implemented conditional indexing
+
+* Ferret concurrency issues magically resolved with Ferret updates
+
+* Modified index_repr to return empty strings for Nils
+
+* Added Ferret support
+
+* Added bailing when unknown option keys are supplied
+
+* Indexers can be told to wipe indexes by using Indexer#prune!
+
+* Indexers will use "index_repr_of_attribute" if it's present
+
+* Attributes used for indexing are now excluded from indexing, and global indexers() collection
+  can be addressed by class or str
+
+* Added :using option to +indexes_columns+ so that a special indexer can be passed
+
+* Added edge rails to testing libraries if edge rails are available in the app
+
+* Fixed a very odd issue of model classes becoming corrupted after the dependencies were reloaded,
+  we now store the name of the model constant and retrieve it dynamically.
+  Don't know how to test it though.
+
+* Changed RIGHT JOIN to LEFT JOIN because in this context
+  it's still applicable and sqlite3 doesn't support RIGHT JOIN. Note that OCI 8
+  supports neither one of the two, but we're not targeting the enterprise market
+  
+* Added more tests for index cleanup and updates

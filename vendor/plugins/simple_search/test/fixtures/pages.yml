@@ -1,0 +1,12 @@
+first:
+  id: 1
+  title: "Something about postmodern cinema and Brazil"
+  body: "This is a long text written for school"
+  page_author_id: 1
+  approved: 0
+second:
+  id: 2
+  title: "Something about Late Spring"
+  body: "Yet another boring text for school"
+  page_author_id: 2
+  approved: 1

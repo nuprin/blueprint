@@ -1,0 +1,10 @@
+first:
+  id: 1
+  first_name: Julian
+  last_name: Tarkhanov
+  birth_date: <%= (Time.parse('10/03/2003 10:34 CST')).to_date %>
+second:
+  id: 2
+  first_name: Joop
+  last_name: Veenman
+  birth_date: <%= (Time.parse('10/10/1989 10:00 CST')).to_date %>

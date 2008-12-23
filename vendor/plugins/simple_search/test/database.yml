@@ -1,0 +1,16 @@
+sqlite3:
+  adapter: sqlite3
+  dbfile: ':memory:'
+  
+mysql:
+  adapter: mysql
+  database: simple_search_tests
+  user: root
+  password: crhbgn
+  encoding: utf8
+
+postgresql:
+  adapter: postgresql
+  database: simple_search_tests
+  user: julik
+  encoding: UNICODE
