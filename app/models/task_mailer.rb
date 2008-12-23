@@ -21,30 +21,20 @@ class TaskMailer < ActionMailer::Base
     body       :comment => comment, :task => task
   end
 
-  def task_duedate_changed(recipient, task)
+  def task_due_date_changed(recipient, task)
     recipients recipient_email(recipient)
     from       FROM_EMAIL_WITH_NAME
-    type = task.kind.empty? ? 'task' : task.kind
-    #Do we want to include the new duedate in the subject?
-    content_type 'text/html'
     subject    task_subject(task)
-    subject "The due date has changed on your #{type}, '#{task.title}'"
-    body :task
+    body       :task => task
   end
   
-  def task_reassigned(recipient, task)
+  def task_reassignment(recipient, task)
+    assignee_was = User.find_by_id(task.assignee_id_was)
+
     recipients recipient_email(recipient)
     from       FROM_EMAIL_WITH_NAME
-    type = task.kind.empty? ? 'task' : task.kind
     subject    task_subject(task)
-    if task.assignee == recipient
-      subject "A #{type} has been reassigned to you: '#{task.title}'"
-    else
-      subject "Your #{type} '#{task.title}' has been reassigned " +
-              "to #{task.assignee.name}"
-    end
-    content_type 'text/html'
-    body :task
+    body       :assignee_was => assignee_was, :task => task
   end
 
   def task_completion(recipient, task)

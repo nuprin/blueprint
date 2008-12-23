@@ -3,6 +3,7 @@ class MassMailer
 
   def initialize(task)
     @task = task
+    @ignored_users = []
   end
   
   def ignoring(users)

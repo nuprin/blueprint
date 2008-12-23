@@ -96,7 +96,8 @@ class Task < ActiveRecord::Base
     !!self.due_date
   end
 
-  before_save :adjust_year, :update_lists, :check_use_due_date, :set_type
+  before_save :adjust_year, :update_lists, :check_use_due_date, :set_type,
+              :notify_subscribers
 
   def set_type
     if self.parent_id
@@ -124,18 +125,26 @@ class Task < ActiveRecord::Base
 
   def update_lists
     unless self.new_record?
-      # TODO [chris]: :( This should not pull from the database.
       old_task = Task.find(self.id)
-      if old_task.project_id != self.project_id
-        old_task.project.remove_from_list(old_task) if old_task.project_id
+      if self.project_id_changed?
+        old_task.project.remove_from_list(old_task) if self.project_id_was
         self.project.add_to_list(self) if self.project_id
       end
-      if old_task.assignee_id != self.assignee_id
-        old_task.assignee.remove_from_list(old_task) if old_task.assignee_id
+      if self.assignee_id_changed?
+        old_task.assignee.remove_from_list(old_task) if self.assignee_id_was
         self.assignee.add_to_list(self) if self.assignee_id
       end
     end
     true
+  end
+
+  def notify_subscribers
+    if self.assignee_id_changed?
+      self.mass_mailer.deliver_task_reassignment
+    end
+    if self.due_date_changed?
+      self.mass_mailer.deliver_task_due_date_changed
+    end
   end
 
   def mass_mailer
