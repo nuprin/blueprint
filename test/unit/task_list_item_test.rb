@@ -22,9 +22,9 @@ class TaskListItemEasyTest < TaskListItemBase
     @kristjan = User.create! :name => 'Kristján'
     @blueprint  = Project.create! :title => 'Blueprint'
     TASK_TITLES.each do |name|
-      Task.create! :title => name, :creator => @kristjan,
-                   :assignee => @kristjan, :project => @blueprint,
-                   :status => 'prioritized'
+      Deliverable.create! :title => name, :creator => @kristjan,
+                          :assignee => @kristjan, :project => @blueprint,
+                          :status => 'prioritized'
     end
   end
 
@@ -81,14 +81,14 @@ class TaskListItemMediumTest < TaskListItemBase
     @blueprint  = Project.create! :title => 'Blueprint'
     @redink = Project.create! :title => 'Redink'
     TASK_TITLES[0].each do |name|
-      Task.create! :title => name, :creator => @kristjan,
-                   :assignee => @kristjan, :project => @blueprint,
-                   :status => 'prioritized'
+      Deliverable.create! :title => name, :creator => @kristjan,
+                          :assignee => @kristjan, :project => @blueprint,
+                          :status => 'prioritized'
     end
     TASK_TITLES[1].each do |name|
-      Task.create! :title => name, :creator => @kristjan,
-                   :assignee => @kristjan, :project => @redink,
-                   :status => 'prioritized'
+      Deliverable.create! :title => name, :creator => @kristjan,
+                          :assignee => @kristjan, :project => @redink,
+                          :status => 'prioritized'
     end
   end
 
