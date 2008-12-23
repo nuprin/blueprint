@@ -21,12 +21,13 @@
                 <th rowspan="<%= deliverables.size %>">
                   <%= day.to_time.strftime("%b %e") %>
                 </th>
-                <% deliverables.each do |deliverable| %>
-                  <td>
-                    <%= link_to_task deliverable %>
-                  </td>
-                <% end %>
+                <td>
+                  <%= link_to_task deliverables.shift %>
+                </td>
               </tr>
+              <% deliverables.each do |deliverable| %>
+                <tr><td><%= link_to_task deliverable %></td></tr>
+              <% end %>
             <% end %>
           </table>
         </div>

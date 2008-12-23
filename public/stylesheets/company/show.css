@@ -37,6 +37,7 @@
   color: #666;
   font-weight: normal;
   text-align: right;
+  vertical-align: top;
   width: 92px;
 }
 #current {
