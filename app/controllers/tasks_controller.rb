@@ -4,11 +4,8 @@ class TasksController < ApplicationController
   def create
     raise "You don't exist" unless viewer.real?
     begin
-      task = Task.create!(params[:task])
-      subscriber_ids = params[:cc] || []
-      subscriber_ids.each do |cc|
-        TaskSubscription.create(:user_id => cc, :task_id => task.id)
-      end
+      task =
+        Task.create_with_subscriptions!(params[:task], params[:cc] || [])
     rescue ActiveRecord::RecordInvalid
       @task = Task.new(params[:task])
       flash[:notice] = "Please be sure to include a title."

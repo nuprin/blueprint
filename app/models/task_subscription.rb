@@ -9,7 +9,7 @@ class TaskSubscription < ActiveRecord::Base
     # An idempotent operation that ensures that the user will be subscribed
     # to all updates about the relevant task.
     def subscribe_to(task)
-      TaskSubscription.create(:task => task, :user => self)
+      task.task_subscriptions.create(:user_id => self.id)
     end
   end
 

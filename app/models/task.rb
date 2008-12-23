@@ -147,6 +147,15 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def self.create_with_subscriptions!(task_params, cc_ids)
+    task = self.create!(task_params)
+    cc_ids.each do |cc_id|
+      task.task_subscriptions.create(:user_id => cc_id)
+    end
+    task.mass_mailer.ignoring(task.creator).deliver_task_creation
+    task
+  end
+  
   def mass_mailer
     MassMailer.new(self)
   end
@@ -158,7 +167,6 @@ class Task < ActiveRecord::Base
     task.creator.subscribe_to(task)
     if task.prioritized?
       task.add_to_lists
-      task.mass_mailer.ignoring(task.creator).deliver_task_creation
     end
   end
 
