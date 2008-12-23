@@ -9,12 +9,12 @@ class Comment < ActiveRecord::Base
       ":rails_root/public/assets/comments/:id/:style/:basename.:extension"
 
   after_create do |comment|
+    comment.author.subscribe_to(comment.task)
     comment.deliver_comment_creation_emails
   end
   
   def deliver_comment_creation_emails
-    # TODO [chris]: The assignee should be on the CC list.
-    list = (self.task.subscribed_users + [self.task.assignee]).uniq
+    list = self.task.subscribed_users
     list.delete(self.author)
     list.each do |rec|
       TaskMailer.deliver_task_comment(rec, self)
