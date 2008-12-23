@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_length_of :name, :in => 1...50
   validates_numericality_of :fbuid, :allow_nil => true
 
+  include TaskSubscription::UserMethods
+
   def parked_tasks
     Task.parked.recently_updated.assigned_to(self).with_details
   end

@@ -140,11 +140,12 @@ class Task < ActiveRecord::Base
   after_create do |task|
     if task.prioritized?
       task.add_to_lists
-      if task.assignee_id && !(task.assignee_id == task.creator_id)
-        TaskMailer.deliver_task_creation(task.assignee, task)
+      if task.assignee_id
+        task.assignee.subscribe_to(task)
       end
     end
-    TaskSubscription.create(:user => task.creator, :task => task)
+    task.creator.subscribe_to(task)
+    task.send_creation_email_to_subscribers
   end
 
   def send_creation_email_to_subscribers

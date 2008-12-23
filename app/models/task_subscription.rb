@@ -4,4 +4,13 @@ class TaskSubscription < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :task
   validates_uniqueness_of :user_id, :scope => [:task_id]  
+
+  module UserMethods
+    # An idempotent operation that ensures that the user will be subscribed
+    # to all updates about the relevant task.
+    def subscribe_to(task)
+      TaskSubscription.create(:task => task, :user => self)
+    end
+  end
+
 end
