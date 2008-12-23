@@ -140,9 +140,9 @@ class Task < ActiveRecord::Base
   after_create do |task|
     if task.prioritized?
       task.add_to_lists
-      if task.assignee_id
-        task.assignee.subscribe_to(task)
-      end
+    end
+    if task.assignee_id
+      task.assignee.subscribe_to(task)
     end
     task.creator.subscribe_to(task)
     task.send_creation_email_to_subscribers
