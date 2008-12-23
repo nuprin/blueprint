@@ -7,6 +7,7 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => "Task"
 
   has_one :spec
+  has_many :children, :foreign_key => :parent_id, :class_name => "Task"
   has_many :comments
   has_many :task_subscriptions
   has_many :list_items, :class_name => 'TaskListItem'

@@ -11,7 +11,7 @@
 #content h1 span {
   margin: 2px 0 6px;
 }
-#content h1, #description, #secondary_fields li {
+#content h1, #description, #secondary_fields li, #subtasks {
   padding: 10px;
 }
 #content h1.task_field {
@@ -94,13 +94,15 @@ h2 {
 }
 #cc h2,
 #comments_list .meta,
-#description h2 {
+#description h2,
+#subtasks h2 {
   float: left;
   width: 120px;
 }
 #cc .text,
 #comments_list .text,
-#description .text {
+#description .text,
+#subtasks ul {
   margin-left: 120px;
 }
 #comments_list .text img {
@@ -150,6 +152,18 @@ h2 {
   border-bottom: 1px solid #eee;
   padding: 40px 45px 100px;
   width: 710px;
+}
+#subtasks img,
+#subtasks input {
+  float: left;
+  margin: 0 6px 0 0;
+}
+#subtasks form {
+  display: inline;
+}
+#subtasks li {
+  line-height: 18px;
+  margin-bottom: 8px;
 }
 #task_identifier {
   background: #eee;

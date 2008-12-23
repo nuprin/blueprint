@@ -13,6 +13,9 @@
 <div id="form_container">
   <% form_for(@task) do |f| %>
     <% if @task.parent_id %>
+      <% if @task.project_id %>
+        <p>Project: <strong><%= link_to_project @task.project %></strong></p>
+      <% end %>
       <p>Deliverable: <strong><%= link_to_task @task.parent %></strong></p>
     <% end %>
     <%= render :partial => "task_form_fields",

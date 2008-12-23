@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
                   projects.resources :specs
                 end
   map.resource  :search
+  map.resources :sub_tasks
   map.resources :task_subscriptions
   map.resources :tasks,
                 :member => {

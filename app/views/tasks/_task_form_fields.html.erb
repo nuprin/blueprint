@@ -11,11 +11,15 @@
   <%= f.text_area :description %>
 </p>
 <ul class="clearfix" id="secondary_fields">
-  <li>
-    <label for="task_project_id">Initiative:</label><br />
-    <%= f.select :project_id, Project.all_for_select,
-      :include_blank => "None" %>
-  </li>
+  <% if task.project_id %>
+    <%= f.hidden_field :project_id %>
+  <% else %>
+    <li>
+      <label for="task_project_id">Initiative:</label><br />
+      <%= f.select :project_id, Project.all_for_select,
+        :include_blank => "None" %>
+    </li>
+  <% end %>
   <li>
     <label for="task_assignee_id">Assign To:</label><br />
       <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},

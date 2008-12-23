@@ -5,12 +5,19 @@
   @hide_layout_title = true
 %>
 
-<% if @task.project_id %>
+<% if @task.project_id || @task.parent_id %>
   <div id="breadcrumbs">
-    <%= link_to @task.project.title.upcase, project_path(@task.project) %>
-    <% if @task.parent_id %>
-      &rarr; <%= link_to_task @task.parent %>
+    <% if @task.project_id %>
+      <%= link_to @task.project.title.upcase, project_path(@task.project) %>
     <% end %>
+    <% if @task.project_id && @task.parent_id %>
+      &rarr;
+    <% end %>
+    <% if @task.parent_id %>
+      <%= link_to_task @task.parent %>
+    <% end %>
+      &rarr;
+      <strong><%= @task.type %> #<%= @task.id %></strong>
   </div>
 <% end %>
 
@@ -75,6 +82,28 @@
         <% end %>
       </div>
     </div>
+    <% if @task.children.any? %>
+      <div class="task_field clearfix" id="subtasks">
+        <h2>TASKS</h2>
+        <ul>
+          <% @task.children.each do |task| %>
+            <li class="clearfix">
+              <% if task.completed? %>
+                <%= image_tag 'check.gif' %>
+              <% else %>
+                <% form_tag complete_task_path(task) do %>
+                  <%= check_box_tag "complete_task_id", false, false,
+                    :onclick =>
+                      "$(this).parents('form').submit(); return false;" %>
+                <% end %>
+              <% end %>
+              
+              <%= link_to_task task %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <div class="task_field" id="comments">
       <h2>DISCUSSION</h2>
       <ul id="comments_list">
@@ -129,7 +158,9 @@
       </div>
       <% if @task.is_a?(Deliverable) %>
         <%= link_to "Add Task to Deliverable",
-          new_task_path(:task => {:parent_id => @task.id}) %> -
+          new_task_path(:task => {
+            :parent_id => @task.id, :project_id => @task.project_id
+          }) %> -
       <% end %>
       <%= link_to "Edit #{@task.type}", edit_task_path(@task) %> - 
       <%= link_to "Delete", task_path(@task),
