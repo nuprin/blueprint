@@ -73,7 +73,7 @@
       <h2>DESCRIPTION</h2>
       <div class="text">
         <% if @task.description.blank? %>
-          <% form_for @task, :url => {:action => "update"} do |f| %>
+          <% form_for(@task) do |f| %>
             <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
             <%= f.submit "Save Description", :tabindex => 2 %>
           <% end %>
