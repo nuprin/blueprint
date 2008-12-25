@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "tasks/show" %>
+<%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 <%= javascript_include_tag "tasks/show" %>
 <% 
   @title = @task.title 
@@ -150,10 +151,9 @@
           <%= link_to "Mark Incomplete", prioritize_task_path(@task),
              :method => :post %>
         <% else %>
-          <%= link_to image_tag("mark-complete.gif"),
-            complete_task_path(@task), :method => :post,
-            :class => "call_to_action"
-          %>
+            <%= link_to image_tag("mark-complete.gif"), "",
+              :class => "call_to_action", :id => "complete_link"
+            %>
         <% end %>
       </div>
       <% if @task.is_a?(Deliverable) %>
@@ -168,4 +168,20 @@
         :method => :delete %>
     </div>
   </div>
+</div>
+
+<div id="confirm_completion" style="display: none;">
+  <h2>Complete Task</h2>
+  <% form_tag complete_task_path(@task), :id => "complete_form" do %>
+    <label for="final_comment_text">
+      Add a comment: <span>(Optional)</span>
+    </label>
+    <%= hidden_field_tag "final_comment[author_id]", viewer.id %>
+    <%= hidden_field_tag "final_comment[task_id]", @task.id %>
+    <%= text_area_tag "final_comment[text]", "", :id => "final_comment_text" %>
+    <div class="submit">
+      <%= submit_tag "Complete" %> or <%= link_to "cancel", "",
+        :class => "simplemodal-close", :title => "Close" %>
+    </div>
+  <% end %>
 </div>

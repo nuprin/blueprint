@@ -111,6 +111,22 @@ h2 {
   margin: 10px 0;
   padding: 9px;
 }
+#confirm_completion h2 {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+#confirm_completion label span {
+  color: #999;
+}
+#confirm_completion textarea {
+  margin: 10px 0;
+  width: 390px;
+}
+#confirm_completion .submit {
+  text-align: right;
+}
 #content {
   padding-left: 0;
   padding-right: 0;

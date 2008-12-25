@@ -57,6 +57,9 @@ class TasksController < ApplicationController
   end
 
   def complete
+    if !params[:final_comment][:text].blank?
+      Comment.create!(params[:final_comment])
+    end
     @task.complete!
     flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been marked " +
                      "complete."
