@@ -56,6 +56,8 @@ class TasksController < ApplicationController
 
   def complete
     @task.complete!
+    flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been marked " +
+                     "complete."
     redirect_to :back
   end
 
