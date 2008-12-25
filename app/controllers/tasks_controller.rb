@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def create
     raise "You don't exist" unless viewer.real?
+    ignore_due_date_if_requested
     begin
       task =
         Task.create_with_subscriptions!(params[:task], params[:cc] || [])
@@ -49,6 +50,7 @@ class TasksController < ApplicationController
   def edit; end
   
   def update
+    ignore_due_date_if_requested
     @task.update_attributes(params[:task])
     flash[:notice] = "Your changes have been saved."
     redirect_to task_path(@task)
@@ -102,6 +104,15 @@ class TasksController < ApplicationController
   end
 
   private
+
+  # TODO [chris]: There must be a way to get this in the model.
+  def ignore_due_date_if_requested
+    if params[:use_due_date].to_i == 0
+      1.upto(3) do |i|
+        params[:task]["due_date(#{i}i)"] = ""
+      end
+    end
+  end
 
   def find_model
     @task = Task.find(params[:id]) if params[:id]

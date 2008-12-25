@@ -97,23 +97,11 @@ class Task < ActiveRecord::Base
     self.subscribed_users.map(&:name).to_sentence
   end
 
-  attr_writer :use_due_date
-  def use_due_date
-    !!self.due_date
-  end
-
-  before_save :adjust_year, :update_lists, :check_use_due_date, :set_type,
-              :notify_subscribers
+  before_save :adjust_year, :update_lists, :set_type, :notify_subscribers
 
   def set_type
     if self.parent_id
       self.type = "SubTask"
-    end
-  end
-
-  def check_use_due_date
-    if @use_due_date.to_i == 0
-      self.due_date = nil
     end
   end
 

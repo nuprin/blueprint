@@ -32,7 +32,7 @@
   </li>      
   <li>
     <label for="<%= task.type.underscore %>_due_date">Due Date:</label><br />
-      <%= f.check_box :use_due_date, :autocomplete => :off,
+      <%= check_box_tag :use_due_date, "1", false, :autocomplete => :off,
           :class => "use_due_date" %>
       <span id="due_date_field_container"<%=
         ' style="display:none"' unless task.due_date %>>
