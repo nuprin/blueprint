@@ -3,15 +3,14 @@ $(function(){
     $(this).parents("form").addClass("editing");
   })
   $("#complete_link").click(function(e) {
-    console.log("HELLO")
     e.preventDefault();
     $("#confirm_completion").modal({overlayCss: {
         backgroundColor: '#000'
       },
       containerCss: {
-        width: '400px',
-        backgroundColor: '#fff',
-        border: '3px solid #ccc',
+        width: '500px',
+        backgroundColor: '#dedfe5',
+        border: '3px double #999',
         padding: '20px 15px'
       }
     });

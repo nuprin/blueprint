@@ -180,8 +180,9 @@
     <%= hidden_field_tag "final_comment[task_id]", @task.id %>
     <%= text_area_tag "final_comment[text]", "", :id => "final_comment_text" %>
     <div class="submit">
-      <%= submit_tag "Complete" %> or <%= link_to "cancel", "",
-        :class => "simplemodal-close", :title => "Close" %>
+      <%= link_to "Cancel", "",
+        :class => "simplemodal-close", :title => "Cancel" %> or
+        <%= submit_tag "Complete" %>
     </div>
   <% end %>
 </div>
