@@ -3,7 +3,7 @@
 
 <% if @results.any? %>
   <% @title = "Search Results for &ldquo;#{params[:q]}&rdquo;" %>
-  <div id="results_count"><%= pluralize(results.size, "task") %> found:</div>
+  <div id="results_count"><%= pluralize(@results.size, "task") %> found:</div>
   <%= render :partial => '/shared/result_set',
              :locals => {:results => @results} %>
 <% end %>
