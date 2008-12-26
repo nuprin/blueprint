@@ -111,7 +111,10 @@ class TasksController < ApplicationController
 
   def create_followup_task_if_requested
     if params[:followup].to_i == 1
-      Task.create!(params[:followup_task])
+      task = Task.create!(params[:followup_task])
+      if params[:task_subscriptions]
+        task.task_subscriptions.create params[:task_subscriptions].values
+      end
     end
   end
 

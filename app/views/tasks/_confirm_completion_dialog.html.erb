@@ -49,6 +49,11 @@
           <%= f.hidden_field :creator_id,  :value => viewer.id %>
           <%= f.hidden_field :assignee_id, :value => task.creator_id %>
           <%= f.hidden_field :status,      :value => "prioritized" %>
+          <% task.task_subscriptions.each_with_index do |ts, i| %>
+            <% fields_for "task_subscriptions[#{i}]" do |g| %>
+              <%= g.hidden_field :user_id, :value => ts.user_id %>
+            <% end %>
+          <% end %>
           <div style="display: none;">
             <%= f.text_field :title,
               :value => "Followup with Bug ##{task.id}" %>
