@@ -16,7 +16,7 @@
                          :assignee_id => @user.id)
 %>
 <%= render :partial => "/shared/task_list",
-           :locals => {:title       => "PRIORITIZED",
+           :locals => {:title       => "PRIORITIZED (#{@user.task_list.size})",
                        :tasks       => @user.task_list,
                        :context     => @user.class.name,
                        :task_object => task_object} %>
@@ -32,7 +32,7 @@
                          :assignee_id => @user.id)
 %>
 <%= render :partial => "/shared/task_list",
-           :locals => {:title => "PARKING LOT",
+           :locals => {:title => "PARKING LOT (#{@user.parked_tasks.size})",
                        :tasks => @user.parked_tasks,
                        :context => @user.class.name,
                        :task_object => task_object} %>

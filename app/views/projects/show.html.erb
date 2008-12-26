@@ -38,13 +38,14 @@
   <% task_object = Task.new(:kind => "task", :status => "prioritized",
                             :project_id => @project.id) %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:title => "PRIORITIZED",
+             :locals => {:title => "PRIORITIZED (#{@project.task_list.size})",
                          :tasks => @project.task_list,
                          :context => @project.class.name,
                          :task_object => task_object} %>
 
   <%= render :partial => "/shared/task_list",
-             :locals => {:title => "RECENTLY COMPLETED",
+             :locals => {:title =>
+                        "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
                          :tasks => @project.completed_tasks,
                          :context => @project.class.name} %>
 
@@ -52,7 +53,8 @@
                             :project_id => @project.id) %>
 
   <%= render :partial => "/shared/task_list",
-             :locals => {:title => "PARKING LOT",
+             :locals => {:title =>
+                          "PARKING LOT (#{@project.parked_tasks.size})",
                          :tasks => @project.parked_tasks,
                          :context => @project.class.name,
                          :task_object => task_object} %>
