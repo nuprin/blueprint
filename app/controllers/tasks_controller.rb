@@ -60,6 +60,7 @@ class TasksController < ApplicationController
     if params[:final_comment] && !params[:final_comment][:text].blank?
       Comment.create!(params[:final_comment])
     end
+    create_followup_task_if_requested
     @task.complete!
     flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been marked " +
                      "complete."
@@ -107,6 +108,12 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def create_followup_task_if_requested
+    if params[:followup].to_i == 1
+      Task.create!(params[:followup_task])
+    end
+  end
 
   # TODO [chris]: There must be a way to get this in the model.
   def ignore_due_date_if_requested
