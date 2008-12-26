@@ -1,0 +1,49 @@
+<div id="confirm_completion" style="display: none;">
+  <h2>Complete Task</h2>
+  <% form_tag complete_task_path(task), :id => "complete_form" do %>
+    <fieldset>
+      <% fields_for :final_comment do |f| %>
+        <legend>Add a Comment</legend>
+        <%= f.hidden_field :author_id, :value => viewer.id %>
+        <%= f.hidden_field :task_id, :value => task.id %>
+        <%= f.text_area :text, :rows => nil %>
+      <% end %>
+    </fieldset>
+    <% if task.kind == "experiment" %>
+      <fieldset id="experiment_followup_fields">
+        <% fields_for :followup_task do |f| %>
+          <legend>Create Followup Task</legend>
+          <%= check_box_tag :followup, "1", true %>
+          Create a task to report experiment results in 
+          <%= f.select :due_date,
+            [
+              ["1 day (#{1.day.from_now.strftime("%b %e")})",
+               1.day.from_now.getlocal.to_date],
+              ["2 days (#{2.days.from_now.strftime("%b %e")})",
+               2.days.from_now.getlocal.to_date],
+              ["3 days (#{3.days.from_now.strftime("%b %e")})",
+               3.days.from_now.getlocal.to_date],
+              ["1 week (#{1.week.from_now.strftime("%b %e")})",
+               1.week.from_now.getlocal.to_date]
+            ] %>
+          <%= f.hidden_field :creator_id,  :value => viewer.id %>
+          <%= f.hidden_field :assignee_id, :value => viewer.id %>
+          <%= f.hidden_field :status,      :value => "prioritized" %>
+          <%= f.hidden_field :kind,        :value => "stats" %>
+          <div style="display: none;">
+            <%= f.text_field :title,
+              :value => "Close Experiment ##{task.id}" %>
+            <%= f.text_field :description,
+              :value => "This is an automatically generated " +
+              "task for following up with experiment ##{task.id}." %>
+          </div>
+        <% end %>
+      </fieldset>
+    <% end %>
+    <div class="submit">
+      <%= link_to "Cancel", "",
+        :class => "simplemodal-close", :title => "Cancel", :tabindex => -1 %> or
+        <%= submit_tag "Complete" %>
+    </div>
+  <% end %>
+</div>
