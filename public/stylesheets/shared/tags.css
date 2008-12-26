@@ -1,0 +1,41 @@
+.tag {
+  background-color: #678;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 9px;
+  line-height: 9px;
+  margin-left: 4px;
+  padding: 3px 5px 0;
+  text-transform: uppercase;
+  -moz-border-radius: 2px;
+}
+.tag.bug {
+  background: #fcc;
+  border-color: #e0a3a3;
+  color: #600;
+}
+.tag.design {
+  background: #ffe6cc;
+  border-color: #e0c2a3;
+  color: #b36212;
+}
+.tag.experiment {
+  background: #fcf;
+  border-color: #d6add6;
+  color: #593380;
+}
+.tag.feature {
+  background: #cce5ff;
+  border-color: #a3c2e0;
+  color: #039;
+}
+.tag.spec {
+  background: #e5d896;
+  border-color: #aca271;
+  color: #402e0a;
+}
+.tag.stats {
+  background: #cfc;
+  border-color: #add6ad;
+  color: #124d12;
+}

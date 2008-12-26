@@ -1,6 +1,32 @@
-<h3><%= pluralize(results.size, type) %></h3>
-<ul>
+<% @title = "Search Results for &ldquo;#{params[:q]}&rdquo;" %>
+<div id="results_count">
+  <%= pluralize(results.size, "task") %> found:
+</div>
+<ul id="results_list">
   <% results.each do |result| %>
-    <li><%= link_to result.to_s, result%></li>
+    <li class="clearfix">
+      <div class="task_id">#<%= result.id %></div>
+      <div class="core_info">
+        <div class="title">
+          <%= link_to_task result %>
+          <% if !result.kind.blank? && result.kind != "task" %>
+            <span class="tag <%= result.kind %>"><%= result.kind %></span>
+          <% end %>
+        </div>
+        <div class="description">
+          <%= result.description %>
+        </div>
+        <div class="meta">
+          <% if result.project_id %>
+            Initiative: <%= link_to_project(result.project) %> -
+          <% end %>
+          Assigned to: <%= link_to_user(result.assignee) %> -
+          Status: <%= result.status.capitalize %>
+          <% if result.due_date %>
+           - Due: <%= result.due_date.strftime("%b %e") %>
+          <% end %>
+        </div>
+      </div>
+    </li>
   <% end %>
 </ul>

@@ -1,6 +1,6 @@
-<% @all_results.each do |(type, results)| %>
-  <% if results.any? %>
-    <%= render :partial => 'result_set',
-               :locals => {:type => type, :results => results} %>
-  <% end %>
+<%= stylesheet_link_tag "shared/tags" %>
+<%= stylesheet_link_tag "searches/show" %>
+<% if @results.any? %>
+  <%= render :partial => 'result_set',
+             :locals => {:type => type, :results => @results} %>
 <% end %>
