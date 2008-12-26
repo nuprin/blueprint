@@ -1,7 +1,8 @@
 <%= stylesheet_link_tag "company/show" %>
 
-<% @title = Time.now.at_beginning_of_week.strftime("%b %e, %Y") + "—" +
-  1.week.from_now.at_end_of_week.strftime("%b %e, %Y") %>
+<% @title = (Task::CURRENT_RANGE.map do |t|
+    t.strftime("%b %e, %Y")
+  end).join("—") %>
 
 <% with_layout "layouts/two_column" do %>
   <% content_for :primary_column do %>

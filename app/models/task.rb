@@ -1,6 +1,10 @@
 class Task < ActiveRecord::Base
   KINDS = ["bug", "design", "experiment", "feature", "inquiry", "spec", "stats"]
 
+  CURRENT_RANGE = [
+    Time.now.at_beginning_of_week, 1.week.from_now.at_end_of_week
+  ].map(&:to_date)
+  
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
@@ -19,6 +23,9 @@ class Task < ActiveRecord::Base
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc]
   named_scope :completed, :conditions => {:status => "completed"}
+  named_scope :currently_due, lambda{|range| {
+    :conditions => {:due_date => Range.new(*CURRENT_RANGE)}
+  }}
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
   }}

@@ -7,12 +7,12 @@ class Initiative < ActiveRecord::Base
   named_scope :inactive, :conditions => "status != 'active'"
 
   def deliverables_by_day
-    self.tasks.with_due_date.group_by(&:due_date).sort_by do |date, tasks|
+    self.tasks.currently_due.group_by(&:due_date).sort_by do |date, tasks|
       date
     end
   end
   
   def assignees
-    self.tasks.with_due_date.map(&:assignee).compact.uniq
+    self.tasks.currently_due.map(&:assignee).compact.uniq
   end
 end
