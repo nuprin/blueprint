@@ -11,7 +11,7 @@ body, input[type=text], textarea {
 body {
   background-color: #012;
   font-size: 12px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 0;
   width: 800px;
 }
@@ -131,6 +131,10 @@ input[type=text], textarea {
   overflow: hidden;
   text-indent: -9999px;  
   width: 200px;
+}
+#header h1 {
+  float: left;
+  margin-bottom: 0;
 }
 #nav {
   background: #3c4650;
