@@ -16,7 +16,9 @@
           <% if result.project_id %>
             Initiative: <%= link_to_project(result.project) %> -
           <% end %>
-          Assigned to: <%= link_to_user(result.assignee) %> -
+          <% if result.assignee_id %>
+            Assigned to: <%= link_to_user(result.assignee) %> -
+          <% end %>
           Status: <%= result.status.capitalize %>
           <% if result.due_date %>
            - Due: <%= result.due_date.strftime("%b %e") %>
