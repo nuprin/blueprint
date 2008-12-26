@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  has_many :subscribed_tasks, :through => :task_subscriptions,
+                              :source => :task,
+                              :order => "id DESC"
+
   has_many :task_list, :class_name => 'TaskListItem',
                        :as => :context,
                        :order => :position
@@ -6,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :task_subscriptions
 
   validates_length_of :name, :in => 1...50
-  validates_numericality_of :fbuid, :allow_nil => true
 
   include TaskSubscription::UserMethods
 

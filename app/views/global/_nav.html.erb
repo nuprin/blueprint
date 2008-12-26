@@ -5,7 +5,14 @@
         new_task_path %>
     </div>
     <ul class="nav sf-menu clearfix" id="filters">
-      <li><%= link_to "YOU", user_path(viewer) %></li>
+      <li>
+        <%= link_to "YOU", user_path(viewer) %>
+        <ul style="display: none">
+          <li><%= link_to "Your Tasks", user_path(viewer) %></li>
+          <li><%= link_to "Subscribed Tasks",
+            subscribed_user_path(viewer) %></li>
+        </ul>      
+      </li>
       <li><%= link_to "COMPANY", company_path %></li>
       <li>
         <%= link_to "INITIATIVES", projects_path %>

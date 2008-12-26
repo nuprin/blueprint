@@ -9,6 +9,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def subscribed
+    @user = User.find(params[:id])
+    @tasks = @user.subscribed_tasks
+  end
+
   def you
     redirect_to viewer
   end

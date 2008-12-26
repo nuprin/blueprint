@@ -23,7 +23,12 @@ ActionController::Routing::Routes.draw do |map|
                   :reorder => :post
                 }
   map.resources :users,
-                :collection => {:login => :get, :save_login => :post}
+                :member => {
+                  :subscribed => :get
+                },
+                :collection => {
+                  :login => :get, :save_login => :post
+                }
   map.root :controller => "users", :action => "you"
   map.connect ':controller/:action/:id'
 end

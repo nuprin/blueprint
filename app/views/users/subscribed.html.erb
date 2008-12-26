@@ -1,0 +1,8 @@
+<%= stylesheet_link_tag "shared/result_set" %>
+
+<% @title = "Your Subscribed Tasks" %>
+
+<div id="results_count">
+  You are subscribing to <%= pluralize(@tasks.size, "task") %>:</div>
+<%= render :partial => '/shared/result_set',
+           :locals => {:results => @tasks} %>
