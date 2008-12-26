@@ -174,11 +174,12 @@
   <h2>Complete Task</h2>
   <% form_tag complete_task_path(@task), :id => "complete_form" do %>
     <fieldset>
-      <legend>Add a Comment</legend>
-      <%= hidden_field_tag "final_comment[author_id]", viewer.id %>
-      <%= hidden_field_tag "final_comment[task_id]", @task.id %>
-      <%= text_area_tag "final_comment[text]", "",
-        :id => "final_comment_text" %>
+      <% fields_for :final_comment do |f| %>
+        <legend>Add a Comment</legend>
+        <%= f.hidden_field :author_id, :value => viewer.id %>
+        <%= f.hidden_field :task_id, :value => @task.id %>
+        <%= f.text_area :text, :rows => nil %>
+      <% end %>
     </fieldset>
     <% if @task.kind == "experiment" %>
       <fieldset id="experiment_followup_fields">
