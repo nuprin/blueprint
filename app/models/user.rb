@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
 
-  has_many :assigned_incomplete_tasks,
+  has_many :created_tasks,
     :class_name  => "Task",
-    :foreign_key => "assignee_id",
-    :conditions  => "completed_at IS NOT NULL",
+    :foreign_key => "creator_id",
     :order       => "id DESC",
     :include     => [:assignee, :project]
 

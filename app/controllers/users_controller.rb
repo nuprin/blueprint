@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     @tasks = @user.subscribed_tasks
   end
 
-  def assigned
+  def created
     @user = User.find(params[:id])
-    @tasks = @user.assigned_incomplete_tasks
+    @tasks = @user.created_tasks
   end
 
   def you

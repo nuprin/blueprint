@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag "shared/result_set" %>
 
-<% @title = "Recently Assigned Tasks" %>
+<% @title = "Recently Created Tasks" %>
 
 <div id="results_count">
-  You have assigned <%= pluralize(@tasks.size, "task") %>:</div>
+  You have created <%= pluralize(@tasks.size, "task") %>:</div>
 <%= render :partial => '/shared/result_set',
            :locals => {:results => @tasks} %>

@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
                 }
   map.resources :users,
                 :member => {
-                  :assigned => :get,
+                  :created => :get,
                   :subscribed => :get
                 },
                 :collection => {

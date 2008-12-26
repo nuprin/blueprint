@@ -9,9 +9,9 @@
         <%= link_to "YOU", user_path(viewer) %>
         <ul style="display: none">
           <li><%= link_to "Your Tasks", user_path(viewer) %></li>
-          <li><%= link_to "Assigned Tasks",
-            assigned_user_path(viewer) %></li>
-          <li><%= link_to "Subscribed Tasks",
+          <li><%= link_to "Created by You",
+            created_user_path(viewer) %></li>
+          <li><%= link_to "Subscribed by You",
             subscribed_user_path(viewer) %></li>
         </ul>      
       </li>
