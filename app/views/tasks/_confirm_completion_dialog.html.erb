@@ -39,6 +39,25 @@
           </div>
         <% end %>
       </fieldset>
+    <% elsif task.kind == "bug" %>
+      <fieldset id="bug_followup_fields">
+        <% fields_for :followup_task do |f| %>
+          <legend>Create Followup Task</legend>
+          <%= check_box_tag :followup, "1", true %>
+          Assign <strong><%= task.creator.name %></strong> a task to followup 
+          with any affected users.
+          <%= f.hidden_field :creator_id,  :value => viewer.id %>
+          <%= f.hidden_field :assignee_id, :value => task.creator_id %>
+          <%= f.hidden_field :status,      :value => "prioritized" %>
+          <div style="display: none;">
+            <%= f.text_field :title,
+              :value => "Followup with Bug ##{task.id}" %>
+            <%= f.text_field :description,
+              :value => "This is an automatically generated " +
+              "task for following up with bug ##{task.id}." %>
+          </div>      
+        <% end %>
+      </fieldset>
     <% end %>
     <div class="submit">
       <%= link_to "Cancel", "",

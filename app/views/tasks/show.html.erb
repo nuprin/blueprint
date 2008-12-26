@@ -33,7 +33,7 @@
   <div id="task">
     <h1 class="task_field">
       <span class="kind">
-        <% if @task.kind != "task" %>
+        <% if !@task.kind.blank? && @task.kind != "task" %>
           <%= @task.kind.upcase %>
         <% end %>
       </span>
