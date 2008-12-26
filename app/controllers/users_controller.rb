@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     @tasks = @user.subscribed_tasks
   end
 
+  def assigned
+    @user = User.find(params[:id])
+    @tasks = @user.assigned_incomplete_tasks
+  end
+
   def you
     redirect_to viewer
   end

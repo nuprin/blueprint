@@ -1,8 +1,16 @@
 class User < ActiveRecord::Base
 
+  has_many :assigned_incomplete_tasks,
+    :class_name  => "Task",
+    :foreign_key => "assignee_id",
+    :conditions  => "completed_at IS NOT NULL",
+    :order       => "id DESC",
+    :include     => [:assignee, :project]
+
   has_many :subscribed_tasks, :through => :task_subscriptions,
-                              :source => :task,
-                              :order => "id DESC"
+                              :source  => :task,
+                              :order   => "tasks.id DESC",
+                              :include => [:assignee, :project]
 
   has_many :task_list, :class_name => 'TaskListItem',
                        :as => :context,

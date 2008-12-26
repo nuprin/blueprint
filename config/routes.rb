@@ -24,10 +24,12 @@ ActionController::Routing::Routes.draw do |map|
                 }
   map.resources :users,
                 :member => {
+                  :assigned => :get,
                   :subscribed => :get
                 },
                 :collection => {
-                  :login => :get, :save_login => :post
+                  :login => :get,
+                  :save_login => :post
                 }
   map.root :controller => "users", :action => "you"
   map.connect ':controller/:action/:id'
