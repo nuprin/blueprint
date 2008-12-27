@@ -10,16 +10,12 @@
   <%= f.text_area :description %>
 </p>
 <ul class="clearfix" id="secondary_fields">
-  <% if task.project_id %>
-    <%= f.hidden_field :project_id %>
-  <% else %>
-    <li>
-      <label for="<%= task.type.underscore %>_project_id">Initiative:</label>
-      <br />
-      <%= f.select :project_id, Project.all_for_select,
-        :include_blank => "None" %>
-    </li>
-  <% end %>
+  <li>
+    <label for="<%= task.type.underscore %>_project_id">Initiative:</label>
+    <br />
+    <%= f.select :project_id, Project.all_for_select,
+      :include_blank => "None" %>
+  </li>
   <li>
     <label for="<%= task.type.underscore %>_assignee_id">Assign To:</label><br />
       <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},
@@ -32,11 +28,11 @@
   </li>      
   <li>
     <label for="<%= task.type.underscore %>_due_date">Due Date:</label><br />
-      <%= check_box_tag :use_due_date, "1", false, :autocomplete => :off,
-          :class => "use_due_date" %>
-      <span id="due_date_field_container"<%=
-        ' style="display:none"' unless task.due_date %>>
-        <%= f.date_select :due_date, :order => [:month, :day] %>
-      </span>
+    <%= check_box_tag :use_due_date, "1", false, :autocomplete => :off,
+        :class => "use_due_date" %>
+    <span id="due_date_field_container"<%=
+      ' style="display:none"' unless task.due_date %>>
+      <%= f.date_select :due_date, :order => [:month, :day] %>
+    </span>
   </li>
 </ul>

@@ -50,7 +50,6 @@ table.task_list .task_due {
   width: 60px;
 }
 table.task_list .task_estimate {
-  text-align: right;
   width: 60px;
 }
 table.task_list td.task_name {
@@ -112,6 +111,13 @@ table.unsortable td {
   padding: 6px 25px 4px 8px;
   text-transform: uppercase;
   -moz-border-radius: 2px;
+}
+table.task_list input.inline_field {
+  padding: 1px;
+  width: 50px;
+}
+table.task_list td.editing {
+  padding: 0;
 }
 .tags {
   display: inline;

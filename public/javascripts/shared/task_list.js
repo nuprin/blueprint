@@ -20,6 +20,32 @@ var Tasks = {
     }, function(){
       $(this).find(".task_links").fadeOut(50);
     });
+  },
+  setupInlineEditing: function() {
+    $(".editable").click(function() {
+      var editable = $(this);
+      editable.hide();
+      var form = editable.parent().find("form");
+      var input = form.find("input[type=text]");
+      form.show();
+      input.focus().select();
+      form.submit(function(e) {
+        e.preventDefault();
+        form.ajaxSubmit({
+          success: function(data) {
+            form.hide();
+            editable.show();
+            editable.text(input.val() + " hours");
+            editable.attr("style", "");
+          }, error: function() {
+            form.hide();
+            editable.show();
+            editable.text(input.val());
+            editable.attr("style", "color: red; font-weight: bold;");
+          }
+        });
+      })
+    })
   }
 };
 
@@ -107,6 +133,7 @@ var KeyboardShortcuts = {
 $(function() {
   Tasks.makeSortable();
   Tasks.setupActions();
+  Tasks.setupInlineEditing();
   QuickAdd.setup();
   KeyboardShortcuts.setup();
 });

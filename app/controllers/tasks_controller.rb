@@ -51,7 +51,7 @@ class TasksController < ApplicationController
   
   def update
     ignore_due_date_if_requested
-    @task.update_attributes(params[:task])
+    @task.update_attributes!(params[:task])
     flash[:notice] = "Your changes have been saved."
     redirect_to task_path(@task)
   end
