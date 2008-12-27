@@ -9,7 +9,7 @@
 <%= render :partial => "/projects/project_nav",
            :locals => {:project => @project} %>
 
-<% form_for :spec, :url => project_spec_path(@project, @spec),
+<% form_for :spec, :url => project_specification_path(@project, @spec),
   :html => {:method => :put, :id => "spec_form"} do |f| %>
   <%= f.text_area :body, :rows => nil %>
   <%= f.submit("Save Changes") %>

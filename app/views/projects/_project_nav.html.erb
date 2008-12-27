@@ -3,7 +3,7 @@
   <%
     [
       ["Tasks", project_path(@project)],
-      ["Spec",  project_spec_path(@project, @project.spec.id)]
+      ["Spec",  project_specification_path(@project, @project.specification.id)]
     ].each do |name, path|
   %>
     <li<%= ' class="current"' if current_page?(path) %>>

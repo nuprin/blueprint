@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   belongs_to :assignee, :class_name => 'User'
   belongs_to :parent, :class_name => "Task"
 
-  has_one :spec
+  has_one :specification
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
   has_many :comments
   has_many :task_subscriptions

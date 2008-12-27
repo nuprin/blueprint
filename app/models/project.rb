@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
                        :order      => :position
   has_many :tasks
 
-  has_one :spec
+  has_one :specification
 
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
@@ -50,7 +50,7 @@ class Project < ActiveRecord::Base
   end
 
   after_create do |project|
-    Spec.create(:project_id => project.id)
+    Specification.create(:project_id => project.id)
   end
 
   after_destroy do |project|
