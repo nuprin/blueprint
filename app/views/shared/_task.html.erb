@@ -49,14 +49,13 @@
     <% end %>
   </td>
   <td class="task_estimate">
-    <span class="editable" title="Click to edit">
+    <div class="editable" id="<%= task.id %>" title="Click to edit">
       <% if task.estimate %>
         <%= pluralize(task.estimate, "hour") %>
+      <% else %>
+        &nbsp;
       <% end %>
-    </span>
-    <% form_for task, :html => {:style => "display: none"} do |f| %>
-      <%= f.text_field :estimate, :class => "inline_field" %>
-    <% end %>
+    </div>
   </td>
   <td class="task_due">
     <% if task.due_date %>

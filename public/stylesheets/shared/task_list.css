@@ -112,12 +112,13 @@ table.unsortable td {
   text-transform: uppercase;
   -moz-border-radius: 2px;
 }
-table.task_list input.inline_field {
+table.task_list input[type=text] {
   padding: 1px;
   width: 50px;
 }
-table.task_list td.editing {
-  padding: 0;
+.inlineError {
+  color: red;
+  font-weight: bold;
 }
 .tags {
   display: inline;
