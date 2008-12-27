@@ -20,34 +20,24 @@ class TaskListItem < ActiveRecord::Base
   end)
 
   def update_position(pos)
-    puts "\n\nUpdating"
     return if pos == position
 
     insert_at(pos)
 
     if other_item && other_item.list.size > 1
-      puts "My cpos: #{contextual_position}"
       other_item.update_contextual_position(contextual_position)
     end
-    puts "Done\n\n"
   end
 
   def update_contextual_position(pos)
     return if contextual_position == pos
     moving_up = pos < contextual_position
 
-    puts "Other item cpos: #{contextual_position}"
-    puts "Moving to #{pos}"
-    puts "Moving up: #{moving_up}"
-    puts "Item is: #{contextual_item_at(pos).task.title}"
-
     remove_from_list
     if moving_up
-      puts "Moving to: #{contextual_item_at(pos).position}"
       insert_at(contextual_item_at(pos).position)
     else
       clear_list
-      puts "Moving to: #{contextual_item_at(pos).position + 1}"
       insert_at(contextual_item_at(pos).position + 1)
     end
   end
