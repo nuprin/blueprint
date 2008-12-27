@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     raise "You don't exist" unless viewer.real?
     ignore_due_date_if_requested
     begin
-      task =
+      @task =
         Task.create_with_subscriptions!(params[:task], params[:cc] || [])
     rescue ActiveRecord::RecordInvalid
       @task = Task.new(params[:task])
@@ -13,15 +13,15 @@ class TasksController < ApplicationController
       render :action => "new"
       return
     end
-    flash[:notice] = "&ldquo;#{task.title}&rdquo; created."
+    flash[:notice] = "&ldquo;#{@task.title}&rdquo; created."
     if params[:commit] == "Create and Add Another"
       redirect_to new_task_path(:task => params[:task])
-    elsif task.project_id
-      redirect_to task.project
-    elsif task.assignee_id
-      redirect_to task.assignee
+    elsif @task.project_id
+      redirect_to @task.project
+    elsif @task.assignee_id
+      redirect_to @task.assignee
     else
-      redirect_to task_path(task)
+      redirect_to task_path(@task)
     end
   end
 
@@ -84,7 +84,8 @@ class TasksController < ApplicationController
     @task.destroy
     flash[:notice] =
       "The task &ldquo;#{@task.title}&rdquo; has been deleted."
-    if request.env["HTTP_REFERER"].include?(task_path(@task.id))
+    referer = request.env["HTTP_REFERER"]
+    if referer && referer.include?(task_path(@task.id))
       if @task.project_id
         redirect_to @task.project
       else
