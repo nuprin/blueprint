@@ -49,17 +49,17 @@
     <% end %>
   </td>
   <td class="task_estimate">
-    <div class="editable" id="<%= task.id %>" title="Click to edit">
-      <% if task.estimate %>
-        <%= pluralize(task.estimate, "hour") %>
-      <% else %>
-        &nbsp;
-      <% end %>
-    </div>
+    <% form_for :task, task, :url => update_estimate_task_path(task),
+      :html => {:class => "inline_form", :method => :put} do |f| %>
+      <% value = task.estimate ? pluralize(task.estimate, "hour") : "" %>
+      <%= f.text_field :estimate, :value => value %>
+    <% end %>
   </td>
   <td class="task_due">
-    <% if task.due_date %>
-      <%= task.due_date.strftime("%b %e")  %>
+    <% form_for :task, task, :url => update_due_date_task_path(task),
+      :html => {:class => "inline_form", :method => :put} do |f| %>
+      <% value = task.due_date ? task.due_date.strftime("%b %e") : "" %>
+      <%= f.text_field :due_date, :value => value %>
     <% end %>
   </td>
 </tr>

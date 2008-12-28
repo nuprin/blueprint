@@ -15,7 +15,9 @@ ActionController::Routing::Routes.draw do |map|
                 :member => {
                   :complete => :post,
                   :park => :post,
-                  :prioritize => :post
+                  :prioritize => :post,
+                  :update_due_date => :put,
+                  :update_estimate => :put
                 },
                 :collection => {
                   :people => :get,

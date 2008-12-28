@@ -56,6 +56,18 @@ class TasksController < ApplicationController
     redirect_to task_path(@task)
   end
 
+  def update_estimate
+    hours = params[:task][:estimate].gsub(/hours?/, "").strip
+    @task.update_attributes!(:estimate => hours)
+    render :text => "#{@task.estimate} hours"
+  end
+
+  def update_due_date
+    due_date = Date.parse(params[:task][:due_date])
+    @task.update_attributes!(:due_date => due_date)
+    render :text => due_date.strftime("%b %e")
+  end
+
   def complete
     if params[:final_comment] && !params[:final_comment][:text].blank?
       Comment.create!(params[:final_comment])

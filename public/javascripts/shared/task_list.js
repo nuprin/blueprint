@@ -22,45 +22,11 @@ var Tasks = {
     });
   },
   setupInlineEditing: function() {
-    $(".editable").each(function() {
-      taskId = $(this).attr("id");
-      $(this).inlineEditor({
-        url: "/tasks/" + taskId,
-        name: "task[estimate]"
-      });
-    });
+    $(".inline_form").each(function() {
+      $(this).inlineEditor();
+    })
   }
 };
-
-$.fn.inlineEditor = function(options) {
-  var editable = this;
-  var form = $("<form method='POST' action='" + options.url + "' " +
-               "style='display: none'></form>").insertAfter(editable);
-  var methodInput = $("<input type='hidden' name='_method' value='put' />");
-  var textInput = $("<input type='text' name='" + options.name + "' />");
-  form.append(methodInput).append(textInput);
-  editable.click(function() {
-    editable.hide();
-    form.show();
-    textInput.focus().select();
-    form.submit(function(e) {
-      e.preventDefault();
-      form.ajaxSubmit({
-        success: function() {
-          form.hide();
-          editable.show();
-          editable.text(textInput.val() + " hours");
-          editable.removeClass("inlineError");
-        }, error: function() {
-          form.hide();
-          editable.show();
-          editable.text(textInput.val());
-          editable.addClass("inlineError");
-        }
-      });
-    })
-  })
-}
 
 var QuickAdd = {
   open: function() {
