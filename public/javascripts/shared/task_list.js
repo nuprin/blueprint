@@ -22,9 +22,7 @@ var Tasks = {
     });
   },
   setupInlineEditing: function() {
-    $(".inline_form").each(function() {
-      $(this).inlineEditor();
-    })
+    $(".inline_form").inlineEditor();
   }
 };
 
