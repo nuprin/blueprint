@@ -116,6 +116,9 @@ table.task_list input[type=text] {
   padding: 1px;
   width: 50px;
 }
+.editable {
+  height: 13px;
+}
 .inlineError {
   color: red;
   font-weight: bold;

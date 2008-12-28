@@ -22,7 +22,12 @@ var Tasks = {
     });
   },
   setupInlineEditing: function() {
-    $(".inline_form").inlineEditor();
+    $(".task_estimate>.inline_form").inlineEditor({
+      title: "Click to edit estimate"
+    });
+    $(".task_due>.inline_form").inlineEditor({
+      title: "Click to edit due date"
+    });
   }
 };
 
