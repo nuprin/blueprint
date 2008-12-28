@@ -1,20 +1,20 @@
 /* An inline editor plugin for jQuery. */
-$.fn.inlineEditor = function(options) {
-  var errorClass = "inlineError";
+jQuery.fn.inlineEditor = function(options) {
+  var settings = jQuery.extend({errorClass: "inlineError"}, options);
   
   var onSuccess = function(data) {
     form.hide();
     editable.show();
     textInput.val(data);
     editable.text(textInput.val());
-    editable.removeClass(errorClass);
+    editable.removeClass(settings.errorClass);
   }
 
   var onError = function() {
     form.hide();
     editable.show();
     editable.text(textInput.val());
-    editable.addClass(errorClass);
+    editable.addClass(settings.errorClass);
   }
 
   var onSubmit = function(e) {
