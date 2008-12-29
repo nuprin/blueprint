@@ -1,0 +1,6 @@
+<%# The status changed. %>
+<% if edit.new_value == "prioritized" %>
+  <%= link_to_user edit.editor %> parked the task.
+<% else %>
+  <%= link_to_user edit.editor %> prioritized the task.
+<% end %>

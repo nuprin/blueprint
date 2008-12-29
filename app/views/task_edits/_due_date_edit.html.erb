@@ -1,0 +1,14 @@
+<%# The due date changed. %>
+<% if edit.old_value && edit.new_value %>
+  <%= link_to_user edit.editor %> changed the due date from
+  <strong><%= Date.parse(edit.old_value).strftime("%b %e") %></strong>
+  to
+  <strong><%= Date.parse(edit.new_value).strftime("%b %e") %></strong>.
+<%# The due date was removed. %>
+<% elsif edit.old_value %>
+  <%= link_to_user edit.editor %> removed the due date.
+<%# A due date was added. %>
+<% else %>
+  <%= link_to_user edit.editor %> added a due date:
+  <strong><%= Date.parse(edit.new_value).strftime("%b %e") %></strong>.
+<% end %>

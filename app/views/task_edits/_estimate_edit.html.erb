@@ -1,0 +1,14 @@
+<%# The estimate changed. %>
+<% if edit.old_value && edit.new_value %>
+  <%= link_to_user edit.editor %> revised the estimate from
+  <strong><%= edit.old_value %></strong>
+  to
+  <strong><%= pluralize(edit.new_value, "hour") %></strong>.
+<%# The estimate was removed. %>
+<% elsif edit.old_value %>
+  <%= link_to_user edit.editor %> removed the estimate.
+<%# An estimate was added. %>
+<% else %>
+  <%= link_to_user edit.editor %> added an estimate of
+  <strong><%= pluralize(edit.new_value, "hour") %></strong>.
+<% end %>

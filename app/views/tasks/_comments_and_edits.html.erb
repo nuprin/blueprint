@@ -1,0 +1,33 @@
+<div class="task_field" id="comments">
+  <h2>DISCUSSION</h2>
+  <ul class="events_list">
+    <% task.comments_and_edits.each do |comment_or_edit| %>
+      <li class="<%= comment_or_edit.class.name.downcase %> clearfix">
+        <% if comment_or_edit.is_a?(Comment) %>
+          <%= render :partial => "task_comment",
+                     :locals => {:comment => comment_or_edit} %>        
+        <% else %>
+          <div class="date">
+            <%= comment_or_edit.created_at.getlocal.strftime("%b %e %I:%M%p") %>
+          </div>
+          <%= render :partial => "/task_edits/#{comment_or_edit.field}_edit",
+                     :locals => {:edit => comment_or_edit} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <% form_for :comment, @comment,
+    :url => {:controller => "comments", :action => :create},
+    :html => {:multipart => true, :id => "add_comment_form"} do |f| %>
+    <%= f.hidden_field :task_id   %>
+    <%= f.hidden_field :author_id %>
+    <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 10 %>
+    <div class="submit_bar">
+      <div class="file_field">
+        <label>Add a picture:</label> <%= f.file_field :image,
+                                                       :tabindex => 12 %>
+      </div>
+      <%= f.submit "Save", :tabindex => 11 %>
+    </div>
+  <% end %>
+</div>

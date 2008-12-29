@@ -17,8 +17,7 @@
     <% if @task.parent_id %>
       <%= link_to_task @task.parent %>
     <% end %>
-      &rarr;
-      <strong><%= @task.type %> #<%= @task.id %></strong>
+      &rarr; <strong><%= @task.type %> #<%= @task.id %></strong>
   </div>
 <% end %>
 
@@ -105,46 +104,7 @@
         </ul>
       </div>
     <% end %>
-    <div class="task_field" id="comments">
-      <h2>DISCUSSION</h2>
-      <ul id="comments_list">
-        <% @task.comments.each do |comment| %>
-          <li class="clearfix">
-            <div class="meta">
-              <strong><%= link_to_user(comment.author) %></strong>
-              <div class="date">
-                <%= comment.created_at.getlocal.strftime("%b %e %I:%M%p") %>
-              </div>
-              <%= link_to "Delete", comment_path(comment),
-                :method => :delete,
-                :confirm => "Are you sure you want to delete this comment?",
-                :class => "delete_link" %>
-            </div>
-            <div class="text">
-              <%= format_text(comment.text) %>
-              <% if comment.image.exists? %>
-                <%= link_to image_tag(comment.image.url(:large)),
-                            comment.image.url %>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-      <% form_for :comment, @comment,
-        :url => {:controller => "comments", :action => :create},
-        :html => {:multipart => true, :id => "add_comment_form"} do |f| %>
-        <%= f.hidden_field :task_id   %>
-        <%= f.hidden_field :author_id %>
-        <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 10 %>
-        <div class="submit_bar">
-          <div class="file_field">
-            <label>Add a picture:</label> <%= f.file_field :image,
-                                                           :tabindex => 12 %>
-          </div>
-          <%= f.submit "Save", :tabindex => 11 %>
-        </div>
-      <% end %>
-    </div>
+    <%= render :partial => "comments_and_edits", :locals => {:task => @task} %>
     <div class="clearfix" id="task_links">
       <div id="primary_action">
         <% if @task.completed? %>

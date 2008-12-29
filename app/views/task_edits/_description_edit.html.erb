@@ -1,0 +1,7 @@
+<%# The description was modified. %>
+<% if !edit.old_value.blank? && !edit.new_value.blank? %>
+  <%= link_to_user edit.editor %> changed the description.
+<%# A description was added. %>
+<% elsif !edit.new_value.blank? %>
+  <%= link_to_user edit.editor %> added a description.
+<% end %>

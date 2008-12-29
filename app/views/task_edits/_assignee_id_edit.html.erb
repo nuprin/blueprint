@@ -1,0 +1,13 @@
+<%# The task was reassigned. %>
+<% if edit.old_value && edit.new_value %>
+  <%= link_to_user edit.editor %> reassigned the task from
+  <%= link_to_user User.find(edit.old_value) %> to
+  <%= link_to_user User.find(edit.new_value) %>.
+<%# The assignee was removed. %>
+<% elsif edit.old_value %>
+  <%= link_to_user edit.editor %> made the task unassigned.
+<%# An assignee was added. %>
+<% else %>
+  <%= link_to_user edit.editor %> assigned the task to
+  <%= link_to_user User.find(edit.new_value) %>.
+<% end %>

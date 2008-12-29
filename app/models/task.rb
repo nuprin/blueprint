@@ -15,6 +15,7 @@ class Task < ActiveRecord::Base
   has_one :specification
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
   has_many :comments
+  has_many :task_edits
   has_many :task_subscriptions
   has_many :list_items, :class_name => 'TaskListItem'
 
@@ -105,7 +106,11 @@ class Task < ActiveRecord::Base
   def subscribed_user_names
     self.subscribed_users.map(&:name).to_sentence
   end
-
+  
+  def comments_and_edits
+    (self.task_edits + self.comments).sort_by(&:created_at)
+  end
+  
   before_save :adjust_year, :update_lists, :set_type, :notify_subscribers
 
   before_update :record_changes
