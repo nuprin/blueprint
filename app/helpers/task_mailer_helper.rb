@@ -9,7 +9,7 @@ module TaskMailerHelper
       fields << ["Subscribed", task.subscribed_user_names]
     end
     if task.project_id
-      fields << ["Project", task.project.title]
+      fields << ["Initiative", task.project.title]
     end
     if task.due_date
       fields << ["Due Date", task.due_date.strftime("%b %e")]
