@@ -3,8 +3,8 @@ class TaskEdit < ActiveRecord::Base
   belongs_to :task
 
   RELEVANT_FIELDS = [
-    "assignee_id", "completed_at", "description", "due_date", "estimate", 
-    "project_id", "status", "title"
+    "assignee_id", "description", "due_date", "estimate", "project_id",
+    "status", "title"
   ]
 
   def self.record_changes!(task)
