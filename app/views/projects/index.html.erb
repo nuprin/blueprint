@@ -9,13 +9,11 @@
   end)).transpose.to_json %>;
 </script>
 
-
 <% @title = "Initiatives" %>
 
 <% @projects.each do |project| %>
   <% task_object =
-    Task.new(:kind => "task", :status => "prioritized",
-             :project_id => project.id) %>
+  Task.new(:kind => "", :status => "prioritized", :project_id => project.id) %>
   <%= render :partial => "/shared/task_list",
              :locals => {:title       => project.title,
                          :see_all_url => project_path(project),

@@ -4,7 +4,9 @@ class Task < ActiveRecord::Base
   CURRENT_RANGE = [
     Time.now.at_beginning_of_week, 1.week.from_now.at_end_of_week
   ].map(&:to_date)
-  
+
+  attr_accessor :editor
+
   belongs_to :project
   belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
@@ -105,6 +107,12 @@ class Task < ActiveRecord::Base
   end
 
   before_save :adjust_year, :update_lists, :set_type, :notify_subscribers
+
+  before_update :record_changes
+
+  def record_changes
+    TaskEdit.record_changes!(self)
+  end
 
   def set_type
     if self.parent_id

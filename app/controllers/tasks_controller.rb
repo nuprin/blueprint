@@ -142,6 +142,7 @@ class TasksController < ApplicationController
 
   def find_model
     @task = Task.find(params[:id]) if params[:id]
+    @task.editor = viewer if viewer.real? && @task
   end
 
 end

@@ -35,7 +35,7 @@
 <%= render :partial => "project_nav", :locals => {:project => @project} %>
 
 <div id="project_content">
-  <% task_object = Task.new(:kind => "task", :status => "prioritized",
+  <% task_object = Task.new(:kind => "", :status => "prioritized",
                             :project_id => @project.id) %>
   <%= render :partial => "/shared/task_list",
              :locals => {:title => "PRIORITIZED (#{@project.task_list.size})",
