@@ -33,7 +33,8 @@
              :locals => {:title =>
                         "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
                          :tasks => @project.completed_tasks,
-                         :context => @project.class.name} %>
+                         :context => @project.class.name,
+                         :unsortable => true} %>
 
   <% task_object = Task.new(:kind => "task", :status => "parked",
                             :project_id => @project.id) %>
@@ -43,7 +44,8 @@
                           "PARKING LOT (#{@project.parked_tasks.size})",
                          :tasks => @project.parked_tasks,
                          :context => @project.class.name,
-                         :task_object => task_object} %>
+                         :task_object => task_object,
+                         :unsortable => true} %>
 </div>
 <div id="project_footer">
   <div class="other_links">

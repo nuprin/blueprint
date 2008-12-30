@@ -28,7 +28,8 @@
            :locals => {
              :title => "COMPLETED TODAY (#{@user.completed_tasks_today.size})",
              :tasks => @user.completed_tasks_today,
-             :context => @user.class.name} %>
+             :context => @user.class.name,
+             :unsortable => true} %>
 
 <% 
   task_object = Task.new(:kind => "task", :status => "parked",
@@ -38,4 +39,5 @@
            :locals => {:title => "PARKING LOT (#{@user.parked_tasks.size})",
                        :tasks => @user.parked_tasks,
                        :context => @user.class.name,
-                       :task_object => task_object} %>
+                       :task_object => task_object,
+                       :unsortable => true} %>
