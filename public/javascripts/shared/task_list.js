@@ -117,10 +117,20 @@ var KeyboardShortcuts = {
   }
 }
 
+var Fluid = {
+  setup: function() {
+    if (window.fluid) {
+      if (PRIORITIZED_TASK_COUNT)
+        window.fluid.dockBadge = PRIORITIZED_TASK_COUNT;
+    }
+  }
+}
+
 $(function() {
   Tasks.makeSortable();
   Tasks.setupActions();
   Tasks.setupInlineEditing();
   QuickAdd.setup();
   KeyboardShortcuts.setup();
+  Fluid.setup();
 });

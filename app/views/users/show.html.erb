@@ -7,6 +7,9 @@
   end) + (Project.all.map do |project|
     [project.title, "project_id", project.id]
   end)).transpose.to_json %>;
+  <% if viewer == @user %>
+    var PRIORITIZED_TASK_COUNT = "<%= @user.task_list.size %>";
+  <% end %>
 </script>
 
 <% @title = viewer == @user ? "Your Tasks" : "#{@user.name.possessive} Tasks"%>
