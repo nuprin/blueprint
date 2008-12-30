@@ -2,15 +2,19 @@ var Tasks = {
   makeSortable: function() {
     $(document.body).sortable({
       axis:  'y',
-      items: 'table.task_list:not(.unsortable) tbody>tr',
+      items: 'table.task_list:not(.unsortable) tbody > tr',
       update: function (evt, ui) {
-        ui.item.find(".task_links").show();
-        context = ui.item.attr('class').split('_');
         $.post("/tasks/reorder", {
           list_item_id: ui.item.attr('id').replace(/list_item_/, ''),
           list_item_position: ui.item.prevAll().length + 1
         }, function (data) {}, "json");
       },
+      // These extra fields seem to jump when dragging a table. Hide them for
+      // now.
+      start: function(evt, ui) {
+        ui.helper.find(".task_links").hide();
+        ui.helper.find(".editable").hide();
+      }
     });
   },
   setupActions: function(trElem) {
