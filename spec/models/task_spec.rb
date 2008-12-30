@@ -7,4 +7,10 @@ describe Task do
   it "should have a title and a creator" do
     @task.valid?.should == true
   end
+  it "should not notify the editor on completion" do
+    mailer = @task.mass_mailer
+    @task.editor = users(:chris)
+    @task.mass_mailer.expects(:ignoring).with(@task.editor).returns(mailer)
+    @task.complete!
+  end
 end

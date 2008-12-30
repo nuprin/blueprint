@@ -69,7 +69,7 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.list_items.map(&:destroy)
-    self.mass_mailer.ignoring(self.assignee).deliver_task_completion
+    self.mass_mailer.ignoring(self.editor).deliver_task_completion
     self.save!
   end
 
