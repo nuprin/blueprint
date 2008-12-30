@@ -1,11 +1,12 @@
 <% if @task.due_date_was -%>
 <% if @task.due_date -%>
-The due date has been changed from <%= @task.due_date_was.strftime("%b %e") %> to <%= @task.due_date.strftime("%b %e") %>.
+<%= task_editor_name(@task) %> changed the due date from <%= 
+@task.due_date_was.strftime("%b %e") %> to <%= @task.due_date.strftime("%b %e") %>.
 <% else %>
-The due date has been removed from this task.
+<%= task_editor_name(@task) %> removed the due date from this task.
 <% end %>
 <% elsif @task.due_date -%>
-The task has been given the due date of <%= @task.due_date.strftime("%b %e") %>.
+<%= task_editor_name(@task) %> set the due date to <%= @task.due_date.strftime("%b %e") %>.
 <% end -%>
 
 View this task:

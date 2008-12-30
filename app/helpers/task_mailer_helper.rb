@@ -1,6 +1,6 @@
 module TaskMailerHelper
   def task_type(task)
-    task.kind.empty? ? 'task' : task.kind
+    task.kind || "task"
   end
   
   def task_footer(task)
@@ -17,5 +17,9 @@ module TaskMailerHelper
     fields.map do |field|
       field.join(": ")
     end.join(" | ")
+  end
+
+  def task_editor_name(task)
+    task.editor ? task.editor.name : "Someone"
   end
 end

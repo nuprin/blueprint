@@ -1,11 +1,11 @@
 <% if @assignee_was -%>
 <% if @task.assignee -%>
-The task has been reassigned from <%= @assignee_was.name %> to <%= @task.assignee.name %>.
+<%= task_editor_name(@task) %> reassigned the task from <%= @assignee_was.name %> to <%= @task.assignee.name %>.
 <% else -%>
-<%= @assignee_was.name %> is no longer assigned to the task.
+<%= task_editor_name(@task) %> removed <%= @assignee_was.name %> from the task.
 <% end -%>
 <% elsif @task.assignee -%>
-The task has been assigned to <%= @task.assignee.name %>.
+<%= task_editor_name(@task) %> assigned the task to <%= @task.assignee.name %>.
 <% end -%>
 
 View this task:
