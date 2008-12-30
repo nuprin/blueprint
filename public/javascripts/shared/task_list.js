@@ -21,13 +21,13 @@ var Tasks = {
       $(this).find(".task_links").fadeOut(50);
     });
   },
-  setupInlineEditing: function() {
-    $(".task_estimate>.inline_form").inlineEditor({
-      title: "Click to edit estimate"
-    });
-    $(".task_due>.inline_form").inlineEditor({
-      title: "Click to edit due date"
-    });
+  setupInlineEditing: function(trElem) {
+    estimateForms = trElem ? trElem.find(".task_estimate>.inline_form") :
+                             $(".task_estimate>.inline_form");
+    dueDateForms = trElem ? trElem.find(".task_due>.inline_form") :
+                            $(".task_due>.inline_form");
+    estimateForms.inlineEditor({title: "Click to edit estimate"});
+    dueDateForms.inlineEditor({title: "Click to edit due date"});
   }
 };
 
@@ -73,6 +73,7 @@ var QuickAdd = {
           var table = $(e.target).parents("table.task_list")
           var trElem = $(data);
           Tasks.setupActions(trElem);
+          Tasks.setupInlineEditing(trElem);
           if ($("#task_status", table).val() == "parked") {
             trElem.prependTo($("tbody", table)).hide().fadeIn("fast");            
           } else {
