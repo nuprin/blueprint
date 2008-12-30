@@ -9,7 +9,7 @@ class TaskEdit < ActiveRecord::Base
 
   def self.record_changes!(task)
     task.changes.each do |f, (o, n)|
-      if RELEVANT_FIELDS.include?(f)
+      if RELEVANT_FIELDS.include?(f) && task.editor
         self.create! :editor_id => task.editor.id, :task_id => task.id,
                      :field => f, :old_value => o, :new_value => n
       end

@@ -128,10 +128,10 @@ class Task < ActiveRecord::Base
   def adjust_year
     # Do the right thing when it comes to year boundaries.
     if self.due_date
-      if self.due_date > Date.today + 1.year
+      if self.due_date > (Date.today + 1.year)
         self.due_date -= 1.year
       end
-      if self.due_date < Date.today
+      if self.due_date < (Date.today - 6.months)
         self.due_date += 1.year
       end
     end
