@@ -10,7 +10,31 @@ describe Task do
   it "should not notify the editor on completion" do
     mailer = @task.mass_mailer
     @task.editor = users(:chris)
-    @task.mass_mailer.expects(:ignoring).with(@task.editor).returns(mailer)
+    @task.stubs(:save!)
+
+    @task.expects(:mass_mailer).returns(mailer)
+    mailer.expects(:ignoring).with(@task.editor).returns(mailer)
+
     @task.complete!
+  end
+  it "should not notify the editor on reassignment" do
+    mailer = @task.mass_mailer
+    @task.editor = users(:chris)
+
+    @task.stubs(:assignee_id_changed?).returns(true)
+    @task.expects(:mass_mailer).returns(mailer)
+    mailer.expects(:ignoring).with(@task.editor).returns(mailer)
+
+    @task.notify_subscribers
+  end
+  it "should not notify the editor on due date change" do
+    mailer = @task.mass_mailer
+    @task.editor = users(:chris)
+
+    @task.stubs(:due_date_changed?).returns(true)
+    @task.expects(:mass_mailer).returns(mailer)
+    mailer.expects(:ignoring).with(@task.editor).returns(mailer)
+
+    @task.notify_subscribers
   end
 end

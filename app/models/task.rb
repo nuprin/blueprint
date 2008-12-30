@@ -154,10 +154,10 @@ class Task < ActiveRecord::Base
 
   def notify_subscribers
     if self.assignee_id_changed?
-      self.mass_mailer.deliver_task_reassignment
+      self.mass_mailer.ignoring(self.editor).deliver_task_reassignment
     end
     if self.due_date_changed?
-      self.mass_mailer.deliver_task_due_date_changed
+      self.mass_mailer.ignoring(self.editor).deliver_task_due_date_changed
     end
   end
 
