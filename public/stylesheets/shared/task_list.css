@@ -170,9 +170,12 @@ table.task_list input[type=text] {
 .task_links {
   background: white;
   color: #aaa;
-  float: right;
   font-size: 11px;
-  margin-right: 20px;
+  line-height: 14px;
+  padding: 0 5px;
+  position: absolute;
+  right: 15px;
+  z-index: 10000;
 }
 .task_links a {
   color: #40678d;

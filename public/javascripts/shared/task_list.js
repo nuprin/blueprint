@@ -4,13 +4,13 @@ var Tasks = {
       axis:  'y',
       items: 'table.task_list:not(.unsortable) tbody>tr',
       update: function (evt, ui) {
+        ui.item.find(".task_links").show();
         context = ui.item.attr('class').split('_');
         $.post("/tasks/reorder", {
           list_item_id: ui.item.attr('id').replace(/list_item_/, ''),
           list_item_position: ui.item.prevAll().length + 1
-        },
-        function (data) {}, "json");
-      }
+        }, function (data) {}, "json");
+      },
     });
   },
   setupActions: function(trElem) {
