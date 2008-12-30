@@ -1,0 +1,11 @@
+<h1>
+  <%= project.title %>
+  <div id="project_fields">
+    <% if !project.mission.blank? %>
+      <div id="project_mission">
+        MISSION: <%= project.mission %>
+      </div>
+    <% end %>
+    <%= project_fields(project) %>
+  </div>
+</h1>

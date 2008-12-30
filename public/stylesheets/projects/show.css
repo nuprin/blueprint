@@ -1,26 +1,25 @@
+#content h1 {
+  padding-bottom: 30px !important;
+}
 #project_fields {
-  float: right;
-  font-size: 13px;
-  font-weight: normal;
-}
-#project_fields li {
-  float: right;
-  margin-left: 30px;
-  text-align: right;
-}
-#project_fields div {
-  margin-top: 5px;
-}
-#project_fields span {
   color: #666;
+  font-size: 11px;
+  font-weight: normal;
+  margin-top: 1em;
+}
+#project_fields .divider {
+  color: #ccc;
+  padding: 0 4px;
 }
 #project_footer {
   background: #eee;
-  border-top: 2px solid #ddd;
-  margin: 60px 20px 0;
-  padding: 10px;
-  width: 740px;
+  border-top: 1px solid #ddd;
+  margin: 60px 0 0;
+  padding: 10px 20px;
 }
-#project_footer a {
+#project_footer .other_links {
   float: right;
+}
+#project_mission {
+  margin-bottom: .5em;
 }

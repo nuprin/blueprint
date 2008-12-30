@@ -12,9 +12,7 @@ class Project < ActiveRecord::Base
                        :order => "title ASC"
 
   validates_length_of :title, :in => 1...255
-  validates_length_of :description, :maximum => 5000, :allow_nil => true
-
-  indexes_columns :title, :description, :using => :ferret
+  indexes_columns :title, :using => :ferret
 
   def to_s
     title
@@ -39,6 +37,10 @@ class Project < ActiveRecord::Base
   def remove_from_list(task)
     TaskListItem.destroy_all :task_id => task, :context_id => self.id,
                              :context_type => self.class.name
+  end
+
+  def estimate
+    self.tasks.sum(:estimate) || 0
   end
 
   def self.sorted

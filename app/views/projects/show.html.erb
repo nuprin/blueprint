@@ -16,21 +16,7 @@
   @title = @project.title
 %>
 
-<h1>
-  <% if @project.assignees.any? %>
-    <ul class="clearfix" id="project_fields">
-      <li>
-        <span>Who's Involved</span>
-        <div>
-        <%= @project.assignees.map do |u|
-           link_to_user u
-         end.join(", ") %>
-        </div>
-      </li>
-    </ul>
-  <% end %>
-  <%= @title %>
-</h1>
+<%= render :partial => "project_header", :locals => {:project => @project} %>
 
 <%= render :partial => "project_nav", :locals => {:project => @project} %>
 
@@ -60,13 +46,16 @@
                          :task_object => task_object} %>
 </div>
 <div id="project_footer">
+  <div class="other_links">
+    <%= link_to "Edit Initiative", edit_project_url(@project) %>
+  </div>
   <% if @project.active? %>
-    <%= link_to "Remove from Active Initiatives",
-      set_inactive_project_path(@project), :method => :put %>
     Initiative Status: <strong>Active</strong>
+    (<%= link_to "Remove from Active Initiatives",
+      set_inactive_project_path(@project), :method => :put %>)
   <% else %>
-    <%= link_to "Add to Active Initiatives",
-      set_active_project_path(@project), :method => :put %>
     Initiative Status: <strong>Inactive</strong>
+    (<%= link_to "Add to Active Initiatives",
+      set_active_project_path(@project), :method => :put %>)
   <% end %>
 </div>

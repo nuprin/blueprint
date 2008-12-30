@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "projects/show" %>
 <%= stylesheet_link_tag "specs/show" %>
 <%= javascript_include_tag "specs/show" %>
 
@@ -6,7 +7,13 @@
     <%= edit_project_specification_path(@project, @spec).to_json %>;
 </script>
 
-<% @title = @project.title %>
+<% 
+  @hide_layout_title = true
+  @title = @project.title
+%>
+
+<%= render :partial => "/projects/project_header",
+           :locals => {:project => @project} %>
 
 <%= render :partial => "/projects/project_nav",
            :locals => {:project => @project} %>

@@ -1,12 +1,26 @@
-<h1>Editing projects</h1>
+<%= stylesheet_link_tag "projects/edit" %>
 
-<% form_for(@projects) do |f| %>
+<% @title = "Edit Initiative" %>
+
+<% form_for(@project) do |f| %>
   <%= f.error_messages %>
-
   <p>
-    <%= f.submit "Update" %>
+    <%= f.label :title, "Name:" %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    Due Date:<br />
+    <%= check_box_tag :use_due_date, "1", !!@project.due_date %>
+    This initiative is due on:
+    <%= f.date_select :due_date, :order => [:month, :day, :year] %>
+  </p>
+  <p>
+    <%= f.label :mission %>:<br />
+    <%= f.text_field :mission %>
+  </p>
+  <p>
+    <%= f.submit "Save Changes" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @projects %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to 'Back to Initiative', project_path(@project) %>
