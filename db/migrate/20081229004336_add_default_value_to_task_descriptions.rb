@@ -2,7 +2,7 @@ class AddDefaultValueToTaskDescriptions < ActiveRecord::Migration
   def self.up
     change_column :tasks, :description, :string, :default => ""
     Task.all.each do |t|
-      if t.nil?
+      if t.description.nil?
         t.update_attribute(:description, "")
       end
     end
