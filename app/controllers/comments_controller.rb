@@ -3,13 +3,13 @@ class CommentsController < ApplicationController
     comment = Comment.create!(params[:comment])
     flash[:notice] = "Your comment has been created. You will also receive " +
                      "email notifications about future changes to this task."
-    redirect_to task_path(comment.commentable_id)
+    redirect_to params[:redirect_url]
   end
 
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
     flash[:notice] = "Your comment has been deleted."
-    redirect_to task_path(comment.commentable_id)
-  end
+    redirect_to :back
+  end  
 end

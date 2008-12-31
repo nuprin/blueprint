@@ -21,6 +21,19 @@
 <div id="spec">
   <%= @spec.body %>
 </div>
+<div>
+  <ul id="comments_list">
+  <% @project.comments.each do |comment| %>
+    <li class="comment clearfix">
+      <%= render :partial => "/shared/comment",
+                 :locals => {:comment => comment} %>
+    </li>
+  <% end %>
+  </ul>
+  <%= render :partial => "/shared/comment_form",
+             :locals => {:commentable => @project,
+               :redirect_url => project_specification_path(@project, @spec)} %>
+</div>
 <div class="edit">
   <%= link_to "Edit Spec", edit_project_specification_path(@project, @spec) %>
 </div>

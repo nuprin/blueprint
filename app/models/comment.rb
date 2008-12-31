@@ -14,6 +14,15 @@ class Comment < ActiveRecord::Base
     text
   end
 
+  def self.form_for_object(commentable, author)
+    attributes = {
+      :author_id => author.id,
+      :commentable_id => commentable.id,
+      :commentable_type => commentable.class.name
+    }
+    self.new(attributes)
+  end
+
   after_create do |comment|
     if comment.commentable_type == "Task"
       comment.author.subscribe_to(comment.commentable)

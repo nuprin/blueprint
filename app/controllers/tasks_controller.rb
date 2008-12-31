@@ -117,11 +117,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    comment_hash = {
-      :commentable_id => params[:id], :commentable_type => "Task",
-      :author_id => viewer.id
-    }
-    @comment = Comment.new(comment_hash)
   end
 
   private

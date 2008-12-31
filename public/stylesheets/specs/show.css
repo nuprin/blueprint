@@ -1,11 +1,59 @@
+.comment .delete_link {
+  color: #999;
+  font-size: 10px;
+}
+.comment .date {
+  color: #666;
+  margin-bottom: 5px;
+}
+.comment .meta {
+  float: left;
+  width: 120px;
+}
+.comment .text {
+  margin-left: 120px;
+}
+.comment .text img {
+  background: #eee;
+  display: block;
+  margin: 10px 0;
+  padding: 9px;
+}
 .edit {
   padding: 10px;
   text-align: right;
 }
+#add_comment_form {
+  margin-left: 20px;
+  padding: 10px 0;
+  width: 500px;
+}
+#add_comment_form textarea {
+  height: 4em;
+  margin-bottom: 10px;
+  width: 490px;
+}
+#add_comment_form .submit_bar {
+  text-align: right;
+}
+#add_comment_form .file_field {
+  float: left;
+}
+#comments_list {
+  margin: 20px;
+  width: 720px;
+}
+#comments_list li {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+#content {
+  line-height: 130%;
+}
 #spec {
   border-bottom: 1px solid #ddd;
   font-size: 1.25em;
-  line-height: 130%;
   padding: 10px 20px 20px;
 }
 #spec h1,
