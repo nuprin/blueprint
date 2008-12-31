@@ -12,30 +12,26 @@
   @title = @project.title
 %>
 
-<%= render :partial => "/projects/project_header",
-           :locals => {:project => @project} %>
-
-<%= render :partial => "/projects/project_nav",
-           :locals => {:project => @project} %>
-
-<div id="spec">
-  <%= link_to "Edit Spec", edit_project_specification_path(@project),
-    :class => "edit" %>
-  <%= @spec.body %>
-</div>
-<div class="clearfix" id="comment_board">
-  <h2>Discussion</h2>
-  <% if @project.comments.any? %>
-    <ul id="comments_list">
-      <% @project.comments.each do |comment| %>
-        <li class="comment clearfix">
-          <%= render :partial => "/shared/comment",
-                     :locals => {:comment => comment} %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-  <%= render :partial => "/shared/comment_form",
-             :locals => {:commentable => @project,
-               :redirect_url => project_specification_path(@project)} %>
-</div>
+<% with_layout "layouts/initiative" do %>
+  <div id="spec">
+    <%= link_to "Edit Spec", edit_project_specification_path(@project),
+      :class => "edit" %>
+    <%= @spec.body %>
+  </div>
+  <div class="clearfix" id="comment_board">
+    <h2>Discussion</h2>
+    <% if @project.comments.any? %>
+      <ul id="comments_list">
+        <% @project.comments.each do |comment| %>
+          <li class="comment clearfix">
+            <%= render :partial => "/shared/comment",
+                       :locals => {:comment => comment} %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= render :partial => "/shared/comment_form",
+               :locals => {:commentable => @project,
+                 :redirect_url => project_specification_path(@project)} %>
+  </div>
+<% end %>

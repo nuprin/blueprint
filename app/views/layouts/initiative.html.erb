@@ -1,0 +1,6 @@
+<% with_locals(:project => @project) do |t| %>
+  <%= t.render :partial => "/projects/project_header" %>
+  <%= t.render :partial => "/projects/project_nav"    %>
+  <%= yield %>
+  <%= t.render :partial => "/projects/project_footer" %>
+<% end %>

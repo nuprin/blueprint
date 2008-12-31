@@ -16,48 +16,32 @@
   @title = @project.title
 %>
 
-<%= render :partial => "project_header", :locals => {:project => @project} %>
+<% with_layout "layouts/initiative" do %>
+  <div id="project_content">
+    <% task_object = Task.new(:kind => "", :status => "prioritized",
+                              :project_id => @project.id) %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title => "PRIORITIZED (#{@project.task_list.size})",
+                           :tasks => @project.task_list,
+                           :context => @project.class.name,
+                           :task_object => task_object} %>
 
-<%= render :partial => "project_nav", :locals => {:project => @project} %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title =>
+                          "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
+                           :tasks => @project.completed_tasks,
+                           :context => @project.class.name,
+                           :unsortable => true} %>
 
-<div id="project_content">
-  <% task_object = Task.new(:kind => "", :status => "prioritized",
-                            :project_id => @project.id) %>
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title => "PRIORITIZED (#{@project.task_list.size})",
-                         :tasks => @project.task_list,
-                         :context => @project.class.name,
-                         :task_object => task_object} %>
+    <% task_object = Task.new(:kind => "task", :status => "parked",
+                              :project_id => @project.id) %>
 
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title =>
-                        "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
-                         :tasks => @project.completed_tasks,
-                         :context => @project.class.name,
-                         :unsortable => true} %>
-
-  <% task_object = Task.new(:kind => "task", :status => "parked",
-                            :project_id => @project.id) %>
-
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title =>
-                          "PARKING LOT (#{@project.parked_tasks.size})",
-                         :tasks => @project.parked_tasks,
-                         :context => @project.class.name,
-                         :task_object => task_object,
-                         :unsortable => true} %>
-</div>
-<div id="project_footer">
-  <div class="other_links">
-    <%= link_to "Edit Initiative", edit_project_url(@project) %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title =>
+                            "PARKING LOT (#{@project.parked_tasks.size})",
+                           :tasks => @project.parked_tasks,
+                           :context => @project.class.name,
+                           :task_object => task_object,
+                           :unsortable => true} %>
   </div>
-  <% if @project.active? %>
-    Initiative Status: <strong>Active</strong>
-    (<%= link_to "Remove from Active Initiatives",
-      set_inactive_project_path(@project), :method => :put %>)
-  <% else %>
-    Initiative Status: <strong>Inactive</strong>
-    (<%= link_to "Add to Active Initiatives",
-      set_active_project_path(@project), :method => :put %>)
-  <% end %>
-</div>
+<% end %>

@@ -1,0 +1,14 @@
+<div id="project_footer">
+  <div class="other_links">
+    <%= link_to "Edit Initiative", edit_project_url(@project) %>
+  </div>
+  <% if @project.active? %>
+    Initiative Status: <strong>Active</strong>
+    (<%= link_to "Remove from Active Initiatives",
+      set_inactive_project_path(@project), :method => :put %>)
+  <% else %>
+    Initiative Status: <strong>Inactive</strong>
+    (<%= link_to "Add to Active Initiatives",
+      set_active_project_path(@project), :method => :put %>)
+  <% end %>
+</div>

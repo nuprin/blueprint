@@ -35,4 +35,7 @@ module ApplicationHelper
     content = render(render_content)
     concat(content, block.binding)
   end
+  def with_locals(locals, &block)
+    with_options(:locals => locals, &block)
+  end
 end
