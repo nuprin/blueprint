@@ -14,7 +14,8 @@ class Task < ActiveRecord::Base
 
   has_one :specification
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
-  has_many :comments
+  has_many :comments, :as => "commentable"
+
   has_many :task_edits
   has_many :task_subscriptions
   has_many :list_items, :class_name => 'TaskListItem'

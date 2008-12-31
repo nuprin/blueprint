@@ -1,4 +1,4 @@
 one:
   text: I say things!
-  task: one
+  commentable: one
   author: chris

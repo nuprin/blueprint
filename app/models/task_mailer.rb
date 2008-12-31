@@ -17,7 +17,7 @@ class TaskMailer < ActionMailer::Base
   def task_comment(recipient, task, comment)
     recipients recipient_email(recipient)
     from       from_email(comment.author)
-    subject    task_subject(comment.task)
+    subject    task_subject(task)
     body       :comment => comment, :task => task
   end
 

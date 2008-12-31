@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  belongs_to :task
   belongs_to :author, :class_name => "User"
+  belongs_to :commentable, :polymorphic => true
 
   indexes_columns :text, :image_file_name, :using => :ferret
 
@@ -15,8 +15,10 @@ class Comment < ActiveRecord::Base
   end
 
   after_create do |comment|
-    comment.author.subscribe_to(comment.task)
-    comment.task.mass_mailer.ignoring(comment.author).
-      deliver_task_comment(comment)
+    if comment.commentable_type == "Task"
+      comment.author.subscribe_to(comment.commentable)
+      comment.commentable.mass_mailer.ignoring(comment.author).
+        deliver_task_comment(comment)
+    end
   end  
 end

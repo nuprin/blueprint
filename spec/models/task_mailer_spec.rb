@@ -46,7 +46,7 @@ end
 describe "The task comment email" do
   before(:each) do 
     @comment = comments(:one)
-    @task = @comment.task
+    @task = @comment.commentable
     @mail = TaskMailer.create_task_comment(@task.assignee, @task, @comment)
   end
 
