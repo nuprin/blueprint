@@ -4,7 +4,7 @@
 
 <script type="text/javascript">
   var EDIT_SPEC_PATH =
-    <%= edit_project_specification_path(@project, @spec).to_json %>;
+    <%= edit_project_specification_path(@project).to_json %>;
 </script>
 
 <% 
@@ -32,8 +32,8 @@
   </ul>
   <%= render :partial => "/shared/comment_form",
              :locals => {:commentable => @project,
-               :redirect_url => project_specification_path(@project, @spec)} %>
+               :redirect_url => project_specification_path(@project)} %>
 </div>
 <div class="edit">
-  <%= link_to "Edit Spec", edit_project_specification_path(@project, @spec) %>
+  <%= link_to "Edit Spec", edit_project_specification_path(@project) %>
 </div>

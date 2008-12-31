@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
                   :set_active   => :put,
                   :set_inactive => :put,
                 } do |projects|
-                  projects.resources :specifications
+                  projects.resource :specification
                 end
   map.resource  :search
   map.resources :sub_tasks
