@@ -19,12 +19,7 @@
   margin: 10px 0;
   padding: 9px;
 }
-.edit {
-  padding: 10px;
-  text-align: right;
-}
 #add_comment_form {
-  margin-left: 20px;
   padding: 10px 0;
   width: 500px;
 }
@@ -39,8 +34,8 @@
 #add_comment_form .file_field {
   float: left;
 }
-#comments_list {
-  margin: 20px;
+#comment_board {
+  padding: 20px;
   width: 720px;
 }
 #comments_list li {
@@ -55,6 +50,9 @@
   border-bottom: 1px solid #ddd;
   font-size: 1.25em;
   padding: 10px 20px 20px;
+}
+#spec .edit {
+  float: right;
 }
 #spec h1,
 #spec h2,

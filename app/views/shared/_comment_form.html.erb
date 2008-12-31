@@ -6,7 +6,7 @@
   <%= f.hidden_field :author_id %>
   <%= hidden_field_tag :redirect_url, redirect_url %>
   <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 10 %>
-  <div class="submit_bar">
+  <div class="submit_bar clearfix">
     <div class="file_field">
       <label>Add a picture:</label> <%= f.file_field :image,
                                                      :tabindex => 12 %>
