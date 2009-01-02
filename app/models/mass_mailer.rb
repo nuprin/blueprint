@@ -1,8 +1,8 @@
 class MassMailer
-  attr_reader :ignored_users, :task
+  attr_reader :ignored_users, :task_or_project
 
-  def initialize(task)
-    @task = task
+  def initialize(task_or_project)
+    @task_or_project = task_or_project
     @ignored_users = []
   end
   
@@ -12,12 +12,16 @@ class MassMailer
   end
   
   def recipients
-    @task.subscribed_users(true) - @ignored_users
+    @task_or_project.subscribed_users(true) - @ignored_users
+  end
+
+  def mailer
+    @task_or_project.is_a?(Task) ? TaskMailer : ProjectMailer
   end
 
   def method_missing(method, *args)
     recipients.each do |recipient|
-      TaskMailer.send(method, recipient, @task, *args)
+      mailer.send(method, recipient, @task_or_project, *args)
     end
   end
 end

@@ -25,10 +25,8 @@ class Comment < ActiveRecord::Base
   end
 
   after_create do |comment|
-    if comment.commentable_type == "Task"
-      comment.author.subscribe_to(comment.commentable)
-      comment.commentable.mass_mailer.ignoring(comment.author).
-        deliver_task_comment(comment)
-    end
+    comment.author.subscribe_to(comment.commentable)
+    comment.commentable.mass_mailer.ignoring(comment.author).
+      deliver_new_comment(comment)
   end  
 end

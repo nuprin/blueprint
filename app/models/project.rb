@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 
   validates_length_of :title, :in => 1...255
   indexes_columns :title, :using => :ferret
-
+  
   def to_s
     title
   end
@@ -52,6 +52,14 @@ class Project < ActiveRecord::Base
 
   def self.all_for_select
     self.sorted.map{|p| [p.title, p.id]}
+  end
+  
+  def mass_mailer
+    MassMailer.new(self)
+  end
+
+  def subscribed_user_names
+    self.subscribed_users.map(&:name)
   end
 
   after_create do |project|

@@ -1,9 +1,7 @@
 class TaskMailer < ActionMailer::Base
 
+  include MailerHelper
   include TaskMailerHelper
-
-  FROM_EMAIL           = "blueprint@causes.com"
-  FROM_EMAIL_WITH_NAME = "Blueprint <#{FROM_EMAIL}>"
 
   default_url_options[:host] = HOST
 
@@ -14,7 +12,7 @@ class TaskMailer < ActionMailer::Base
     body       :task => task, :recipient => recipient
   end
 
-  def task_comment(recipient, task, comment)
+  def new_comment(recipient, task, comment)
     recipients recipient_email(recipient)
     from       from_email(comment.author)
     subject    task_subject(task)
@@ -48,14 +46,6 @@ class TaskMailer < ActionMailer::Base
   
   def task_subject(task)
     "(##{task.id}) #{task.title}"
-  end
-
-  def recipient_email(recipient)
-    "#{recipient.name} <#{recipient.email}>"
-  end
-
-  def from_email(user)
-    "#{user.name} <#{FROM_EMAIL}>"
   end
 
   def task_editor_email(task)
