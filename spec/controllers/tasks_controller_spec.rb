@@ -7,7 +7,7 @@ describe TasksController do
     get :new
     response.should be_success
   end
-  
+
   it "should create task" do
     task_params = {
       :title  => "Here's a task", :creator_id => users(:brad).id,
@@ -33,7 +33,7 @@ describe TasksController do
     put :update, :id => tasks(:one).id, :task => { }
     response.should redirect_to(task_path(assigns(:task)))
   end
-  
+
   it "should destroy task" do
     task = tasks(:one)
     # NOTE [chris]: url_for doesn't work before the request in a functional
@@ -41,7 +41,7 @@ describe TasksController do
     request.env["HTTP_REFERER"] = "/users/#{task.assignee_id}"
     old_count = Task.count
     delete :destroy, :id => task.id
-    Task.count.should == old_count - 1    
+    Task.count.should == old_count - 1
     response.should redirect_to(user_path(task.assignee_id))
   end
 end
