@@ -12,7 +12,7 @@ class MassMailer
   end
   
   def recipients
-    @task.subscribed_users - @ignored_users
+    @task.subscribed_users(true) - @ignored_users
   end
 
   def method_missing(method, *args)

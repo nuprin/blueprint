@@ -13,12 +13,14 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => "Task"
 
   has_one :specification
+
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
   has_many :comments, :as => "commentable"
-
-  has_many :task_edits
-  has_many :task_subscriptions
   has_many :list_items, :class_name => 'TaskListItem'
+  has_many :subscribed_users, :through => :subscriptions, :source => :user,
+    :uniq => true
+  has_many :subscriptions, :as => "entity"
+  has_many :task_edits
 
   named_scope :assigned_to, lambda{|user| {
     :conditions => {:assignee_id => user.id}
@@ -27,9 +29,9 @@ class Task < ActiveRecord::Base
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc]
   named_scope :completed, :conditions => {:status => "completed"}
-  named_scope :currently_due, lambda{|range| {
-    :conditions => {:due_date => Range.new(*CURRENT_RANGE)}
-  }}
+  named_scope :currently_due, :conditions => {:due_date => 
+    Range.new(*CURRENT_RANGE)
+  }
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
   }}
@@ -94,10 +96,6 @@ class Task < ActiveRecord::Base
   def add_to_lists
     self.project.add_to_list(self) if self.project_id
     self.assignee.add_to_list(self) if self.assignee_id
-  end
-
-  def subscribed_users
-    self.task_subscriptions.map(&:user).compact.uniq
   end
 
   def unsubscribed_users
@@ -165,7 +163,7 @@ class Task < ActiveRecord::Base
   def self.create_with_subscriptions!(task_params, cc_ids)
     task = self.create!(task_params)
     cc_ids.each do |cc_id|
-      task.task_subscriptions.create(:user_id => cc_id)
+      task.subscriptions.create(:user_id => cc_id)
     end
     task.mass_mailer.ignoring(task.creator).deliver_task_creation
     task

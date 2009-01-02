@@ -2,17 +2,18 @@
 <h2>CC LIST</h2>
 <div class="text">
   <ul class="clearfix" id='cc_list'>
-    <% task.task_subscriptions.each do |ts| %>
+    <% task.subscriptions.each do |sub| %>
       <%= render :partial => "task_subscription_name",
-                 :locals => {:ts => ts} %>
+                 :locals => {:sub => sub} %>
     <% end %>
   </ul>
-  <% if_any(task.unsubscribed_users) do |users| %>
+  <% if_any(task.unsubscribed_users) do |users| %> 
     <%= link_to_function "Add to List",
       "$(this).parent().addClass('adding')", :class => "add_link" %>
-    <% form_for :task_subscription, :url => task_subscriptions_path,
+    <% form_for :subscription, :url => subscriptions_path,
                 :html => {:id => 'cc_form'} do |f| %>
-       <%= f.hidden_field :task_id, :value => task.id %>
+       <%= f.hidden_field :entity_type, :value => "Task" %>
+       <%= f.hidden_field :entity_id, :value => task.id %>
        <%= f.select :user_id, users.map{|u| [u.name, u.id]},
          :include_blank => "Add a name..." %>
     <% end %>

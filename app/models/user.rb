@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     :order       => "id DESC",
     :include     => [:assignee, :project]
 
-  has_many :subscribed_tasks, :through => :task_subscriptions,
+  has_many :subscribed_tasks, :through => :subscriptions,
                               :source  => :task,
                               :order   => "tasks.id DESC",
                               :include => [:assignee, :project]
@@ -15,11 +15,12 @@ class User < ActiveRecord::Base
                        :as => :context,
                        :order => :position
   has_many :tasks
-  has_many :task_subscriptions
+  has_many :task_subscriptions, :conditions => {:entity_type => "Task"},
+    :class_name => "Subscription"
 
   validates_length_of :name, :in => 1...50
 
-  include TaskSubscription::UserMethods
+  include Subscription::UserMethods
 
   def parked_tasks
     Task.parked.recently_updated.assigned_to(self).with_details
