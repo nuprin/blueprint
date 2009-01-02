@@ -18,7 +18,7 @@ class Comment < ActiveRecord::Base
     attributes = {
       :author_id => author.id,
       :commentable_id => commentable.id,
-      :commentable_type => commentable.class.name
+      :commentable_type => "Task"
     }
     self.new(attributes)
   end
