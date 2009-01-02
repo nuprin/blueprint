@@ -5,7 +5,8 @@
       <% fields_for :final_comment do |f| %>
         <legend>Add a Comment</legend>
         <%= f.hidden_field :author_id, :value => viewer.id %>
-        <%= f.hidden_field :task_id, :value => task.id %>
+        <%= f.hidden_field :commentable_type, :value => "Task" %>
+        <%= f.hidden_field :commentable_id, :value => task.id %>
         <%= f.text_area :text, :rows => nil %>
       <% end %>
     </fieldset>
