@@ -4,7 +4,7 @@ describe MassMailer do
   before(:each) do 
     user_id = users(:brad).id
     @task = Task.new :title => "This is a test", :assignee_id => user_id
-    @task.task_subscriptions.build(:user_id => user_id)
+    @task.subscriptions.build(:user_id => user_id)
   end
   it "should deliver to a subscriber" do
     @task.mass_mailer.recipients.should == [@task.assignee]
