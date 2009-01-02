@@ -1,3 +1,12 @@
 p {
   margin-bottom: 2em;
 }
+#subscriptions_list {
+  margin-bottom: 20px;
+  width: 400px;
+}
+#subscriptions_list li {
+  float: left;
+  margin: 0 10px 10px 0;
+  width: 80px;
+}

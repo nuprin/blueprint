@@ -11,6 +11,10 @@ class ProjectsController < ApplicationController
     ignore_due_date_if_requested(params[:project])
     @project = Project.find(params[:id])
     @project.update_attributes(params[:project])
+    @project.subscriptions.destroy_all
+    params[:user_ids].each do |cc_id|
+      @project.subscriptions.create(:user_id => cc_id)
+    end
     flash[:notice] = "Your changes have been saved."
     redirect_to project_path(@project)
   end
