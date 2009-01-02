@@ -9,7 +9,7 @@ module ProjectsHelper
     if project.estimate > 0
       fields << ["ESTIMATE", pluralize(project.estimate, "hour")]
     end
-    if project.assignees.any?
+    if project.subscribed_users.any?
       assignees = project.subscribed_users.map do |u|
         link_to_user u
       end.join(", ")

@@ -15,10 +15,11 @@ class Comment < ActiveRecord::Base
   end
 
   def self.form_for_object(commentable, author)
+    commentable_type = commentable.is_a?(Task) ? "Task" : commentable.class.name
     attributes = {
       :author_id => author.id,
       :commentable_id => commentable.id,
-      :commentable_type => "Task"
+      :commentable_type => commentable_type
     }
     self.new(attributes)
   end

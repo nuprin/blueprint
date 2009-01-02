@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.update_attributes(params[:project])
     @project.subscriptions.destroy_all
-    params[:user_ids].each do |cc_id|
+    (params[:user_ids] || []).each do |cc_id|
       @project.subscriptions.create(:user_id => cc_id)
     end
     flash[:notice] = "Your changes have been saved."
