@@ -8,30 +8,32 @@
   <% content_for :primary_column do %>
     <div id="initiatives">
       <% Initiative.active.each do |initiative| %>
-        <div class="initiative">
-          <h2>
-            <span>
-              <%= initiative.assignees.sort_by(&:name).map do |user|
-                  link_to_user(user)
-                end.join(", ") %>
-            </span>
-            <%= link_to_project initiative %></h2>
-          <table>
-            <% initiative.deliverables_by_day.each do |day, deliverables| %>
-              <tr>
-                <th rowspan="<%= deliverables.size %>">
-                  <%= day.to_time.strftime("%b %e") %>
-                </th>
-                <td>
-                  <%= link_to_task deliverables.shift %>
-                </td>
-              </tr>
-              <% deliverables.each do |deliverable| %>
-                <tr><td><%= link_to_task deliverable %></td></tr>
+        <% if_any(initiative.deliverables_by_day) do |deliverables_by_day| %>
+          <div class="initiative">
+            <h2>
+              <span>
+                <%= initiative.assignees.sort_by(&:name).map do |user|
+                    link_to_user(user)
+                  end.join(", ") %>
+              </span>
+              <%= link_to_project initiative %></h2>
+            <table>
+              <% deliverables_by_day.each do |day, deliverables| %>
+                <tr>
+                  <th rowspan="<%= deliverables.size %>">
+                    <%= day.to_time.strftime("%b %e") %>
+                  </th>
+                  <td>
+                    <%= link_to_task deliverables.shift %>
+                  </td>
+                </tr>
+                <% deliverables.each do |deliverable| %>
+                  <tr><td><%= link_to_task deliverable %></td></tr>
+                <% end %>
               <% end %>
-            <% end %>
-          </table>
-        </div>
+            </table>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <div id="inactive_initiatives">
