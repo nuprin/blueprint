@@ -186,4 +186,10 @@ class Task < ActiveRecord::Base
   after_destroy do |task|
     task.list_items.destroy_all
   end
+  
+  after_save do |task|
+    if task.project_id && task.assignee_id
+      task.assignee.subscribe_to(task.project)
+    end
+  end
 end

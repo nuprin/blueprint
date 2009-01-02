@@ -2,6 +2,8 @@ class Project < ActiveRecord::Base
   has_many :assignees, :through => :tasks, :uniq => true, :order => :name
   has_many :comments, :as => :commentable
   has_many :subscriptions, :as => :entity
+  has_many :subscribed_users, :through => :subscriptions, :source => :user,
+    :uniq => true
   has_many :task_list, :class_name => 'TaskListItem',
                        :as         => :context,
                        :order      => :position

@@ -10,10 +10,10 @@ module ProjectsHelper
       fields << ["ESTIMATE", pluralize(project.estimate, "hour")]
     end
     if project.assignees.any?
-      assignees = project.assignees.map do |u|
+      assignees = project.subscribed_users.map do |u|
         link_to_user u
       end.join(", ")
-      fields << ["INVOLVED", assignees]
+      fields << ["FOLLOWING", assignees]
     end
     fields.map do |field|
       field.join(": ")
