@@ -3,8 +3,6 @@ class TaskMailer < ActionMailer::Base
   include MailerHelper
   include TaskMailerHelper
 
-  default_url_options[:host] = HOST
-
   def task_creation(recipient, task)
     recipients recipient_email(recipient)
     from       from_email(task.creator)

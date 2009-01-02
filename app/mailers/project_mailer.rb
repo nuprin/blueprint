@@ -3,9 +3,6 @@ class ProjectMailer < ActionMailer::Base
   include MailerHelper
   include ProjectMailerHelper
 
-  # TODO [chris]: I think there's a configuration option for this.
-  default_url_options[:host] = HOST
-
   def new_comment(recipient, project, comment)
     project = comment.commentable
 

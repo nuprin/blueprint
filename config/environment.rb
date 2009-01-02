@@ -52,7 +52,7 @@ Rails::Initializer.run do |config|
     :secret      => '43b4da5f063d738b8b32d5b48aefcd5b7ab982240119e40f02cfae8ac032cc54b6555b30330394ac436fdb91f45402e03492b4fc21e8a30fdbdc37cb5bc2a6a6',
     :session_expires => Time.now + 31557600 #1.year not yet defined
   }
-
+  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
