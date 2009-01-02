@@ -1,6 +1,6 @@
 module TaskMailerHelper
   def task_type(task)
-    task.kind || "task"
+    task.kind.blank? ? "task" : task.kind
   end
   
   def task_footer(task)
