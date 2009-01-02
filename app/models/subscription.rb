@@ -1,6 +1,8 @@
 class Subscription < ActiveRecord::Base
-  belongs_to :user
   belongs_to :entity, :polymorphic => true
+  belongs_to :project, :foreign_key => "entity_id"
+  belongs_to :task,    :foreign_key => "entity_id"
+  belongs_to :user
 
   validates_presence_of :user
   validates_presence_of :entity

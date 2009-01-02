@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
     :order       => "id DESC",
     :include     => [:assignee, :project]
 
-  has_many :subscribed_tasks, :through => :subscriptions,
-                              :source  => :task,
-                              :order   => "tasks.id DESC",
-                              :include => [:assignee, :project]
+  has_many :subscribed_tasks, :through => :task_subscriptions,
+    :source  => :task,
+    :conditions => "subscriptions.entity_type = 'Task'",
+    :order   => "tasks.id DESC",
+    :include => [:assignee, :project]
 
   has_many :task_list, :class_name => 'TaskListItem',
                        :as => :context,
