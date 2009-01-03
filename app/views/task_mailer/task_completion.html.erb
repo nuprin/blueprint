@@ -1,5 +1,4 @@
-<%= @task.assignee_id ? @task.assignee.name : "Someone"
-%> completed the <%= task_type(@task) %>.
+<%= @task.editor.name %> marked the task complete.
 
 <% if @task.kind == "bug" -%>
 Please let any affected users know that the bug has been resolved.
