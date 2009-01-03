@@ -24,21 +24,23 @@
 
     <%= render :partial => "task_form_fields",
                :locals => {:f => f, :task => @task} %>
-    <div id="cc_list_container">
-      <label for='cc_text'>CC List:</label><br />
-      <ul id='cc_list'>
-        <% @task.subscriptions.each do |cc| %>
-          <li>
-            <%= cc.user.name %>
-            <%= hidden_field_tag 'cc[]', cc.user.id %></li>
-          </li>
-        <% end %>
-      </ul>
-      <%= text_field_tag 'cc_text' %>
+
+     <div id="cc_list_container">
+       <label for='cc_text'>CC List:</label><br />
+       <ul id='cc_list'>
+         <% @task.subscriptions.each do |cc| %>
+           <li>
+             <%= cc.user.name %>
+             <%= hidden_field_tag 'cc[]', cc.user.id %></li>
+           </li>
+         <% end %>
+       </ul>
+       <%= text_field_tag 'cc_text' %>
+     </div>
+               
+    <div class="clearfix" id="submit_tags">
+      <%= f.submit "Create Task" %>
+      <%= f.submit "Create and Add Another" %>
     </div>
-    <ul class="clearfix" id="submit_tags">
-      <li><%= f.submit "Create Task" %></li>
-      <li><%= f.submit "Create and Add Another" %></li>
-    </ul>
   <% end %>
 </div>

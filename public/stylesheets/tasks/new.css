@@ -13,12 +13,6 @@ textarea {
 #cc_list_container {
   margin-bottom: 2em;
 }
-#content input[type=text],
-#content textarea {
-  border: 2px solid #ddd;
-  margin: 5px 0 10px;
-  width: 590px;
-}
 #form_container {
   background: #f0f0f0;
   border-bottom: 1px solid #e3e3e3;
@@ -26,23 +20,42 @@ textarea {
   margin: 20px -20px 0;
   padding: 30px 100px 40px;
 }
-#secondary_fields li, #submit_tags li {
+.secondary_fields li, #submit_tags li {
   float: left;
 }
-#secondary_fields {
+.secondary_fields {
   margin-bottom: 1em;
 }
-#secondary_fields li {
-  margin-left: 30px;
+.secondary_fields li {
+  margin: 0 0 0 20px;
 }
-#secondary_fields li:first-child {
+.secondary_fields li:first-child {
   margin-left: 0;
 }
-#submit_tags li {
-  margin-right: 5px;
+#submit_tags {
+  border-top: 2px solid #ddd;
+  padding-top: 15px;
+  text-align: right;
+  vertical-align: middle;
+}
+#cc_text, #task_description, #task_title {
+  border: 2px solid #ddd;
+  font-size: 16px;
+  margin-top: 5px;
+  width: 590px;
 }
 #task_description, #task_title {
-  font-size: 16px;
+  margin-bottom: 10px;
+}
+#task_assignee_id, #task_feature_id, #task_kind, #task_project_id {
+  margin-bottom: .5em;
+  width: 132px;
+}
+#task_estimate {
+  border: 1px solid #ccc;
+  margin: 3px 0;
+  padding: 3px 4px;
+  width: 60px;
 }
 #use_due_date {
   float: left;

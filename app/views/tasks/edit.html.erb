@@ -8,9 +8,9 @@
     :html => {:method => :put}) do |f| %>
     <%= render :partial => "task_form_fields",
                :locals => {:f => f, :task => @task} %>
-    <ul class="clearfix" id="submit_tags">
-      <li><%= f.submit "Save Changes" %></li>
-      <li>or <%= link_to 'Back to Task', task_path(@task) %></li>
-    </ul>
+    <div class="clearfix" id="submit_tags">
+       <%= link_to 'Back to Task', task_path(@task) %> or
+       <%= f.submit "Save Changes" %>
+    </div>
   <% end %>
 </div>

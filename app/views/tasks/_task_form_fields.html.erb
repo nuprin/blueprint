@@ -2,37 +2,42 @@
 <%= f.hidden_field :status %>
 <%= f.hidden_field :parent_id %>
 <p>
-  <label for="<%= task.type.underscore %>_title">Title:</label><br />
+  <%= f.label :title, "Title:" %><br />
   <%= f.text_field :title %>
 </p>
 <p>
-  <label for="<%= task.type.underscore %>_description">Description:</label><br />
+  <%= f.label :description, "Description:" %><br />
   <%= f.text_area :description %>
 </p>
-<ul class="clearfix" id="secondary_fields">
+<ul class="secondary_fields clearfix">
   <li>
-    <label for="<%= task.type.underscore %>_project_id">Initiative:</label>
-    <br />
+    <%= f.label :project_id, "Initiative:" %><br />
     <%= f.select :project_id, Project.all_for_select,
       :include_blank => "None" %>
   </li>
   <li>
-    <label for="<%= task.type.underscore %>_assignee_id">Assign To:</label><br />
+      <%= f.label :assignee_id, "Assign To:" %><br />
       <%= f.select :assignee_id, User.sorted.map{|u| [u.name, u.id]},
         :include_blank => "Nobody" %>
   </li>
   <li>
-    <label for="<%= task.type.underscore %>_kind">Kind:</label><br />
+    <%= f.label :kind, "Kind:" %><br />
     <%= f.select :kind, Task::KINDS.map{|k| [k.capitalize, k]},
       :include_blank => "" %>
   </li>      
   <li>
-    <label for="<%= task.type.underscore %>_feature">Feature:</label><br />
+    <%= f.label :feature_id, "Feature:" %><br />
     <%= f.select :feature_id, Feature.all.map{|feature| [feature.name, feature.id]},
       :include_blank => "" %>
   </li>
+</ul>
+<ul class="secondary_fields clearfix">
   <li>
-    <label for="<%= task.type.underscore %>_due_date">Due Date:</label><br />
+    <%= f.label :estimate, "Estimate:" %><br />
+    <%= f.text_field :estimate %>
+  </li>
+  <li>
+    <%= f.label :due_date, "Due Date:" %><br />
     <%= check_box_tag :use_due_date, "1", !!task.due_date,
       :autocomplete => :off, :class => "use_due_date" %>
     <span id="due_date_field_container"<%=
