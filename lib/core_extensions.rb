@@ -23,3 +23,27 @@ module ActiveSupport
     end
   end
 end
+
+module ActionView::Helpers::TextHelper
+  # AUTO_LINK_REgularexpression : This version is the same as the Rails
+  # constant, but without the trailing text.
+  AUTO_LINK_RE = %r{
+    (                          # leading text
+      <\w+.*?>|                # leading HTML tag, or
+      [^=!:/]|                 # leading punctuation, or
+      ^                        # beginning of line
+    )
+    (
+      (?:https?://)|           # protocol spec, or
+      (?:www\.)                # www.*
+    )
+    (
+      [-\w]+                   # subdomain or domain
+      (?:\.[-\w]+)*            # remaining subdomains or domain
+      (?::\d+)?                # port
+      (?:/(?:(?:[~\w\+@%-]|(?:[,.;:][^\s$]))+)?)* # path
+      (?:\?[\w\+@%&=.;-]+)?     # query string
+      (?:\#[\w\-]*)?           # trailing anchor
+    )
+  }x
+end
