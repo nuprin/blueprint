@@ -59,7 +59,7 @@ class Project < ActiveRecord::Base
   end
 
   def subscribed_user_names
-    self.subscribed_users.map(&:name)
+    self.subscribed_users.map(&:name).to_sentence
   end
 
   after_create do |project|

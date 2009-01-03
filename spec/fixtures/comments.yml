@@ -1,4 +1,11 @@
 one:
   text: I say things!
   commentable: one
+  commentable_type: Task
   author: chris
+two:
+  text: Yes, but will it work?
+  commentable: one
+  commentable_type: Project
+  author: chris
+  
