@@ -26,9 +26,10 @@ class Task < ActiveRecord::Base
   named_scope :assigned_to, lambda{|user| {
     :conditions => {:assignee_id => user.id}
   }}
-  named_scope :completed_today,
+  named_scope :completed_today, lambda {{
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc]
+  }}
   named_scope :completed, :conditions => {:status => "completed"}
   named_scope :currently_due, :conditions => {:due_date => 
     Range.new(*CURRENT_RANGE)
