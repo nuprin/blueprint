@@ -4,7 +4,7 @@
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
     [kind, "kind", kind]
   end) + (Project.all.map do |project|
-    [project.title, "project_id", project.id]
+    [h(project.title), "project_id", project.id]
   end)).transpose.to_json %>;
 </script>
 
