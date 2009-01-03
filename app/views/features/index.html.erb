@@ -1,0 +1,25 @@
+<%= stylesheet_link_tag "features/index" %>
+
+<% @title = "Features" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th colspan="2">Actions</th>
+  </tr>
+
+<% for feature in @features %>
+  <tr>
+    <td><%= feature.name %></td>
+    <td><%= link_to 'Edit Feature', edit_feature_path(feature) %></td>
+    <td><%= link_to 'Delete', feature, :confirm => 'Are you sure?',
+      :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% form_for :feature do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit "Add Feature" %>
+<% end %>

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :features
+
   map.resources :comments
   map.resource  :company
   map.resources :deliverables

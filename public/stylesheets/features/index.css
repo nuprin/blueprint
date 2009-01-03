@@ -1,0 +1,10 @@
+#content table {
+  width: 100%;
+}
+#content th, #content td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 5px;
+}
+#content th {
+  text-align: left;
+}

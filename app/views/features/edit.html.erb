@@ -1,0 +1,10 @@
+<h1>Editing feature</h1>
+
+<% form_for(@feature) do |f| %>
+  <%= f.text_field :name %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', features_path %>
