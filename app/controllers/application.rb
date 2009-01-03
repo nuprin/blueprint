@@ -25,4 +25,15 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+  # TODO [chris]: Something in our production setup is requiring us to manually
+  # set the host. Talk to Josh about how this can work in a more transparent
+  # way.
+  def default_url_options(options = nil)
+    if Rails.env == 'production'
+      {:host => "blueprint"}
+    else
+      super(options)
+    end
+  end
 end

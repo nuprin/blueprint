@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def save_login
     user = User.find(params[:user_id])
     session[:user_id] = user.id
-    redirect_to user_url(user)
+    redirect_to user_path(user)
   rescue ActiveRecord::RecordNotFound
     redirect_to login_users_path
   end
