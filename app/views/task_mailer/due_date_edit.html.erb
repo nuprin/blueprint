@@ -1,0 +1,16 @@
+<%# The due date changed. -%>
+<% if @edit.old_value && @edit.new_value -%>
+<%= @edit.editor.name %> changed the due date from <%= @edit.old_value.strftime("%b %e") %> to <%= @edit.new_value.strftime("%b %e") %>.
+<%# The due date was removed. -%>
+<% elsif @edit.old_value -%>
+<%= @edit.editor.name %> removed the due date.
+<%# A due date was added. -%>
+<% else -%>
+<%= @edit.editor.name %> added a due date: <%= @edit.new_value.strftime("%b %e") %>.
+<% end -%>
+
+View this task:
+<%= task_url(@edit.task) %>
+
+----
+<%= task_footer(@edit.task) %>

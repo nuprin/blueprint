@@ -17,27 +17,32 @@ class TaskMailer < ActionMailer::Base
     body       :comment => comment, :task => task
   end
 
-  def task_due_date_changed(recipient, task)
-    recipients recipient_email(recipient)
-    from       task_editor_email(task)
-    subject    task_subject(task)
-    body       :task => task
-  end
-  
-  def task_reassignment(recipient, task)
-    assignee_was = User.find_by_id(task.assignee_id_was)
-
-    recipients recipient_email(recipient)
-    from       task_editor_email(task)
-    subject    task_subject(task)
-    body       :assignee_was => assignee_was, :task => task
-  end
-
   def task_completion(recipient, task)
     recipients recipient_email(recipient)
     from       task_editor_email(task)
     subject    task_subject(task)
     body       :task => task
+  end
+
+  def assignee_id_edit(recipient, task, edit)
+    recipients recipient_email(recipient)
+    from       from_email(edit.editor)
+    subject    task_subject(edit.task)
+    body       :edit => edit
+  end
+
+  def due_date_edit(recipient, task, edit)
+    recipients recipient_email(recipient)
+    from       from_email(edit.editor)
+    subject    task_subject(edit.task)
+    body       :edit => edit
+  end
+
+  def estimate_edit(recipient, task, edit)
+    recipients recipient_email(recipient)
+    from       from_email(edit.editor)
+    subject    task_subject(edit.task)
+    body       :edit => edit
   end
 
   private

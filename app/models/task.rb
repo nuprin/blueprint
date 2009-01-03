@@ -111,7 +111,7 @@ class Task < ActiveRecord::Base
     (self.task_edits + self.comments).sort_by(&:created_at)
   end
   
-  before_save :adjust_year, :update_lists, :set_type, :notify_subscribers
+  before_save :adjust_year, :update_lists, :set_type
 
   before_update :record_changes
 
@@ -150,15 +150,6 @@ class Task < ActiveRecord::Base
       end
     end
     true
-  end
-
-  def notify_subscribers
-    if self.assignee_id_changed?
-      self.mass_mailer.ignoring(self.editor).deliver_task_reassignment
-    end
-    if self.due_date_changed?
-      self.mass_mailer.ignoring(self.editor).deliver_task_due_date_changed
-    end
   end
 
   def self.create_with_subscriptions!(task_params, cc_ids)

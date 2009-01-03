@@ -1,0 +1,6 @@
+assignee_id_edit:
+  editor: brad
+  field: assignee_id
+  old_value: <%= Fixtures.identify(:brad) %>
+  new_value: <%= Fixtures.identify(:chris) %>
+  task: one

@@ -23,7 +23,8 @@ Spec::Runner.configure do |config|
   # do so right here. Just uncomment the next line and replace the fixture
   # names with your fixtures.
   #
-  config.global_fixtures = :projects, :specifications, :tasks, :users, :comments
+  config.global_fixtures =
+    :comments, :projects, :specifications, :task_edits, :tasks, :users
   #
   # If you declare global fixtures, be aware that they will be declared
   # for all of your examples, even those that don't use them.

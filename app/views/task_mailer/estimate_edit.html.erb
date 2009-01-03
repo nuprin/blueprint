@@ -1,0 +1,16 @@
+<%# An estimate was revised. -%>
+<% if @edit.old_value && @edit.new_value -%>
+<%= @edit.editor.name %> revised the estimate from <%= @edit.old_value %> to <%= pluralize(@edit.new_value, "hour") %>.
+<%# The estimate was removed. -%>
+<% elsif @edit.old_value -%>
+<%= @edit.editor.name %> removed the estimate.
+<%# An estimate was added. -%>
+<% else -%>
+<%= @edit.editor.name %> added an estimate of <%= pluralize(@edit.new_value, "hour") %>.
+<% end -%>
+
+View this task:
+<%= task_url(@edit.task) %>
+
+----
+<%= task_footer(@edit.task) %>

@@ -1,0 +1,16 @@
+<%# The task was reassigned. -%>
+<% if @edit.old_value && @edit.new_value -%>
+<%= @edit.editor.name %> reassigned the task from <%= User.find(@edit.old_value).name %> to <%= User.find(@edit.new_value).name %>.
+<%# The assignee was removed. -%>
+<% elsif @edit.old_value -%>
+<%= @edit.editor.name %> made the task unassigned.
+<%# An assignee was added. -%>
+<% else -%>
+<%= @edit.editor.name %> assigned the task to <%= User.find(@edit.new_value).name %>.
+<% end -%>
+
+View this task:
+<%= task_url(@edit.task) %>
+
+----
+<%= task_footer(@edit.task) %>
