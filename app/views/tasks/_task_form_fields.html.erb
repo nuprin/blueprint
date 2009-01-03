@@ -27,6 +27,11 @@
       :include_blank => "" %>
   </li>      
   <li>
+    <label for="<%= task.type.underscore %>_feature">Feature:</label><br />
+    <%= f.select :feature_id, Feature.all.map{|feature| [feature.name, feature.id]},
+      :include_blank => "" %>
+  </li>
+  <li>
     <label for="<%= task.type.underscore %>_due_date">Due Date:</label><br />
     <%= check_box_tag :use_due_date, "1", !!task.due_date,
       :autocomplete => :off, :class => "use_due_date" %>

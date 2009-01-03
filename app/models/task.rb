@@ -7,10 +7,11 @@ class Task < ActiveRecord::Base
 
   attr_accessor :editor
 
-  belongs_to :project
-  belongs_to :creator, :class_name => 'User'
   belongs_to :assignee, :class_name => 'User'
+  belongs_to :creator, :class_name => 'User'
+  belongs_to :feature
   belongs_to :parent, :class_name => "Task"
+  belongs_to :project
 
   has_one :specification
 
