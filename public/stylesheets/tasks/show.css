@@ -8,10 +8,7 @@
   font-size: 13px;
   font-weight: normal;
 }
-#content h1 span {
-  margin: 2px 0 6px;
-}
-#content h1, #description, #secondary_fields li, #subtasks {
+#subtasks {
   padding: 10px;
 }
 #content h1.task_field {
@@ -73,6 +70,8 @@ h2 {
   padding: 0 5px;
 }
 #cc {
+  background: white;
+  border-top: 1px solid #ddd;
   padding: 10px;
 }
 /* Default overrides */
@@ -104,14 +103,12 @@ h2 {
 }
 #cc h2,
 .comment .meta,
-#description h2,
 #subtasks h2 {
   float: left;
   width: 120px;
 }
 #cc .text,
 .comment .text,
-#description .text,
 #subtasks ul {
   margin-left: 120px;
 }
@@ -120,6 +117,12 @@ h2 {
   display: block;
   margin: 10px 0;
   padding: 9px;
+}
+#comments {
+  background: white;
+}
+#comments h2 {
+  margin: 6px 0 12px;
 }
 #confirm_completion fieldset {
   border: none;
@@ -155,35 +158,62 @@ h2 {
   padding-left: 0;
   padding-right: 0;
 }
-#description, #secondary_fields {
-  border-top: none;
-}
 #description textarea {
   background: #e3e3e3;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
-  width: 448px;
+  width: 553px;
 }
 #description .editing textarea {
   background: #fff;
   height: 12em;
 }
+#description #task_submit {
+  display: none;
+  margin-top: 10px;
+}
+#description .editing #task_submit {
+  display: block;
+}
 #primary_action {
   float: right;
-}
-#secondary_fields li {
-  border-left: 1px solid #ddd;
-  float: left;
-  height: 32px;
-  width: 98px;
 }
 #secondary_fields li:first-child {
   border-left: none;
 }
 #task {
-  background: white;
-  border-top: 1px solid #ddd;
+  background-image: url("../../images/task-background.gif");
   margin: 0 0 30px 110px;
+}
+#task_info {
+  background: white;
+  border: 1px solid #d3d3d3;
+  margin-bottom: 40px;
+}
+#task_info h1 {
+  margin-bottom: 5px;
+}
+#task_logistics {
+  border-top: 1px solid #e3e3e3;
+  margin: 0 16px;
+  padding: 12px 0 10px;
+}
+#task_logistics h3 {
+  color: #999;
+  font-size: 10px;
+  font-weight: normal;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+#task_logistics li {
+  float: left;
+  margin-right: 20px;
+}
+#task_meta {
+  color: #888;
+  margin-bottom: 20px;
+}
+#task_primary_info {
+  padding: 22px 16px 30px;  
 }
 #content, #task_links {
   background-image: url("../../images/task-background.gif");
@@ -192,6 +222,27 @@ h2 {
   border-bottom: 1px solid #eee;
   padding: 40px 45px 100px;
   width: 710px;
+}
+#narrow_col {
+  float: left;
+  width: 100px;
+}
+#status {
+  color: white;
+  font-size: 11px;
+  padding: 5px 0 3px;
+  text-align: center;
+  text-transform: uppercase;
+  -moz-border-radius: 3px;
+}
+#status.completed {
+  background: #447d1d;
+}
+#status.parked {
+  background: #b35e03;
+}
+#status.prioritized {
+  background: #1a6da9;
 }
 #subtasks img,
 #subtasks input {
@@ -208,10 +259,9 @@ h2 {
 #task_identifier {
   background: #eee;
   border: 1px solid #ddd;
-  float: left;
+  margin-bottom: 10px;
   padding: 10px 0 4px;
   text-align: center;
-  width: 100px;
 }
 #task_identifier hr {
   background-color: #ccc;

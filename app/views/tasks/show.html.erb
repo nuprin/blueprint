@@ -22,65 +22,72 @@
 <% end %>
 
 <div id="task_container">
-  <div id="task_identifier">
-    <div class="type"><%= @task.type %></div>
-    <hr />
-    <div class="num">
-      <span class="pound">#</span><%= @task.id %>
+  <div id="narrow_col">
+    <div id="task_identifier">
+      <div class="type"><%= @task.type %></div>
+      <hr />
+      <div class="num">
+        <span class="pound">#</span><%= @task.id %>
+      </div>
+    </div>
+    <div class="<%= @task.status.downcase %>" id="status">
+      <%= @task.status.capitalize %>      
     </div>
   </div>
   <div id="task">
-    <h1 class="task_field">
-      <span class="kind">
-        <% if !@task.kind.blank? && @task.kind != "task" %>
-          <%= @task.kind.upcase %>
+    <div id="task_info">
+      <div id="task_primary_info">
+        <h1><%= @title %></h1>
+        <div id="task_meta">
+          <% if !@task.kind.blank? && @task.kind != "task" %>
+            <%= @task.kind.upcase %>
+          <% end %>
+          Created by <%= link_to_user @task.creator %>
+          at <%= @task.created_at.strftime("%b %e %I:%m%p") %>
+          <% if @task.feature_id %>
+            | Feature: <%= @task.feature.name %>
+          <% end %>
+        </div>
+        <div id="description">
+          <% if @task.description.blank? %>
+            <% form_for(:task, @task, :html => {:method => :put}) do |f| %>
+              <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
+              <%= f.submit "Save Description", :tabindex => 2 %>
+            <% end %>
+          <% else %>
+              <%= format_text(@task.description) %>
+          <% end %>
+        </div>
+      </div>
+      <ul class="clearfix" id="task_logistics">
+        <% if @task.project_id %>
+          <li>
+            <h3>INITIATIVE</h3>
+            <%= link_to_project @task.project %>
+          </li>
         <% end %>
-      </span>
-      <%= @title %>
-    </h1>
-    <ul class="task_field clearfix" id="secondary_fields">
-      <li>
-        <h2>STATUS</h2>
-        <%= @task.status.capitalize %>
-      </li>
-      <li>
-        <h2>CREATOR</h2>
-        <%= link_to_user @task.creator %>
-      </li>
-      <li>
         <% if @task.assignee_id %>
-          <h2>ASSIGNED TO</h2>
-          <%= link_to_user @task.assignee %>
+          <li>
+            <h3>Assigned To</h3>
+            <%= link_to_user @task.assignee %>
+          </li>
         <% end %>
-      </li>
-      <li>
         <% if @task.due_date %>
-          <h2>DUE DATE</h2>
-          <%= @task.due_date.strftime("%b %e") %>
+          <li>
+            <h3>DUE DATE</h3>
+            <%= @task.due_date.strftime("%b %e") %>
+          </li>
         <% end %>
-      </li>
-      <li>
         <% if @task.estimate %>
-          <h2>ESTIMATE</h2>
-          <%= pluralize(@task.estimate, "hour") %>
+          <li>
+            <h3>ESTIMATE</h3>
+            <%= pluralize(@task.estimate, "hour") %>
+          </li>
         <% end %>
-      </li>
-    </ul>
+      </ul>
+    </div>
     <div class='task_field' id='cc'>
       <%= render :partial => 'cc_list', :locals => {:task => @task} %>
-    </div>
-    <div class="task_field clearfix" id="description">
-      <h2>DESCRIPTION</h2>
-      <div class="text">
-        <% if @task.description.blank? %>
-          <% form_for(:task, @task, :html => {:method => :put}) do |f| %>
-            <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
-            <%= f.submit "Save Description", :tabindex => 2 %>
-          <% end %>
-        <% else %>
-            <%= format_text(@task.description) %>
-        <% end %>
-      </div>
     </div>
     <% if @task.children.any? %>
       <div class="task_field clearfix" id="subtasks">
