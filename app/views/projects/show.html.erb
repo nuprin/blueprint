@@ -18,8 +18,8 @@
 
 <% with_layout "layouts/initiative" do %>
   <div id="project_content">
-    <% task_object = Task.new(:kind => "", :status => "prioritized",
-                              :project_id => @project.id) %>
+    <% task_object =
+      Deliverable.new(:status => "prioritized", :project_id => @project.id) %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title => "PRIORITIZED (#{@project.task_list.size})",
                            :tasks => @project.task_list,
@@ -33,9 +33,8 @@
                            :context => @project.class.name,
                            :unsortable => true} %>
 
-    <% task_object = Task.new(:kind => "task", :status => "parked",
-                              :project_id => @project.id) %>
-
+    <% task_object =
+      PrivateTask.new(:status => "parked", :project_id => @project.id) %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title =>
                             "PARKING LOT (#{@project.parked_tasks.size})",

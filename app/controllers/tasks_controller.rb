@@ -26,7 +26,11 @@ class TasksController < ApplicationController
   end
 
   def quick_create
-    task = Task.create!(params[:task])
+    task = Task.new(params[:task])
+    # Rails quirk: For security reasons, type cannot be assigned in create or
+    # update_attribute calls.
+    task.type = params[:task][:type]
+    task.save!
     context = params[:context]
     if context == "User"
       li = TaskListItem.for_context(viewer).first(:conditions => {
@@ -54,6 +58,16 @@ class TasksController < ApplicationController
     @task.update_attributes!(params[:task])
     flash[:notice] = "Your changes have been saved."
     redirect_to task_path(@task)
+  end
+
+  def update_type
+    @task.update_attribute(:type, params[:task][:type])
+    # Reload from the db so that it's aware of its new type.
+    @task = Task.find(@task.id)
+    render :partial => "/shared/task", :locals => {
+      :task_list_item_or_task => @task,
+      :context => params[:context]
+    }
   end
 
   def update_estimate

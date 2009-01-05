@@ -15,8 +15,8 @@
 <% @title = viewer == @user ? "Your Tasks" : "#{@user.name.possessive} Tasks"%>
 
 <% 
-  task_object = Task.new(:kind => "task", :status => "prioritized",
-                         :assignee_id => @user.id)
+  task_object =
+    PrivateTask.new(:status => "prioritized", :assignee_id => @user.id)
 %>
 <%= render :partial => "/shared/task_list",
            :locals => {:title       => "PRIORITIZED (#{@user.task_list.size})",
@@ -32,8 +32,7 @@
              :unsortable => true} %>
 
 <% 
-  task_object = Task.new(:kind => "task", :status => "parked",
-                         :assignee_id => @user.id)
+  task_object = PrivateTask.new(:status => "parked", :assignee_id => @user.id)
 %>
 <%= render :partial => "/shared/task_list",
            :locals => {:title => "PARKING LOT (#{@user.parked_tasks.size})",

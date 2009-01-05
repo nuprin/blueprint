@@ -2,7 +2,8 @@
             :url  => {:controller => "tasks", :action => "quick_create"},
             :html => {:class => "quick_add_form", :method => :post} do |f| %>
 
-  <%= f.hidden_field :status      %>  
+  <%= f.hidden_field :status      %>
+  <%= f.hidden_field :type %>
   <%= f.hidden_field :kind,        :autocomplete => :off %>
   <%= f.hidden_field :project_id,  :autocomplete => :off %>
   <%= f.hidden_field :assignee_id, :autocomplete => :off %>

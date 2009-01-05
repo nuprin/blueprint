@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   def ignore_due_date_if_requested(object_hash)
     if params[:use_due_date].to_i == 0
       1.upto(3) do |i|
-        object_hash["due_date(#{i}i)"] = ""
+        if object_hash["due_date(#{i}i)"]
+          object_hash["due_date(#{i}i)"] = ""
+        end
       end
     end
   end

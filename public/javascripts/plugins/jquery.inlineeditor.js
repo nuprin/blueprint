@@ -15,6 +15,9 @@
         textInput.val(data);
         editable.text(textInput.val());
         editable.removeClass(settings.errorClass);
+        if (settings.onSuccessFn) {
+          settings.onSuccessFn(form);
+        }
       }
 
       var onError = function() {

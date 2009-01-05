@@ -39,8 +39,25 @@ var Tasks = {
                              $(".task_estimate>.inline_form");
     dueDateForms = trElem ? trElem.find(".task_due>.inline_form") :
                             $(".task_due>.inline_form");
-    estimateForms.inlineEditor({title: "Click to edit estimate"});
+    estimateForms.inlineEditor({
+      title: "Click to edit estimate",
+      onSuccessFn: function(form) {
+        form.parents("td").removeClass("empty");
+      }
+    });
     dueDateForms.inlineEditor({title: "Click to edit due date"});
+  },
+  updateType: function(linkElem) {
+    var form = linkElem.parent();
+    var trElem = linkElem.parents("tr.task");
+    form.ajaxSubmit({
+      success: function(data) {
+        var newTrElem = $(data);
+        Tasks.setupActions(newTrElem);
+        Tasks.setupInlineEditing(newTrElem);
+        trElem.replaceWith(newTrElem);
+      }
+    })
   }
 };
 

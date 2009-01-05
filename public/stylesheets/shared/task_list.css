@@ -37,8 +37,7 @@ table.task_list .task_bug_indicator {
   background-repeat: no-repeat;
   background-position: 0px 11px;
 }
-table.task_list .task_assignee,
-table.task_list .task_project {
+table.task_list .task_assignee{
   width: 75px;
 }
 table.task_list td.task_assignee a,
@@ -52,6 +51,17 @@ table.task_list .task_estimate {
 table.task_list .task_menu {
   padding: 0;
   width: 30px;
+}
+table.task_list .task_project {
+  width: 150px;
+}
+table.task_list .task_type {
+  padding: 0;
+  width: 24px;
+}
+table.task_list .task_type img {
+  display: block;
+  margin-top: 1px;
 }
 table.task_list td.task_name {
   overflow: hidden;
@@ -117,6 +127,11 @@ table.unsortable td {
 table.task_list input[type=text] {
   padding: 1px;
   width: 50px;
+}
+table.prioritized .deliverable .empty.task_assignee,
+table.prioritized .deliverable .empty.task_estimate {
+  background: #fcc;
+  border-bottom: 1px solid #b77;
 }
 .editable {
   height: 13px;

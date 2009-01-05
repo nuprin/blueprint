@@ -19,11 +19,12 @@ ActionController::Routing::Routes.draw do |map|
                   :park => :post,
                   :prioritize => :post,
                   :update_due_date => :put,
-                  :update_estimate => :put
+                  :update_estimate => :put,
+                  :update_type => :put
                 },
                 :collection => {
                   :people => :get,
-                  :quick_create => :post, 
+                  :quick_create => :post,
                   :reorder => :post
                 }
   map.resources :users,

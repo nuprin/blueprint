@@ -1,0 +1,2 @@
+class PrivateTask < Task
+end
