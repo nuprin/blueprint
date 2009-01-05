@@ -202,15 +202,22 @@ table.task_list input[type=text] {
   display: block;
 }
 .task_menu_container .task_menu_items {
-  background: white;
-  border: 1px solid #ddd;
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-width: 0 1px 1px 0;
   display: none;
   position: absolute;
   z-index: 10000;
 }
-.task_menu_container .task_menu_items li {
-  background: white;
+.task_menu_container .task_menu_items a {
+  display: block;
   padding: 6px 5px;
+}
+.task_menu_container .task_menu_items a:hover {
+  background: #3c4650;
+  color: white;
+}
+.task_menu_container .task_menu_items li {
   width: 200px;
 }
 #content {

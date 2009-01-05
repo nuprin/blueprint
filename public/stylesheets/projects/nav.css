@@ -17,8 +17,9 @@
   margin-bottom: 20px;
 }
 #project_nav a {
-  background: #e3e3e3;
-  border-color: #e3e3e3;
+  background: #ddd;
+  border-color: #ddd;
+  border-bottom-color: #efefef; 
   border-style: solid;
   border-width: 2px 2px 0 2px;
   display: block;
@@ -30,7 +31,7 @@
   text-transform: uppercase;
 }
 #project_nav .current a {
-  background: white;
+  background: #efefef;
   border-color: #eee;
   color: #222;
   font-weight: bold;
