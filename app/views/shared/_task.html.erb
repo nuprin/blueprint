@@ -17,27 +17,30 @@
     <% end %>
   </td>
   <td class="task_name">
-    <div style="position: relative">
-      <span class="task_links" style="display: none;">
-        <%= link_to "Edit", edit_task_path(task) %> |
+    <%= link_to h(task.title), task_path(task) %>
+    <span class="tags">
+      <% if !task.kind.blank? && task.kind != 'task' %>
+        <span class="<%= task.kind %>"><%= task.kind %></span>
+      <% end %>
+    </span>
+  </td>
+  <td class="task_menu">
+    <div class="task_menu_container">
+      <%= link_to_function "More Actions...", "", :class => "menu_arrow" %>
+      <ul class="task_menu_items" style="display: none;">
+        <li><%= link_to "Edit", edit_task_path(task) %></li>
         <% if task.completed? %>
-          <%= link_to "Mark Incomplete", prioritize_task_path(task),
-            :method => :post %>
+          <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
+            :method => :post %></li>
         <% elsif task.parked? %>
-          <%= link_to "Prioritize", prioritize_task_path(task),
-            :method => :post %>
+          <li><%= link_to "Prioritize", prioritize_task_path(task),
+            :method => :post %></li>
         <% elsif task.prioritized? %>
-          <%= link_to "Park", park_task_path(task), :method => :post %>
+          <li><%= link_to "Park", park_task_path(task), :method => :post %></li>
         <% end %>
-        | <%= link_to "Delete", task_path(task), :method => :delete,
-            :confirm => "Are you sure you want to delete this task?" %>
-      </span>
-      <%= link_to h(task.title), task_path(task) %>
-      <span class="tags">
-        <% if !task.kind.blank? && task.kind != 'task' %>
-          <span class="<%= task.kind %>"><%= task.kind %></span>
-        <% end %>
-      </span>
+          <li><%= link_to "Delete", task_path(task), :method => :delete,
+            :confirm => "Are you sure you want to delete this task?" %></li>
+      </ul>
     </div>
   </td>
   <td class="task_project">

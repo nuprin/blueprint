@@ -18,7 +18,7 @@ table.task_list tbody {
 }
 table.task_list tbody td {
   background: white;
-  border-bottom: 1px solid #e9f1f5;
+  border-bottom: 1px solid #efefef;
 }
 table.task_list td {
   cursor: move;
@@ -26,7 +26,6 @@ table.task_list td {
   white-space: nowrap;
 }
 table.task_list .drag_handle {
-  background-color: #f3f3f3;
   text-align: center;
   padding: 0;
   width: 31px;
@@ -46,14 +45,17 @@ table.task_list td.task_assignee a,
 table.task_list td.task_project a {
   color: #40678d;
 }
-table.task_list .task_due {
-  width: 60px;
-}
+table.task_list .task_due,
 table.task_list .task_estimate {
   width: 60px;
 }
+table.task_list .task_menu {
+  padding: 0;
+  width: 30px;
+}
 table.task_list td.task_name {
   overflow: hidden;
+  padding-left: 0;
 }
 table.task_list td.task_assignee,
 table.task_list td.task_estimate,
@@ -179,4 +181,34 @@ table.task_list input[type=text] {
 }
 .task_links a {
   color: #40678d;
+}
+.task_menu_container {
+  position: relative;
+}
+.task_menu_container .menu_arrow {
+  background-image: url(../../images/task-dropdown.gif);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  display: block;
+  height: 20px;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 20px;
+}
+.task_menu_container .active {
+  background-image: url(../../images/task-dropdown-active.gif);
+}
+.task_menu_container .task_menu_items {
+  background: white;
+  border: 1px solid #ddd;
+  position: absolute;
+  z-index: 10000;
+}
+.task_menu_container .task_menu_items li {
+  background: white;
+  padding: 6px 5px;
+  width: 200px;
+}
+#content {
+  background: #efefef;
 }

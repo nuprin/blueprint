@@ -12,17 +12,29 @@ var Tasks = {
       // These extra fields seem to jump when dragging a table. Hide them for
       // now.
       start: function(evt, ui) {
-        ui.helper.find(".task_links").hide();
+        ui.helper.find(".menu_arrow").hide();
         ui.helper.find(".editable").hide();
       }
     });
   },
   setupActions: function(trElem) {
     trElem = trElem || $("table.task_list tr")
-    trElem.hover(function(){
-      $(this).find(".task_links").fadeIn(50);
-    }, function(){
-      $(this).find(".task_links").fadeOut(50);
+    var currentMenu;
+    $("#content").click(function(e) {
+      if (currentMenu &&
+          $(e.target).parents(".task_menu_container").length == 0) {
+        currentMenu.hide();
+        currentMenu.prev().removeClass("active");
+      }
+    });
+    trElem.find(".task_menu_container").click(function() {
+      if (currentMenu) {
+        currentMenu.hide();
+        currentMenu.prev().removeClass("active");
+      }
+      currentMenu = $(this).find(".task_menu_items");
+      currentMenu.show();
+      currentMenu.prev().addClass("active");
     });
   },
   setupInlineEditing: function(trElem) {
