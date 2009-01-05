@@ -27,7 +27,7 @@
   <td class="task_menu">
     <div class="task_menu_container">
       <%= link_to_function "More Actions...", "", :class => "menu_arrow" %>
-      <ul class="task_menu_items" style="display: none;">
+      <ul class="task_menu_items">
         <li><%= link_to "Edit", edit_task_path(task) %></li>
         <% if task.completed? %>
           <li><%= link_to "Mark Incomplete", prioritize_task_path(task),

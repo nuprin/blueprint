@@ -19,22 +19,19 @@ var Tasks = {
   },
   setupActions: function(trElem) {
     trElem = trElem || $("table.task_list tr")
-    var currentMenu;
+    var currentMenuContainer;
     $("#content").click(function(e) {
-      if (currentMenu &&
+      if (currentMenuContainer &&
           $(e.target).parents(".task_menu_container").length == 0) {
-        currentMenu.hide();
-        currentMenu.prev().removeClass("active");
+        currentMenuContainer.removeClass("active");
       }
     });
     trElem.find(".task_menu_container").click(function() {
-      if (currentMenu) {
-        currentMenu.hide();
-        currentMenu.prev().removeClass("active");
+      if (currentMenuContainer) {
+        currentMenuContainer.removeClass("active");
       }
-      currentMenu = $(this).find(".task_menu_items");
-      currentMenu.show();
-      currentMenu.prev().addClass("active");
+      $(this).addClass("active");
+      currentMenuContainer = $(this);
     });
   },
   setupInlineEditing: function(trElem) {
