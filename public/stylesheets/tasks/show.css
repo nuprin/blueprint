@@ -192,10 +192,13 @@ h2 {
 #task_info h1 {
   margin-bottom: 5px;
 }
-#task_logistics {
-  border-top: 1px solid #e3e3e3;
+#task_logistics_bar {
+  border-top: 1px solid #e3e3e3;  
   margin: 0 16px;
   padding: 12px 0 10px;
+}
+#task_logistics_bar .call_to_action {
+  float: right;
 }
 #task_logistics h3 {
   color: #999;

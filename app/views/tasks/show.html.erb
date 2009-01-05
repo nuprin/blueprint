@@ -17,14 +17,14 @@
     <% if @task.parent_id %>
       <%= link_to_task @task.parent %>
     <% end %>
-      &rarr; <strong><%= @task.type %> #<%= @task.id %></strong>
+      &rarr; <strong><%= @task.displayed_type %> #<%= @task.id %></strong>
   </div>
 <% end %>
 
 <div id="task_container">
   <div id="narrow_col">
     <div id="task_identifier">
-      <div class="type"><%= @task.type %></div>
+      <div class="type"><%= @task.displayed_type %></div>
       <hr />
       <div class="num">
         <span class="pound">#</span><%= @task.id %>
@@ -59,35 +59,38 @@
           <% end %>
         </div>
       </div>
-      <ul class="clearfix" id="task_logistics">
-        <% if @task.project_id %>
-          <li>
-            <h3>INITIATIVE</h3>
-            <%= link_to_project @task.project %>
-          </li>
+      <div class="clearfix" id="task_logistics_bar">
+        <% unless @task.completed? %>
+          <%= link_to image_tag("mark-complete.gif"), "",
+            :class => "call_to_action", :id => "complete_link" %>
         <% end %>
-        <% if @task.assignee_id %>
-          <li>
-            <h3>Assigned To</h3>
-            <%= link_to_user @task.assignee %>
-          </li>
-        <% end %>
-        <% if @task.due_date %>
-          <li>
-            <h3>DUE DATE</h3>
-            <%= @task.due_date.strftime("%b %e") %>
-          </li>
-        <% end %>
-        <% if @task.estimate %>
-          <li>
-            <h3>ESTIMATE</h3>
-            <%= pluralize(@task.estimate, "hour") %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-    <div class='task_field' id='cc'>
-      <%= render :partial => 'cc_list', :locals => {:task => @task} %>
+        <ul class="clearfix" id="task_logistics">
+          <% if @task.project_id %>
+            <li>
+              <h3>INITIATIVE</h3>
+              <%= link_to_project @task.project %>
+            </li>
+          <% end %>
+          <% if @task.assignee_id %>
+            <li>
+              <h3>Assigned To</h3>
+              <%= link_to_user @task.assignee %>
+            </li>
+          <% end %>
+          <% if @task.due_date %>
+            <li>
+              <h3>DUE DATE</h3>
+              <%= @task.due_date.strftime("%b %e") %>
+            </li>
+          <% end %>
+          <% if @task.estimate %>
+            <li>
+              <h3>ESTIMATE</h3>
+              <%= pluralize(@task.estimate, "hour") %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
     <% if @task.children.any? %>
       <div class="task_field clearfix" id="subtasks">
@@ -112,15 +115,14 @@
       </div>
     <% end %>
     <%= render :partial => "comments_and_edits", :locals => {:task => @task} %>
+    <div class='task_field' id='cc'>
+      <%= render :partial => 'cc_list', :locals => {:task => @task} %>
+    </div>
     <div class="clearfix" id="task_links">
       <div id="primary_action">
         <% if @task.completed? %>
           <%= link_to "Mark Incomplete", prioritize_task_path(@task),
              :method => :post %>
-        <% else %>
-            <%= link_to image_tag("mark-complete.gif"), "",
-              :class => "call_to_action", :id => "complete_link"
-            %>
         <% end %>
       </div>
       <% if @task.is_a?(Deliverable) %>
@@ -129,7 +131,7 @@
             :parent_id => @task.id, :project_id => @task.project_id
           }) %> -
       <% end %>
-      <%= link_to "Edit #{@task.type}", edit_task_path(@task) %> - 
+      <%= link_to "Edit #{@task.displayed_type}", edit_task_path(@task) %> - 
       <%= link_to "Delete", task_path(@task),
         :confirm => "Are you sure you want to delete this task?",
         :method => :delete %>

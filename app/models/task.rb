@@ -166,6 +166,10 @@ class Task < ActiveRecord::Base
     MassMailer.new(self)
   end
 
+  def displayed_type
+    self.is_a?(Deliverable) ? "Deliverable" : "Task"
+  end
+
   after_create do |task|
     if task.assignee_id
       task.assignee.subscribe_to(task)
