@@ -34,7 +34,11 @@
                   </td>
                 </tr>
                 <% deliverables.each do |deliverable| %>
-                  <tr><td><%= link_to_task deliverable %></td></tr>
+                  <tr>
+                    <td class="task <%= task.status %>">
+                      <%= link_to_task deliverable %>
+                    </td>
+                  </tr>
                 <% end %>
               <% end %>
             </table>
