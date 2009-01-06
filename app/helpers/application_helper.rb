@@ -10,14 +10,21 @@ module ApplicationHelper
   def link_to_task(task)
     link_to task.title, task_path(task)
   end
+  # Order matters!  auto_link links things inside tags
   def format_text(text)
     text = nl2br(text)
     text = auto_link_tasks(text)
     auto_link(text, :all, :target => "_blank")
+    text = auto_link_commits(text)
   end
   def auto_link_tasks(text)
     text.gsub /(?:^|\s)#(\d+)/ do |task|
       link_to task, task_path($1)
+    end
+  end
+  def auto_link_commits(text)
+    text.gsub /[a-f0-9]{6,40}/i do |hash|
+      link_to hash, "http://git/causes/commit?id=#{hash}"
     end
   end
   def nl2br(text)
