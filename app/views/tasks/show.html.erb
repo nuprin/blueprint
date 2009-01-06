@@ -40,7 +40,7 @@
         <h1><%= @title %></h1>
         <div id="task_meta">
           <% if !@task.kind.blank? && @task.kind != "task" %>
-            <%= @task.kind.upcase %>
+            <%= @task.kind.capitalize %> |
           <% end %>
           Created by <%= link_to_user @task.creator %>
           at <%= @task.created_at.strftime("%b %e %I:%m%p") %>
@@ -96,19 +96,19 @@
       <div class="task_field clearfix" id="subtasks">
         <h2>TASKS</h2>
         <ul>
-          <% @task.children.each do |task| %>
+          <% @task.children.each do |child| %>
             <li class="clearfix">
-              <% if task.completed? %>
+              <% if child.completed? %>
                 <%= image_tag 'check.gif' %>
               <% else %>
-                <% form_tag complete_task_path(task) do %>
+                <% form_tag complete_task_path(child) do %>
                   <%= check_box_tag "complete_task_id", false, false,
                     :onclick =>
                       "$(this).parents('form').submit(); return false;" %>
                 <% end %>
               <% end %>
               
-              <%= link_to_task task %>
+              <%= link_to_task child %>
             </li>
           <% end %>
         </ul>

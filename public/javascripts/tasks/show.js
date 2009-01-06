@@ -14,6 +14,7 @@ $(function(){
         padding: '20px 15px'
       }
     });
+    $("#final_comment_text").val($("#comment_text").val());
     $("#final_comment_text").focus();
   })
 })
