@@ -24,7 +24,7 @@ module ApplicationHelper
   end
   def auto_link_commits(text)
     text.gsub /[a-f0-9]{6,40}/i do |hash|
-      link_to hash, "http://git/causes/commit?id=#{hash}"
+      link_to hash, "http://git/causes/commit?id=#{hash}", :target => :blank
     end
   end
   def nl2br(text)
