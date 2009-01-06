@@ -40,6 +40,12 @@
   vertical-align: top;
   width: 92px;
 }
+.initiative .task.completed {
+  background-color: #efe;
+  background-image: url(../../images/check.gif);
+  background-repeat: no-repeat;
+  background-position: 360px 10px;
+}
 #current {
   background: #eee;
   border-color: #ddd;
