@@ -40,6 +40,13 @@ class Task < ActiveRecord::Base
   named_scope :parked, :conditions => {:status => "parked"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
+
+  named_scope :prioritized_or_completed_recently, :conditions => [
+    "status IN (?, ?) AND " +
+    "(due_date IS NULL OR (due_date >= ? AND due_date < ?))",
+    "prioritized", "completed", *Task::CURRENT_RANGE
+  ]
+
   named_scope :with_due_date, :conditions => "due_date IS NOT NULL"
   named_scope :with_details, :include => [:assignee, :project]
 
