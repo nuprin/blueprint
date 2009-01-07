@@ -1,26 +1,24 @@
 // TODO [chris]: This should be refactored into a plugin.
 var KeyboardShortcuts = {
-  setupFields: function() {
-    $('input[type=text],textarea').focus(function() {
-      $(document.body).addClass("typing");
-    });
-    $('input[type=text],textarea').blur(function() {
-      $(document.body).removeClass("typing");
-    });
-  },
   setup: function() {
-    this.setupFields();
-    $(window).keydown(function(event) {
-      if (!$(document.body).hasClass("typing")) {
-        if (user.keyboard.character() == "¿") {
-          event.preventDefault();
-          $("#q").focus();
-        }
-        if (user.keyboard.character() == "A") {
-          event.preventDefault();
-          $(".quick_add_link:eq(0)").trigger("click");
-        }
+    $(document.body).shortkeys({
+      "a": function() {
+        $(".quick_add_link:eq(0)").trigger("click");      
+      },
+      'c': function() {
+        location.href = "/company";
+      },
+      'y': function() {
+        location.href = "/";
+      },
+      '¿': function() {
+        $("#q").focus();        
       }
+    })
+    // TODO: MOve this over to shortkeys when it supports the concept of a
+    // "universal" shortcut, a shortcut that works regardless of whether you're
+    // on a form field or not.
+    $(window).keydown(function(event) {
       if (user.keyboard.character() == "esc") {
         event.preventDefault();
         $("#task_title").blur();
