@@ -14,8 +14,8 @@ module ApplicationHelper
   def format_text(text)
     text = nl2br(text)
     text = auto_link_tasks(text)
-    auto_link(text, :all, :target => "_blank")
     text = auto_link_commits(text)
+    auto_link(text, :all, :target => "_blank")
   end
   def auto_link_tasks(text)
     text.gsub /(?:^|\s)#(\d+)/ do |task|
@@ -25,7 +25,7 @@ module ApplicationHelper
   def auto_link_commits(text)
     text.gsub /git:[a-f0-9]+/i do |key|
       hash = key.split(':').last
-      link_to key, "http://git/causes/commit?id=#{hash}", :target => :blank
+      link_to key, git_path(hash), :target => :blank
     end
   end
   def nl2br(text)
