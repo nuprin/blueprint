@@ -13,10 +13,19 @@
   padding: 24px 10px 8px;
   text-transform: uppercase;
 }
-.initiative h2 span {
+.initiative h2 span.assignees {
   float: right;
   font-weight: normal;
   text-transform: none;
+}
+.initiative h2 .remove {
+  color: #666;
+  font-size: 11px;
+  font-weight: normal;
+  text-transform: none;
+}
+.initiative h2 .remove a {
+  color: #666;
 }
 .initiative table {
   border-collapse: collapse;
@@ -65,13 +74,16 @@
   font-weight: bold;
 }
 #inactive_initiatives h2 {
-  margin-bottom: 0;
+  margin-bottom: .5em;
 }
 #inactive_initiatives li {
-  display: block;
-  float: left;
+  border-bottom: 1px solid #ddd;
   line-height: 33px;
-  margin-right: 20px;
+}
+#inactive_initiatives .add {
+  float: right;
+  font-size: 11px;
+  margin-top: 1px;
 }
 #initiatives {
   margin-bottom: 40px;

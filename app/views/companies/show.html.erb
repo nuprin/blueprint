@@ -12,12 +12,17 @@
         %>
           <div class="initiative">
             <h2>
-              <span>
+              <span class="assignees">
                 <%= initiative.assignees.sort_by(&:name).map do |user|
                     link_to_user(user)
                   end.join(", ") %>
               </span>
-              <%= link_to_project initiative %></h2>
+              <%= link_to_project initiative %>
+              <span class="remove">
+              (<%= link_to "Remove",
+                set_inactive_project_path(initiative), :method => :put %>)
+              </span>
+              </h2>
             <table>
               <% deliverables_by_day.each do |day, deliverables| %>
                 <tr>
@@ -51,7 +56,12 @@
       <ul class="clearfix">
       <% Initiative.inactive.each do |initiative| %>
         <%# TODO [chris]: Rename project_path to initiative_path. %>
-        <li><%= link_to_project initiative %></li>
+        <li class="clearfix">
+          <%= link_to "Add to Active",
+            set_active_project_path(initiative), :method => :put,
+            :class => "add" %>
+          <%= link_to_project initiative %>
+        </li>
       <% end %>
       </ul>
     </div>
