@@ -116,33 +116,6 @@ var QuickAdd = {
   }
 }
 
-var KeyboardShortcuts = {
-  setupFields: function() {
-    $('input[type=text],textarea').focus(function() {
-      $(document.body).addClass("typing");
-    });
-    $('input[type=text],textarea').blur(function() {
-      $(document.body).removeClass("typing");
-    });
-  },
-  setup: function() {
-    this.setupFields();
-    $(window).keydown(function(event) {
-      if (!$(document.body).hasClass("typing")) {
-        if (user.keyboard.character() == "A") {
-          event.preventDefault();
-          $(".quick_add_link:eq(0)").trigger("click");
-        }
-      }
-      if (user.keyboard.character() == "esc") {
-        event.preventDefault();
-        $("#task_title").blur();
-        $(".quick_cancel_link:eq(0)").trigger("click")
-      }
-    })
-  }
-}
-
 var Fluid = {
   setup: function() {
     if (window.fluid) {
@@ -157,6 +130,5 @@ $(function() {
   Tasks.setupActions();
   Tasks.setupInlineEditing();
   QuickAdd.setup();
-  KeyboardShortcuts.setup();
   Fluid.setup();
 });
