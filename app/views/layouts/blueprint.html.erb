@@ -17,6 +17,11 @@
     <%= javascript_include_tag "hoverIntent" %>
     <%= javascript_include_tag "superfish" %>
     <%= javascript_include_tag "blueprint" %>
+    <script type="text/javascript">
+      <% if viewer.real? %>
+        var VIEWER_ID = <%= viewer.id %>;
+      <% end %>
+    </script>
   </head>
   <body>
     <div id="container">
