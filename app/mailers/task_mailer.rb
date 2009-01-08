@@ -3,10 +3,13 @@ class TaskMailer < ActionMailer::Base
   include MailerHelper
   include TaskMailerHelper
 
+  REPLY_TO = "philbot@project-agape.com"
+  
   def task_creation(recipient, task)
     recipients recipient_email(recipient)
     from       from_email(task.creator)
     subject    task_subject(task)
+    reply_to   REPLY_TO
     body       :task => task, :recipient => recipient
   end
 
@@ -17,7 +20,7 @@ class TaskMailer < ActionMailer::Base
     #TODO
     #this should add the "+id" to the email address that can then be parsed out?
     #reply_to   "philbot+#{task.id}@project-agape.com"
-    reply_to   "philbot@project-agape.com"
+    reply_to   REPLY_TO
     body       :comment => comment, :task => task
   end
 
@@ -25,6 +28,7 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(edit.editor)
     subject    task_subject(edit.task)
+    reply_to   REPLY_TO
     body       :edit => edit
   end
 
@@ -32,6 +36,7 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(edit.editor)
     subject    task_subject(edit.task)
+    reply_to   REPLY_TO
     body       :edit => edit
   end
 
@@ -39,6 +44,7 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(edit.editor)
     subject    task_subject(edit.task)
+    reply_to   REPLY_TO
     body       :edit => edit
   end
 
@@ -46,6 +52,7 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(edit.editor)
     subject    task_subject(edit.task)
+    reply_to   REPLY_TO
     body       :edit => edit
   end
 
@@ -53,6 +60,7 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(edit.editor)
     subject    task_subject(edit.task)
+    reply_to   REPLY_TO
     body       :edit => edit
   end
 
