@@ -3,7 +3,7 @@ class TaskMailer < ActionMailer::Base
   include MailerHelper
   include TaskMailerHelper
 
-  REPLY_TO = "philbot@project-agape.com"
+  REPLY_TO = "blueprint@causes.com"
   
   def task_creation(recipient, task)
     recipients recipient_email(recipient)
