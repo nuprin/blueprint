@@ -8,6 +8,9 @@ var KeyboardShortcuts = {
       'c': function() {
         location.href = "/company";
       },
+      's': function() {
+        location.href = "/users/" + VIEWER_ID + "/subscribed"
+      },
       'y': function() {
         location.href = "/";
       },
