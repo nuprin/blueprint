@@ -31,6 +31,7 @@ class TasksController < ApplicationController
     # update_attribute calls.
     task.type = params[:task][:type]
     task.save!
+    task.mass_mailer.ignoring(task.creator).deliver_task_creation
     context = params[:context]
     if context == "User"
       li = TaskListItem.for_context(viewer).first(:conditions => {

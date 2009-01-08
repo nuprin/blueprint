@@ -71,17 +71,3 @@ describe "The task reassignment email" do
     @edit.editor.name.should == @mail.from_addrs[0].name
   end
 end
-
-describe "The task completion email" do
-  before(:each) do 
-    @task = tasks(:one)
-    @task.editor = users(:chris)
-    @mail = TaskMailer.create_task_completion(@task.assignee, @task)
-  end
-
-  it_should_behave_like "a generic task email"
-  
-  it "should appear to be from the editor" do
-    @task.editor.name.should == @mail.from_addrs[0].name
-  end
-end
