@@ -17,15 +17,9 @@ u1 = users[0]
 u2 = users[1]
 
 projects = []
-projects << Project.create!(:title => "Petitions",
-                     :description => %(A feature that lets people sign their
-                     name on various petitions that nonprofits will deliver to
-                     individuals or organizations in a position to effect
-                     change.).squish)
+projects << Project.create!(:title => "Petitions")
 
-projects << Project.create!(:title => "Birthday Wish",
-                     :description => %(A feature that lets people get
-                     donations on their birthday.).squish)
+projects << Project.create!(:title => "Birthday Wish")
 
 projects.each do |p|
 

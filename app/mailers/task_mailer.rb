@@ -14,6 +14,10 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(comment.author)
     subject    task_subject(task)
+    #TODO
+    #this should add the "+id" to the email address that can then be parsed out?
+    #reply_to   "philbot+#{task.id}@project-agape.com"
+    reply_to   "philbot@project-agape.com"
     body       :comment => comment, :task => task
   end
 
