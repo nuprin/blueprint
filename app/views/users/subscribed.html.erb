@@ -1,8 +1,13 @@
-<%= stylesheet_link_tag "shared/result_set" %>
+<%= stylesheet_link_tag "shared/task_list" %>
+<%= stylesheet_link_tag "shared/task_filter" %>
+<%= javascript_include_tag "shared/task_list" %>
+<%= javascript_include_tag "shared/task_filter" %>
 
 <% @title = "Your Subscribed Tasks" %>
 
-<div id="results_count">
-  You are subscribing to <%= pluralize(@tasks.size, "task") %>:</div>
-<%= render :partial => '/shared/result_set',
-           :locals => {:results => @tasks} %>
+<%= render :partial => "/shared/task_filters" %>
+<%= render :partial => "/shared/task_list",
+          :locals => {
+            :title => "#{params[:status].upcase} TASKS (#{@tasks.size})",
+            :tasks => @tasks,
+            :context => "User"} %>

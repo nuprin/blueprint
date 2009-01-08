@@ -11,12 +11,12 @@ class UsersController < ApplicationController
 
   def subscribed
     @user = User.find(params[:id])
-    @tasks = @user.subscribed_tasks
+    @tasks = filtered_task_list(:subscribed_tasks)
   end
 
   def created
     @user = User.find(params[:id])
-    @tasks = @user.created_tasks
+    @tasks = filtered_task_list(:created_tasks)
   end
 
   def you
@@ -31,5 +31,16 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   rescue ActiveRecord::RecordNotFound
     redirect_to login_users_path
+  end
+  
+  private
+  
+  def filtered_task_list(task_method)
+    if params[:status]
+      @user.send(task_method).send(params[:status]).first(100)
+    else
+      params[:status] = "all"
+      @user.send(task_method).first(100)
+    end
   end
 end

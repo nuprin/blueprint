@@ -1,0 +1,7 @@
+<div class="task_filters">
+  <%= label_tag :status, "Status:" %>
+  <%= select_tag :status, options_for_select({"All" => "all",
+    "Prioritized" => "prioritized", "Parked" => "parked",
+    "Completed" => "completed"
+  }, params[:status]), :class => "task_filter" %>
+</div>

@@ -38,6 +38,7 @@ class Task < ActiveRecord::Base
     :conditions => {:project_id => project.id}
   }}
   named_scope :parked, :conditions => {:status => "parked"}
+  named_scope :prioritized, :conditions => {:status => "prioritized"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
 

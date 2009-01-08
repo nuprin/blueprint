@@ -1,8 +1,12 @@
-<%= stylesheet_link_tag "shared/result_set" %>
+<%= stylesheet_link_tag "shared/task_list" %>
+<%= stylesheet_link_tag "shared/task_filter" %>
+<%= javascript_include_tag "shared/task_list" %>
+<%= javascript_include_tag "shared/task_filter" %>
 
 <% @title = "Recently Created Tasks" %>
 
-<div id="results_count">
-  You have created <%= pluralize(@tasks.size, "task") %>:</div>
-<%= render :partial => '/shared/result_set',
-           :locals => {:results => @tasks} %>
+<%= render :partial => "/shared/task_filters" %>
+<%= render :partial => "/shared/task_list",
+          :locals => {:title => "CREATED TASKS (#{@tasks.size})",
+                      :tasks => @tasks,
+                      :context => "User"} %>
