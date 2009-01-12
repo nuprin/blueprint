@@ -3,31 +3,6 @@ require 'net/imap'
 LOGIN = 'philbot@project-agape.com'
 EMAIL = 'arefin'
 
-def remove_quotation(text)
-  lines = text.split(/\n/)
-
-  date = lines.index do |line|
-    /^On .* wrote:$/.match(line)
-  end
-
-  comment, quotation = lines[0...date], lines[date+1..-1]
-  quotation.reject! do |line|
-    line.starts_with?('>')
-  end
-
-  nonempty_lines = quotation.select do |line|
-    !line.gsub(/\s/, '').blank?
-  end
-
-  result = comment
-  if nonempty_lines.any?
-    result.push(lines[date])
-    result += nonempty_lines
-  end
-
-  result.join("\n")
-end
-
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
 connection.login(LOGIN, EMAIL)
 connection.select('INBOX')
@@ -69,7 +44,6 @@ messages.each do |message_id|
     task_id = Integer(task_id_string.split("#")[1])
     
     raw_body = raw_msg.attr["BODY[1]"]
-    comment = remove_quotation(raw_body)
 
     #create a comment from the info above
     t = Task.find(task_id)
