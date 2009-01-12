@@ -26,6 +26,8 @@ def remove_quotation(text)
   end
 
   result.join("\n")
+rescue
+  text
 end
 
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
