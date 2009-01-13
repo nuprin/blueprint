@@ -31,7 +31,8 @@ def remove_quotation(text)
 
   result.join("\n")
 rescue => bang
-  puts bang
+  puts "Error: #{bang}"
+  puts bang.backtrace
   text
 end
 
