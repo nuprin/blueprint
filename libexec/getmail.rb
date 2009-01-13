@@ -5,7 +5,9 @@ EMAIL = 'arefin'
 
 DATE_EX = /(.*)^On.*wrote:$/m
 def remove_quotation(text)
-  (DATE_EX.match(text) ? $1 : text).strip
+  comment = (DATE_EX.match(text) ? $1 : text).strip
+  puts DATE_EX.match(text).inspect
+  comment
 end
 
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
