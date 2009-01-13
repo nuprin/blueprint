@@ -7,7 +7,7 @@ def remove_quotation(text)
   lines = text.split(/\n/)
 
   date = lines.index do |line|
-    /^On.*wrote:$/.match(line)
+    /^On.*wrote:\s*$/.match(line)
   end
   puts "Date: #{date}"
 
@@ -19,7 +19,7 @@ def remove_quotation(text)
   quotation.reject! do |line|
     line =~ /^\s*>/
   end
-  puts comment, '========', quotation
+  puts comment.inspect, '========', quotation.inspect
 
   nonempty_lines = quotation.select do |line|
     !line.gsub(/\s/, '').blank?
