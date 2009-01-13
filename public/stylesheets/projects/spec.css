@@ -6,10 +6,10 @@
   margin-bottom: 10px;
   width: 750px;
 }
-#saving {
-  color: #999;
-  line-height: 19px;
-  text-align: right;
+#spec_form {
+  margin: 0 auto;
+  padding: 30px 0;
+  width: 760px;
 }
 body {
   font-family: Helvetica;

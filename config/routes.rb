@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :deliverables
   map.resources :git
   map.resources :projects, :member => {
+                  :completed => :get,
+                  :parked => :get,
                   :set_active   => :put,
                   :set_inactive => :put,
                 } do |projects|
@@ -30,7 +32,9 @@ ActionController::Routing::Routes.draw do |map|
                 }
   map.resources :users,
                 :member => {
+                  :completed => :get,
                   :created => :get,
+                  :parked => :get,
                   :subscribed => :get
                 },
                 :collection => {

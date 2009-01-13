@@ -19,6 +19,16 @@ class UsersController < ApplicationController
     @tasks = filtered_task_list(:created_tasks)
   end
 
+  def parked
+    @user = User.find(params[:id])
+    @tasks = @user.tasks.parked
+  end
+  
+  def completed
+    @user = User.find(params[:id])
+    @tasks = @user.tasks.completed
+  end
+
   def you
     redirect_to viewer
   end

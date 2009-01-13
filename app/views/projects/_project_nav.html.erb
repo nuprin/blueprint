@@ -1,13 +1,26 @@
+<%= stylesheet_link_tag "shared/header" %>
 <%= stylesheet_link_tag "projects/nav" %>
-<ul class="clearfix" id="project_nav">
+
+<div class="clearfix" id="tabs">
+  <div class="secondary">
+    <% path = project_specification_path(@project) %>
+    <% if current_page?(path) %>
+      <%= link_to "SPEC", path, :class => "current" %>
+    <% else %>
+      <%= link_to "SPEC", path %>
+    <% end %>    
+  </div>
   <%
     [
-      ["Tasks", project_path(@project)],
-      ["Spec",  project_specification_path(@project)]
+      ["PRIORITIZED (#{@project.task_list.size})", project_path(@project)],
+      ["COMPLETED", completed_project_path(@project)],
+      ["PARKED", parked_project_path(@project)]
     ].each do |name, path|
   %>
-    <li<%= ' class="current"' if current_page?(path) %>>
+    <% if current_page?(path) %>
+      <%= link_to name, path, :class => "current" %>
+    <% else %>
       <%= link_to name, path %>
-    </li>
+    <% end %>
   <% end %>
-</ul>
+</div>

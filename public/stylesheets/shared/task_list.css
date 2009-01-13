@@ -1,5 +1,5 @@
 h2 {
-  color: #aaa;
+  color: #555;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 29px;
@@ -8,7 +8,7 @@ h2 {
 }
 table.task_list {
   border-collapse: collapse;
-  margin: 0 0 30px;
+  margin: 0 0 20px;
   table-layout: fixed;
   white-space: nowrap;
   width: 760px;
@@ -236,5 +236,9 @@ table.prioritized .deliverable .empty.task_estimate {
   width: 200px;
 }
 #content {
-  background: #efefef;
+  background: #ced8e2;
+  padding: 0;
+}
+#task_list {
+  padding: 30px 20px;
 }

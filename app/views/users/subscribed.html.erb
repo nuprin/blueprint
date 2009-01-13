@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'shared/header' %>
 <%= stylesheet_link_tag "shared/task_list" %>
 <%= stylesheet_link_tag "shared/task_filter" %>
 <%= javascript_include_tag "shared/task_list" %>
@@ -5,9 +6,11 @@
 
 <% @title = "Your Subscribed Tasks" %>
 
-<%= render :partial => "/shared/task_filters" %>
-<%= render :partial => "/shared/task_list",
-          :locals => {
-            :title => "#{params[:status].upcase} TASKS (#{@tasks.size})",
-            :tasks => @tasks,
-            :context => "User"} %>
+<div id="task_list">
+  <%= render :partial => "/shared/task_filters" %>
+  <%= render :partial => "/shared/task_list",
+            :locals => {
+              :title => "#{params[:status].upcase} TASKS (#{@tasks.size})",
+              :tasks => @tasks,
+              :context => "User"} %>
+</div>

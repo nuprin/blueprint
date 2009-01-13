@@ -19,18 +19,12 @@
 <% with_layout "layouts/initiative" do %>
   <div id="task_list">
     <% task_object =
-      Deliverable.new(:status => "prioritized", :project_id => @project.id) %>
+      PrivateTask.new(:status => "parked", :project_id => @project.id) %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title => "",
-                           :tasks => @project.task_list,
+                           :tasks => @project.parked_tasks,
                            :context => @project.class.name,
-                           :task_object => task_object} %>
-    <%= render :partial => "/shared/task_list",
-               :locals => {:title =>
-                          "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
-                           :tasks => @project.completed_tasks,
-                           :context => @project.class.name,
+                           :task_object => task_object,
                            :unsortable => true} %>
-
   </div>
 <% end %>

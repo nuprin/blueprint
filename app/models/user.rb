@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :task_list, :class_name => 'TaskListItem',
                        :as => :context,
                        :order => :position
-  has_many :tasks
+  has_many :tasks, :foreign_key => :assignee_id
   has_many :task_subscriptions, :conditions => {:entity_type => "Task"},
     :class_name => "Subscription"
 

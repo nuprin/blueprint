@@ -1,0 +1,26 @@
+#content h1 {
+  background-image: url(../../images/task-list-header-bkgd.gif);
+  margin: 0;
+  padding: 20px 20px 55px;
+}
+#tabs {
+  background-image: url(../../images/task-list-header-bkgd.gif);
+  padding: 0 20px;
+}
+#tabs a {
+  background: #e0e6ed;
+  color: #444;
+  display: block;
+  float: left;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 30px;
+  margin-right: 4px;
+  padding: 0 12px;
+}
+#tabs a.current {
+  background: #ced8e2;
+}
+#tabs .secondary {
+  float: right;
+}

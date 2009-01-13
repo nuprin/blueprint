@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag "shared/header" %>
 <%= stylesheet_link_tag "projects/show" %>
 <%= stylesheet_link_tag "specs/show" %>
 <%= javascript_include_tag "specs/show" %>
@@ -14,8 +15,6 @@
 
 <% with_layout "layouts/initiative" do %>
   <div id="spec">
-    <%= link_to "Edit Spec", edit_project_specification_path(@project),
-      :class => "edit" %>
     <%= @spec.body %>
   </div>
   <div class="clearfix" id="comment_board">

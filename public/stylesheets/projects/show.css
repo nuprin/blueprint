@@ -12,10 +12,10 @@
   padding: 0 4px;
 }
 #project_footer {
-  background: #eee;
-  border-top: 1px solid #ddd;
+  background-image: url(../../images/task-list-header-bkgd.gif);
+  border-top: 1px solid #bbb;
   margin: 20px 0 0;
-  padding: 10px 20px;
+  padding: 12px 20px 10px;
 }
 #project_footer .other_links {
   float: right;

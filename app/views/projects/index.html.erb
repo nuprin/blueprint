@@ -1,5 +1,6 @@
-<%= javascript_include_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/header' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
+<%= javascript_include_tag 'shared/task_list' %>
 
 <script type="text/javascript">
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
@@ -11,13 +12,16 @@
 
 <% @title = "Initiatives" %>
 
-<% @projects.each do |project| %>
-  <% task_object =
-  Task.new(:kind => "", :status => "prioritized", :project_id => project.id) %>
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title       => project.title,
-                         :see_all_url => project_path(project),
-                         :tasks       => project.task_list,
-                         :context     => project.class.name,
-                         :task_object => task_object} %>                       
-<% end %>
+<div id="task_list">
+  <% @projects.each do |project| %>
+    <% task_object =
+    Task.new(:kind => "", :status => "prioritized", :project_id => project.id)
+    %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title       => project.title,
+                           :see_all_url => project_path(project),
+                           :tasks       => project.task_list,
+                           :context     => project.class.name,
+                           :task_object => task_object} %>                       
+  <% end %>
+</div>

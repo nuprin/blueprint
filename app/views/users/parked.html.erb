@@ -20,19 +20,11 @@
 <div id="task_list">
   <% 
     task_object =
-      PrivateTask.new(:status => "prioritized", :assignee_id => @user.id)
+      PrivateTask.new(:status => "parked", :assignee_id => @user.id)
   %>
   <%= render :partial => "/shared/task_list",
              :locals => {:title       => "",
-                         :tasks       => @user.task_list,
+                         :tasks       => @tasks,
                          :context     => @user.class.name,
                          :task_object => task_object} %>
-
-  <%= render :partial => "/shared/task_list",
-             :locals => {
-               :title => "COMPLETED TODAY (#{@user.completed_tasks_today.size})",
-               :tasks => @user.completed_tasks_today,
-               :context => @user.class.name,
-               :unsortable => true} %>
-
 </div>

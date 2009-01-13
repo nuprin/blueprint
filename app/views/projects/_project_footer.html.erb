@@ -1,6 +1,7 @@
 <div id="project_footer">
   <div class="other_links">
-    <%= link_to "Edit Initiative", edit_project_url(@project) %>
+    <%= link_to "Edit Initiative", edit_project_url(@project) %> |
+    <%= link_to "Edit Spec", edit_project_specification_path(@project) %>
   </div>
   <% if @project.active? %>
     Initiative Status: <strong>Active</strong>

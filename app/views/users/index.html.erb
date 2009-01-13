@@ -1,5 +1,7 @@
-<%= javascript_include_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/header' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
+<%= javascript_include_tag 'shared/task_list' %>
+
 <script type="text/javascript">
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
     [kind, "kind", kind]
@@ -10,15 +12,17 @@
 
 <% @title = "People" %>
 
-<% @users.each do |user| %>
-  <% 
-    task_object = Task.new(:kind => "task", :status => "prioritized",
-                           :assignee_id => user.id)
-  %>
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title       => user.name,
-                         :see_all_url => user_path(user),
-                         :tasks       => user.task_list,
-                         :context     => user.class.name,
-                         :task_object => task_object} %>                       
-<% end %>
+<div id="task_list">
+  <% @users.each do |user| %>
+    <% 
+      task_object = Task.new(:kind => "task", :status => "prioritized",
+                             :assignee_id => user.id)
+    %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title       => user.name,
+                           :see_all_url => user_path(user),
+                           :tasks       => user.task_list,
+                           :context     => user.class.name,
+                           :task_object => task_object} %>                       
+  <% end %>
+</div>

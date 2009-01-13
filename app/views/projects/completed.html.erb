@@ -1,0 +1,20 @@
+<%= javascript_include_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/task_list' %>
+
+<%= stylesheet_link_tag "projects/show" %>
+
+<% 
+  @hide_layout_title = true
+  @title = @project.title
+%>
+
+<% with_layout "layouts/initiative" do %>
+  <div id="task_list">
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title => "",
+                           :tasks => @project.completed_tasks,
+                           :context => @project.class.name,
+                           :unsortable => true} %>
+
+  </div>
+<% end %>
