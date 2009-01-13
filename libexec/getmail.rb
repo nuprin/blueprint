@@ -3,39 +3,9 @@ require 'net/imap'
 LOGIN = 'philbot@project-agape.com'
 EMAIL = 'arefin'
 
+DATE_EX = /(.*)^On.*wrote:$/m
 def remove_quotation(text)
-  lines = text.split(/\n/)
-
-  date = lines.index do |line|
-    /^On.*wrote:\s*$/.match(line)
-  end
-  puts "Date: #{date}"
-
-  if date
-    comment, quotation = lines[0...date], lines[date+1..-1]
-  else
-    comment, quotation = lines, []
-  end
-  quotation.reject! do |line|
-    line =~ /^\s*>/
-  end
-  puts comment.inspect, '========', quotation.inspect
-
-  nonempty_lines = quotation.select do |line|
-    !line.gsub(/\s/, '').blank?
-  end
-
-  result = comment
-  if nonempty_lines.any?
-    result.push(lines[date])
-    result += nonempty_lines
-  end
-
-  result.join("\n")
-rescue => bang
-  puts "Error: #{bang}"
-  puts bang.backtrace
-  text
+  (DATE_EX.match(text) ? $1 : text).strip
 end
 
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
