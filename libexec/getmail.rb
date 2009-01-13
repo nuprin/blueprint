@@ -30,7 +30,8 @@ def remove_quotation(text)
   end
 
   result.join("\n")
-rescue
+rescue => bang
+  puts bang
   text
 end
 
