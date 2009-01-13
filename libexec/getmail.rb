@@ -57,7 +57,7 @@ messages.each do |message_id|
     #create a comment from the info above
     t = Task.find(task_id)
     comment_params = {
-      :author_id => user.id, :commentable => t, :text => raw_body
+      :author_id => user.id, :commentable => t, :text => comment
     }
     c = Comment.create!(comment_params)
     
