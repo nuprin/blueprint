@@ -31,6 +31,9 @@ class Task < ActiveRecord::Base
       (Time.now - 6.hours).at_midnight.getutc]
   }}
   named_scope :completed, :conditions => {:status => "completed"}
+  named_scope :completed_since, lambda {|since| {
+    :conditions => {:completed_at => Range.new(since, Time.now)}
+  }}
   named_scope :currently_due, :conditions => {:due_date => 
     Range.new(*CURRENT_RANGE)
   }

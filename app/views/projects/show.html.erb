@@ -27,8 +27,8 @@
                            :task_object => task_object} %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title =>
-                          "RECENTLY COMPLETED (#{@project.completed_tasks.size})",
-                           :tasks => @project.completed_tasks,
+                          "COMPLETED THIS WEEK (#{@project.completed_tasks_this_week.size})",
+                           :tasks => @project.completed_tasks_this_week,
                            :context => @project.class.name,
                            :unsortable => true} %>
 

@@ -25,6 +25,11 @@ class Project < ActiveRecord::Base
     Task.completed.recently_completed.for_project(self).with_details
   end
 
+  def completed_tasks_this_week
+    Task.completed.recently_completed.completed_since(7.days.ago).
+      for_project(self).with_details
+  end
+
   def parked_tasks
     Task.parked.recently_updated.for_project(self).with_details
   end
