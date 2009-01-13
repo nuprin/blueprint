@@ -2,7 +2,7 @@ module UsersHelper
   def user_tabs(user)
     links = [
       ["PRIORITIZED (#{user.task_list.size})", user_url(user)],
-      ["COMPLETED", completed_user_url(user)],
+      ["CARELOG", completed_user_url(user)],
       ["PARKED", parked_user_url(user)]
     ]
     links.map do |name, url|

@@ -178,6 +178,10 @@ class Task < ActiveRecord::Base
     self.is_a?(Deliverable) ? "Deliverable" : "Task"
   end
 
+  def completion_day
+    (self.completed_at - 6.hours).at_midnight.to_date
+  end
+
   after_create do |task|
     if task.assignee_id
       task.assignee.subscribe_to(task)
@@ -195,6 +199,15 @@ class Task < ActiveRecord::Base
   after_save do |task|
     if task.project_id && task.assignee_id
       task.assignee.subscribe_to(task.project)
+    end
+  end
+  
+  module UserMethods
+    def tasks_completed_by_day(since = 7.days.ago)
+      range = [since, Time.now]
+      conditions = {:completed_at => Range.new(*range), :assignee_id => self.id}
+      tasks = Task.all(:conditions => conditions)
+      tasks.group_by(&:completion_day).sort_by(&:first).reverse    
     end
   end
 end

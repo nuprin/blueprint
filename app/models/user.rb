@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   validates_length_of :name, :in => 1...50
 
   include Subscription::UserMethods
+  include Task::UserMethods
 
   def parked_tasks
     Task.parked.recently_updated.assigned_to(self).with_details

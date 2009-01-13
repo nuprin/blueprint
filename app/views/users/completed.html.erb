@@ -18,13 +18,10 @@
 <%= render :partial => "user_task_list_tabs", :locals => {:user => @user} %>
 
 <div id="task_list">
-  <% 
-    task_object =
-      PrivateTask.new(:status => "completed", :assignee_id => @user.id)
-  %>
-  <%= render :partial => "/shared/task_list",
-             :locals => {:title       => "",
-                         :tasks       => @tasks,
-                         :context     => @user.class.name,
-                         :task_object => task_object} %>
+  <% @tasks_by_day.each do |day, tasks| %>
+    <%= render :partial => "/shared/task_list",
+               :locals => {:title       => day.strftime("%B %e"),
+                           :tasks       => tasks,
+                           :context     => @user.class.name} %>
+  <% end %>
 </div>

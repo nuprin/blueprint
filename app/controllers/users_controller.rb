@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   
   def completed
     @user = User.find(params[:id])
-    @tasks = @user.tasks.completed
+    @tasks_by_day = @user.tasks_completed_by_day
   end
 
   def you
