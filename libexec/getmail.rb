@@ -10,7 +10,11 @@ def remove_quotation(text)
     /^On .* wrote:$/.match(line)
   end
 
-  comment, quotation = lines[0...date], lines[date+1..-1]
+  if date
+    comment, quotation = lines[0...date], lines[date+1..-1]
+  else
+    comment, quotation = lines, []
+  end
   quotation.reject! do |line|
     line.starts_with?('>')
   end
