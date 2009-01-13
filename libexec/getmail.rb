@@ -3,7 +3,7 @@ require 'net/imap'
 LOGIN = 'philbot@project-agape.com'
 EMAIL = 'arefin'
 
-DATE_EX = /(.*)^On.*wrote:$/m
+DATE_EX = /(.*)^On.*wrote:/m
 def remove_quotation(text)
   puts text.inspect
   comment = (DATE_EX.match(text) ? $1 : text).strip
