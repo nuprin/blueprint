@@ -182,7 +182,7 @@ class Task < ActiveRecord::Base
   end
 
   def completion_day
-    (self.completed_at - 6.hours).at_midnight.to_date
+    (self.completed_at.getlocal - 6.hours).at_midnight.to_date
   end
 
   after_create do |task|
@@ -207,7 +207,7 @@ class Task < ActiveRecord::Base
   
   module UserMethods
     def tasks_completed_by_day(since = 7.days.ago)
-      range = [since, Time.now]
+      range = [since, Time.now.getutc]
       conditions = {:completed_at => Range.new(*range), :assignee_id => self.id}
       tasks = Task.all(:conditions => conditions)
       tasks.group_by(&:completion_day).sort_by(&:first).reverse    
