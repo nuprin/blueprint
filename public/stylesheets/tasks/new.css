@@ -1,6 +1,10 @@
 form ul {
   margin: 0 0 1em;
 }
+input[type=checkbox] {
+  float: left;
+  margin: 7px 10px 0 0;
+}
 select {
   margin-top: 4px;
 }
@@ -56,8 +60,4 @@ textarea {
   margin: 3px 0;
   padding: 3px 4px;
   width: 60px;
-}
-#use_due_date {
-  float: left;
-  margin: 7px 10px 0 0;
 }

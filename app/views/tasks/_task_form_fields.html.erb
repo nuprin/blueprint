@@ -1,5 +1,4 @@
 <%= f.error_messages %>
-<%= f.hidden_field :status %>
 <%= f.hidden_field :parent_id %>
 <p>
   <%= f.label :title, "Title:" %><br />
@@ -35,6 +34,10 @@
   <li>
     <%= f.label :estimate, "Estimate:" %><br />
     <%= f.text_field :estimate %>
+  </li>
+  <li>
+    <%= f.label :status, "Prioritized:" %><br />
+    <%= f.check_box :status, {}, "prioritized", "parked" %>
   </li>
   <li>
     <%= f.label :due_date, "Due Date:" %><br />
