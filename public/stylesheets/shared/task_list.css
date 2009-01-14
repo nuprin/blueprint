@@ -63,8 +63,11 @@ table.task_list .task_type img {
   display: block;
   margin-top: 1px;
 }
-table.task_list td.task_name {
+table.task_list td.task_name,
+table.task_list td.task_project {
   overflow: hidden;
+}
+table.task_list td.task_name {
   padding-left: 0;
 }
 table.task_list td.task_assignee,
