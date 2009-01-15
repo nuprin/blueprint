@@ -75,7 +75,13 @@ class TaskMailer < ActionMailer::Base
   private
   
   def task_subject(task)
-    "(##{task.id}) #{task.title}"
+    # TODO [chris]: Remove after there's little activity for tasks created
+    # before this date.
+    if task.created_at >= Time.parse("January 15, 2009 11:00:00").getutc
+      "(Blueprint ##{task.id}) #{task.title}"
+    else
+      "(##{task.id}) #{task.title}"      
+    end
   end
 
   def task_editor_email(task)
