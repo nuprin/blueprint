@@ -75,6 +75,12 @@
       <% if task.assignee_id %>
         <%= link_to_user task.assignee %>
       <% end %>
+      <% form_for :task, task, :url => update_assignee_task_path(task),
+        :html => {:class => "inline_form", :method => :put} do |f| %>
+        <%= f.select :assignee_id,
+          User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]], {},
+          :onchange => "$(this).parent().submit();"%>
+      <% end %>
     </td>
   <% end %>
   <td class="task_estimate <%= "empty" unless task.estimate %>">

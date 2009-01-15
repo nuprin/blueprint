@@ -37,8 +37,15 @@ table.task_list .task_bug_indicator {
   background-repeat: no-repeat;
   background-position: 0px 11px;
 }
-table.task_list .task_assignee{
+table.task_list .task_assignee {
   width: 75px;
+}
+table.task_list .task_assignee form,
+table.task_list .editing.task_assignee a {
+  display: none;
+}
+table.task_list .editing.task_assignee form {
+  display: block;
 }
 table.task_list td.task_assignee a,
 table.task_list td.task_project a {

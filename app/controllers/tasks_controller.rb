@@ -65,6 +65,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_assignee
+    params[:task][:assignee_id] = nil if params[:task][:assignee_id].blank?
+    @task.update_attribute(:assignee_id, params[:task][:assignee_id])
+    if @task.assignee_id
+      flash[:notice] = "The task has been reassigned to #{@task.assignee.name}."
+    end
+    redirect_to :back
+  end
+
   def update_type
     @task.update_attribute(:type, params[:task][:type])
     # Reload from the db so that it's aware of its new type.

@@ -46,6 +46,10 @@ var Tasks = {
       }
     });
     dueDateForms.inlineEditor({title: "Click to edit due date"});
+    $(".task_assignee").click(function(e) {
+      if (e.target.tagName != "A")
+        $(this).addClass("editing");
+    })
   },
   updateType: function(linkElem) {
     var form = linkElem.parent();
