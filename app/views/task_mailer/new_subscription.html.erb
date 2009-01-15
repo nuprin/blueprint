@@ -1,0 +1,18 @@
+<%= @editor.name %> added you to the cc list.
+
+DESCRIPTION
+<%= @task.description %>
+
+<% if @task.comments.any? -%>
+COMMENTS
+<% @task.comments.each do |comment| -%>
+<%= comment.author.name %> wrote:
+<%= comment.text %>
+
+<% end -%>
+<% end -%>
+View this task:
+<%= task_url(@task) %>
+
+----
+<%= task_footer(@task) %>
