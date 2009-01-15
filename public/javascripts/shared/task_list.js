@@ -46,7 +46,8 @@ var Tasks = {
       }
     });
     dueDateForms.inlineEditor({title: "Click to edit due date"});
-    $(".task_assignee").click(function(e) {
+    assigneeCells = trElem ? trElem.find(".task_assignee") : $(".task_assignee")
+    assigneeCells.click(function(e) {
       if (e.target.tagName != "A")
         $(this).addClass("editing");
     })
