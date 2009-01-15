@@ -123,6 +123,11 @@
         <% if @task.completed? %>
           <%= link_to "Mark Incomplete", prioritize_task_path(@task),
              :method => :post %>
+        <% elsif @task.parked? %>
+          <%= link_to "Prioritize", prioritize_task_path(@task),
+             :method => :post %>
+        <% elsif @task.prioritized? %>
+          <%= link_to "Park", park_task_path(@task), :method => :post %>
         <% end %>
       </div>
       <% if @task.is_a?(Deliverable) %>
