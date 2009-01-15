@@ -48,7 +48,7 @@ messages.each do |message_id|
     task_id = $1.to_i
     puts task_id
     
-    raw_body = raw_msg.attr["BODY[1]"]
+    raw_body = raw_msg.attr["BODY[1]"].gsub("=\r\n", '')
     comment = remove_quotation(raw_body)
 
     #create a comment from the info above
