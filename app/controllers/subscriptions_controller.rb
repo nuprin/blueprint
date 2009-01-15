@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
     begin
       sub = Subscription.create!(params[:subscription])
       TaskMailer.deliver_new_subscription(sub, viewer)
+      TaskEdit.record_subscription!(sub, viewer)
       locals = {:sub => sub}
       render :partial => "/tasks/task_subscription_name", :locals => locals
     rescue ActiveRecord::RecordInvalid

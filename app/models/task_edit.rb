@@ -17,6 +17,11 @@ class TaskEdit < ActiveRecord::Base
     end
   end
 
+  def self.record_subscription!(subscription, editor)
+    self.create! :editor_id => editor.id, :task_id => subscription.task.id,
+                 :field => "subscriptions", :new_value => subscription.user_id
+  end
+
   # TODO [chris]: Eliminate SUPPORTED_FIELDS as we move over emails.
   EMAIL_FIELDS = [
     "assignee_id", "description", "due_date", "estimate", "status"
