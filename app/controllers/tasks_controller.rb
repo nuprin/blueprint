@@ -50,6 +50,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new(params[:task])
+    @task.assignee_id = viewer.id
   end
 
   def edit; end
