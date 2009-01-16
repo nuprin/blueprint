@@ -1,9 +1,8 @@
 <%= @edit.editor.name %> edited the description:
-<% unless @edit.task.description.blank? -%>
+<% unless @edit.new_value.blank? -%>
 <%= @edit.new_value %>
 
 <% end -%>
-
 View this task:
 <%= task_url(@edit.task) %>
 
