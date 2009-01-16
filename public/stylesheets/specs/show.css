@@ -44,11 +44,12 @@
   padding-bottom: 10px;
 }
 #content {
-  line-height: 163%;
+  line-height: 130%;
 }
 #spec {
   border-bottom: 1px solid #ddd;
   font-size: 1.25em;
+  line-height: 130%;
   padding: 30px 20px;
 }
 #spec h1,
