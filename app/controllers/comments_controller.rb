@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
   def create
-    comment = Comment.create!(params[:comment])
-    flash[:notice] = "Your comment has been created. You will also receive " +
-                     "email notifications about future changes to this task."
+    begin
+      comment = Comment.create!(params[:comment])
+      flash[:notice] = "Your comment has been created. You will also receive " +
+                       "email notifications about future changes to this task."
+    rescue ActiveRecord::RecordInvalid
+      flash[:notice] = "Your comment cannot be blank."
+    end
     redirect_to params[:redirect_url]
   end
 
