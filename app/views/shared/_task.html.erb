@@ -23,6 +23,7 @@
     </span>
     <% form_for :task, task, :url => update_title_task_path(task),
       :html => {:method => :put} do |f| %>
+      <%= hidden_field_tag :include_link, 1 %>
       <%= f.text_field :title %>
     <% end %>
     <span class="tags">
@@ -78,6 +79,7 @@
       </span>
       <% form_for :task, task, :url => update_project_task_path(task),
         :html => {:method => :put} do |f| %>
+        <%= hidden_field_tag :include_link, 1 %>
         <%= f.select :project_id,
           Project.all.map{|p| [p.title, p.id]} + [["No Initiative", ""]],
             :include_blank => "Add initiative..." %>
@@ -93,6 +95,7 @@
       </span>
       <% form_for :task, task, :url => update_assignee_task_path(task),
         :html => {:method => :put} do |f| %>
+        <%= hidden_field_tag :include_link, 1 %>
         <%= f.select :assignee_id,
           User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]],
             :include_blank => "Reassign to..." %>

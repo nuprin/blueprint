@@ -69,7 +69,7 @@ class TasksController < ApplicationController
   def update_assignee
     params[:task][:assignee_id] = nil if params[:task][:assignee_id].blank?
     @task.update_attribute(:assignee_id, params[:task][:assignee_id])
-    if @task.assignee_id
+    if @task.assignee_id && params[:include_link].to_i == 1
       user_path = user_path(@task.assignee_id)
       link = "<a href='#{user_path}'>#{@task.assignee.name}</a>"
     else
@@ -81,7 +81,7 @@ class TasksController < ApplicationController
   def update_project
     params[:task][:project_id] = nil if params[:task][:project_id].blank?
     @task.update_attribute(:project_id, params[:task][:project_id])
-    if @task.project_id
+    if @task.project_id && params[:include_link].to_i == 1
       project_path = project_path(@task.project_id)
       link = "<a href='#{project_path}'>#{@task.project.title}</a>"
     else
@@ -92,8 +92,12 @@ class TasksController < ApplicationController
 
   def update_title
     @task.update_attribute(:title, params[:task][:title])
-    task_path = task_path(@task)
-    link = "<a href='#{task_path}'>#{@task.title}</a>"
+    if params[:include_link].to_i == 1
+      task_path = task_path(@task)
+      link = "<a href='#{task_path}'>#{@task.title}</a>"
+    else
+      link = @task.title
+    end
     render :text => link
   end
 
