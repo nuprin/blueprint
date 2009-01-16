@@ -18,7 +18,13 @@
     <% end %>
   </td>
   <td class="task_name">
-    <%= link_to h(task.title), task_path(task) %>
+    <span class="editable">
+      <%= link_to h(task.title), task_path(task) %>
+    </span>
+    <% form_for :task, task, :url => update_title_task_path(task),
+      :html => {:method => :put} do |f| %>
+      <%= f.text_field :title %>
+    <% end %>
     <span class="tags">
       <% if !task.kind.blank? && task.kind != 'task' %>
         <span class="<%= task.kind %>"><%= task.kind %></span>
@@ -65,35 +71,55 @@
   </td>
   <% unless context == "Project" %>
     <td class="task_project<%= ' empty' unless task.project_id %>">
-      <% if task.project_id %>
-        <%= link_to_project task.project %>
+      <span class="editable">
+        <% if task.project_id %>
+          <%= link_to_project task.project %>
+        <% end %>
+      </span>
+      <% form_for :task, task, :url => update_project_task_path(task),
+        :html => {:method => :put} do |f| %>
+        <%= f.select :project_id,
+          Project.all.map{|p| [p.title, p.id]} + [["No Initiative", ""]],
+            :include_blank => "Add initiative..." %>
       <% end %>
     </td>
   <% end %>
   <% unless context == "User" %>
     <td class="task_assignee<%= ' empty' unless task.assignee_id %>">
-      <% if task.assignee_id %>
-        <%= link_to_user task.assignee %>
-      <% end %>
+      <span class="editable">
+        <% if task.assignee_id %>
+          <%= link_to_user task.assignee %>
+        <% end %>
+      </span>
       <% form_for :task, task, :url => update_assignee_task_path(task),
-        :html => {:class => "inline_form", :method => :put} do |f| %>
+        :html => {:method => :put} do |f| %>
         <%= f.select :assignee_id,
-          User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]], {},
-          :onchange => "$(this).parent().submit();"%>
+          User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]],
+            :include_blank => "Reassign to..." %>
       <% end %>
     </td>
   <% end %>
   <td class="task_estimate <%= "empty" unless task.estimate %>">
+    <% value = task.estimate ? pluralize(task.estimate, "hour") : "" %>
+    <span class="editable">
+      <% if task.estimate %>
+        <%= value %>      
+      <% end %>
+    </span>
     <% form_for :task, task, :url => update_estimate_task_path(task),
-      :html => {:class => "inline_form", :method => :put} do |f| %>
-      <% value = task.estimate ? pluralize(task.estimate, "hour") : "" %>
+        :html => {:method => :put} do |f| %>
       <%= f.text_field :estimate, :value => value %>
     <% end %>
   </td>
   <td class="task_due">
+    <% value = task.due_date ? task.due_date.strftime("%b %e") : "" %>
+    <span class="editable">
+      <% if task.due_date %>
+        <%= value %>      
+      <% end %>
+    </span>
     <% form_for :task, task, :url => update_due_date_task_path(task),
-      :html => {:class => "inline_form", :method => :put} do |f| %>
-      <% value = task.due_date ? task.due_date.strftime("%b %e") : "" %>
+      :html => {:method => :put} do |f| %>
       <%= f.text_field :due_date, :value => value %>
     <% end %>
   </td>

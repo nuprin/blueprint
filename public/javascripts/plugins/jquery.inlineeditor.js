@@ -12,11 +12,10 @@
       var onSuccess = function(data) {
         form.hide();
         editable.show();
-        textInput.val(data);
-        editable.text(textInput.val());
+        editable.html(data);
         editable.removeClass(settings.errorClass);
         if (settings.onSuccessFn) {
-          settings.onSuccessFn(form);
+          settings.onSuccessFn(clickable);
         }
       }
 
@@ -32,26 +31,41 @@
         form.ajaxSubmit({success: onSuccess, error: onError});
       }
 
-      var onClick = function() {
-        editable.hide();
-        form.show();
-        textInput.focus().select();
-        form.submit(onSubmit);
+      var onChange = function(e) {
+        e.preventDefault();
+        form.ajaxSubmit({success: onSuccess, error: onError});
       }
 
-      var form = $(this);
+      var onClick = function(e) {
+        if (e.target.tagName == "A") {
+          return;
+        }
+        editable.hide();
+        form.css("display", "inline");
+        if (textInput.length > 0) {
+          textInput.focus().select();
+          form.submit(onSubmit);
+        }
+        else if (select.length > 0) {
+          select.focus();
+          select.change(onChange);
+        }
+      }
+
+      var clickable = $(this);
+      var form = clickable.find("form");
+      var select = form.find("select");
       var textInput = form.find("input[type=text]");
-      var editable = $("<div>" + textInput.val() + "</div>").insertAfter(form);
+      var editable = clickable.find(".editable");
 
       form.hide();
       editable.attr("title", settings.title);
-      editable.attr("class", "editable");
-      editable.click(onClick);    
+      clickable.click(onClick);
     });
   };
 })(jQuery);
 
 $.fn.inlineEditor.defaults = {
   errorClass: "inlineError",
-  title: "Click to edit"
+  title: "Click to Edit"
 };

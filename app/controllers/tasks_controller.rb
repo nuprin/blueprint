@@ -70,9 +70,31 @@ class TasksController < ApplicationController
     params[:task][:assignee_id] = nil if params[:task][:assignee_id].blank?
     @task.update_attribute(:assignee_id, params[:task][:assignee_id])
     if @task.assignee_id
-      flash[:notice] = "The task has been reassigned to #{@task.assignee.name}."
+      user_path = user_path(@task.assignee_id)
+      link = "<a href='#{user_path}'>#{@task.assignee.name}</a>"
+    else
+      link = ""
     end
-    redirect_to :back
+    render :text => link
+  end
+
+  def update_project
+    params[:task][:project_id] = nil if params[:task][:project_id].blank?
+    @task.update_attribute(:project_id, params[:task][:project_id])
+    if @task.project_id
+      project_path = project_path(@task.project_id)
+      link = "<a href='#{project_path}'>#{@task.project.title}</a>"
+    else
+      link = ""
+    end
+    render :text => link
+  end
+
+  def update_title
+    @task.update_attribute(:title, params[:task][:title])
+    task_path = task_path(@task)
+    link = "<a href='#{task_path}'>#{@task.title}</a>"
+    render :text => link
   end
 
   def update_type

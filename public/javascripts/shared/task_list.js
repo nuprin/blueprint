@@ -35,22 +35,26 @@ var Tasks = {
     });
   },
   setupInlineEditing: function(trElem) {
-    estimateForms = trElem ? trElem.find(".task_estimate>.inline_form") :
-                             $(".task_estimate>.inline_form");
-    dueDateForms = trElem ? trElem.find(".task_due>.inline_form") :
-                            $(".task_due>.inline_form");
+    estimateForms = trElem ? trElem.find(".task_estimate") : 
+                             $(".task_estimate");
     estimateForms.inlineEditor({
       title: "Click to edit estimate",
-      onSuccessFn: function(form) {
-        form.parents("td").removeClass("empty");
+      onSuccessFn: function(clickable) {
+        clickable.removeClass("empty");
       }
     });
+
+    dueDateForms = trElem ? trElem.find(".task_due") : $(".task_due");
     dueDateForms.inlineEditor({title: "Click to edit due date"});
+
     assigneeCells = trElem ? trElem.find(".task_assignee") : $(".task_assignee")
-    assigneeCells.click(function(e) {
-      if (e.target.tagName != "A")
-        $(this).addClass("editing");
-    })
+    assigneeCells.inlineEditor();
+
+    names = trElem ? trElem.find(".task_name") : $(".task_name");
+    names.inlineEditor();
+
+    projects = trElem ? trElem.find(".task_project") : $(".task_project");
+    projects.inlineEditor();
   },
   updateType: function(linkElem) {
     var form = linkElem.parent();
