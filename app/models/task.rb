@@ -32,7 +32,7 @@ class Task < ActiveRecord::Base
   }}
   named_scope :completed, :conditions => {:status => "completed"}
   named_scope :completed_since, lambda {|since| {
-    :conditions => {:completed_at => Range.new(since, Time.now)}
+    :conditions => {:completed_at => Range.new(since.getutc, Time.now.getutc)}
   }}
   named_scope :currently_due, :conditions => {:due_date => 
     Range.new(*CURRENT_RANGE)
