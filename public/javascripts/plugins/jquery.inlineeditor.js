@@ -27,13 +27,20 @@
       }
 
       var onSubmit = function(e) {
-        e.preventDefault();
-        form.ajaxSubmit({success: onSuccess, error: onError});
+        if (settings.useAjax) {
+          e.preventDefault();
+          form.ajaxSubmit({success: onSuccess, error: onError});
+        }
       }
 
       var onChange = function(e) {
-        e.preventDefault();
-        form.ajaxSubmit({success: onSuccess, error: onError});
+        if (settings.useAjax) {
+          e.preventDefault();
+          form.ajaxSubmit({success: onSuccess, error: onError});
+        }
+        else {
+          form.submit();
+        }
       }
 
       var onClick = function(e) {
@@ -42,14 +49,23 @@
         }
         editable.hide();
         form.css("display", "inline");
-        if (textInput.length > 0) {
-          textInput.focus().select();
-          form.submit(onSubmit);
-        }
-        else if (select.length > 0) {
-          select.focus();
-          select.change(onChange);
-        } else if (textarea.length > 0) {
+        processInput();
+        processSelect();
+        processTextArea();
+      }
+
+      var processInput = function() {
+        textInput.focus().select();
+        form.submit(onSubmit);        
+      }
+
+      var processSelect = function() {
+        select.focus();
+        select.change(onChange);
+      }
+
+      var processTextArea = function() {
+        if (textarea.length > 0) {
           textarea.focus().select();
           form.submit(onSubmit);
         }
@@ -62,7 +78,7 @@
       var textarea = form.find("textarea");
       var editable = clickable.find(".editable");
       
-      if (editable.html().length > 0)
+      if (editable.html() && editable.html().length > 0)
         form.hide();
       editable.attr("title", settings.title);
       clickable.click(onClick);
@@ -72,5 +88,6 @@
 
 $.fn.inlineEditor.defaults = {
   errorClass: "inlineError",
-  title: "Click to Edit"
+  title: "Click to Edit",
+  useAjax: true
 };

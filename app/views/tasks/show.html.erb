@@ -30,8 +30,15 @@
         <span class="pound">#</span><%= @task.id %>
       </div>
     </div>
-    <div class="<%= @task.status.downcase %>" id="status">
-      <%= @task.status.capitalize %>      
+    <div id="status_container">
+      <div class="<%= @task.status.downcase %> editable" id="status">
+        <%= @task.status.capitalize %>
+      </div>
+      <% form_for :task, @task, :html => {:method => :put} do |f| %>
+        <%= f.select :status, [
+          ["Prioritized", "prioritized"], ["Parked", "parked"]
+        ] %>
+      <% end %>
     </div>
   </div>
   <div id="task">

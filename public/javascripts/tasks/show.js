@@ -19,4 +19,5 @@ $(function(){
   })
   $("#task_primary_info h1").inlineEditor();
   $("#description").inlineEditor();
+  $("#status_container").inlineEditor({useAjax: false});
 })
