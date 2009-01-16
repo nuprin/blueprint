@@ -18,4 +18,5 @@ $(function(){
     $("#final_comment_text").focus();
   })
   $("#task_primary_info h1").inlineEditor();
+  $("#description").inlineEditor();
 })

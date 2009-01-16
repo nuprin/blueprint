@@ -78,6 +78,11 @@ class TasksController < ApplicationController
     render :text => link
   end
 
+  def update_description
+    @task.update_attribute(:description, params[:task][:description])
+    render :text => @task.description
+  end
+
   def update_project
     params[:task][:project_id] = nil if params[:task][:project_id].blank?
     @task.update_attribute(:project_id, params[:task][:project_id])

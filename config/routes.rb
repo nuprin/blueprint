@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
                   :park => :post,
                   :prioritize => :post,
                   :update_assignee => :put,
+                  :update_description => :put,
                   :update_due_date => :put,
                   :update_estimate => :put,
                   :update_project => :put,

@@ -49,6 +49,9 @@
         else if (select.length > 0) {
           select.focus();
           select.change(onChange);
+        } else if (textarea.length > 0) {
+          textarea.focus().select();
+          form.submit(onSubmit);
         }
       }
 
@@ -56,9 +59,11 @@
       var form = clickable.find("form");
       var select = form.find("select");
       var textInput = form.find("input[type=text]");
+      var textarea = form.find("textarea");
       var editable = clickable.find(".editable");
-
-      form.hide();
+      
+      if (editable.html().length > 0)
+        form.hide();
       editable.attr("title", settings.title);
       clickable.click(onClick);
     });
