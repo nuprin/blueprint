@@ -17,4 +17,5 @@ $(function(){
     $("#final_comment_text").val($("#comment_text").val());
     $("#final_comment_text").focus();
   })
+  $("#task_primary_info h1").inlineEditor();
 })

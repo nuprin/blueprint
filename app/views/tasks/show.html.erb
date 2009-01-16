@@ -37,7 +37,13 @@
   <div id="task">
     <div id="task_info">
       <div id="task_primary_info">
-        <h1><%= @title %></h1>
+        <h1>
+          <span class="editable"><%= @title %></span>
+          <% form_for :task, @task, :html => {:method => :put},
+            :url => update_title_task_path(@task) do |f| %>
+            <%= f.text_field :title %>
+          <% end %>
+        </h1>
         <div id="task_meta">
           <% if !@task.kind.blank? && @task.kind != "task" %>
             <%= @task.kind.capitalize %> |
