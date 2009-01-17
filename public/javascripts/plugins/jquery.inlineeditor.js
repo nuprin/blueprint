@@ -9,6 +9,8 @@
     var settings = $.extend($.fn.inlineEditor.defaults, options);
 
     return this.each(function() {  
+      var inputField;
+
       var onSuccess = function(data) {
         form.hide();
         editable.show();
@@ -52,20 +54,34 @@
         processInput();
         processSelect();
         processTextArea();
+        inputField.blur(onBlur);
+        
+      }
+
+      var onBlur = function(e) {
+        form.hide();
+        editable.show();
       }
 
       var processInput = function() {
-        textInput.focus().select();
-        form.submit(onSubmit);        
+        if (textInput.length > 0) {
+          inputField = textInput;
+          textInput.focus().select();
+          form.submit(onSubmit);        
+        }
       }
 
       var processSelect = function() {
-        select.focus();
-        select.change(onChange);
+        if (select.length > 0) {
+          inputField = select;
+          select.focus();
+          select.change(onChange);
+        }
       }
 
       var processTextArea = function() {
         if (textarea.length > 0) {
+          inputField = textarea;
           textarea.focus().select();
           form.submit(onSubmit);
         }
