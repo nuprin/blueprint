@@ -34,7 +34,8 @@
       <div class="<%= @task.status.downcase %> editable" id="status">
         <%= @task.status.capitalize %>
       </div>
-      <% form_for :task, @task, :html => {:method => :put} do |f| %>
+      <% form_for :task, @task, :html => {:method => :put},
+        :url => update_status_task_path(@task) do |f| %>
         <%= f.select :status, [
           ["Prioritized", "prioritized"], ["Parked", "parked"]
         ] %>

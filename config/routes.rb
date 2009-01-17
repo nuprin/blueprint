@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
                   :update_due_date => :put,
                   :update_estimate => :put,
                   :update_project => :put,
+                  :update_status => :put,
                   :update_title => :put,
                   :update_type => :put
                 },
