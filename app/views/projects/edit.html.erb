@@ -19,6 +19,11 @@
     <%= f.text_field :mission %>
   </p>
   <p>
+    Category:<br />
+    <%= f.select :category_id, ProjectCategory.form_options,
+      :include_blank => true %>
+  </p>
+  <p>
     Subscriptions:
     <ul class="clearfix" id="subscriptions_list">
       <% User.sorted.each do |u| %>

@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  belongs_to :category, :class_name => "ProjectCategory"
+
   has_many :assignees, :through => :tasks, :uniq => true, :order => :name
   has_many :comments, :as => :commentable
   has_many :subscriptions, :as => :entity

@@ -3,8 +3,17 @@
 <% form_for(@project) do |f| %>
   <%= f.error_messages %>
   <p>
-    <label for="project_title">Title:</label><br />
+    <%= f.label :title %><br />
     <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :mission %>:<br />
+    <%= f.text_field :mission %>
+  </p>
+  <p>
+    <%= f.label :category_id %>:<br />
+    <%= f.select :category_id, ProjectCategory.form_options,
+      :include_blank => true %>
   </p>
   <p>
     <%= f.submit "Create Initiative" %>

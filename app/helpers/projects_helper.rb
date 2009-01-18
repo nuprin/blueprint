@@ -6,8 +6,8 @@ module ProjectsHelper
     else
       fields << ["ONGOING"]
     end
-    if project.estimate > 0
-      fields << ["ESTIMATE", pluralize(project.estimate, "hour")]
+    if project.category_id
+      fields << ["CATEGORY", project.category.name]
     end
     if project.subscribed_users.any?
       assignees = project.subscribed_users.map do |u|
