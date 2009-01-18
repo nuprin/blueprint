@@ -31,6 +31,9 @@ table.task_list {
   white-space: nowrap;
   width: 760px;
 }
+table.task_list .editable+form {
+  display: none;
+}
 table.task_list tbody {
   border-top: 1px solid #e9f1f5;
 }
