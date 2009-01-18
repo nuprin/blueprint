@@ -7,8 +7,12 @@ describe "a generic task email", :shared => true do
     @mail.from[0].should == TaskMailer::FROM_EMAIL
   end
 
-  it "should have the generic task subject" do
-    @mail.subject.should == "(##{@task.id}) #{@task.title}"
+  it "should include the title in the subject" do
+    @mail.subject.include?("#{@task.title}").should == true
+  end
+
+  it "should include the id in the subject" do
+    @mail.subject.include?("##{@task.id}").should == true
   end
 
   it "should have link to the task in the body" do

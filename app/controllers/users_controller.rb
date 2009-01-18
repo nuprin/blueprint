@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :require_login, :except => [:login, :save_login]
 
   def index
-    @users = User.all
+    @users = User.active
   end
 
   def show

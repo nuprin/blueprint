@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   has_many :task_subscriptions, :conditions => {:entity_type => "Task"},
     :class_name => "Subscription"
 
+  named_scope :active, :conditions => {:active => true}
+
   validates_length_of :name, :in => 1...50
 
   include Subscription::UserMethods
@@ -39,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def self.sorted
-    self.all.sort_by(&:name)
+    self.active.sort_by(&:name)
   end
 
   def add_to_list(task)

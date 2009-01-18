@@ -112,7 +112,7 @@ class Task < ActiveRecord::Base
   end
 
   def unsubscribed_users
-    (User.all - subscribed_users).sort_by(&:name)
+    (User.active - subscribed_users).sort_by(&:name)
   end
 
   def subscribed_user_names

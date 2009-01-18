@@ -5,7 +5,7 @@
 <%= javascript_include_tag "tasks/new" %>
 <%= javascript_include_tag "tasks/form" %>
 <script type="text/javascript">
-  var NAME_DATA = <%= (User.all.map do |u|
+  var NAME_DATA = <%= (User.active.map do |u|
     [u.name, u.id]
   end).transpose.to_json %>;
 </script>

@@ -5,7 +5,7 @@
 <script type="text/javascript">
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
     [kind, "kind", kind]
-  end) + (User.all.map do |u| 
+  end) + (User.active.map do |u| 
     [u.name, "assignee_id", u.id]
   end)).transpose.to_json %>;
 </script>
