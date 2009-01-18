@@ -59,8 +59,10 @@
       }
 
       var onBlur = function(e) {
-        form.hide();
-        editable.show();
+        if (form.find("input[type=submit]").length == 0) {
+          form.hide();
+          editable.show();
+        }
       }
 
       var processInput = function() {
