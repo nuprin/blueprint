@@ -157,6 +157,18 @@ input[type=text], textarea {
   border-bottom: 1px solid #012;
   font-family: Helvetica;
 }
+#nav h3 {
+  color: #999;
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0 10px;
+}
+#nav li.divider {
+  background: #ccc;
+  height: 1px;
+  margin: 5px 0;
+}
 #nav #add_button {
   float: right;
 }

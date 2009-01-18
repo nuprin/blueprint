@@ -16,6 +16,9 @@ class Project < ActiveRecord::Base
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
 
+  named_scope :followed_by, lambda { |user| {
+    :conditions => {:id => user.subscribed_project_ids}
+  }}
   named_scope :for_category, lambda { |category_id| {
     :conditions => {:category_id => category_id}
   }}
