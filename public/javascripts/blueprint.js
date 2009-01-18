@@ -5,8 +5,11 @@ var KeyboardShortcuts = {
       "a": function() {
         $(".quick_add_link:eq(0)").trigger("click");      
       },
-      'c': function() {
-        location.href = "/company";
+      'i': function() {
+        location.href = "/projects/all";
+      },
+      "n": function() {
+        location.href = "/tasks/new"
       },
       's': function() {
         location.href = "/users/" + VIEWER_ID + "/subscribed"
@@ -15,7 +18,7 @@ var KeyboardShortcuts = {
         location.href = "/";
       },
       '¿': function() {
-        $("#q").focus();        
+        $("#q").focus();
       }
     })
     // TODO: MOve this over to shortkeys when it supports the concept of a
