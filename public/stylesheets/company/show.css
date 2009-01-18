@@ -72,19 +72,7 @@
 }
 #current .task {
   font-weight: bold;
-}
-#inactive_initiatives h2 {
-  margin-bottom: .5em;
-}
-#inactive_initiatives li {
-  border-bottom: 1px solid #ddd;
-  line-height: 33px;
-}
-#inactive_initiatives .add {
-  float: right;
-  font-size: 11px;
-  margin-top: 1px;
-}
+}\
 #initiatives {
   margin-bottom: 40px;
 }

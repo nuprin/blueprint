@@ -15,9 +15,8 @@
             subscribed_user_path(viewer) %></li>
         </ul>      
       </li>
-      <li><%= link_to "COMPANY", company_path %></li>
       <li>
-        <%= link_to "INITIATIVES", projects_path %>
+        <%= link_to "INITIATIVES", all_projects_path %>
         <ul style="display: none">
           <% Project.active.each do |p| %>
             <li><%= link_to p.title, project_path(p) %></li>

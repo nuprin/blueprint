@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'shared/header' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'projects/index' %>
 <%= javascript_include_tag 'shared/task_list' %>
 
 <script type="text/javascript">
@@ -12,16 +13,33 @@
 
 <% @title = "Initiatives" %>
 
+<%= render :partial => "/shared/nav",
+  :locals => {:tab_links => project_tab_links} %>
+
 <div id="task_list">
   <% @projects.each do |project| %>
-    <% task_object =
-    Task.new(:kind => "", :status => "prioritized", :project_id => project.id)
-    %>
+    <% title =
+      render(:partial => "modify_project", :locals => {:project => project}) %>
     <%= render :partial => "/shared/task_list",
-               :locals => {:title       => project.title,
-                           :see_all_url => project_path(project),
-                           :tasks       => project.task_list,
-                           :context     => project.class.name,
-                           :task_object => task_object} %>                       
+               :locals => {:title       => title,
+                           :tasks       => project.task_list.first(5),
+                           :context     => project.class.name} %>                       
   <% end %>
 </div>
+
+<% if params[:category_id].blank? %>
+  <div id="inactive_initiatives">
+    <h2>Other Initiatives</h2>
+    <ul class="clearfix">
+    <% Initiative.inactive.each do |initiative| %>
+      <%# TODO [chris]: Rename project_path to initiative_path. %>
+      <li class="clearfix">
+        <%= link_to "+ Add to Active",
+          set_active_project_path(initiative), :method => :put,
+          :class => "add" %>
+        <%= link_to_project initiative %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

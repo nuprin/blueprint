@@ -6,6 +6,24 @@ h2 {
   margin-bottom: 0;
   text-align: left;
 }
+h2 .modify_links {
+  color: #888;
+  float: right;
+  font-weight: normal;
+}
+h2 .modify_links a {
+  color: #888;
+}
+h2 .modify_links span.divider {
+  margin: 0 4px;
+}
+h2 .project_category {
+  color: #888;
+  font-weight: normal;
+}
+h2 .project_category div {
+  display: inline;
+}
 table.task_list {
   border-collapse: collapse;
   margin: 0 0 20px;

@@ -55,6 +55,8 @@ var Tasks = {
 
     projects = trElem ? trElem.find(".task_project") : $(".task_project");
     projects.inlineEditor();
+    
+    $(".project_category").inlineEditor();
   },
   updateType: function(linkElem) {
     var form = linkElem.parent();

@@ -9,7 +9,8 @@ class Initiative < ActiveRecord::Base
     :conditions => {:type => "Deliverable"}
 
   named_scope :active,   :conditions => {:status => "active"}
-  named_scope :inactive, :conditions => "status != 'active'"
+  named_scope :inactive, :conditions => "status != 'active'",
+    :order => "title ASC"
 
   def prioritized_deliverables_by_day
     deliverables = self.deliverables.prioritized_or_completed_recently

@@ -1,0 +1,12 @@
+<%= stylesheet_link_tag "shared/header" %>
+<%= stylesheet_link_tag "projects/nav" %>
+
+<div class="clearfix" id="tabs">
+  <% tab_links.each do |name, path| %>
+    <% if current_page?(path) %>
+      <%= link_to name, path, :class => "current" %>
+    <% else %>
+      <%= link_to name, path %>
+    <% end %>
+  <% end %>
+</div>

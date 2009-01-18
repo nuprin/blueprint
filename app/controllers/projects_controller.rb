@@ -1,6 +1,11 @@
 class ProjectsController < ApplicationController
+  def all
+    @projects = Project.active    
+    render :action => "index"
+  end
+
   def index
-    @projects = Project.active
+    @projects = Project.active.for_category(params[:category_id])
   end
 
   def edit
@@ -17,6 +22,12 @@ class ProjectsController < ApplicationController
     end
     flash[:notice] = "Your changes have been saved."
     redirect_to project_path(@project)
+  end
+
+  def update_category
+    @project = Project.find(params[:id])
+    @project.update_attribute(:category_id, params[:project][:category_id])
+    render :text => @project.category_name
   end
 
   def new

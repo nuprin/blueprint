@@ -10,6 +10,9 @@ ActionController::Routing::Routes.draw do |map|
                   :parked => :get,
                   :set_active   => :put,
                   :set_inactive => :put,
+                  :update_category => :put
+                }, :collection => {
+                  :all => :get
                 } do |projects|
                   projects.resource :specification
                 end

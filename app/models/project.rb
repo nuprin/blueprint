@@ -16,11 +16,15 @@ class Project < ActiveRecord::Base
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
 
+  named_scope :for_category, lambda { |category_id| {
+    :conditions => {:category_id => category_id}
+  }}
+  
   validates_length_of :title, :in => 1...255
   indexes_columns :title, :using => :ferret
   
   def to_s
-    title
+    self.title
   end
 
   def completed_tasks
@@ -61,6 +65,10 @@ class Project < ActiveRecord::Base
     self.sorted.map{|p| [p.title, p.id]}
   end
   
+  def category_name
+    self.category_id ? self.category.name : "Uncategorized"
+  end
+
   def mass_mailer
     MassMailer.new(self)
   end

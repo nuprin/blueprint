@@ -1,0 +1,15 @@
+#inactive_initiatives {
+  background: white;
+  padding: 20px;
+}
+#inactive_initiatives h2 {
+  line-height: 13px;
+  margin-bottom: .5em;
+}
+#inactive_initiatives li {
+  border-bottom: 1px solid #ddd;
+  padding: 11px 0 9px;
+}
+#inactive_initiatives .add {
+  float: right;
+}
