@@ -6,7 +6,7 @@ class CreateProjectCategories < ActiveRecord::Migration
     [
       "Business Development",
       "Engineering",
-      "Nonprofit",
+      "Activist",
       "Product"
     ].each do |name|
       ProjectCategory.create(:name => name)
