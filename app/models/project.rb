@@ -65,7 +65,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.all_for_select
-    self.sorted.map{|p| [p.title, p.id]}
+    self.active.map{|p| [p.title, p.id]}
   end
   
   def category_name
