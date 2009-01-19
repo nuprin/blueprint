@@ -125,7 +125,7 @@ class Task < ActiveRecord::Base
   
   before_save :adjust_year, :update_lists, :set_type
 
-  before_update :record_changes
+  before_update :check_reassignment, :record_changes
 
   def record_changes
     TaskEdit.record_changes!(self)
@@ -186,12 +186,15 @@ class Task < ActiveRecord::Base
   end
 
   after_create do |task|
-    if task.assignee_id
-      task.assignee.subscribe_to(task)
-    end
     task.creator.subscribe_to(task)
     if task.prioritized?
       task.add_to_lists
+    end
+  end
+
+  after_save do |task|
+    if task.project_id && task.assignee_id
+      task.assignee.subscribe_to(task.project)
     end
   end
 
@@ -199,12 +202,12 @@ class Task < ActiveRecord::Base
     task.list_items.destroy_all
   end
   
-  after_save do |task|
-    if task.project_id && task.assignee_id
-      task.assignee.subscribe_to(task.project)
+  def check_reassignment
+    if self.assignee_id
+      self.assignee.subscribe_to(self)
     end
   end
-  
+
   module UserMethods
     def tasks_completed_by_day(since = 7.days.ago)
       range = [since, Time.now.getutc]

@@ -5,7 +5,7 @@ class TaskListItem < ActiveRecord::Base
 
   belongs_to :task
   belongs_to :context, :polymorphic => true
-
+  
   validates_presence_of :task
   validates_presence_of :context
 
