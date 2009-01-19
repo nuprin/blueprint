@@ -80,7 +80,7 @@ class TasksController < ApplicationController
 
   def update_description
     @task.update_attribute(:description, params[:task][:description])
-    render :text => @task.description
+    render :inline => "<%= format_text(@task.description) %>"
   end
 
   def update_status

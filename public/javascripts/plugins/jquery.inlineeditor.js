@@ -21,6 +21,7 @@
         editable.show();
         editable.html(data);
         editable.removeClass(settings.errorClass);
+        clickable.removeClass("editing");
         if (settings.onSuccessFn) {
           settings.onSuccessFn(clickable);
         }
@@ -60,13 +61,14 @@
         processSelect();
         processTextArea();
         inputField.blur(onBlur);
-        
+        clickable.addClass("editing");
       }
 
       var onBlur = function(e) {
         if (form.find("input[type=submit]").length == 0) {
           form.hide();
           editable.show();
+          clickable.removeClass("editing");
         }
       }
 
@@ -89,7 +91,7 @@
       var processTextArea = function() {
         if (textarea.length > 0) {
           inputField = textarea;
-          textarea.focus().select();
+          inputField.focus();
           form.submit(onSubmit);
         }
       }

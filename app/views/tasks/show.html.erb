@@ -63,20 +63,13 @@
           <% end %>
         </div>
         <div id="description">
-          <% if @task.description.blank? %>
-            <% form_for(:task, @task, :html => {:method => :put}) do |f| %>
-              <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
-              <%= f.submit "Save Description", :tabindex => 2 %>
-            <% end %>
-          <% else %>
-            <div class="editable">
-              <%= format_text(@task.description) %>
-            </div>
-            <% form_for(:task, @task, :html => {:method => :put},
-              :url => update_description_task_path(@task)) do |f| %>
-              <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
-              <%= f.submit "Save Description", :tabindex => 2 %>
-            <% end %>
+          <div class="editable<%= ' empty' if @task.description.blank? %>">
+            <%= format_text(@task.description) %>
+          </div>
+          <% form_for(:task, @task, :html => {:method => :put},
+            :url => update_description_task_path(@task)) do |f| %>
+            <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
+            <%= f.submit "Save Description", :tabindex => 2 %>
           <% end %>
         </div>
       </div>

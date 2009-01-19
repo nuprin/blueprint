@@ -164,20 +164,18 @@ h2 {
   padding-right: 0;
 }
 #description textarea {
-  background: #e3e3e3;
+  background: #fff;
   border: 1px solid #ccc;
+  height: 12em;
   width: 553px;
 }
-#description .editing textarea {
-  background: #fff;
-  height: 12em;
+#description .empty {
+  background: #eee;
+  border: 1px solid #ddd;
+  height: 5em;
 }
 #description #task_submit {
-  display: none;
   margin-top: 10px;
-}
-#description .editing #task_submit {
-  display: block;
 }
 #primary_action {
   float: right;

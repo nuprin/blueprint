@@ -1,7 +1,4 @@
 $(function(){
-  $("#task_description").focus(function(){
-    $(this).parents("form").addClass("editing");
-  })
   $("#complete_link").click(function(e) {
     e.preventDefault();
     $("#confirm_completion").modal({overlayCss: {
@@ -18,6 +15,8 @@ $(function(){
     $("#final_comment_text").focus();
   })
   $("#task_primary_info h1").inlineEditor();
-  $("#description").inlineEditor();
+  $("#description").inlineEditor({onSuccessFn: function(elem) {
+    elem.find(".editable").removeClass("empty");
+  }});
   $("#status_container").inlineEditor();
 })
