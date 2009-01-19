@@ -9,6 +9,9 @@ class TaskListItem < ActiveRecord::Base
   validates_presence_of :task
   validates_presence_of :context
 
+  validates_uniqueness_of :task_id, :scope => [:context_id, :context_type],
+    :message => "cannot be added twice to the same task list"
+  
   named_scope :with_tasks, :include => :task
   named_scope :with_contexts, :include => :context
   named_scope(:for_context, lambda do |context|
@@ -18,6 +21,11 @@ class TaskListItem < ActiveRecord::Base
   named_scope(:after, lambda do |position|
     {:conditions => "position > #{position}"}
   end)
+
+  before_validation do |item|
+    # Only add tasks to lists that have not been completed.
+    !item.task.completed?
+  end
 
   def update_position(pos)
     return if pos == position

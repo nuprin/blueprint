@@ -48,7 +48,7 @@ class Project < ActiveRecord::Base
   end
 
   def add_to_list(task)
-    TaskListItem.create!(:task => task, :context => self)
+    TaskListItem.create(:task => task, :context => self)
   end
 
   def remove_from_list(task)

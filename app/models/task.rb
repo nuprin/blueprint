@@ -150,7 +150,7 @@ class Task < ActiveRecord::Base
   end
 
   def update_lists
-    unless self.new_record?
+    if !self.new_record?
       old_task = Task.find(self.id)
       if self.project_id_changed?
         old_task.project.remove_from_list(old_task) if self.project_id_was
