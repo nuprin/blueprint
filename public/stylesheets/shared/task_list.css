@@ -65,6 +65,12 @@ table.task_list td.task_assignee a,
 table.task_list td.task_project a {
   color: #40678d;
 }
+table.task_list td.task_assignee select {
+  width: 80px;
+}
+table.task_list td.task_project select {
+  width: 130px;
+}
 table.task_list .task_due,
 table.task_list .task_estimate {
   width: 60px;

@@ -98,7 +98,7 @@
         <%= hidden_field_tag :include_link, 1 %>
         <%= f.select :assignee_id,
           User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]],
-            :include_blank => "Reassign to..." %>
+            :include_blank => "Assign..." %>
       <% end %>
     </td>
   <% end %>
