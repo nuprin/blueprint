@@ -30,6 +30,12 @@ class ProjectsController < ApplicationController
     render :text => @project.category_name
   end
 
+  def update_title
+    @project = Project.find(params[:id])
+    @project.update_attribute(:title, params[:project][:title])
+    render :text => @project.title
+  end
+
   def new
     @project = Project.new
   end

@@ -10,7 +10,8 @@ ActionController::Routing::Routes.draw do |map|
                   :parked => :get,
                   :set_active   => :put,
                   :set_inactive => :put,
-                  :update_category => :put
+                  :update_category => :put,
+                  :update_title => :put
                 }, :collection => {
                   :all => :get
                 } do |projects|

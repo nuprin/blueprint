@@ -1,5 +1,12 @@
+<%= javascript_include_tag "projects/header" %>
 <h1>
-  <%= project.title %>
+  <span id="project_title">
+    <span class="editable"><%= project.title %></span>
+    <% form_for :project, :html => {:method => :put},
+      :url => update_title_project_path(project) do |f| %>
+      <%= f.text_field :title %>
+    <% end %>
+  </span>
   <div id="project_fields">
     <% if !project.mission.blank? %>
       <div id="project_mission">

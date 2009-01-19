@@ -38,14 +38,13 @@ var Tasks = {
     estimateForms = trElem ? trElem.find(".task_estimate") : 
                              $(".task_estimate");
     estimateForms.inlineEditor({
-      title: "Click to edit estimate",
       onSuccessFn: function(clickable) {
         clickable.removeClass("empty");
       }
     });
 
     dueDateForms = trElem ? trElem.find(".task_due") : $(".task_due");
-    dueDateForms.inlineEditor({title: "Click to edit due date"});
+    dueDateForms.inlineEditor();
 
     assigneeCells = trElem ? trElem.find(".task_assignee") : $(".task_assignee")
     assigneeCells.inlineEditor();

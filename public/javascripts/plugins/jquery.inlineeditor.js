@@ -4,6 +4,11 @@
  * 
  */
 
+/*
+ * TODO: 
+ *   1. Figure out how to store state for every inline editor.
+ *   2. How to streamline interface to require a minimum of markup.
+ */
 ;(function($) {
   $.fn.inlineEditor = function(options) {
     var settings = $.extend($.fn.inlineEditor.defaults, options);
@@ -95,6 +100,11 @@
       var textInput = form.find("input[type=text]");
       var textarea = form.find("textarea");
       var editable = clickable.find(".editable");
+      
+      var styles = ["font-size", "font-weight"];
+      for (var i in styles) {
+        textInput.css(styles[i], clickable.css(styles[i]));
+      }
       
       if (editable.html() && editable.html().length > 0)
         form.hide();
