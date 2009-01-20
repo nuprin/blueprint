@@ -26,7 +26,7 @@
   </li>      
   <li>
     <%= f.label :feature_id, "Feature:" %><br />
-    <%= f.select :feature_id, Feature.all.map{|feature| [feature.name, feature.id]},
+    <%= f.select :feature_id, Feature.all.map{|feature| [feature.name, feature.id]}.sort,
       :include_blank => "" %>
   </li>
 </ul>
