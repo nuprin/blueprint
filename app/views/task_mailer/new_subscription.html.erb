@@ -1,8 +1,9 @@
 <%= @editor.name %> added you to the cc list.
-
+<% unless @task.description.blank? -%>
 DESCRIPTION
 <%= @task.description %>
 
+<% end -%>
 <% if @task.comments.any? -%>
 COMMENTS
 <% @task.comments.each do |comment| -%>
