@@ -46,7 +46,7 @@ describe TasksController do
   end
 end
 
-describe TasksController, "quick add" do
+describe TasksController, "a quick added task" do
   before(:each) do
     @old_count = Task.count
     @chris = users(:chris)
@@ -67,5 +67,11 @@ describe TasksController, "quick add" do
   it "should send an email to the assignee" do
     TaskMailer.expects(:deliver_task_creation).times(1)
     post :quick_create, :task => @task
+  end
+
+  it "should not send an email if self assigned" do
+    TaskMailer.expects(:deliver_task_creation).times(0)
+    post :quick_create,
+      :task => @task.merge!(:assignee_id => @task[:creator_id])
   end
 end
