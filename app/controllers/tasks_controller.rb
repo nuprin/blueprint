@@ -37,7 +37,7 @@ class TasksController < ApplicationController
       li = TaskListItem.for_context(viewer).first(:conditions => {
         :task_id => task.id
       })
-    else
+    elsif context == "Project"
       li = TaskListItem.for_context(task.project).first(:conditions => {
         :task_id => task.id
       })

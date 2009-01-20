@@ -124,8 +124,9 @@ class Task < ActiveRecord::Base
   end
   
   before_save :adjust_year, :update_lists, :set_type
+  before_update :record_changes
 
-  before_update :check_reassignment, :record_changes
+  after_save :check_reassignment
 
   def record_changes
     TaskEdit.record_changes!(self)

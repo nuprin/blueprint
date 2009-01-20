@@ -45,3 +45,27 @@ describe TasksController do
     response.should redirect_to(user_path(task.assignee_id))
   end
 end
+
+describe TasksController, "quick add" do
+  before(:each) do
+    @old_count = Task.count
+    @chris = users(:chris)
+    @task = {
+      :title => "This is quickly created.",
+      :assignee_id => @chris.id,
+      :creator_id => users(:brad).id,
+      :status => "prioritized",
+      :type => "Deliverable"
+    }
+  end
+
+  it "should require only a name and a creator" do
+    post :quick_create, :task => @task
+    Task.count.should == @old_count + 1
+  end
+  
+  it "should send an email to the assignee" do
+    TaskMailer.expects(:deliver_task_creation).times(1)
+    post :quick_create, :task => @task
+  end
+end
