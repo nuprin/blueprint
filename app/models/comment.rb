@@ -2,8 +2,8 @@ class Comment < ActiveRecord::Base
   belongs_to :author, :class_name => "User"
   belongs_to :commentable, :polymorphic => true
 
-  validates_presence_of :text
-
+  validate :must_have_text_or_photo
+  
   indexes_columns :text, :image_file_name, :using => :ferret
 
   has_attached_file :image,
@@ -11,6 +11,12 @@ class Comment < ActiveRecord::Base
     :url  => "/assets/comments/:id/:style/:basename.:extension",
     :path =>
       ":rails_root/public/assets/comments/:id/:style/:basename.:extension"
+
+  def must_have_text_or_photo
+    if self.image_file_name.blank? && self.text.blank?
+      errors.add_to_base("must have text or a photo")
+    end
+  end
 
   def to_s
     text
