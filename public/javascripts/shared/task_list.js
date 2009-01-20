@@ -40,22 +40,25 @@ var Tasks = {
     estimateForms.inlineEditor({
       onSuccessFn: function(clickable) {
         clickable.removeClass("empty");
-      }
+      },
+      title: "Double-Click to Edit Estimate"
     });
 
     dueDateForms = trElem ? trElem.find(".task_due") : $(".task_due");
-    dueDateForms.inlineEditor();
+    dueDateForms.inlineEditor({title: "Double-Click to Edit Due Date"});
 
     assigneeCells = trElem ? trElem.find(".task_assignee") : $(".task_assignee")
-    assigneeCells.inlineEditor();
+    assigneeCells.inlineEditor({title: "Double-Click to Edit Assignee"});
 
     names = trElem ? trElem.find(".task_name") : $(".task_name");
-    names.inlineEditor({title: "Click to Edit Name"});
+    names.inlineEditor({title: "Double-Click to Edit Name"});
 
     projects = trElem ? trElem.find(".task_project") : $(".task_project");
-    projects.inlineEditor();
+    projects.inlineEditor({title: "Double-Click to Edit Project"});
     
-    $(".project_category").inlineEditor();
+    $(".project_category").inlineEditor({
+      title: "Double-Click to Edit Category"
+    });
   },
   updateType: function(linkElem) {
     var form = linkElem.parent();

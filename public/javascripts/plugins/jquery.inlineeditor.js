@@ -11,12 +11,9 @@
  */
 ;(function($) {
   $.fn.inlineEditor = function(options) {
-    // var settings = $.extend($.fn.inlineEditor.defaults, options);
-    console.log(options);
     return this.each(function() {  
       var inputField;
-      var settings = $.extend($.fn.inlineEditor.defaults, options);
-      console.log("Settings: %o", settings);
+      var settings = $.extend({}, $.fn.inlineEditor.defaults, options);
       var onSuccess = function(data) {
         form.hide();
         editable.show();
@@ -119,6 +116,6 @@
 
 $.fn.inlineEditor.defaults = {
   errorClass: "inlineError",
-  title: "Click to Edit",
+  title: "Double-Click to Edit",
   useAjax: true
 };
