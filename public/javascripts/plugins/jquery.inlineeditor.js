@@ -11,11 +11,12 @@
  */
 ;(function($) {
   $.fn.inlineEditor = function(options) {
-    var settings = $.extend($.fn.inlineEditor.defaults, options);
-
+    // var settings = $.extend($.fn.inlineEditor.defaults, options);
+    console.log(options);
     return this.each(function() {  
       var inputField;
-
+      var settings = $.extend($.fn.inlineEditor.defaults, options);
+      console.log("Settings: %o", settings);
       var onSuccess = function(data) {
         form.hide();
         editable.show();
@@ -51,7 +52,7 @@
         }
       }
 
-      var onClick = function(e) {
+      var onDblClick = function(e) {
         if (e.target.tagName == "A") {
           return;
         }
@@ -111,7 +112,7 @@
       if (editable.html() && editable.html().length > 0)
         form.hide();
       editable.attr("title", settings.title);
-      clickable.click(onClick);
+      clickable.dblclick(onDblClick);
     });
   };
 })(jQuery);

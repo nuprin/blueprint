@@ -50,7 +50,7 @@ var Tasks = {
     assigneeCells.inlineEditor();
 
     names = trElem ? trElem.find(".task_name") : $(".task_name");
-    names.inlineEditor();
+    names.inlineEditor({title: "Click to Edit Name"});
 
     projects = trElem ? trElem.find(".task_project") : $(".task_project");
     projects.inlineEditor();
