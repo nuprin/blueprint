@@ -40,7 +40,8 @@ class Task < ActiveRecord::Base
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
   }}
-  named_scope :parked, :conditions => {:status => "parked"}
+  named_scope :parked, :conditions => {:status => "parked"},
+    :order => "updated_at DESC"
   named_scope :prioritized, :conditions => {:status => "prioritized"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
@@ -85,13 +86,11 @@ class Task < ActiveRecord::Base
   def complete!
     self.status = "completed"
     self.completed_at = Time.now.getutc
-    self.list_items.map(&:destroy)
     self.save!
   end
 
   def park!
     self.status = "parked"
-    self.list_items.map(&:destroy)
     self.save!
   end
 
@@ -103,7 +102,6 @@ class Task < ActiveRecord::Base
     self.status = "prioritized"
     self.completed_at = nil
     self.save!
-    self.add_to_lists
   end
 
   def add_to_lists
@@ -151,6 +149,7 @@ class Task < ActiveRecord::Base
   end
 
   def update_lists
+    # TODO: This can be encapsulated in before_update.
     if !self.new_record?
       old_task = Task.find(self.id)
       if self.project_id_changed?
@@ -160,6 +159,13 @@ class Task < ActiveRecord::Base
       if self.assignee_id_changed?
         old_task.assignee.remove_from_list(old_task) if self.assignee_id_was
         self.assignee.add_to_list(self) if self.assignee_id
+      end
+      if self.status_changed?
+        if ["completed", "parked"].include?(self.status)
+          self.list_items.destroy_all
+        elsif self.status == "prioritized"
+          self.add_to_lists
+        end
       end
     end
     true
