@@ -6,7 +6,12 @@
 <%= @edit.editor.name %> made the task unassigned.
 <%# An assignee was added. -%>
 <% else -%>
-<%= @edit.editor.name %> assigned the task to <%= User.find(@edit.new_value).name %>.
+<%= @edit.editor.name %> assigned the task to <% if @edit.new_value.to_i == @edit.editor_id -%>
+<%= @edit.editor.male? ? "himself" : "herself" %>.
+<% else -%>
+<%= User.find(@edit.new_value).name %>.
+<% end -%>  
+
 <% end -%>
 
 View this task:

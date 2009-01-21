@@ -70,4 +70,11 @@ class User < ActiveRecord::Base
     !self.id.nil?
   end
 
+  def male?
+    self.gender == "M"
+  end
+  
+  def female?
+    !self.male?
+  end
 end
