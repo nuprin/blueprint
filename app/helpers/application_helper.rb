@@ -13,9 +13,13 @@ module ApplicationHelper
   # Order matters!  auto_link links things inside tags
   def format_text(text)
     text = nl2br(text)
+    text = escape_ruby_output(text)
     text = auto_link_tasks(text)
     text = auto_link_commits(text)
     auto_link(text, :all, :target => "_blank")
+  end
+  def escape_ruby_output(text)
+    text.gsub /#<([^>]*)>/, "#&lt;\\1&gt;"
   end
   def auto_link_tasks(text)
     text.gsub /(?:^|\s)#(\d+)/ do |task|
