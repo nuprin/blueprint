@@ -44,7 +44,7 @@ messages.each do |message_id|
   subj_string = envelope.subject
   # Only look at messages with Task IDs
   # TODO: Do we want to just delete the rest?
-  if subj_string =~ /\(#(\d+)\)/
+  if subj_string =~ /#(\d+)/
     task_id = $1.to_i
     puts task_id
     
