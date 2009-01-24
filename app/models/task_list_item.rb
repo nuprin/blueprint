@@ -5,7 +5,8 @@ class TaskListItem < ActiveRecord::Base
 
   belongs_to :task
   belongs_to :context, :polymorphic => true
-  
+
+  validate :cannot_be_subtask
   validates_presence_of :task
   validates_presence_of :context
 
@@ -21,6 +22,12 @@ class TaskListItem < ActiveRecord::Base
   named_scope(:after, lambda do |position|
     {:conditions => "position > #{position}"}
   end)
+
+  def cannot_be_subtask
+    if self.task.parent_id
+      errors.add_to_base("cannot be a subtask")
+    end
+  end
 
   before_validation do |item|
     # Only add tasks to lists that have not been completed.
