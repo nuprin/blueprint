@@ -2,14 +2,15 @@ class TasksController < ApplicationController
   before_filter :find_model
 
   def create
-    raise "You don't exist" unless viewer.real?
     ignore_due_date_if_requested(params[:task])
     begin
-      @task =
-        Task.create_with_subscriptions!(params[:task], params[:cc] || [])
-    rescue ActiveRecord::RecordInvalid
       @task = Task.new(params[:task])
-      flash[:notice] = "Please be sure to include a title."
+      @task.save!
+      (params[:cc] || []).each do |cc_id|
+        @task.subscriptions.create(:user_id => cc_id)
+      end
+      @task.mass_mailer.ignoring(@task.creator).deliver_task_creation
+    rescue ActiveRecord::RecordInvalid
       render :action => "new"
       return
     end

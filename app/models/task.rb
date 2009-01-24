@@ -171,15 +171,6 @@ class Task < ActiveRecord::Base
     true
   end
 
-  def self.create_with_subscriptions!(task_params, cc_ids)
-    task = self.create!(task_params)
-    cc_ids.each do |cc_id|
-      task.subscriptions.create(:user_id => cc_id)
-    end
-    task.mass_mailer.ignoring(task.creator).deliver_task_creation
-    task
-  end
-  
   def mass_mailer
     MassMailer.new(self)
   end
