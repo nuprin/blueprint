@@ -75,3 +75,27 @@ describe TasksController, "a quick added task" do
       :task => @task.merge!(:assignee_id => @task[:creator_id])
   end
 end
+
+describe TasksController, "task creation with bad input" do
+  before(:each) do
+    @task_params = {
+      :title  => "This is a task", :creator_id => users(:brad).id,
+      :status => "prioritized"
+    }
+    @old_count = Task.count
+  end
+
+  it "should not allow a task to be created without a title" do
+    @task_params[:title] = ""
+    post :create, :task => @task_params
+    Task.count.should == @old_count
+    assigns(:task).errors.count.should == 1
+  end
+
+  it "should not allow a task to be created with weird estimate " do
+    @task_params[:estimate] = "2 hours"
+    post :create, :task => @task_params
+    Task.count.should == @old_count
+    assigns(:task).errors.count.should == 1
+  end
+end
