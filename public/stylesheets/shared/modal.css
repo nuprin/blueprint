@@ -1,0 +1,9 @@
+.simplemodal-container {
+  background: #d3dfe5;
+  border: 3px double #999;
+  padding: 20px 15px;
+  width: 500px;
+}
+.simplemodal-overlay {
+  background-color: #000;
+}
