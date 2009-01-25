@@ -1,3 +1,6 @@
+.add_link {
+  float: right;
+}
 #content h1, #content h1 input[type="text"] {
   font-size: 32px;
   margin-bottom: 0;
@@ -8,19 +11,14 @@
   width: 553px;
 }
 h2 {
-  display: block;
-  color: #999;
+  color: #444;
   font-size: 13px;
-  font-weight: normal;
+  font-weight: bold;
+  margin-bottom: 0;
+  text-transform: uppercase;
 }
-#subtasks {
-  padding: 10px;
-}
-#content h1.task_field {
-  padding-bottom: 40px;
-}
-h2 {
-  margin-bottom: 5px;
+#subtasks h2 {
+  padding: 6px 0 20px;
 }
 #cc select,
 #cc .adding .add_link {
@@ -36,7 +34,7 @@ h2 {
   display: block;
 }
 .events_list li {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px dotted #ccc;
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
@@ -44,15 +42,23 @@ h2 {
   border: 1px solid #ddd;
   border-top: none;
 }
-.taskedit {
+.taskedit,
+.taskedit a {
   color: gray;
+}
+.taskedit a {
+  border-bottom: 1px dotted gray;
 }
 .taskedit strong {
   color: #222;
 }
 .taskedit .date {
-  color: #aaa;
-  float: right;
+  color: #666;
+  float: left;
+  width: 125px;
+}
+.taskedit .text {
+  font-style: italic;
 }
 #add_comment_form {
   padding: 10px 0;
@@ -76,13 +82,18 @@ h2 {
 }
 #cc {
   background: white;
-  border-top: 1px solid #ddd;
-  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 12px;
+  padding-top: 6px;
+}
+#cc #add_subscriptions {
+  float: right;
 }
 /* Default overrides */
+#cc_list {
+  margin-left: 125px;
+}
 #cc #cc_list .cc {
-  display: block;
-  float: left;
   margin: 0 5px 5px 0;
 }
 #cc #cc_list .remove_link {
@@ -96,7 +107,7 @@ h2 {
 #comments {
   border-top: 1px solid #ddd;
   margin-top: 1px;
-  padding: 10px;
+  padding: 12px 16px;
 }
 .comment .delete_link {
   color: #999;
@@ -106,16 +117,12 @@ h2 {
   color: #666;
   margin-bottom: 5px;
 }
-#cc h2,
-.comment .meta,
-#subtasks h2 {
+.comment .meta {
   float: left;
-  width: 120px;
+  width: 125px;
 }
-#cc .text,
-.comment .text,
-#subtasks ul {
-  margin-left: 120px;
+.comment .text {
+  margin-left: 125px;
 }
 .comment .text img {
   background: #eee;
@@ -125,9 +132,6 @@ h2 {
 }
 #comments {
   background: white;
-}
-#comments h2 {
-  margin: 6px 0 12px;
 }
 #confirm_completion fieldset {
   border: none;
@@ -229,6 +233,9 @@ h2 {
   padding: 40px 45px 100px;
   width: 710px;
 }
+#following {
+  padding: 2px 0 27px;
+}
 #narrow_col {
   float: left;
   width: 100px;
@@ -250,6 +257,12 @@ h2 {
 #status.prioritized {
   background: #1a6da9;
 }
+#subtasks {
+  background: white;
+  border-top: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+}
 #subtasks img,
 #subtasks input {
   float: left;
@@ -261,6 +274,9 @@ h2 {
 #subtasks li {
   line-height: 18px;
   margin-bottom: 8px;
+}
+#subtasks .add_link {
+  margin-top: 6px;
 }
 #task_identifier {
   background: #eee;

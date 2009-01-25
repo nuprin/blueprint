@@ -106,55 +106,9 @@
         </ul>
       </div>
     </div>
-    <% if @task.children.any? %>
-      <div class="task_field clearfix" id="subtasks">
-        <h2>TASKS</h2>
-        <ul>
-          <% @task.children.each do |child| %>
-            <li class="clearfix">
-              <% if child.completed? %>
-                <%= image_tag 'check.gif' %>
-              <% else %>
-                <% form_tag complete_task_path(child) do %>
-                  <%= check_box_tag "complete_task_id", false, false,
-                    :onclick =>
-                      "$(this).parents('form').submit(); return false;" %>
-                <% end %>
-              <% end %>
-              
-              <%= link_to_task child %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render :partial => "subtasks", :locals => {:task => @task} %>
     <%= render :partial => "comments_and_edits", :locals => {:task => @task} %>
-    <div class='task_field' id='cc'>
-      <%= render :partial => 'cc_list', :locals => {:task => @task} %>
-    </div>
-    <div class="clearfix" id="task_links">
-      <div id="primary_action">
-        <% if @task.completed? %>
-          <%= link_to "Mark Incomplete", prioritize_task_path(@task),
-             :method => :post %>
-        <% elsif @task.parked? %>
-          <%= link_to "Prioritize", prioritize_task_path(@task),
-             :method => :post %>
-        <% elsif @task.prioritized? %>
-          <%= link_to "Park", park_task_path(@task), :method => :post %>
-        <% end %>
-      </div>
-      <% if @task.is_a?(Deliverable) %>
-        <%= link_to "Add Task to Deliverable",
-          new_task_path(:task => {
-            :parent_id => @task.id, :project_id => @task.project_id
-          }) %> -
-      <% end %>
-      <%= link_to "Edit #{@task.displayed_type}", edit_task_path(@task) %> - 
-      <%= link_to "Delete", task_path(@task),
-        :confirm => "Are you sure you want to delete this task?",
-        :method => :delete %>
-    </div>
+    <%= render :partial => "task_links", :locals => {:task => @task} %>
   </div>
 </div>
 

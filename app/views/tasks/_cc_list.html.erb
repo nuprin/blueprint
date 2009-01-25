@@ -1,21 +1,26 @@
 <%= javascript_include_tag "shared/cc_list" %>
-<h2>CC LIST</h2>
-<div class="text">
-  <ul class="clearfix" id='cc_list'>
-    <% task.subscriptions.each do |sub| %>
-      <%= render :partial => "task_subscription_name",
-                 :locals => {:sub => sub} %>
-    <% end %>
-  </ul>
+<div class="clearfix" id="cc">
   <% if_any(task.unsubscribed_users) do |users| %> 
-    <%= link_to_function "Add to List",
-      "$(this).parent().addClass('adding')", :class => "add_link" %>
-    <% form_for :subscription, :url => subscriptions_path,
-                :html => {:id => 'cc_form'} do |f| %>
-       <%= f.hidden_field :entity_type, :value => "Task" %>
-       <%= f.hidden_field :entity_id, :value => task.id %>
-       <%= f.select :user_id, users.map{|u| [u.name, u.id]},
-         :include_blank => "Add a name..." %>
-    <% end %>
+    <div id="add_subscriptions">
+      <%= link_to_function "+ Add to CC List",
+        "$(this).parent().addClass('adding')", :class => "add_link" %>
+      <% form_for :subscription, :url => subscriptions_path,
+                  :html => {:id => 'cc_form'} do |f| %>
+         <%= f.hidden_field :entity_type, :value => "Task" %>
+         <%= f.hidden_field :entity_id, :value => task.id %>
+         <%= f.select :user_id, users.map{|u| [u.name, u.id]},
+           :include_blank => "Select a person..." %>
+      <% end %>
+    </div>
   <% end %>
+  <h2>Discussion & Updates</h2>
+  <div id="following">
+    <span style="float: left;">Following:</span>
+    <div class="clearfix" id='cc_list'>
+      <% task.subscriptions.each do |sub| %>
+        <%= render :partial => "task_subscription_name",
+                   :locals => {:sub => sub} %>
+      <% end %>
+    </div>
+  </div>
 </div>
