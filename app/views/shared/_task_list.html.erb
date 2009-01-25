@@ -1,5 +1,5 @@
 <% if tasks.any? || local_assigns[:task_object] %>
-  <h2>
+  <h2<%= " class='#{collapsible}'" if local_assigns[:collapsible] %>>
     <% if local_assigns[:see_all_url] %>
       <%= link_to title, see_all_url %>
     <% else %>
@@ -7,8 +7,8 @@
     <% end %>
   </h2>
   <table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
-    <%= " #{title.split(' ').first.downcase}" if title.split(' ').length > 0 %>"
-    id="<%= title.dehumanize %>">
+    <%= " #{context.downcase}_task_list" %>"
+    id="<%= title.dehumanize %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
     <% if local_assigns[:task_object] %>
       <tfoot>
         <tr>

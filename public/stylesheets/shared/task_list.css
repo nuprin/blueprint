@@ -1,4 +1,6 @@
 h2 {
+  background-position: 11px 10px;
+  background-repeat: no-repeat;
   color: #555;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -23,6 +25,17 @@ h2 .project_category {
 }
 h2 .project_category div {
   display: inline;
+}
+h2.collapsed {
+  background-image: url(../../images/arrows/collapsed.gif);
+  padding-left: 31px;
+}
+h2.expanded {
+  background-image: url(../../images/arrows/expanded.gif);
+  padding-left: 31px;
+}
+table.project_task_list td.task_name {
+  width: 446px;
 }
 table.task_list {
   border-collapse: collapse;
@@ -136,6 +149,9 @@ table.task_list .editing .quick_add_form {
 }
 table.unsortable td {
   cursor: default;
+}
+table.user_task_list td.task_name {
+  width: 369px;
 }
 .quick_add_items li {
   background-color: #678;

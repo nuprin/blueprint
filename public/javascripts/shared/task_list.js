@@ -60,6 +60,18 @@ var Tasks = {
       title: "Double-Click to Edit Category"
     });
   },
+  makeCollapsible: function() {
+    $("h2.collapsed").add("h2.expanded").each(function() {
+      $(this).css("cursor", "pointer");
+      $(this).click(function(event) {
+        if (event.target.tagName == "H2") {
+          $(this).toggleClass("collapsed");
+          $(this).toggleClass("expanded");
+          $(this).next().slideToggle("fast");
+        }
+      })
+    })
+  },
   updateType: function(linkElem) {
     var form = linkElem.parent();
     var trElem = linkElem.parents("tr.task");
@@ -142,6 +154,7 @@ $(function() {
   Tasks.makeSortable();
   Tasks.setupActions();
   Tasks.setupInlineEditing();
+  Tasks.makeCollapsible();
   QuickAdd.setup();
   Fluid.setup();
 });
