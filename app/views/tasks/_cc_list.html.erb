@@ -15,12 +15,12 @@
   <% end %>
   <h2>Discussion & Updates</h2>
   <div id="following">
-    <span style="float: left;">Following:</span>
-    <div class="clearfix" id='cc_list'>
+    <label>Following:</label>
+    <span class="clearfix" id='cc_list'>
       <% task.subscriptions.each do |sub| %>
         <%= render :partial => "task_subscription_name",
                    :locals => {:sub => sub} %>
       <% end %>
-    </div>
+    </span>
   </div>
 </div>

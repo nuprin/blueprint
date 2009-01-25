@@ -15,7 +15,6 @@ h2 {
   font-size: 13px;
   font-weight: bold;
   margin-bottom: 0;
-  text-transform: uppercase;
 }
 #subtasks h2 {
   padding: 6px 0 20px;
@@ -41,6 +40,9 @@ h2 {
 .task_field {
   border: 1px solid #ddd;
   border-top: none;
+}
+.task_field h2 {
+  text-transform: uppercase;
 }
 .taskedit,
 .taskedit a {
@@ -90,9 +92,6 @@ h2 {
   float: right;
 }
 /* Default overrides */
-#cc_list {
-  margin-left: 125px;
-}
 #cc #cc_list .cc {
   margin: 0 5px 5px 0;
 }
@@ -235,6 +234,9 @@ h2 {
 }
 #following {
   padding: 2px 0 27px;
+}
+#following label {
+  color: #666;
 }
 #narrow_col {
   float: left;
