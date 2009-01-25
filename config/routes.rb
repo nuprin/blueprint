@@ -13,7 +13,8 @@ ActionController::Routing::Routes.draw do |map|
                   :update_category => :put,
                   :update_title => :put
                 }, :collection => {
-                  :all => :get
+                  :all => :get,
+                  :uncategorized => :get
                 } do |projects|
                   projects.resource :specification
                 end

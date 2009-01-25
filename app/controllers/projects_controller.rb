@@ -8,6 +8,11 @@ class ProjectsController < ApplicationController
     @projects = Project.active.for_category(params[:category_id])
   end
 
+  def uncategorized
+    @projects = Project.active.uncategorized
+    render :action => "index"
+  end
+
   def edit
     @project = Project.find(params[:id])
   end

@@ -22,8 +22,9 @@ module ProjectsHelper
   
   def project_tab_links
     [["ALL", all_projects_path]] +
-      ProjectCategory.all.map do |category|
+      (ProjectCategory.all.map do |category|
         [category.name.upcase, projects_path(:category_id => category.id)]
-      end
+      end) +
+    [["UNCATEGORIZED", uncategorized_projects_path]]
   end
 end
