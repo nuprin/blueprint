@@ -88,12 +88,12 @@ var Tasks = {
     })
   },
   setupParkUntil: function() {
-    $("#custom_time").focus(function() {
+    $("#custom_time").click(function() {
       $("#deferred_task_prioritize_at_custom").attr("checked", "checked");
-    })
+    });
     $("#deferred_task_prioritize_at_custom").click(function() {
       $("#custom_time").focus();
-    })
+    });
   },
   parkUntil: function(taskId) {
     $("#deferred_task_task_id").val(taskId);

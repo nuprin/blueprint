@@ -24,7 +24,7 @@
       <li>
         <%= f.radio_button :prioritize_at, "custom" %>
         <%= f.label "prioritize_at_", "At another time:" %>
-        <%= text_field_tag(:custom_time) %>
+        <%= text_field_tag(:custom_time, "", :tabindex => -2) %>
       </li>
     </ul>
 

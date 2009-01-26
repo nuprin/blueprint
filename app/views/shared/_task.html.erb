@@ -17,7 +17,8 @@
       <%= image_tag 'drag_handle.gif' %>
     <% end %>
   </td>
-  <td class="task_name">
+  <td class="task_name<%= " deferred_task" if task.parked? && 
+    task.deferred_task %>">
     <span class="editable">
       <%= link_to h(task.title), task_path(task) %>
     </span>
