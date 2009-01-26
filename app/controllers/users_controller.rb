@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
   def parked
     @user = User.find(params[:id])
-    @tasks = @user.tasks.parked
+    @tasks = @user.tasks.parked.with_deferred_tasks.with_details
   end
   
   def completed

@@ -88,7 +88,7 @@
         :html => {:method => :put} do |f| %>
         <%= hidden_field_tag :include_link, 1 %>
         <%= f.select :project_id,
-          Project.all.map{|p| [p.title, p.id]} + [["No Initiative", ""]],
+          Project.all_for_select + [["No Initiative", ""]],
             :include_blank => "Add initiative..." %>
       <% end %>
     </td>

@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   private
 
   def viewer
-    @viewer = User.find_by_id(session[:user_id]) || User.new
+    @viewer ||= begin
+      User.find_by_id(session[:user_id]) || User.new
+    end
   end
   helper_method :viewer
 
