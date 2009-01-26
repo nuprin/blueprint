@@ -1,6 +1,6 @@
 <div id="deferred_task_dialog" style="display: none">
   <h2>Park Task Until...</h2>
-  <p>Park this task, and then reprioritize it:</p>
+  <p><strong>Park this task, and then reprioritize it:</strong></p>
   <% form_for :deferred_task, :url => deferred_tasks_path do |f| %>
     <%= f.hidden_field :task_id %>
 
@@ -10,7 +10,8 @@
         <%= f.radio_button :prioritize_at, t0,
           :id => "deferred_task_prioritize_at_0", :checked => "checked" %>
         <%= f.label "prioritize_at_0",
-          "Tomorrow (#{t0.strftime("%b %e %I:00%p")})" %>
+          "Tomorrow <span class='details'>" +
+          "(#{t0.strftime("%b %e %I:00%p")})</span>" %>
       </li>
       <% t1 = Chronic.parse("next monday 6:00am") %>
       <% unless t0 == t1 %>
@@ -18,13 +19,17 @@
           <%= f.radio_button :prioritize_at, t1,
             :id => "deferred_task_prioritize_at_1" %>
           <%= f.label "prioritize_at_1",
-            "Next week (#{t1.strftime("%b %e %I:00%p")})" %>
+            "Next week <span class='details'>" +
+            "(#{t1.strftime("%b %e %I:00%p")})</span>" %>
         </li>
       <% end %>
       <li>
         <%= f.radio_button :prioritize_at, "custom" %>
         <%= f.label "prioritize_at_", "At another time:" %>
         <%= text_field_tag(:custom_time, "", :tabindex => -2) %>
+        <span class="example">
+          e.g. &ldquo;tomorrow noon&rdquo; or &ldquo;1 week hence&rdquo;
+        </span>
       </li>
     </ul>
 

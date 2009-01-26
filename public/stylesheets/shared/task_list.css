@@ -303,6 +303,13 @@ table.prioritized .deliverable .empty.task_estimate {
   margin-top: 0;
   vertical-align: middle;
 }
+#deferred_task_dialog .details,
+#deferred_task_dialog .example {
+  color: gray;
+}
+#deferred_task_dialog .example {
+  font-size: 11px;
+}
 #task_list {
   padding: 30px 20px;
 }
