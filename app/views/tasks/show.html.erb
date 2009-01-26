@@ -58,7 +58,7 @@
             <%= @task.kind.capitalize %> |
           <% end %>
           Created by <%= link_to_user @task.creator %>
-          at <%= @task.created_at.getlocal.strftime("%b %e %I:%m%p") %>
+          at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
           <% if @task.feature_id %>
             | Feature: <%= @task.feature.name %>
           <% end %>

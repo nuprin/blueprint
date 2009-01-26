@@ -56,6 +56,12 @@
             <%= link_to_function name, "Tasks.updateType($(this));" %>
           <% end %>
         </li>
+        <% if task.prioritized? %>
+          <li>
+            <%= link_to_function "Park Until...", "Tasks.parkUntil(#{task.id})"
+            %>
+          </li>
+        <% end %>
         <% if task.completed? %>
           <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
             :method => :post %></li>

@@ -1,4 +1,8 @@
 <% if tasks.any? || local_assigns[:task_object] %>
+
+  <%= stylesheet_link_tag "shared/modal" %>
+  <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
+
   <h2<%= " class='#{collapsible}'" if local_assigns[:collapsible] %>>
     <% if local_assigns[:see_all_url] %>
       <%= link_to title, see_all_url %>
@@ -29,4 +33,6 @@
       <% end %>
     </tbody>
   </table>
+  
+  <%= render_once :partial => "/shared/deferred_task_form" %>
 <% end %>

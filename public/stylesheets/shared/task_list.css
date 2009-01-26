@@ -290,6 +290,13 @@ table.prioritized .deliverable .empty.task_estimate {
   background: #ced8e2;
   padding: 0;
 }
+#deferred_task_dialog li {
+  line-height: 29px;
+}
+#deferred_task_dialog li input[type=radio] {
+  margin-top: 0;
+  vertical-align: middle;
+}
 #task_list {
   padding: 30px 20px;
 }
