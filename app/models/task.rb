@@ -35,21 +35,12 @@ class Task < ActiveRecord::Base
   named_scope :completed_since, lambda {|since| {
     :conditions => {:completed_at => Range.new(since.getutc, Time.now.getutc)}
   }}
-  named_scope :currently_due, :conditions => {:due_date => 
-    Range.new(*CURRENT_RANGE)
-  }
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
   }}
   named_scope :parked, :conditions => {:status => "parked"},
     :order => "updated_at DESC"
   named_scope :prioritized, :conditions => {:status => "prioritized"}
-  named_scope :prioritized_or_completed_recently, :conditions => [
-    "(status = 'prioritized' AND " +
-    "(due_date IS NULL OR (due_date >= ? AND due_date < ?))) OR " +
-    "(status = 'completed' AND (completed_at >= ? AND completed_at < ?))",
-    *Task::CURRENT_RANGE * 2
-  ]
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
   named_scope :with_due_date, :conditions => "due_date IS NOT NULL"
