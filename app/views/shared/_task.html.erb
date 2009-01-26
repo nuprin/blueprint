@@ -59,7 +59,7 @@
         </li>
         <% if task.prioritized? %>
           <li>
-            <%= link_to_function "Park Until...", "Tasks.parkUntil(#{task.id})"
+            <%= link_to_function "Defer Task", "Tasks.parkUntil(#{task.id})"
             %>
           </li>
         <% end %>
