@@ -5,6 +5,12 @@
 #content {
   line-height: 140%;
 }
+#empty_results_message {
+  color: #999;
+  font-size: 19px;
+  padding: 6em 0;
+  text-align: center;
+}
 #results_count {
   margin-bottom: 2em;
 }

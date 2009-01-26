@@ -6,4 +6,15 @@
   <div id="results_count"><%= pluralize(@results.size, "task") %> found:</div>
   <%= render :partial => '/shared/result_set',
              :locals => {:results => @results} %>
+<% else %>
+  <div id="empty_results_message">
+    <p>
+      <strong>
+        No results could be found for &ldquo;<%= params[:q]%>&rdquo;.
+      </strong>
+    </p>
+    <p>
+      Please try again.
+    </p>
+  </div>
 <% end %>
