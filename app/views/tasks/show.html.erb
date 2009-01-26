@@ -7,6 +7,8 @@
   @hide_layout_title = true
 %>
 
+<%= render :partial => "deferred_task_message", :locals => {:task => @task} %>
+
 <% if @task.project_id || @task.parent_id %>
   <div id="breadcrumbs">
     <% if @task.project_id %>

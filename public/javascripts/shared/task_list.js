@@ -98,6 +98,7 @@ var Tasks = {
   parkUntil: function(taskId) {
     $("#deferred_task_task_id").val(taskId);
     $("#deferred_task_dialog").modal();
+    $("#deferred_task_prioritize_at_0").focus();
   }
 };
 

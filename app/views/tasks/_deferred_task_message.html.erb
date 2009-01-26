@@ -1,0 +1,8 @@
+<% if dt = task.deferred_task %>
+  <div id="deferred_task_message">
+    <%= button_to "Prioritize Now", prioritize_task_path(task) %>
+    <%= button_to "Keep Parked", deferred_task_path(dt), :method => :delete %>
+    This task is scheduled to be reprioritized
+    <%= task.deferred_task.prioritize_at.strftime("on %b %e at %I:%M:%p") %>.
+  </div>
+<% end %>

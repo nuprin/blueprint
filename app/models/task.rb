@@ -13,6 +13,7 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => "Task"
   belongs_to :project
 
+  has_one :deferred_task
   has_one :specification
 
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
@@ -95,6 +96,7 @@ class Task < ActiveRecord::Base
   end
 
   def prioritize!
+    self.deferred_task.destroy if self.deferred_task
     self.undo_complete!
   end
   

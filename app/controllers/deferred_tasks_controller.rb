@@ -12,6 +12,13 @@ class DeferredTasksController < ApplicationController
     redirect_to :back
   end
   
+  def destroy
+    dt = DeferredTask.find(params[:id])
+    dt.destroy
+    flash[:notice] = "This task has been parked indefinitely."
+    redirect_to task_path(dt.task_id)
+  end
+
   private
 
   def parse_custom_time
