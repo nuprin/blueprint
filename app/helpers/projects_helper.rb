@@ -21,7 +21,7 @@ module ProjectsHelper
   end
 
   TAB_ORDER = [
-    "PRODUCT", "ACTIVIST", "BUSINESS DEVELOPMENT", "ENGINEERING"
+    "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
   ]
   def project_tab_links
     [["ALL", all_projects_path]] +
