@@ -83,15 +83,34 @@
         <% end %>
         <ul class="clearfix" id="task_logistics">
           <% if @task.project_id %>
-            <li>
+            <li id="initiative">
               <h3>INITIATIVE</h3>
-              <%= link_to_project @task.project %>
+              <div class="editable">
+                <%= link_to_project @task.project %>
+              </div>
+              <% form_for :task, @task, :url => update_project_task_path(@task),
+                :html => {:method => :put} do |f| %>
+                <%= hidden_field_tag :include_link, 1 %>
+                <%= f.select :project_id,
+                  Project.all_for_select + [["No Initiative", ""]],
+                    :include_blank => "Add initiative..." %>
+              <% end %>
             </li>
           <% end %>
           <% if @task.assignee_id %>
-            <li>
+            <li id="assignee">
               <h3>Assigned To</h3>
-              <%= link_to_user @task.assignee %>
+              <div class="editable">
+                <%= link_to_user @task.assignee %>
+              </div>
+              <% form_for :task, @task,
+                :url => update_assignee_task_path(@task),
+                :html => {:method => :put} do |f| %>
+                <%= hidden_field_tag :include_link, 1 %>
+                <%= f.select :assignee_id,
+                  User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]],
+                    :include_blank => "Assign..." %>
+              <% end %>
             </li>
           <% end %>
           <% if @task.due_date %>

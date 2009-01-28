@@ -6,6 +6,8 @@ $(function(){
     $("#final_comment_text").focus();
   })
   $("#task_primary_info h1").inlineEditor();
+  $("#assignee").inlineEditor();
+  $("#initiative").inlineEditor();
   $("#description").inlineEditor({onSuccessFn: function(elem) {
     elem.find(".editable").removeClass("empty");
   }});
