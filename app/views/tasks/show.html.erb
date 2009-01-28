@@ -83,7 +83,7 @@
         <% end %>
         <ul class="clearfix" id="task_logistics">
           <% if @task.project_id %>
-            <li id="initiative">
+            <li>
               <h3>INITIATIVE</h3>
               <div class="editable">
                 <%= link_to_project @task.project %>
@@ -98,7 +98,7 @@
             </li>
           <% end %>
           <% if @task.assignee_id %>
-            <li id="assignee">
+            <li>
               <h3>Assigned To</h3>
               <div class="editable">
                 <%= link_to_user @task.assignee %>
@@ -114,7 +114,7 @@
             </li>
           <% end %>
           <% if @task.due_date %>
-            <li id="due_date">
+            <li>
               <h3>DUE DATE</h3>
               <div class="editable">
                 <%= value = @task.due_date.strftime("%b %e") %>
@@ -129,7 +129,14 @@
           <% if @task.estimate %>
             <li>
               <h3>ESTIMATE</h3>
-              <%= pluralize(@task.estimate, "hour") %>
+              <div class="editable">
+                <%= pluralize(@task.estimate, "hour") %>
+              </div>
+              <% form_for :task, @task,
+                  :url => update_estimate_task_path(@task),
+                  :html => {:method => :put} do |f| %>
+                <%= f.text_field :estimate %>
+              <% end %>
             </li>
           <% end %>
         </ul>
