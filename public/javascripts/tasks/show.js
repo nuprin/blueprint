@@ -8,6 +8,7 @@ $(function(){
   $("#task_primary_info h1").inlineEditor();
   $("#assignee").inlineEditor();
   $("#initiative").inlineEditor();
+  $("#due_date").inlineEditor();
   $("#description").inlineEditor({onSuccessFn: function(elem) {
     elem.find(".editable").removeClass("empty");
   }});

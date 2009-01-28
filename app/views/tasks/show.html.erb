@@ -114,9 +114,16 @@
             </li>
           <% end %>
           <% if @task.due_date %>
-            <li>
+            <li id="due_date">
               <h3>DUE DATE</h3>
-              <%= @task.due_date.strftime("%b %e") %>
+              <div class="editable">
+                <%= value = @task.due_date.strftime("%b %e") %>
+              </div>
+              <% form_for :task, @task,
+                :url => update_due_date_task_path(@task),
+                :html => {:method => :put} do |f| %>
+                <%= f.text_field :due_date, :value => value %>
+              <% end %>
             </li>
           <% end %>
           <% if @task.estimate %>
