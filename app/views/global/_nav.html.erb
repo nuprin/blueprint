@@ -10,9 +10,11 @@
         <ul style="display: none">
           <li><%= link_to "Your Tasks", user_path(viewer) %></li>
           <li><%= link_to "Created by You",
-            created_user_path(viewer) %></li>
+            created_user_path(:id => viewer.id, :status => "prioritized") %>
+          </li>
           <li><%= link_to "Subscribed by You",
-            subscribed_user_path(viewer) %></li>
+            subscribed_user_path(:id => viewer.id, :status => "prioritized") %>
+          </li>
         </ul>      
       </li>
       <li>
