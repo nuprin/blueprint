@@ -15,16 +15,16 @@
         <% fields_for :followup_task do |f| %>
           <legend>Create Followup Task</legend>
           <%= check_box_tag :followup, "1", true %>
-          Create a task to report experiment results in 
+          Create a task to report experiment results in
           <%= f.select :due_date,
             [
-              ["1 day (#{1.day.from_now.strftime("%b %e")})",
+              ["1 day (#{1.day.from_now.getlocal.strftime("%b %e")})",
                1.day.from_now.getlocal.to_date],
-              ["2 days (#{2.days.from_now.strftime("%b %e")})",
+              ["2 days (#{2.days.from_now.getlocal.strftime("%b %e")})",
                2.days.from_now.getlocal.to_date],
-              ["3 days (#{3.days.from_now.strftime("%b %e")})",
+              ["3 days (#{3.days.from_now.getlocal.strftime("%b %e")})",
                3.days.from_now.getlocal.to_date],
-              ["1 week (#{1.week.from_now.strftime("%b %e")})",
+              ["1 week (#{1.week.from_now.getlocal.strftime("%b %e")})",
                1.week.from_now.getlocal.to_date]
             ] %>
           <%= f.hidden_field :creator_id,  :value => viewer.id %>
@@ -45,7 +45,7 @@
         <% fields_for :followup_task do |f| %>
           <legend>Create Followup Task</legend>
           <%= check_box_tag :followup, "1", true %>
-          Assign <strong><%= task.creator.name %></strong> a task to followup 
+          Assign <strong><%= task.creator.name %></strong> a task to followup
           with any affected users.
           <%= f.hidden_field :creator_id,  :value => viewer.id %>
           <%= f.hidden_field :assignee_id, :value => task.creator_id %>
@@ -62,7 +62,7 @@
               :value => "This is an automatically generated " +
               "task for following up with bug ##{task.id}. " +
               "(#{task.title})" %>
-          </div>      
+          </div>
         <% end %>
       </fieldset>
     <% end %>
