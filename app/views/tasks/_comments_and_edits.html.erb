@@ -1,5 +1,5 @@
 <div class="task_field" id="comments">
-  <h2>DISCUSSION & UPDATES</h2>
+  <%= render :partial => 'cc_list', :locals => {:task => task} %>
   <ul class="events_list">
     <% task.comments_and_edits.each do |comment_or_edit| %>
       <li class="<%= comment_or_edit.class.name.downcase %> clearfix">
@@ -10,8 +10,10 @@
           <div class="date">
             <%= comment_or_edit.created_at.getlocal.strftime("%b %e %I:%M%p") %>
           </div>
+          <div class="text">
           <%= render :partial => "/task_edits/#{comment_or_edit.field}_edit",
                      :locals => {:edit => comment_or_edit} %>
+          </div>
         <% end %>
       </li>
     <% end %>

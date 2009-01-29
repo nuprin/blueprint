@@ -13,6 +13,7 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => "Task"
   belongs_to :project
 
+  has_one :deferred_task
   has_one :specification
 
   has_many :children, :foreign_key => :parent_id, :class_name => "Task"
@@ -34,9 +35,6 @@ class Task < ActiveRecord::Base
   named_scope :completed_since, lambda {|since| {
     :conditions => {:completed_at => Range.new(since.getutc, Time.now.getutc)}
   }}
-  named_scope :currently_due, :conditions => {:due_date => 
-    Range.new(*CURRENT_RANGE)
-  }
   named_scope :for_project, lambda{|project| {
     :conditions => {:project_id => project.id}
   }}
@@ -45,17 +43,9 @@ class Task < ActiveRecord::Base
   named_scope :prioritized, :conditions => {:status => "prioritized"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
-
-  named_scope :prioritized_or_completed_recently, :conditions => [
-    "(status = 'prioritized' AND " +
-    "(due_date IS NULL OR (due_date >= ? AND due_date < ?))) OR " +
-    "(status = 'completed' AND (completed_at >= ? AND completed_at < ?))",
-    *Task::CURRENT_RANGE * 2
-  ]
-
   named_scope :with_due_date, :conditions => "due_date IS NOT NULL"
   named_scope :with_details, :include => [:assignee, :project]
-
+  named_scope :with_deferred_tasks, :include => :deferred_task
 
   validates_presence_of :creator
 
@@ -103,6 +93,7 @@ class Task < ActiveRecord::Base
   end
 
   def prioritize!
+    self.deferred_task.destroy if self.deferred_task
     self.undo_complete!
   end
   
@@ -179,15 +170,6 @@ class Task < ActiveRecord::Base
     true
   end
 
-  def self.create_with_subscriptions!(task_params, cc_ids)
-    task = self.create!(task_params)
-    cc_ids.each do |cc_id|
-      task.subscriptions.create(:user_id => cc_id)
-    end
-    task.mass_mailer.ignoring(task.creator).deliver_task_creation
-    task
-  end
-  
   def mass_mailer
     MassMailer.new(self)
   end

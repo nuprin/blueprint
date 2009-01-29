@@ -53,11 +53,12 @@
         if (e.target.tagName == "A") {
           return;
         }
+        adjustWidths();
         editable.hide();
-        form.css("display", "inline");
         processInput();
         processSelect();
         processTextArea();
+        form.css("display", "inline");
         inputField.blur(onBlur);
         clickable.addClass("editing");
       }
@@ -68,6 +69,12 @@
           editable.show();
           clickable.removeClass("editing");
         }
+      }
+
+      var adjustWidths = function() {
+        textInput.width(clickable.width());
+        select.width(clickable.width());
+        textarea.width(clickable.width());        
       }
 
       var processInput = function() {

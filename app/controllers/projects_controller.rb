@@ -1,11 +1,19 @@
 class ProjectsController < ApplicationController
   def all
     @projects = Project.active    
+    @task_list_state = "collapsed"
     render :action => "index"
   end
 
   def index
     @projects = Project.active.for_category(params[:category_id])
+    @task_list_state = "expanded"
+  end
+
+  def uncategorized
+    @projects = Project.active.uncategorized
+    @task_list_state = "expanded"
+    render :action => "index"
   end
 
   def edit

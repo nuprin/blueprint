@@ -1,4 +1,4 @@
-<li class='cc'>
+<span class='cc'>
   <% if sub.user_id == viewer.id %>
     <strong><%= sub.user.name %></strong>
     <%= link_to "Remove", subscription_path(sub), :method => "delete",
@@ -7,4 +7,4 @@
   <% else %>
     <%= sub.user.name %>
   <% end %>
-</li>
+</span>

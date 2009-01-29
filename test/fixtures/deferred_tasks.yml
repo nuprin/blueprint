@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  task_id: 1
+  prioritize_at: 2009-01-24 21:23:37
+
+two:
+  task_id: 1
+  prioritize_at: 2009-01-24 21:23:37

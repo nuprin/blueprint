@@ -26,12 +26,15 @@ var Tasks = {
         currentMenuContainer.removeClass("active");
       }
     });
-    trElem.find(".task_menu_container").click(function() {
+    trElem.find(".menu_arrow").click(function() {
       if (currentMenuContainer) {
         currentMenuContainer.removeClass("active");
       }
-      $(this).addClass("active");
-      currentMenuContainer = $(this);
+      $(this).parent().addClass("active");
+      currentMenuContainer = $(this).parent();
+    });
+    trElem.find(".task_menu_items").click(function() {
+      $(this).parents(".task_menu_container").removeClass("active");
     });
   },
   setupInlineEditing: function(trElem) {
@@ -60,6 +63,18 @@ var Tasks = {
       title: "Double-Click to Edit Category"
     });
   },
+  makeCollapsible: function() {
+    $("h2.collapsed").add("h2.expanded").each(function() {
+      $(this).css("cursor", "pointer");
+      $(this).click(function(event) {
+        if (event.target.tagName == "H2") {
+          $(this).toggleClass("collapsed");
+          $(this).toggleClass("expanded");
+          $(this).next().slideToggle("fast");
+        }
+      })
+    })
+  },
   updateType: function(linkElem) {
     var form = linkElem.parent();
     var trElem = linkElem.parents("tr.task");
@@ -71,6 +86,19 @@ var Tasks = {
         trElem.replaceWith(newTrElem);
       }
     })
+  },
+  setupParkUntil: function() {
+    $("#custom_time").click(function() {
+      $("#deferred_task_prioritize_at_custom").attr("checked", "checked");
+    });
+    $("#deferred_task_prioritize_at_custom").click(function() {
+      $("#custom_time").focus();
+    });
+  },
+  parkUntil: function(taskId) {
+    $("#deferred_task_task_id").val(taskId);
+    $("#deferred_task_dialog").modal();
+    $("#deferred_task_prioritize_at_0").focus();
   }
 };
 
@@ -142,6 +170,8 @@ $(function() {
   Tasks.makeSortable();
   Tasks.setupActions();
   Tasks.setupInlineEditing();
+  Tasks.setupParkUntil();
+  Tasks.makeCollapsible();
   QuickAdd.setup();
   Fluid.setup();
 });

@@ -18,12 +18,15 @@
 
 <div id="task_list">
   <% @projects.each do |project| %>
-    <% title =
-      render(:partial => "modify_project", :locals => {:project => project}) %>
+    <% 
+      title =
+        render(:partial => "modify_project", :locals => {:project => project}) 
+    %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title       => title,
                            :tasks       => project.task_list.first(5),
-                           :context     => project.class.name} %>                       
+                           :context     => project.class.name,
+                           :collapsible => @task_list_state} %>
   <% end %>
 </div>
 

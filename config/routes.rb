@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :features
 
   map.resources :comments
-  map.resource  :company
+  map.resources :deferred_tasks
   map.resources :deliverables
   map.resources :git
   map.resources :projects, :member => {
@@ -13,7 +13,8 @@ ActionController::Routing::Routes.draw do |map|
                   :update_category => :put,
                   :update_title => :put
                 }, :collection => {
-                  :all => :get
+                  :all => :get,
+                  :uncategorized => :get
                 } do |projects|
                   projects.resource :specification
                 end

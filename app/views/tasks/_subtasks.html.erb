@@ -1,0 +1,30 @@
+<% if task.children.any? %>
+  <div class="task_field clearfix" id="subtasks">
+    <% if task.is_a?(Deliverable) %>
+      <%= link_to "+ Add Subtask",
+        new_task_path(:task => {
+          :parent_id => task.id, :project_id => task.project_id
+        }), :class => "add_link" %>
+    <% end %>
+    <h2>
+      Tasks
+    </h2>
+    <ul>
+      <% task.children.each do |child| %>
+        <li class="clearfix">
+          <% if child.completed? %>
+            <%= image_tag 'check.gif' %>
+          <% else %>
+            <% form_tag complete_task_path(child) do %>
+              <%= check_box_tag "complete_task_id", false, false,
+                :onclick =>
+                  "$(this).parents('form').submit(); return false;" %>
+            <% end %>
+          <% end %>
+          
+          <%= link_to_task child %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

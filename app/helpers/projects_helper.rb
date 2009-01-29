@@ -19,11 +19,17 @@ module ProjectsHelper
       field.join(": ")
     end.join("<span class='divider'>|</span>")
   end
-  
+
+  TAB_ORDER = [
+    "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
+  ]
   def project_tab_links
     [["ALL", all_projects_path]] +
-      ProjectCategory.all.map do |category|
+      (ProjectCategory.all.map do |category|
         [category.name.upcase, projects_path(:category_id => category.id)]
-      end
+      end).sort_by do |name, path| 
+        TAB_ORDER.index(name) || 1000
+      end +
+    [["UNCATEGORIZED", uncategorized_projects_path]]
   end
 end

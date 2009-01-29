@@ -26,7 +26,8 @@
       <%= image_tag 'drag_handle.gif' %>
     <% end %>
   </td>
-  <td class="task_name">
+  <td class="task_name<%= " deferred_task" if task.parked? && 
+    task.deferred_task %>">
     <span class="editable">
       <%= link_to h(task.title), task_path(task) %>
     </span>
@@ -65,6 +66,12 @@
             <%= link_to_function name, "Tasks.updateType($(this));" %>
           <% end %>
         </li>
+        <% if task.prioritized? %>
+          <li>
+            <%= link_to_function "Defer Task", "Tasks.parkUntil(#{task.id})"
+            %>
+          </li>
+        <% end %>
         <% if task.completed? %>
           <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
             :method => :post %></li>
@@ -90,7 +97,7 @@
         :html => {:method => :put} do |f| %>
         <%= hidden_field_tag :include_link, 1 %>
         <%= f.select :project_id,
-          Project.all.map{|p| [p.title, p.id]} + [["No Initiative", ""]],
+          Project.all_for_select + [["No Initiative", ""]],
             :include_blank => "Add initiative..." %>
       <% end %>
     </td>
