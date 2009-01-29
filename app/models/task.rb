@@ -83,6 +83,14 @@ class Task < ActiveRecord::Base
     self.status == "prioritized"
   end
 
+  def due_soon?
+    Date.tomorrow == due_date
+  end
+
+  def due_today?
+    Date.today == due_date
+  end
+
   def complete!
     self.status = "completed"
     self.completed_at = Time.now.getutc

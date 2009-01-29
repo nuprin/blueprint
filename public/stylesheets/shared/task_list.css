@@ -74,6 +74,22 @@ table.task_list td.task_project select {
 table.task_list .task_due,
 table.task_list .task_estimate {
   width: 60px;
+  text-align: center;
+}
+table.task_list span.deadline_highlight {
+  padding: 5px 8px;
+  -moz-border-radius-bottomleft:5px;
+  -moz-border-radius-bottomright:5px;
+  -moz-border-radius-topleft:5px;
+  -moz-border-radius-topright:5px;
+}
+table.task_list .deadline_soon td.task_due span.deadline_highlight {
+  background-color: #FED;
+  color: #000;
+}
+table.task_list .deadline_today td.task_due span.deadline_highlight {
+  background-color: #FCC;
+  color: #000;
 }
 table.task_list .task_menu {
   padding: 0;

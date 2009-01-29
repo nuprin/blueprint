@@ -24,7 +24,8 @@
       <% tasks.each do |task_list_item_or_task| %>
         <%= render :partial => "/shared/task", :locals => {
             :task_list_item_or_task => task_list_item_or_task,
-            :context => context
+            :context => context,
+            :highlight_deadlines => local_assigns[:highlight_deadlines]
           } %>
       <% end %>
     </tbody>

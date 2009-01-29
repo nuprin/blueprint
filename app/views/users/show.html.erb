@@ -26,7 +26,8 @@
              :locals => {:title       => "",
                          :tasks       => @user.task_list,
                          :context     => @user.class.name,
-                         :task_object => task_object} %>
+                         :task_object => task_object,
+                         :highlight_deadlines => true} %>
 
   <%= render :partial => "/shared/task_list",
              :locals => {

@@ -3,7 +3,16 @@
 <% else %>
   <% task = task_list_item_or_task %>
 <% end %>
-<tr class="task <%= task.class.name.downcase %>"
+<% if local_assigns[:highlight_deadlines]
+     deadline_class = case
+     when task.due_soon?:  "deadline_soon"
+     when task.due_today?:  "deadline_today"
+     else
+       ""
+     end
+   end
+%>
+<tr class="task <%= task.class.name.downcase %> <%= deadline_class %>"
   id="list_item_<%= task_list_item_or_task.id %>">
   <td class="drag_handle">
     <% if task.completed? %>
@@ -118,7 +127,7 @@
     <% value = task.due_date ? task.due_date.strftime("%b %e") : "" %>
     <span class="editable">
       <% if task.due_date %>
-        <%= value %>      
+        <span class="deadline_highlight"><%= value %></span>
       <% end %>
     </span>
     <% form_for :task, task, :url => update_due_date_task_path(task),
