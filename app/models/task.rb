@@ -1,5 +1,8 @@
 class Task < ActiveRecord::Base
-  KINDS = ["bug", "design", "experiment", "feature", "inquiry", "spec", "stats"]
+  KINDS = [
+    "bug", "copy", "design", "experiment", "feature", "inquiry", "spec", 
+    "stats"
+  ]
 
   CURRENT_RANGE = [
     Time.now.at_beginning_of_week, 1.week.from_now.at_end_of_week

@@ -212,9 +212,11 @@ table.prioritized .deliverable .empty.task_estimate {
   display: inline;
 }
 .tags span {
-  background-color: #678;
+  background-color: white;
+  border-color: #999;
   border-style: solid;
   border-width: 1px;
+  color: #666;
   font-size: 9px;
   line-height: 9px;
   padding: 3px 5px 0;
