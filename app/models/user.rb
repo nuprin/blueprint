@@ -38,6 +38,12 @@ class User < ActiveRecord::Base
     Task.parked.recently_updated.assigned_to(self).with_details
   end
 
+  def undescribed_tasks
+    conditions = "creator_id != assignee_id AND description = '' AND " +
+                 "status = 'prioritized'"
+    self.created_tasks.all :conditions => conditions
+  end
+
   def completed_tasks_today
     Task.assigned_to(self).completed_today.recently_completed.with_details
   end

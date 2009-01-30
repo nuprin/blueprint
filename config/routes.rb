@@ -1,9 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :features
 
   map.resources :comments
   map.resources :deferred_tasks
   map.resources :deliverables
+  map.resources :features
   map.resources :git
   map.resources :projects, :member => {
                   :completed => :get,
@@ -39,6 +39,11 @@ ActionController::Routing::Routes.draw do |map|
                   :people => :get,
                   :quick_create => :post,
                   :reorder => :post
+                }
+  map.resources :task_descriptions,
+                :collection => {
+                  :edit_all => :get,
+                  :update_all => :get
                 }
   map.resources :users,
                 :member => {
