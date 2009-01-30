@@ -1,5 +1,5 @@
 <% if viewer.real? %>
-  <div id="nav">
+  <div class="clearfix" id="nav">
     <div id="add_button">
       <%= link_to image_tag("add-task.gif", :alt => "Add a Task"),
         new_task_path %>
@@ -42,5 +42,11 @@
         </ul>
       </li>
     </ul>
+    <% if viewer.name == "Chris" %>
+      <ul class="clearfix" id="notifications">
+        <li><%= link_to viewer.undescribed_tasks_count,
+          edit_all_task_descriptions_path %></li>
+      </ul>
+    <% end %>
   </div>
 <% end %>

@@ -39,9 +39,11 @@ class User < ActiveRecord::Base
   end
 
   def undescribed_tasks
-    conditions = "creator_id != assignee_id AND description = '' AND " +
-                 "status = 'prioritized'"
-    self.created_tasks.all :conditions => conditions
+    self.created_tasks.assigned_to_other.undescribed.prioritized.all
+  end
+
+  def undescribed_tasks_count
+    self.created_tasks.assigned_to_other.undescribed.prioritized.count
   end
 
   def completed_tasks_today

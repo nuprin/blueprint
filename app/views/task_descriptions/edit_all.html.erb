@@ -1,6 +1,11 @@
 <%= stylesheet_link_tag "task_descriptions/edit_all" %>
 
-<h3>You have <%= @tasks.size %> descriptions to clarify.</h3>
+<% @title = "Describe Tasks You've Assigned" %>
+
+<h3>
+  You have assigned <%= @tasks.size %> prioritized tasks that need a 
+  description.
+</h3>
 <% form_tag update_all_task_descriptions_path do %>
   <ul id="task_description_fields">
     <% @tasks.each_with_index do |task, i| %>

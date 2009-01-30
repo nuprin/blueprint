@@ -107,6 +107,9 @@ input[type=text], textarea {
 #content {
   padding: 20px;
 }
+#filters {
+  float: left;
+}
 #filters>li>a {
   background-image: url(../images/nav-bkgd.gif);
   color: #ccc;
@@ -174,6 +177,21 @@ input[type=text], textarea {
 }
 #nav #filters>li>a {
   color: white;
+}
+#notifications {
+  float: left;
+}
+#notifications li {
+  float: left;
+  text-align: center;
+}
+#notifications a {
+  border-right: 1px solid #012;
+  color: white;
+  display: block;
+  padding-bottom: 9px;
+  padding-top: 11px;
+  width: 39px;
 }
 #search label {
   color: white;

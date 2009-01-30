@@ -27,6 +27,7 @@ class Task < ActiveRecord::Base
   named_scope :assigned_to, lambda{|user| {
     :conditions => {:assignee_id => user.id}
   }}
+  named_scope :assigned_to_other, :conditions => "creator_id != assignee_id"
   named_scope :completed_today, lambda {{
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc]
@@ -43,6 +44,7 @@ class Task < ActiveRecord::Base
   named_scope :prioritized, :conditions => {:status => "prioritized"}
   named_scope :recently_completed, :order => "completed_at DESC"
   named_scope :recently_updated, :order => "updated_at DESC"
+  named_scope :undescribed, :conditions => {:description => ''}
   named_scope :with_due_date, :conditions => "due_date IS NOT NULL"
   named_scope :with_details, :include => [:assignee, :project]
   named_scope :with_deferred_tasks, :include => :deferred_task
