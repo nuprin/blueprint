@@ -71,6 +71,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.create!(params[:project])
+    viewer.subscribe_to(@project)
     flash[:notice] = "#{@project.title} has been created."
     redirect_to @project
   end
