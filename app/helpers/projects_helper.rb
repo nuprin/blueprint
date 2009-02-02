@@ -24,12 +24,15 @@ module ProjectsHelper
     "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
   ]
   def project_tab_links
-    [["ALL", all_projects_path]] +
-      (ProjectCategory.all.map do |category|
-        [category.name.upcase, projects_path(:category_id => category.id)]
-      end).sort_by do |name, path| 
-        TAB_ORDER.index(name) || 1000
-      end +
-    [["UNCATEGORIZED", uncategorized_projects_path]]
+    [["ALL", all_projects_path]] + project_nav_links +
+      [["UNCATEGORIZED", uncategorized_projects_path]]
+  end
+  
+  def project_nav_links
+    (ProjectCategory.all.map do |category|
+      [category.name.upcase, projects_path(:category_id => category.id)]
+    end).sort_by do |name, path| 
+      TAB_ORDER.index(name) || 1000
+    end
   end
 end
