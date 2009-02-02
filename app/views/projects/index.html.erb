@@ -30,11 +30,11 @@
   <% end %>
 </div>
 
-<% if params[:category_id].blank? %>
+<% if_any(@inactive_projects) do |inactive_projects| %>
   <div id="inactive_initiatives">
     <h2>Other Initiatives</h2>
     <ul class="clearfix">
-    <% Initiative.inactive.each do |initiative| %>
+    <% inactive_projects.each do |initiative| %>
       <%# TODO [chris]: Rename project_path to initiative_path. %>
       <li class="clearfix">
         <%= link_to "+ Add to Active",

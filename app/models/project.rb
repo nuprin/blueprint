@@ -22,7 +22,8 @@ class Project < ActiveRecord::Base
   named_scope :for_category, lambda { |category_id| {
     :conditions => {:category_id => category_id}
   }}
-
+  named_scope :inactive, :conditions => {:status => "inactive"},
+                         :order => "title ASC"
   named_scope :uncategorized, :conditions => {:category_id => nil}
 
   validates_length_of :title, :in => 1...255
