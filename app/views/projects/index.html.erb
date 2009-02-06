@@ -37,7 +37,7 @@
     <% inactive_projects.each do |initiative| %>
       <%# TODO [chris]: Rename project_path to initiative_path. %>
       <li class="clearfix">
-        <%= link_to "+ Add to Active",
+        <%= link_to "+ Prioritize",
           set_active_project_path(initiative), :method => :put,
           :class => "add" %>
         <%= link_to_project initiative %>
