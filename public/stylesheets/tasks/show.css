@@ -66,9 +66,9 @@ h2 {
   padding: 10px 0;
 }
 #add_comment_form textarea {
-  height: 4em;
+  height: 6em;
   margin-bottom: 10px;
-  width: 568px;
+  width: 558px;
 }
 #add_comment_form .submit_bar {
   text-align: right;
