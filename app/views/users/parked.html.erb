@@ -13,7 +13,8 @@
   <% end %>
 </script>
 
-<% @title = viewer == @user ? "Your Tasks" : "#{@user.name.possessive} Tasks"%>
+<% @title = viewer == @user ? "Your Parked Tasks" :
+                              "#{@user.name.possessive} Parked Tasks"%>
 
 <%= render :partial => "user_task_list_tabs", :locals => {:user => @user} %>
 

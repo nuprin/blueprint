@@ -5,6 +5,9 @@
 <%= javascript_include_tag "shared/task_filter" %>
 
 <% @title = "Your Subscribed Tasks" %>
+<% @title = viewer == @user ? "Your Subscribed Tasks" :
+                              "#{@user.name.possessive} Subscribed Tasks"%>
+
 
 <div id="task_list">
   <%= render :partial => "/shared/task_filters" %>

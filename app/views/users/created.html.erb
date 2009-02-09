@@ -4,7 +4,9 @@
 <%= javascript_include_tag "shared/task_list" %>
 <%= javascript_include_tag "shared/task_filter" %>
 
-<% @title = "Recently Created Tasks" %>
+<% @title = viewer == @user ?
+            "Your Recently Created Tasks" :
+            "#{@user.name.possessive} Recently Created Tasks"%>
 
 <div id="task_list">
   <%= render :partial => "/shared/task_filters" %>
