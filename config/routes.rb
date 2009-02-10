@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-
+  map.resources :bugs, :collection => {
+    :completed => :get,
+    :parked => :get
+  }
   map.resources :comments
   map.resources :deferred_tasks
   map.resources :deliverables
