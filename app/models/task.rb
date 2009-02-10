@@ -189,6 +189,10 @@ class Task < ActiveRecord::Base
 
   after_create do |task|
     task.creator.subscribe_to(task)
+    # Temporarily subscribe Michel to tasks assigned to engineers.
+    if task.assignee_id && task.assignee.engineer? && User.michel
+      User.michel.subscribe_to(task)
+    end
     if task.prioritized?
       task.add_to_lists
     end

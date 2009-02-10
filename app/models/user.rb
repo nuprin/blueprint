@@ -77,4 +77,12 @@ class User < ActiveRecord::Base
   def female?
     !self.male?
   end
+  
+  def engineer?
+    self.role == "engineer"
+  end
+  
+  def self.michel
+    User.find_by_name("Michel")
+  end
 end
