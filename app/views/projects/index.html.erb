@@ -20,7 +20,7 @@
   <% @projects.each do |project| %>
     <% 
       title =
-        render(:partial => "modify_project", :locals => {:project => project}) 
+        render(:partial => "modify_project", :locals => {:project => project})
     %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title       => title,
