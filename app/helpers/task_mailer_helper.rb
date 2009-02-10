@@ -14,6 +14,7 @@ module TaskMailerHelper
     if task.due_date
       fields << ["Due Date", task.due_date.strftime("%b %e")]
     end
+    fields << ["Status", task.status.capitalize]
     fields.map do |field|
       field.join(": ")
     end.join(" | ")
