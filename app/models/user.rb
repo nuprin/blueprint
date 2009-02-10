@@ -38,14 +38,6 @@ class User < ActiveRecord::Base
     Task.parked.recently_updated.assigned_to(self).with_details
   end
 
-  def undescribed_tasks
-    self.created_tasks.assigned_to_other.undescribed.prioritized.all
-  end
-
-  def undescribed_tasks_count
-    self.created_tasks.assigned_to_other.undescribed.prioritized.count
-  end
-
   def completed_tasks_today
     Task.assigned_to(self).completed_today.recently_completed.with_details
   end
