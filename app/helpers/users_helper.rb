@@ -4,7 +4,7 @@ module UsersHelper
       user.task_list.size == 0 ? "" : " (#{user.task_list.size})"
     links = [
       ["PRIORITIZED#{prioritized_count}", user_path(user)],
-      ["CARELOG", completed_user_path(user)],
+      ["COMPLETED", completed_user_path(user)],
       ["PARKED", parked_user_path(user)]
     ]
     links.map do |name, url|
