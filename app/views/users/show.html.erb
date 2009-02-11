@@ -28,12 +28,16 @@
                          :context     => @user.class.name,
                          :task_object => task_object,
                          :highlight_deadlines => true} %>
-
+  <% 
+    completed_task_object =
+      PrivateTask.new(:status => "completed", :assignee_id => @user.id)
+  %>
   <%= render :partial => "/shared/task_list",
              :locals => {
                :title => "COMPLETED TODAY (#{@user.completed_tasks_today.size})",
                :tasks => @user.completed_tasks_today,
                :context => @user.class.name,
+               :task_object => completed_task_object,
                :unsortable => true} %>
 
 </div>

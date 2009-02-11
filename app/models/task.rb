@@ -125,10 +125,15 @@ class Task < ActiveRecord::Base
     (self.task_edits + self.comments).sort_by(&:created_at)
   end
   
+  before_create :set_already_completed
   before_save :adjust_year, :update_lists, :set_type
   before_update :record_changes
 
   after_save :check_reassignment
+
+  def set_already_completed
+    self.completed_at = Time.now.getutc if completed?
+  end
 
   def record_changes
     TaskEdit.record_changes!(self)
