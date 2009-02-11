@@ -30,7 +30,7 @@
                          :highlight_deadlines => true} %>
   <% 
     completed_task_object =
-      PrivateTask.new(:status => "completed", :assignee_id => @user.id)
+      HindsightTask.new(:status => "completed", :assignee_id => @user.id)
   %>
   <%= render :partial => "/shared/task_list",
              :locals => {
