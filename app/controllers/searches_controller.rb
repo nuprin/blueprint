@@ -2,6 +2,10 @@ class SearchesController < ApplicationController
   def show
     q = params[:q]
 
+    if q == "bugs"
+      redirect_to bugs_path
+    end
+    
     if q =~ /^\d+$/ && t = Task.find_by_id(q)
       redirect_to task_path(t)
     end

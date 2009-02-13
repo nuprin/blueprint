@@ -57,7 +57,12 @@
         </h1>
         <div id="task_meta">
           <% if !@task.kind.blank? && @task.kind != "task" %>
-            <%= @task.kind.capitalize %> |
+            <% if @task.kind == "bug" %>
+              <%= link_to "Bug", bugs_path %>
+            <% else %>
+              <%= @task.kind.capitalize %>
+            <% end %>
+            |
           <% end %>
           Created by <%= link_to_user @task.creator %>
           at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
