@@ -1,7 +1,15 @@
 <%= stylesheet_link_tag "shared/header" %>
 <%= stylesheet_link_tag 'shared/task_list' %>
 
+<%= javascript_include_tag 'shared/task_list' %>
+
 <% @title = "Bugs" %>
+
+<%= tabs([
+  ["PRIORITIZED", bugs_path],
+  ["COMPLETED",   completed_bugs_path],
+  ["PARKED",      parked_bugs_path]
+]) %>
 
 <div id="task_list">
   <%= render :partial => "/shared/task_list",

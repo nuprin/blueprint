@@ -1,0 +1,6 @@
+<ul class="clearfix" id="tabs">
+  <% links.each do |name, url| %>
+    <% class_name = current_page?(url) ? "current" : "" %>
+    <li><%= link_to name, url, :class => class_name %></li>
+  <% end %>
+</ul>

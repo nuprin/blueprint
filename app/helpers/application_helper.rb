@@ -69,4 +69,8 @@ module ApplicationHelper
     @render_counts[partial] += 1
     content
   end
+  
+  def tabs(links)
+    render :partial => "/shared/tabs", :locals => {:links => links}
+  end
 end
