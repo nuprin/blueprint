@@ -5,6 +5,9 @@
 
 <% @title = "Bugs" %>
 
+<%= render :partial => "/shared/autocomplete_data",
+           :locals => {:fields => [:assignee]} %>
+
 <%= tabs([
   ["PRIORITIZED", bugs_path],
   ["COMPLETED",   completed_bugs_path],
@@ -12,6 +15,8 @@
 ]) %>
 
 <div id="task_list">
+  <%# TODO [chris]: "Project" is a hack to hide the initiative column. %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:tasks => @tasks, :context => "Project"} %>
+             :locals => {:tasks => @tasks, :context => "Project",
+               :task_object => Task.new(:kind => "bug")} %>
 </div>
