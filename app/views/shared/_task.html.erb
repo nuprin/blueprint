@@ -42,30 +42,11 @@
       <% end %>
     </span>
   </td>
-  <td class="task_type">
-    <% if task.is_a?(Deliverable) %>
-      <%= image_tag "plane.gif", :title => "Deliverable" %>
-    <% end %>
-  </td>
   <td class="task_menu">
     <div class="task_menu_container">
       <%= link_to_function "More Actions...", "", :class => "menu_arrow" %>
       <ul class="task_menu_items">
         <li><%= link_to "Edit", edit_task_path(task) %></li>
-        <li>
-          <% form_for :task, :url => update_type_task_path(task),
-            :html => {:method => :put} do |f| %>
-            <%= hidden_field_tag :context, context %>
-            <% if task.is_a?(Deliverable) %>
-              <%= f.hidden_field :type, :value => "PrivateTask" %>
-              <% name = "Turn into Task" %>
-            <% else %>
-              <%= f.hidden_field :type, :value => "Deliverable" %>
-              <% name = "Turn into Deliverable" %>
-            <% end %>
-            <%= link_to_function name, "Tasks.updateType($(this));" %>
-          <% end %>
-        </li>
         <% if task.prioritized? %>
           <li>
             <%= link_to_function "Defer Task", "Tasks.parkUntil(#{task.id})"
