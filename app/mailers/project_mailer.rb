@@ -15,7 +15,7 @@ class ProjectMailer < ActionMailer::Base
   private
   
   def project_subject(project, subject)
-    "[#{project.title}] #{subject}"
+    "(Blueprint) #{project.title} #{subject}"
   end
 
 end
