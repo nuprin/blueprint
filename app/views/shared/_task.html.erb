@@ -100,10 +100,12 @@
     </td>
   <% end %>
   <td class="task_estimate <%= "empty" unless task.estimate %>">
-    <% value = task.estimate ? pluralize(task.estimate, "hour") : "" %>
+    <% value = task.estimate ?
+      render(:partial => "/shared/task_estimate_with_units",
+             :locals => {:task => task}) : "" %>
     <span class="editable">
       <% if task.estimate %>
-        <%= value %>      
+        <%= value %>
       <% end %>
     </span>
     <% form_for :task, task, :url => update_estimate_task_path(task),

@@ -135,7 +135,8 @@
             <li>
               <h3>ESTIMATE</h3>
               <div class="editable">
-                <%= pluralize(@task.estimate, "hour") %>
+                <%= render :partial => "/shared/task_estimate_with_units",
+                           :locals => {:task => @task} %>
               </div>
               <% form_for :task, @task,
                   :url => update_estimate_task_path(@task),

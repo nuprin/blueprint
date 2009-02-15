@@ -123,9 +123,11 @@ class TasksController < ApplicationController
   end
 
   def update_estimate
-    hours = params[:task][:estimate].gsub(/hours?/, "").strip
+    hours =
+      params[:task][:estimate].gsub(/hours?/, "").gsub(/minutes?/, "").strip
     @task.update_attributes!(:estimate => hours)
-    render :text => "#{@task.estimate} hours"
+    render :partial => "/shared/task_estimate_with_units",
+           :locals => {:task => @task}
   end
 
   def update_due_date
