@@ -88,7 +88,6 @@ table.task_list .deadline_today td {
   background-image: url("../../images/due-today.gif");
   background-repeat: repeat-x;
   color: #333 !important;
-  font-weight: bold;
 }
 table.task_list .deadline_today .task_menu_container {
   font-weight: normal;
