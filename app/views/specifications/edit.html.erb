@@ -12,5 +12,6 @@
 <% form_for :spec, :url => project_specification_path(@project),
   :html => {:method => :put, :id => "spec_form"} do |f| %>
   <%= f.text_area :body, :rows => nil %>
+  <div id="saved_msg"></div>
   <%= f.submit("Save Changes") %>
 <% end %>

@@ -1,6 +1,10 @@
 .wysiwyg {
   margin-bottom: 10px;
 }
+#saved_msg {
+  color: gray;
+  float: right;
+}
 #spec_body {
   height: 500px;
   margin-bottom: 10px;

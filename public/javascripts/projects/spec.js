@@ -1,3 +1,11 @@
+var Spec = {
+  save: function() {
+    $("#spec_form").ajaxSubmit();
+    $("#saved_msg").text("Automatically saved at " +
+      new Date().toLocaleTimeString() + ".");
+  }
+}
+
 $(function() {
   $("#spec_body").wysiwyg({
     controls: {
@@ -6,8 +14,5 @@ $(function() {
     },
     css: "/stylesheets/projects/spec/body.css"
   });
+  setInterval(Spec.save, 5000)
 });
-
-window.onbeforeunload = function(e) {
-  return "You seem to be in the middle of editing a spec."
-};
