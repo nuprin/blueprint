@@ -53,9 +53,6 @@ table.task_list {
 table.task_list .editable+form {
   display: none;
 }
-table.task_list tbody {
-  border-top: 1px solid #e9f1f5;
-}
 table.task_list tbody td {
   background: white;
   border-bottom: 1px solid #efefef;
@@ -70,13 +67,6 @@ table.task_list .drag_handle {
   padding: 0;
   width: 31px;
 }
-table.task_list .task_bug_indicator {
-  width: 20px;
-  overflow: hidden;
-  background-image: url("../../images/bug_sm.png");
-  background-repeat: no-repeat;
-  background-position: 0px 11px;
-}
 table.task_list .task_assignee {
   width: 75px;
 }
@@ -87,22 +77,31 @@ table.task_list td.task_project a {
 table.task_list .task_due,
 table.task_list .task_estimate {
   width: 60px;
-  text-align: center;
+  text-align: right;
 }
-table.task_list span.deadline_highlight {
-  padding: 5px 8px;
-  -moz-border-radius-bottomleft:5px;
-  -moz-border-radius-bottomright:5px;
-  -moz-border-radius-topleft:5px;
-  -moz-border-radius-topright:5px;
+table.task_list .deadline_soon td {
+  background-image: url("../../images/due-soon.gif");
+  background-repeat: repeat-x;
+  color: #333 !important;
 }
-table.task_list .deadline_soon td.task_due span.deadline_highlight {
-  background-color: #FED;
-  color: #000;
+table.task_list .deadline_today td {
+  background-image: url("../../images/due-today.gif");
+  background-repeat: repeat-x;
+  color: #333 !important;
+  font-weight: bold;
 }
-table.task_list .deadline_today td.task_due span.deadline_highlight {
-  background-color: #FCC;
-  color: #000;
+table.task_list .deadline_today .task_menu_container {
+  font-weight: normal;
+}
+table.task_list .deadline_soon .menu_arrow {
+  background-image: url("../../images/task-dropdown-due-soon.gif");
+}
+table.task_list .deadline_today .menu_arrow {
+  background-image: url("../../images/task-dropdown-due-today.gif");
+}
+table.task_list .deadline_soon .active .menu_arrow,
+table.task_list .deadline_today .active .menu_arrow {
+  background-image: url("../../images/task-dropdown-active.gif");
 }
 table.task_list .task_menu {
   padding: 0;

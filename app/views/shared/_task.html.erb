@@ -117,7 +117,7 @@
     <% value = task.due_date ? task.due_date.strftime("%b %e") : "" %>
     <span class="editable">
       <% if task.due_date %>
-        <span class="deadline_highlight"><%= value %></span>
+        <%= value %>
       <% end %>
     </span>
     <% form_for :task, task, :url => update_due_date_task_path(task),

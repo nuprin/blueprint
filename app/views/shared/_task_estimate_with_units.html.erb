@@ -1,5 +1,5 @@
 <% if task.estimate >= 1 %>
-  <%= pluralize(task.estimate, "hour") %>
+  <%= pluralize(task.estimate.to_i, "hour") %>
 <% else %>
   <%= (task.estimate * 60).to_i %> minutes
 <% end %>
