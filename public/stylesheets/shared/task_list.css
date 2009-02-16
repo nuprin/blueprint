@@ -55,7 +55,7 @@ table.task_list .editable+form {
 }
 table.task_list tbody td {
   background: white;
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid #e2e8ee;
 }
 table.task_list td {
   cursor: move;
