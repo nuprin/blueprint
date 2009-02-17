@@ -1,44 +1,42 @@
-<% if local_assigns[:task_object] %>
-  
-  <% 
-    context = local_assigns[:context] || "" 
-    title = local_assigns[:title] || ""
-  %>
+<% 
+  context = local_assigns[:context] || "" 
+  title = local_assigns[:title] || ""
+%>
 
-  <%= stylesheet_link_tag "shared/modal" %>
-  <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
+<%= stylesheet_link_tag "shared/modal" %>
+<%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 
-  <h2<%= " class='#{collapsible}'" if local_assigns[:collapsible] %>>
-    <% if local_assigns[:see_all_url] %>
-      <%= link_to title, see_all_url %>
-    <% elsif !title.blank? %>
-      <%= title %>
+<h2<%= " class='#{collapsible}'" if local_assigns[:collapsible] %>>
+  <% if local_assigns[:see_all_url] %>
+    <%= link_to title, see_all_url %>
+  <% elsif !title.blank? %>
+    <%= title %>
+  <% end %>
+</h2>
+<table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
+  <%= " #{context.downcase}_task_list" %>"
+  id="<%= title.dehumanize %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
+  <% if local_assigns[:task_object] %>
+    <tfoot>
+      <tr>
+        <th colspan="5">
+          <%= render :partial => "/shared/quick_add_form",
+                     :locals => {:task_object => task_object,
+                                 :context => context} %>
+        </th>
+      </tr>
+    </tfoot>
+  <% end %>
+  <tbody>
+    <% tasks.each do |task_list_item_or_task| %>
+      <%= render :partial => "/shared/task", :locals => {
+          :task_list_item_or_task => task_list_item_or_task,
+          :context => context,
+          :highlight_deadlines => local_assigns[:highlight_deadlines]
+        } %>
     <% end %>
-  </h2>
-  <table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
-    <%= " #{context.downcase}_task_list" %>"
-    id="<%= title.dehumanize %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
-    <% if local_assigns[:task_object] %>
-      <tfoot>
-        <tr>
-          <th colspan="5">
-            <%= render :partial => "/shared/quick_add_form",
-                       :locals => {:task_object => task_object,
-                                   :context => context} %>
-          </th>
-        </tr>
-      </tfoot>
-    <% end %>
-    <tbody>
-      <% tasks.each do |task_list_item_or_task| %>
-        <%= render :partial => "/shared/task", :locals => {
-            :task_list_item_or_task => task_list_item_or_task,
-            :context => context,
-            :highlight_deadlines => local_assigns[:highlight_deadlines]
-          } %>
-      <% end %>
-    </tbody>
-  </table>
-  
-  <%= render_once :partial => "/shared/deferred_task_form" %>
-<% end %>
+  </tbody>
+</table>
+
+<%= render_once :partial => "/shared/deferred_task_form" %>
+
