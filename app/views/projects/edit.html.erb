@@ -19,7 +19,7 @@
     <%= f.text_field :mission %>
   </p>
   <p>
-    Feature:<br />
+    <%= f.label :feature_id %>:<br />
     <%= f.select :feature_id, Feature.form_options, :include_blank => true %>
   </p>
   <p>

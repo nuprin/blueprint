@@ -16,6 +16,10 @@
       :include_blank => true %>
   </p>
   <p>
+    <%= f.label :feature_id %>:<br />
+    <%= f.select :feature_id, Feature.form_options, :include_blank => true %>
+  </p>
+  <p>
     <%= f.submit "Create Initiative" %>
   </p>
 <% end %>
