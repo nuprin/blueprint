@@ -4,12 +4,12 @@
     <%= link_to "Edit Spec", edit_project_specification_path(@project) %>
   </div>
   <% if @project.active? %>
-    Initiative Status: <strong>Active</strong>
-    (<%= link_to "Remove from Active Initiatives",
+    Initiative Status: <strong>Prioritized</strong>
+    (<%= link_to "Park",
       set_inactive_project_path(@project), :method => :put %>)
   <% else %>
-    Initiative Status: <strong>Inactive</strong>
-    (<%= link_to "Add to Active Initiatives",
+    Initiative Status: <strong>Parked</strong>
+    (<%= link_to "Prioritize",
       set_active_project_path(@project), :method => :put %>)
   <% end %>
 </div>
