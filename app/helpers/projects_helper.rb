@@ -9,6 +9,9 @@ module ProjectsHelper
     if project.category_id
       fields << ["CATEGORY", project.category.name]
     end
+    if project.feature_id
+      fields << ["FEATURE", project.feature.name]
+    end
     if project.subscribed_users.any?
       assignees = project.subscribed_users.map do |u|
         link_to_user u

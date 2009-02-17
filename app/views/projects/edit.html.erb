@@ -19,6 +19,10 @@
     <%= f.text_field :mission %>
   </p>
   <p>
+    Feature:<br />
+    <%= f.select :feature_id, Feature.form_options, :include_blank => true %>
+  </p>
+  <p>
     Category:<br />
     <%= f.select :category_id, ProjectCategory.form_options,
       :include_blank => true %>
