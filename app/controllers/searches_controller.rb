@@ -18,6 +18,6 @@ class SearchesController < ApplicationController
       redirect_to p
     end
 
-    @results = Task.find_using_term(q).map(&:record)
+    @results = nil
   end
 end

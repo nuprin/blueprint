@@ -4,8 +4,6 @@ class Comment < ActiveRecord::Base
 
   validate :must_have_text_or_photo
   
-  indexes_columns :text, :image_file_name, :using => :ferret
-
   has_attached_file :image,
     :styles => { :large => "360x360>" },
     :url  => "/assets/comments/:id/:style/:basename.:extension",

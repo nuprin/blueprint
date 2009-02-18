@@ -28,7 +28,6 @@ class Project < ActiveRecord::Base
   named_scope :uncategorized, :conditions => {:category_id => nil}
 
   validates_length_of :title, :in => 1...255
-  indexes_columns :title, :using => :ferret
   
   def to_s
     self.title
