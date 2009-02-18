@@ -14,5 +14,5 @@ $(function() {
     },
     css: "/stylesheets/projects/spec/body.css"
   });
-  setInterval(Spec.save, 5000)
+  // setInterval(Spec.save, 5000)
 });
