@@ -14,8 +14,11 @@
 %>
 
 <% with_layout "layouts/initiative" do %>
+  <div id="subnav">
+    <%= link_to "Edit Spec", edit_project_specification_path(@project) %>
+  </div>
   <div id="spec">
-    <%= @spec.body %>
+    <%= highlight_rfcs(@spec.body) %>
   </div>
   <div class="clearfix" id="comment_board">
     <h2>Discussion</h2>
