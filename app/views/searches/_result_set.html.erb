@@ -3,7 +3,7 @@
     <li class="clearfix">
     <% result_partial = case result
       when Task: 'task_result'
-      when Project: 'project_result'
+      when Initiative: 'initiative_result'
       end
     %>
     <%= render :partial => result_partial,

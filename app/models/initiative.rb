@@ -1,4 +1,6 @@
 class Initiative < ActiveRecord::Base
+  is_indexed :fields => [:title, :mission]
+
   set_table_name :projects
 
   has_many :tasks, :foreign_key => :project_id

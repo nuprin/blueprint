@@ -5,6 +5,10 @@ module ApplicationHelper
     link_to user.name, user_path(user)
   end
   
+  def link_to_initiative(initiative)
+    link_to initiative.title, project_path(initiative)
+  end
+  
   def link_to_project(project)
     link_to project.title, project_path(project)
   end

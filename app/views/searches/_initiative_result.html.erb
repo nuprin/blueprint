@@ -1,0 +1,10 @@
+<div class="core_info">
+  <div class="title">
+    <%= link_to_initiative result %>
+  </div>
+  <% if !result.mission.blank? %>
+    <div class="description">
+      <%= result.mission.ellipsize(100) %>
+    </div>
+  <% end %>
+</div>
