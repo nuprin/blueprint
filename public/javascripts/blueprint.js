@@ -12,7 +12,7 @@ var KeyboardShortcuts = {
         location.href = "/tasks/new"
       },
       's': function() {
-        location.href = "/users/" + VIEWER_ID + "/subscribed"
+        location.href = "/users/" + VIEWER_ID + "/subscribed?status=prioritized"
       },
       'y': function() {
         location.href = "/";
