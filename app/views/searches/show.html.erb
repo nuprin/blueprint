@@ -1,10 +1,10 @@
 <%= stylesheet_link_tag "shared/tags" %>
-<%= stylesheet_link_tag "shared/result_set" %>
+<%= stylesheet_link_tag "searches/result_set" %>
 
 <% if @results.any? %>
   <% @title = "Search Results for &ldquo;#{params[:q]}&rdquo;" %>
   <div id="results_count"><%= pluralize(@results.size, "task") %> found:</div>
-  <%= render :partial => '/shared/result_set',
+  <%= render :partial => 'result_set',
              :locals => {:results => @results} %>
 <% else %>
   <div id="empty_results_message">
