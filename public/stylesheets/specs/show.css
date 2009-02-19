@@ -74,6 +74,16 @@
   list-style-type: disc;
   margin: 1em 0 1em 40px;
 }
+#subnav {
+  background: #ced8e2;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 8px 10px 6px;
+  text-align: right;
+}
+#subnav a {
+  color: #666;
+}
 #tabs {
   border-bottom: 1px solid #ced8e2;
 }
