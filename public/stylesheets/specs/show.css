@@ -19,6 +19,12 @@
   margin: 10px 0;
   padding: 9px;
 }
+.rfc {
+  background: #ff8;
+  border-bottom: 1px dotted #888;
+  font-weight: bold;
+  padding: 6px 4px 4px;
+}
 #add_comment_form {
   padding: 10px 0;
   width: 500px;
