@@ -2,6 +2,19 @@ class String
   def possessive
     self.last == 's' ? "#{self}'" : "#{self}'s"
   end
+  
+  def ellipsize(length, token = "...")
+    return token if length <= 0
+    return self if size <= length
+
+    str = self[0, length]
+
+    rindex = str.rindex(/\s/)
+    unless rindex.nil?
+      str = str[0, rindex]
+    end
+    str + token
+  end
 end
 
 module ActiveSupport::Inflector

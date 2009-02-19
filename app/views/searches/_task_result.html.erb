@@ -1,0 +1,24 @@
+<div class="task_id">#<%= result.id %></div>
+<div class="meta">
+  <% if result.project_id %>
+    Initiative: <%= link_to_project(result.project) %> <br />
+  <% end %>
+  <% if result.assignee_id %>
+    Assigned to: <%= link_to_user(result.assignee) %> <br />
+  <% end %>
+  Status: <%= result.status.capitalize %>
+  <% if result.due_date %>
+  <br /> Due: <%= result.due_date.strftime("%b %e") %>
+  <% end %>
+</div>
+<div class="core_info">
+  <div class="title">
+    <%= link_to_task result %>
+    <% if !result.kind.blank? && result.kind != "task" %>
+      <span class="tag <%= result.kind %>"><%= result.kind %></span>
+    <% end %>
+  </div>
+  <div class="description">
+    <%= result.description.ellipsize(100) %>
+  </div>
+</div>

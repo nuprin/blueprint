@@ -32,9 +32,11 @@
   margin: 0 0 10px;
 }
 #results_list .meta {
+  float: right;
   color: gray;
   font-size: 10px;
   text-transform: uppercase;
+  width: 200px;
 }
 #results_list .task_id {
   float: left;

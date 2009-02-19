@@ -1,30 +1,13 @@
 <ul id="results_list">
   <% results.each do |result| %>
     <li class="clearfix">
-      <div class="task_id">#<%= result.id %></div>
-      <div class="core_info">
-        <div class="title">
-          <%= link_to_task result %>
-          <% if !result.kind.blank? && result.kind != "task" %>
-            <span class="tag <%= result.kind %>"><%= result.kind %></span>
-          <% end %>
-        </div>
-        <div class="description">
-          <%= result.description %>
-        </div>
-        <div class="meta">
-          <% if result.project_id %>
-            Initiative: <%= link_to_project(result.project) %> -
-          <% end %>
-          <% if result.assignee_id %>
-            Assigned to: <%= link_to_user(result.assignee) %> -
-          <% end %>
-          Status: <%= result.status.capitalize %>
-          <% if result.due_date %>
-           - Due: <%= result.due_date.strftime("%b %e") %>
-          <% end %>
-        </div>
-      </div>
+    <% result_partial = case result
+      when Task: 'task_result'
+      when Project: 'project_result'
+      end
+    %>
+    <%= render :partial => result_partial,
+               :locals => {:result => result} %>
     </li>
   <% end %>
 </ul>
