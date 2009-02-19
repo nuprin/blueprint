@@ -1,6 +1,9 @@
 <%= stylesheet_link_tag "shared/header" %>
 <%= stylesheet_link_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/task_nav' %>
 <%= javascript_include_tag 'shared/task_list' %>
+<%= javascript_include_tag 'shared/task_nav' %>
+
 
 <%= render :partial => "/shared/autocomplete_data",
            :locals => {:fields => [:kind, :project]} %>
@@ -25,7 +28,8 @@
                          :tasks       => @user.task_list,
                          :context     => @user.class.name,
                          :task_object => task_object,
-                         :highlight_deadlines => true} %>
+                         :highlight_deadlines => true,
+                         :table_id    => "main_task_list"} %>
   <% 
     completed_task_object =
       HindsightTask.new(:status => "completed", :assignee_id => @user.id)
