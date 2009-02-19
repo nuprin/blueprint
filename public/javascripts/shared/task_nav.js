@@ -11,7 +11,7 @@ var TaskNavigation = {
         if (0 < next.length) {
           cursor.removeClass('cursor');
           next.addClass('cursor');
-          next.get(0).scrollIntoView(false);
+          //next.get(0).scrollIntoView(false);
         }
       },
       'k': function() {
@@ -24,7 +24,7 @@ var TaskNavigation = {
         if (0 < prev.length) {
           cursor.removeClass('cursor');
           prev.addClass('cursor');
-          prev.get(0).scrollIntoView(true);
+          //prev.get(0).scrollIntoView(true);
         }
       },
       'Enter': function() {
