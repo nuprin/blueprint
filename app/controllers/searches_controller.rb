@@ -18,6 +18,6 @@ class SearchesController < ApplicationController
       redirect_to p
     end
 
-    @results = nil
+    @results = Ultrasphinx::Search.new(:query => q).results
   end
 end

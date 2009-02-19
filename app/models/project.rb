@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  is_indexed :fields => [:title, :mission]
+
   belongs_to :category, :class_name => "ProjectCategory"
   belongs_to :feature
 

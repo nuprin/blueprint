@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  is_indexed :fields => [:title, :description]
+
   KINDS = [
     "bug", "copy", "design", "experiment", "feature", "inquiry", "spec", 
     "stats"
