@@ -28,6 +28,13 @@
   float: left;
   width: 400px;
 }
+#results_list .initiative .core_info {
+  font-size: 16px;
+}
+#results_list .initiative .category {
+  color: #888;
+  font-weight: normal;
+}
 #results_list .description {
   margin: 0 0 10px;
 }

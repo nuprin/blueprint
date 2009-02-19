@@ -1,10 +1,15 @@
-<div class="core_info">
-  <div class="title">
-    <%= link_to_initiative result %>
-  </div>
-  <% if !result.mission.blank? %>
-    <div class="description">
-      <%= result.mission.ellipsize(100) %>
+<div class="initiative">
+  <div class="task_id">&nbsp;</div>
+  <div class="core_info">
+    <div class="title">
+      <%= link_to_initiative result %>
+      (<%= pluralize(result.tasks.size, 'task') %>)
+      <span class="category">&mdash; <%= result.category_name %></span>
     </div>
-  <% end %>
+    <% if !result.mission.blank? %>
+      <div class="description">
+        <%= result.mission.ellipsize(100) %>
+      </div>
+    <% end %>
+  </div>
 </div>

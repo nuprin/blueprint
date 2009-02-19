@@ -3,6 +3,8 @@ class Initiative < ActiveRecord::Base
 
   set_table_name :projects
 
+  belongs_to :category, :class_name => "ProjectCategory"
+
   has_many :tasks, :foreign_key => :project_id
 
   has_many :deliverables,
@@ -13,4 +15,8 @@ class Initiative < ActiveRecord::Base
   named_scope :active,   :conditions => {:status => "active"}
   named_scope :inactive, :conditions => "status != 'active'",
     :order => "title ASC"
+
+  def category_name
+    self.category_id ? self.category.name : "Uncategorized"
+  end
 end
