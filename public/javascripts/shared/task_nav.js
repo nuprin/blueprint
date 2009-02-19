@@ -1,4 +1,10 @@
 var TaskNavigation = {
+  open: function() {
+          url = $(".cursor td:eq(1) a");
+          if (0 < url.length) {
+            location.href = url.get(0).href
+          }
+        },
   setup: function() {
     $(document.body).shortkeys({
       'j': function() {
@@ -28,10 +34,10 @@ var TaskNavigation = {
         }
       },
       'Enter': function() {
-        url = $(".cursor td:eq(1) a");
-        if (0 < url.length) {
-          location.href = url.get(0).href
-        }
+        TaskNavigation.open();
+      },
+      'o': function() {
+        TaskNavigation.open();
       }
     }, {moreKeys: {'Enter':13} })
   }
