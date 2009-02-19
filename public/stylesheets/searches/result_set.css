@@ -47,3 +47,27 @@
 #results_list .title {
   font-weight: bold;
 }
+#results_list .search_highlight_0 {
+  background-color: #FFF8CC;
+  border-bottom: 1px solid #FFE222;
+}
+#results_list .search_highlight_1 {
+  background-color: #CCFFF8;
+  border-bottom: 1px solid #22FFE2;
+}
+#results_list .search_highlight_2 {
+  background-color: #F8CCFF;
+  border-bottom: 1px solid #E222FF;
+}
+#results_list .search_highlight_3 {
+  background-color: #00F8CC;
+  border-bottom: 1px solid #00E222;
+}
+#results_list .search_highlight_4 {
+  background-color: #FF00CC;
+  border-bottom: 1px solid #FF0022;
+}
+#results_list .search_highlight_5 {
+  background-color: #FFF800;
+  border-bottom: 1px solid #FFE200;
+}

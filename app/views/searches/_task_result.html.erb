@@ -13,12 +13,12 @@
 </div>
 <div class="core_info">
   <div class="title">
-    <%= link_to_task result %>
+    <%= link_to highlight_query(result.title), task_path(result) %>
     <% if !result.kind.blank? && result.kind != "task" %>
       <span class="tag <%= result.kind %>"><%= result.kind %></span>
     <% end %>
   </div>
   <div class="description">
-    <%= result.description.ellipsize(100) %>
+    <%= highlight_query(result.description.ellipsize(100)) %>
   </div>
 </div>

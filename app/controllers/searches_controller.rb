@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+
   def show
     q = params[:q]
 
@@ -20,4 +21,5 @@ class SearchesController < ApplicationController
 
     @results = Ultrasphinx::Search.new(:query => q).results
   end
+
 end
