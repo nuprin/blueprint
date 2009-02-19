@@ -2,13 +2,13 @@
   <div class="task_id">&nbsp;</div>
   <div class="core_info">
     <div class="title">
-      <%= link_to_initiative result %>
+      <%= link_to highlight_query(result.title), project_path(result) %>
       (<%= pluralize(result.tasks.size, 'task') %>)
       <span class="category">&mdash; <%= result.category_name %></span>
     </div>
     <% if !result.mission.blank? %>
       <div class="description">
-        <%= result.mission.ellipsize(100) %>
+        <%= highlight_query(result.mission.ellipsize(100)) %>
       </div>
     <% end %>
   </div>

@@ -28,7 +28,7 @@
   float: left;
   width: 400px;
 }
-#results_list .initiative .core_info {
+#results_list .initiative .core_info .title {
   font-size: 16px;
 }
 #results_list .initiative .category {
