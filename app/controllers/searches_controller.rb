@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
       redirect_to p
     end
 
-    @results = Ultrasphinx::Search.new(:query => q).
+    @results = Ultrasphinx::Search.new(:query => q, :per_page => 50).
                 results.sort_by do |item|
       case item
       when Initiative: 0
