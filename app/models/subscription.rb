@@ -13,7 +13,13 @@ class Subscription < ActiveRecord::Base
     # An idempotent operation that ensures that the user will be subscribed
     # to all updates about the relevant task.
     def subscribe_to(entity)
-      entity.subscriptions.create(:user_id => self.id)
+      if !subscribed_to?(entity)
+        entity.subscriptions.create(:user_id => self.id)
+      end
+    end
+
+    def subscribed_to?(entity)
+      entity.subscriptions.map(&:user_id).include?(self.id)
     end
   end
 

@@ -34,5 +34,5 @@ class Comment < ActiveRecord::Base
     comment.author.subscribe_to(comment.commentable)
     comment.commentable.mass_mailer.ignoring(comment.author).
       deliver_new_comment(comment)
-  end  
+  end
 end
