@@ -84,8 +84,20 @@ class Api::TasksController < ApplicationController
 #  end
 
   def mark_complete
-    @task = Task.find(params[:id])
-    @task.complete!
+    task = Task.find(params[:id])
+    author = User.find_by_email(params[:author_email])
+
+    if !params[:comment].blank? && author
+      Comment.create!(
+        :author => author,
+        :text => params[:comment],
+        :commentable => task
+      )
+    end
+
+    task.editor = author
+    task.complete!
+
     respond_to do |format|
       format.xml  { head :ok }
     end
