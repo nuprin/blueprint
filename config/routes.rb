@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.namespace(:api) do |api|
+    api.resources :tasks, :member => {
+      :mark_complete => :put
+    }
+  end
+
   map.resources :bugs, :collection => {
     :completed => :get,
     :parked => :get
