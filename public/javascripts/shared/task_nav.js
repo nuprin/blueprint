@@ -50,19 +50,25 @@ var TaskNavigation = {
   },
   setup: function() {
     $(document.body).shortkeys({
-      'j':     TaskNavigation.down,
-      'k':     TaskNavigation.up,
       'Enter': TaskNavigation.open,
+      'j':     TaskNavigation.down,
+      'Down':  TaskNavigation.down,
+      'k':     TaskNavigation.up,
+      'Up':    TaskNavigation.up,
       'o':     TaskNavigation.open,
       'e':     TaskNavigation.edit,
       'd':     TaskNavigation.defer,
       'p':     TaskNavigation.park,
       'x':     TaskNavigation.complete,
-    }, {moreKeys: {'Enter': 13}})
+    }, {moreKeys: {
+      'Enter': 13,
+      'Up':    38,
+      'Down':  40
+    }})
   }
 }
 
 $(function() {
   TaskNavigation.setup();
-  //$(document).keydown(function(e){alert(e.keyCode);});
+  // $(document).keydown(function(e){console.log(e.keyCode);});
 });
