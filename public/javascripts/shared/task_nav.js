@@ -22,34 +22,36 @@ var TaskNavigation = {
   complete: function() {
     $(".cursor .task_complete_form").submit();
   },
+  up: function() {
+    cursor = $("#main_task_list .cursor");
+    if (0 == cursor.length) {
+      $("#main_task_list tbody tr:first-child").addClass('cursor');
+      return;
+    }
+    prev = cursor.prev();
+    if (0 < prev.length) {
+      cursor.removeClass('cursor');
+      prev.addClass('cursor');
+      //prev.get(0).scrollIntoView(true);
+    }
+  },
+  down: function() {
+    cursor = $("#main_task_list .cursor");
+    if (0 == cursor.length) {
+      $("#main_task_list tbody tr:first-child").addClass('cursor');
+      return;
+    }
+    next = cursor.next();
+    if (0 < next.length) {
+      cursor.removeClass('cursor');
+      next.addClass('cursor');
+      //next.get(0).scrollIntoView(false);
+    }
+  },
   setup: function() {
     $(document.body).shortkeys({
-      'j': function() {
-        cursor = $("#main_task_list .cursor");
-        if (0 == cursor.length) {
-          $("#main_task_list tbody tr:first-child").addClass('cursor');
-          return;
-        }
-        next = cursor.next();
-        if (0 < next.length) {
-          cursor.removeClass('cursor');
-          next.addClass('cursor');
-          //next.get(0).scrollIntoView(false);
-        }
-      },
-      'k': function() {
-        cursor = $("#main_task_list .cursor");
-        if (0 == cursor.length) {
-          $("#main_task_list tbody tr:first-child").addClass('cursor');
-          return;
-        }
-        prev = cursor.prev();
-        if (0 < prev.length) {
-          cursor.removeClass('cursor');
-          prev.addClass('cursor');
-          //prev.get(0).scrollIntoView(true);
-        }
-      },
+      'j':     TaskNavigation.down,
+      'k':     TaskNavigation.up,
       'Enter': TaskNavigation.open,
       'o':     TaskNavigation.open,
       'e':     TaskNavigation.edit,
