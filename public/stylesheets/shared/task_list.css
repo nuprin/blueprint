@@ -141,9 +141,6 @@ table.task_list tfoot a {
   color: #40678d;
   font-weight: normal;
 }
-table.task_list th {
-
-}
 table.task_list .quick_add_form,
 table.task_list .editing .quick_add_link {
   display: none;
@@ -205,6 +202,11 @@ table.prioritized .deliverable .empty.task_estimate {
 .inlineError {
   color: red;
   font-weight: bold;
+}
+.shortcut {
+  color: #888;
+  float: right;
+  padding: 6px 5px;
 }
 .tags {
   display: inline;

@@ -13,12 +13,13 @@
    end
 %>
 <tr class="task <%= task.class.name.downcase %> <%= deadline_class %>"
-  id="list_item_<%= task_list_item_or_task.id %>">
+  id="list_item_<%= task_list_item_or_task.id %>"
+  task_id="<%= task.id %>">
   <td class="drag_handle">
     <% if task.completed? %>
       <%= image_tag 'check.gif' %>
     <% elsif task.assignee == viewer || task.assignee_id.nil? %>
-      <% form_tag complete_task_path(task) do %>
+      <% form_tag complete_task_path(task), :class => "task_complete_form" do %>
         <%= check_box_tag "complete_task_id", false, false,
           :onclick => "$(this).parents('form').submit(); return false;" %>
       <% end %>
@@ -46,11 +47,14 @@
     <div class="task_menu_container">
       <%= link_to_function "More Actions...", "", :class => "menu_arrow" %>
       <ul class="task_menu_items">
-        <li><%= link_to "Edit", edit_task_path(task) %></li>
+        <li>
+          <span class="shortcut">E</span>
+          <%= link_to "Edit", edit_task_path(task) %>
+        </li>
         <% if task.prioritized? %>
           <li>
-            <%= link_to_function "Defer Task", "Tasks.parkUntil(#{task.id})"
-            %>
+            <span class="shortcut">D</span>
+            <%= link_to_function "Defer Task", "Tasks.parkUntil(#{task.id})" %>
           </li>
         <% end %>
         <% if task.completed? %>
@@ -58,9 +62,13 @@
             :method => :post %></li>
         <% elsif task.parked? %>
           <li><%= link_to "Prioritize", prioritize_task_path(task),
-            :method => :post %></li>
+            :method => :post, :class => "prioritize_task_link" %></li>
         <% elsif task.prioritized? %>
-          <li><%= link_to "Park", park_task_path(task), :method => :post %></li>
+          <li>
+            <span class="shortcut">P</span>
+            <%= link_to "Park", park_task_path(task), :method => :post,
+            :class => "park_task_link" %>
+          </li>
         <% end %>
           <li><%= link_to "Delete", task_path(task), :method => :delete,
             :confirm => "Are you sure you want to delete this task?" %></li>

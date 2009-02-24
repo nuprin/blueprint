@@ -1,10 +1,27 @@
 var TaskNavigation = {
+  getSelectedTaskId: function() {
+    return $(".cursor").attr("task_id");
+  },
   open: function() {
-          url = $(".cursor td:eq(1) a");
-          if (0 < url.length) {
-            location.href = url.get(0).href
-          }
-        },
+    url = $(".cursor td:eq(1) a");
+    if (0 < url.length) {
+      location.href = url.get(0).href
+    }
+  },  
+  edit: function() {
+    id = TaskNavigation.getSelectedTaskId();
+    location.href = "/tasks/" + id + "/edit"
+  },
+  defer: function() {
+    id = TaskNavigation.getSelectedTaskId();
+    Tasks.parkUntil(id);
+  },
+  park: function() {
+    $(".cursor .park_task_link").click();
+  },
+  complete: function() {
+    $(".cursor .task_complete_form").submit();
+  },
   setup: function() {
     $(document.body).shortkeys({
       'j': function() {
@@ -33,13 +50,13 @@ var TaskNavigation = {
           //prev.get(0).scrollIntoView(true);
         }
       },
-      'Enter': function() {
-        TaskNavigation.open();
-      },
-      'o': function() {
-        TaskNavigation.open();
-      }
-    }, {moreKeys: {'Enter':13} })
+      'Enter': TaskNavigation.open,
+      'o':     TaskNavigation.open,
+      'e':     TaskNavigation.edit,
+      'd':     TaskNavigation.defer,
+      'p':     TaskNavigation.park,
+      'x':     TaskNavigation.complete,
+    }, {moreKeys: {'Enter': 13}})
   }
 }
 
