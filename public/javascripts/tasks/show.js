@@ -1,3 +1,29 @@
+var TaskShortkeys = {
+  edit: function() {
+    location.href += "/edit"
+  },
+  parkOrPrioritize: function() {
+    $(".task_park_link").click();
+    $(".task_prioritize_link").click();
+  },
+  complete: function() {
+    $("#complete_link").click();
+  },
+  delete: function() {
+    $(".task_delete_link").click();
+  },
+  setup: function() {
+    $(document.body).shortkeys({
+      'e':       TaskShortkeys.edit,
+      'p':       TaskShortkeys.parkOrPrioritize,
+      'x':       TaskShortkeys.complete,
+      'Shift+1': TaskShortkeys.delete,
+    }, {moreKeys: {
+      'Shift': 16,
+    }})
+  }
+}
+
 $(function(){
   $("#complete_link").click(function(e) {
     e.preventDefault();
@@ -11,4 +37,5 @@ $(function(){
     elem.find(".editable").removeClass("empty");
   }});
   $("#status_container").inlineEditor();
+  TaskShortkeys.setup();
 })
