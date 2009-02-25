@@ -75,5 +75,5 @@ var TaskNavigation = {
 
 $(function() {
   TaskNavigation.setup();
-  // $(document).keydown(function(e){console.log(e.keyCode);});
+  $(document).keydown(function(e){console.log(e.keyCode);});
 });
