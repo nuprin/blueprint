@@ -70,8 +70,11 @@
             :class => "park_task_link" %>
           </li>
         <% end %>
-          <li><%= link_to "Delete", task_path(task), :method => :delete,
-            :confirm => "Are you sure you want to delete this task?" %></li>
+          <li>
+            <span class="shortcut">!</span>
+            <%= link_to "Delete", task_path(task), :method => :delete,
+            :confirm => "Are you sure you want to delete this task?",
+            :class => "task_delete_link" %></li>
       </ul>
     </div>
   </td>

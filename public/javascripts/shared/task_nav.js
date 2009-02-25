@@ -22,6 +22,9 @@ var TaskNavigation = {
   complete: function() {
     $(".cursor .task_complete_form").submit();
   },
+  delete: function() {
+    $(".cursor .task_delete_link").click();
+  },
   up: function() {
     cursor = $("#main_task_list .cursor");
     if (0 == cursor.length) {
@@ -50,18 +53,20 @@ var TaskNavigation = {
   },
   setup: function() {
     $(document.body).shortkeys({
-      'Enter': TaskNavigation.open,
-      'j':     TaskNavigation.down,
-      'Down':  TaskNavigation.down,
-      'k':     TaskNavigation.up,
-      'Up':    TaskNavigation.up,
-      'o':     TaskNavigation.open,
-      'e':     TaskNavigation.edit,
-      'd':     TaskNavigation.defer,
-      'p':     TaskNavigation.park,
-      'x':     TaskNavigation.complete,
+      'Enter':   TaskNavigation.open,
+      'j':       TaskNavigation.down,
+      'Down':    TaskNavigation.down,
+      'k':       TaskNavigation.up,
+      'Up':      TaskNavigation.up,
+      'o':       TaskNavigation.open,
+      'e':       TaskNavigation.edit,
+      'd':       TaskNavigation.defer,
+      'p':       TaskNavigation.park,
+      'x':       TaskNavigation.complete,
+      'Shift+1': TaskNavigation.delete,
     }, {moreKeys: {
       'Enter': 13,
+      'Shift': 16,
       'Up':    38,
       'Down':  40
     }})
@@ -70,5 +75,5 @@ var TaskNavigation = {
 
 $(function() {
   TaskNavigation.setup();
-  $(document).keydown(function(e){console.log(e.keyCode);});
+  // $(document).keydown(function(e){console.log(e.keyCode);});
 });
