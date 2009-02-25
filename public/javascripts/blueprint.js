@@ -2,13 +2,16 @@
 var KeyboardShortcuts = {
   setup: function() {
     $(document.body).shortkeys({
-      "a": function() {
+      'a': function() {
         $(".quick_add_link:eq(0)").trigger("click");      
+      },
+      'b': function() {
+        location.href = "/bugs";
       },
       'i': function() {
         location.href = "/projects/all";
       },
-      "n": function() {
+      'n': function() {
         location.href = "/tasks/new"
       },
       's': function() {
@@ -19,7 +22,7 @@ var KeyboardShortcuts = {
       },
       '¿': function() {
         $("#q").focus();
-      }
+      },
     })
     // TODO: MOve this over to shortkeys when it supports the concept of a
     // "universal" shortcut, a shortcut that works regardless of whether you're
