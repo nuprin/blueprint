@@ -35,7 +35,6 @@ var TaskNavigation = {
     if (0 < prev.length) {
       cursor.removeClass('cursor');
       prev.addClass('cursor');
-      //prev.get(0).scrollIntoView(true);
     }
   },
   down: function() {
@@ -48,7 +47,6 @@ var TaskNavigation = {
     if (0 < next.length) {
       cursor.removeClass('cursor');
       next.addClass('cursor');
-      //next.get(0).scrollIntoView(false);
     }
   },
   setup: function() {
@@ -75,5 +73,5 @@ var TaskNavigation = {
 
 $(function() {
   TaskNavigation.setup();
-  $(document).keydown(function(e){console.log(e.keyCode);});
+  // $(document).keydown(function(e){console.log(e.keyCode);});
 });
