@@ -1,7 +1,9 @@
-<%= javascript_include_tag 'shared/task_list' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
-
+<%= stylesheet_link_tag 'shared/task_nav' %>
 <%= stylesheet_link_tag "projects/show" %>
+
+<%= javascript_include_tag 'shared/task_list' %>
+<%= javascript_include_tag 'shared/task_nav' %>
 
 <script type="text/javascript">
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
