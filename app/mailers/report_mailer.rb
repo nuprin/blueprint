@@ -4,7 +4,7 @@ class ReportMailer < ActionMailer::Base
     from       REPLY_TO
     reply_to   REPLY_TO
     subject    "Scrum Notes: #{Time.now.strftime("%b %e, %Y")}"
-    recipients "chris@causes.com"
+    recipients "eng@causes.com"
     content_type "text/html"
   end
 end
