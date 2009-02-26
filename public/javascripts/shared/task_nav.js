@@ -26,7 +26,7 @@ var TaskNavigation = {
     $(".cursor .task_delete_link").click();
   },
   up: function() {
-    cursor = $(".task_list:eq(0) .cursor");
+    cursor = $(".cursor");
     if (0 == cursor.length) {
       $(".task_list:eq(0) tbody tr:first-child").addClass('cursor');
       return;
@@ -39,7 +39,7 @@ var TaskNavigation = {
     }
   },
   down: function() {
-    cursor = $(".task_list:eq(0) .cursor");
+    cursor = $(".cursor");
     if (0 == cursor.length) {
       $(".task_list:eq(0) tbody tr:first-child").addClass('cursor');
       return;
