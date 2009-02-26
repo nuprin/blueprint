@@ -1,6 +1,9 @@
 <%= stylesheet_link_tag "shared/header" %>
 <%= stylesheet_link_tag 'shared/task_list' %>
+<%= stylesheet_link_tag 'shared/task_nav' %>
+
 <%= javascript_include_tag 'shared/task_list' %>
+<%= javascript_include_tag 'shared/task_nav' %>
 
 <script type="text/javascript">
   var AUTOCOMPLETE_DATA = <%= ((Task::KINDS.map do |kind|
@@ -8,9 +11,6 @@
   end) + (Project.all.map do |project|
     [h(project.title), "project_id", project.id]
   end)).transpose.to_json %>;
-  <% if viewer == @user %>
-    var PRIORITIZED_TASK_COUNT = "<%= @user.task_list.size %>";
-  <% end %>
 </script>
 
 <% @title = viewer == @user ? "Your Completed Tasks" :
