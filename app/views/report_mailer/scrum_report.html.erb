@@ -1,0 +1,12 @@
+<% User.active.each do |user| %>
+  <% tasks = user.completed_tasks_since_scrum %>
+  <% if tasks.any? %>
+    <strong><%= user.name %>'s Completed Tasks</strong>
+    <ul>
+      <% tasks.each do |task| %>
+        <li><%= link_to task.title, task_url(task) %></li>
+      <% end %>
+    </ul><br />
+    <br />
+  <% end %>
+<% end %>

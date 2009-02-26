@@ -1,0 +1,1 @@
+ReportMailer.deliver_scrum_report

@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
     Task.assigned_to(self).completed_today.recently_completed.with_details
   end
 
+  SCRUM_TIME = Chronic.parse("Yesterday 12:30pm").getutc
+  def completed_tasks_since_scrum
+    Task.assigned_to(self).all(:conditions => {
+      :completed_at => SCRUM_TIME..Time.now.getutc
+    })
+  end
+
   def self.form_options
     self.sorted.map{|u| [u.id, u.name]}.map do |(id, name)|
       "<option value=\"#{id}\">#{name}</option>"
