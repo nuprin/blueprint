@@ -27,8 +27,7 @@
                :locals => {:title => "",
                            :tasks => @project.task_list,
                            :context => @project.class.name,
-                           :task_object => task_object,
-                           :table_id    => "main_task_list"} %>
+                           :task_object => task_object} %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title =>
                           "COMPLETED THIS WEEK (#{@project.completed_tasks_this_week.size})",

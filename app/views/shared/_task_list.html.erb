@@ -1,7 +1,6 @@
 <% 
   context = local_assigns[:context] || "" 
   title = local_assigns[:title] || ""
-  table_id = local_assigns[:table_id] || title.dehumanize
 %>
 
 <%= stylesheet_link_tag "shared/modal" %>
@@ -16,7 +15,7 @@
 </h2>
 <table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
   <%= " #{context.downcase}_task_list" %>"
-  id="<%= table_id %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
+  id="<%= title.dehumanize %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
   <% if local_assigns[:task_object] %>
     <tfoot>
       <tr>

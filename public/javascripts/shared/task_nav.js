@@ -26,9 +26,9 @@ var TaskNavigation = {
     $(".cursor .task_delete_link").click();
   },
   up: function() {
-    cursor = $("#main_task_list .cursor");
+    cursor = $(".task_list:eq(0) .cursor");
     if (0 == cursor.length) {
-      $("#main_task_list tbody tr:first-child").addClass('cursor');
+      $(".task_list:eq(0) tbody tr:first-child").addClass('cursor');
       return;
     }
     prev = cursor.prev();
@@ -39,9 +39,9 @@ var TaskNavigation = {
     }
   },
   down: function() {
-    cursor = $("#main_task_list .cursor");
+    cursor = $(".task_list:eq(0) .cursor");
     if (0 == cursor.length) {
-      $("#main_task_list tbody tr:first-child").addClass('cursor');
+      $(".task_list:eq(0) tbody tr:first-child").addClass('cursor');
       return;
     }
     next = cursor.next();

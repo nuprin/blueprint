@@ -28,8 +28,7 @@
                          :tasks       => @user.task_list,
                          :context     => @user.class.name,
                          :task_object => task_object,
-                         :highlight_deadlines => true,
-                         :table_id    => "main_task_list"} %>
+                         :highlight_deadlines => true} %>
   <% 
     completed_task_object =
       HindsightTask.new(:status => "completed", :assignee_id => @user.id)
