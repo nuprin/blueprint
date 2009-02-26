@@ -16,8 +16,8 @@ var TaskNavigation = {
     id = TaskNavigation.getSelectedTaskId();
     Tasks.parkUntil(id);
   },
-  park: function() {
-    $(".cursor .park_task_link").click();
+  parkOrPrioritize: function() {
+    $(".cursor .park_task_link").add(".cursor .prioritize_task_link").click();
   },
   complete: function() {
     $(".cursor .task_complete_form").submit();
@@ -61,7 +61,7 @@ var TaskNavigation = {
       'o':       TaskNavigation.open,
       'e':       TaskNavigation.edit,
       'd':       TaskNavigation.defer,
-      'p':       TaskNavigation.park,
+      'p':       TaskNavigation.parkOrPrioritize,
       'x':       TaskNavigation.complete,
       'Shift+1': TaskNavigation.delete,
     }, {moreKeys: {

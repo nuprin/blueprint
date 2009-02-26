@@ -61,8 +61,13 @@
           <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
             :method => :post %></li>
         <% elsif task.parked? %>
-          <li><%= link_to "Prioritize", prioritize_task_path(task),
-            :method => :post, :class => "prioritize_task_link" %></li>
+          <li>
+            <span class="shortcut">P</span>
+            <%= link_to "Park", park_task_path(task), :method => :post,
+            :class => "park_task_link" %>
+            <%= link_to "Prioritize", prioritize_task_path(task),
+              :method => :post, :class => "prioritize_task_link" %>
+          </li>
         <% elsif task.prioritized? %>
           <li>
             <span class="shortcut">P</span>
