@@ -18,8 +18,10 @@ class TaskMailer < ActionMailer::Base
     from       from_email(comment.author)
     subject    task_subject(task)
     reply_to   REPLY_TO
-    attachment :content_type => comment.image_content_type,
-               :body         => File.read(comment.image.path)
+    if comment.image_file_name
+      attachment :content_type => comment.image_content_type,
+                 :body         => File.read(comment.image.path)
+    end
     part :content_type => "text/plain",
          :body =>
             render_message("new_comment", :comment => comment, :task => task)
