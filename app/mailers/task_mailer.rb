@@ -17,11 +17,12 @@ class TaskMailer < ActionMailer::Base
     recipients recipient_email(recipient)
     from       from_email(comment.author)
     subject    task_subject(task)
-    #TODO
-    #this should add the "+id" to the email address that can then be parsed out?
-    #reply_to   "philbot+#{task.id}@project-agape.com"
     reply_to   REPLY_TO
-    body       :comment => comment, :task => task
+    attachment :content_type => comment.image_content_type,
+               :body         => File.read(comment.image.path)
+    part :content_type => "text/plain",
+         :body =>
+            render_message("new_comment", :comment => comment, :task => task)
   end
 
   def assignee_id_edit(recipient, task, edit)

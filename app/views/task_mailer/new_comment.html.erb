@@ -1,10 +1,5 @@
 <%= @comment.text -%>
 
-<% if @comment.image_file_name -%>
-Photo:
-<%= @comment.image.url -%>
-
-<% end -%>
 ----
 Reply to the discussion:
 <%= task_url(@task) %>

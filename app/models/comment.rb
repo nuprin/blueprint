@@ -32,6 +32,9 @@ class Comment < ActiveRecord::Base
 
   after_create do |comment|
     comment.author.subscribe_to(comment.commentable)
+  end
+  
+  after_save do |comment|
     comment.commentable.mass_mailer.ignoring(comment.author).
       deliver_new_comment(comment)
   end
