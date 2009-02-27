@@ -42,7 +42,12 @@ class User < ActiveRecord::Base
     Task.assigned_to(self).completed_today.recently_completed.with_details
   end
 
-  SCRUM_TIME = Chronic.parse("Yesterday 12:30pm").getutc
+  SCRUM_TIME = if Date.today.wday == 1
+    Chrnoic.parse("Last Friday 12:00pm").getutc
+  else
+    Chronic.parse("Yesterday 12:00pm").getutc
+  end
+
   def completed_tasks_since_scrum
     Task.assigned_to(self).all(:conditions => {
       :completed_at => SCRUM_TIME..Time.now.getutc
