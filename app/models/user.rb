@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   SCRUM_TIME = if Date.today.wday == 1
-    Chrnoic.parse("Last Friday 12:00pm").getutc
+    Chronic.parse("Last Friday 12:00pm").getutc
   else
     Chronic.parse("Yesterday 12:00pm").getutc
   end
