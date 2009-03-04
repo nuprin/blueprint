@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     render :partial => "/shared/task", :locals => {
       :task_list_item_or_task => (li || task),
       :context => context
-    }    
+    }
   end
 
   def new
@@ -55,9 +55,10 @@ class TasksController < ApplicationController
   end
 
   def edit; end
-  
+
   def update
     ignore_due_date_if_requested(params[:task])
+    params[:task][:estimate] = nil if params[:task][:estimate].blank?
     begin
       @task.update_attributes!(params[:task])
       flash[:notice] = "Your changes have been saved."
