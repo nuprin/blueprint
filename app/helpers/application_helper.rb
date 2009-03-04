@@ -37,8 +37,8 @@ module ApplicationHelper
   end
   
   def auto_link_commits(text)
-    text.gsub /git:[a-f0-9]+/i do |key|
-      hash = key.split(':').last
+    text.gsub /git:\s*[a-f0-9]+/i do |key|
+      hash = key.split(':').last.strip
       link_to key, git_path(hash), :target => :blank
     end
   end
