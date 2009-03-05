@@ -89,6 +89,15 @@ class Project < ActiveRecord::Base
     Specification.create(:project_id => project.id)
   end
 
+  after_save do |project|
+    if ["Product", "Engineering"].include?(project.category_name)
+      u = User.find_by_name("Michel")
+      if u
+        u.subscribe_to(project) 
+      end
+    end
+  end
+  
   after_destroy do |project|
     project.tasks.destroy_all
   end

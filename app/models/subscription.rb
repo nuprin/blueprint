@@ -14,7 +14,8 @@ class Subscription < ActiveRecord::Base
     # to all updates about the relevant task.
     def subscribe_to(entity)
       if !subscribed_to?(entity)
-        entity.subscriptions.create(:user_id => self.id)
+        Subscription.create!(:user_id => self.id, :entity_id => entity.id,
+          :entity_type => entity.class.name)
       end
     end
 
