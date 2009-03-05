@@ -70,10 +70,15 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create!(params[:project])
-    viewer.subscribe_to(@project)
-    flash[:notice] = "#{@project.title} has been created."
-    redirect_to @project
+    @project = Project.new(params[:project])
+    begin
+      @project.save!
+      viewer.subscribe_to(@project)
+      flash[:notice] = "#{@project.title} has been created."
+      redirect_to @project
+    rescue ActiveRecord::RecordInvalid => ex
+      render :action => "new"
+    end
   end
   
   def show

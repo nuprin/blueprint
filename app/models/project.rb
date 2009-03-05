@@ -28,6 +28,8 @@ class Project < ActiveRecord::Base
   named_scope :uncategorized, :conditions => {:category_id => nil}
 
   validates_length_of :title, :in => 1...255
+  validates_uniqueness_of :title,
+    :message => "is the same as another initiative. Try a different one?"
   
   def to_s
     self.title

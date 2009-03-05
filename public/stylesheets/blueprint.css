@@ -37,7 +37,7 @@ input[type=text], textarea {
 }
 .errorExplanation ul {
   list-style-type: square;
-  margin-left: 20px;
+  margin: 0 0 1em 20px;
 }
 .sf-menu ul {
   background: #ddd;
