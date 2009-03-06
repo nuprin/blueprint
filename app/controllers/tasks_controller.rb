@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
   before_filter :find_model
 
+  rescue_from ActiveRecord::RecordNotFound,
+              :with => :redirect_from_deleted_task
+
   def create
     ignore_due_date_if_requested(params[:task])
     begin
@@ -185,7 +188,11 @@ class TasksController < ApplicationController
     render :text => {:status => "item not found"}.to_json
   end
 
-  def show
+  def show; end
+
+  def redirect_from_deleted_task
+    flash[:notice] = "The task you're looking for has been deleted."
+    redirect_to viewer
   end
 
   private
