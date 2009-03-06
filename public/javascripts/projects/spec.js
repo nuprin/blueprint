@@ -11,6 +11,8 @@ $(function() {
     controls: {
       insertOrderedList:   {visible: true},
       insertUnorderedList: {visible: true},
+      h1mozilla: {visible: false},
+      h1: {visible: false}
     },
     css: "/stylesheets/projects/spec/body.css"
   });
