@@ -9,7 +9,7 @@
            :locals => {:fields => [:assignee]} %>
 
 <%= tabs([
-  ["PRIORITIZED", bugs_path],
+  ["PRIORITIZED (#{Task.prioritized.bugs.size})", bugs_path],
   ["COMPLETED",   completed_bugs_path],
   ["PARKED",      parked_bugs_path]
 ]) %>

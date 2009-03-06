@@ -1,15 +1,15 @@
 class BugsController < ApplicationController
   def index
-    @tasks = Task.prioritized.all(:conditions => {:kind => "bug"})
+    @tasks = Task.prioritized.bugs
   end
 
   def completed
-    @tasks = Task.completed.all(:conditions => {:kind => "bug"})
+    @tasks = Task.completed.bugs
     render :action => "index"
   end
 
   def parked
-    @tasks = Task.parked.all(:conditions => {:kind => "bug"})
+    @tasks = Task.parked.bugs
     render :action => "index"
   end
 end

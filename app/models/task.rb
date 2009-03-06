@@ -33,6 +33,7 @@ class Task < ActiveRecord::Base
     :conditions => {:assignee_id => user.id}
   }}
   named_scope :assigned_to_other, :conditions => "creator_id != assignee_id"
+  named_scope :bugs, :conditions => {:kind => "bug"}
   named_scope :completed_today, lambda {{
     :conditions => ["completed_at >= ?",
       (Time.now - 6.hours).at_midnight.getutc]
