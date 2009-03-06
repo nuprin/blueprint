@@ -9,7 +9,7 @@ var TaskShortkeys = {
   complete: function() {
     $("#complete_link").click();
   },
-  delete: function() {
+  deleteTask: function() {
     $(".task_delete_link").click();
   },
   setup: function() {
@@ -17,10 +17,10 @@ var TaskShortkeys = {
       'e':       TaskShortkeys.edit,
       'p':       TaskShortkeys.parkOrPrioritize,
       'x':       TaskShortkeys.complete,
-      'Shift+1': TaskShortkeys.delete,
+      'Shift+1': TaskShortkeys.deleteTask,
     }, {moreKeys: {
       'Shift': 16,
-    }})
+    }});
   }
 }
 
