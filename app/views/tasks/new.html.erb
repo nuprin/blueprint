@@ -19,7 +19,6 @@
       <p>Deliverable: <strong><%= link_to_task @task.parent %></strong></p>
     <% end %>
 
-    <%= f.hidden_field :status, :value => "prioritized" %>
     <%= f.hidden_field :creator_id, :value => viewer.id %>
 
     <%= render :partial => "task_form_fields",
