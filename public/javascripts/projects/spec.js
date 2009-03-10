@@ -15,8 +15,7 @@ $(function() {
       h1:                   {visible: false},
       insertHorizontalRule: {visible: true},
       indent:               {visible: true},
-      outdent:              {visible: true},
-      html:                 {visible: true}
+      outdent:              {visible: true}
     },
     css: "/stylesheets/projects/spec/body.css"
   });
