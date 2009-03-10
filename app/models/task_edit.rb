@@ -9,9 +9,9 @@ class TaskEdit < ActiveRecord::Base
 
   def self.record_changes!(task)
     # TODO: Seems to think the butler parked one of my tasks.
-    task.editor ||= User.butler
+    # task.editor ||= User.butler
     task.changes.each do |f, (o, n)|
-      if RELEVANT_FIELDS.include?(f)
+      if RELEVANT_FIELDS.include?(f) && task.editor
         edit = self.create! :editor_id => task.editor.id, :task_id => task.id,
                             :field => f, :old_value => o, :new_value => n
         edit.notify_subscribers(task)        
