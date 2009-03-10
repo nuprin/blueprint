@@ -13,6 +13,7 @@ class DeferredTask < ActiveRecord::Base
   
   def process
     self.task.prioritize!
+    self.task.mass_mailer.deliver_task_reprioritized
     self.destroy    
   end
   
@@ -29,5 +30,5 @@ class DeferredTask < ActiveRecord::Base
   after_create do |deferred_task|
     deferred_task.task.mass_mailer.ignoring(deferred_task.creator).
       deliver_task_deferred(deferred_task)
-  end
+  end  
 end

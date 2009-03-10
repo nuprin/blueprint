@@ -83,6 +83,14 @@ class TaskMailer < ActionMailer::Base
     body       :deferred_task => deferred_task
   end
 
+  def task_reprioritized(recipient, task)
+    recipients recipient_email(recipient)
+    from       REPLY_TO
+    subject    task_subject(task)
+    reply_to   REPLY_TO
+    body       :task => task
+  end
+  
   private
   
   def task_subject(task)
