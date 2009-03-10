@@ -55,8 +55,6 @@ describe "The task comment email" do
     @mail = TaskMailer.create_new_comment(@task.assignee, @task, @comment)
   end
 
-  it_should_behave_like "a generic task email"
-
   it "should appear to be from the comment author" do
     @comment.author.name.should == @mail.from_addrs[0].name
   end

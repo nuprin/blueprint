@@ -8,8 +8,7 @@ describe "a generic initiative email", :shared => true do
   end
 
   it "should have a subject prepended with the title" do
-    RAILS_DEFAULT_LOGGER.info "#{@mail.subject}"
-    @mail.subject.include?("[#{@project.title}]").should == true
+    @mail.subject.include?("#{@project.title}").should == true
   end
 
   it "should have link to the initiative in the body" do
