@@ -79,7 +79,7 @@ table.task_list .task_estimate {
   width: 60px;
   text-align: right;
 }
-table.task_list .deadline_soon td {
+table.task_list .deadline_tomorrow td {
   background-image: url("../../images/due-soon.gif");
   background-repeat: repeat-x;
   color: #333 !important;
@@ -92,13 +92,13 @@ table.task_list .deadline_today td {
 table.task_list .deadline_today .task_menu_container {
   font-weight: normal;
 }
-table.task_list .deadline_soon .menu_arrow {
+table.task_list .deadline_tomorrow .menu_arrow {
   background-image: url("../../images/task-dropdown-due-soon.gif");
 }
 table.task_list .deadline_today .menu_arrow {
   background-image: url("../../images/task-dropdown-due-today.gif");
 }
-table.task_list .deadline_soon .active .menu_arrow,
+table.task_list .deadline_tomorrow .active .menu_arrow,
 table.task_list .deadline_today .active .menu_arrow {
   background-image: url("../../images/task-dropdown-active.gif");
 }

@@ -80,11 +80,19 @@ class Task < ActiveRecord::Base
   end
 
   def due_soon?
-    Date.tomorrow == due_date
+    self.due_today? || self.due_tomorrow?
+  end
+
+  def overdue?
+    self.due_date && (Date.today > self.due_date)
+  end
+
+  def due_tomorrow?
+    Date.tomorrow == self.due_date
   end
 
   def due_today?
-    Date.today == due_date
+    Date.today == self.due_date
   end
 
   def complete!
@@ -126,6 +134,14 @@ class Task < ActiveRecord::Base
     (self.task_edits + self.comments).sort_by(&:created_at)
   end
   
+  def self.prioritize_due_tasks
+    self.parked.with_due_date.each do |task|
+      if task.due_soon? || task.overdue?
+        task.prioritize!
+      end
+    end
+  end
+
   before_create :set_already_completed
   before_save :adjust_year, :update_lists, :set_type
   before_update :record_changes

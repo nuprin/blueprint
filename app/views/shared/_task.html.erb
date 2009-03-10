@@ -5,8 +5,8 @@
 <% end %>
 <% if local_assigns[:highlight_deadlines]
      deadline_class = case
-     when task.due_soon?:  "deadline_soon"
-     when task.due_today?:  "deadline_today"
+     when task.due_tomorrow?:  "deadline_tomorrow"
+     when (task.due_today? || task.overdue?):  "deadline_today"
      else
        ""
      end
