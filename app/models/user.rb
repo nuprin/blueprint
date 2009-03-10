@@ -97,4 +97,8 @@ class User < ActiveRecord::Base
   def self.michel
     User.find_by_name("Michel")
   end
+  
+  def self.butler
+    User.find_or_create_by_name("The Butler")
+  end
 end

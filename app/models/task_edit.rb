@@ -9,8 +9,8 @@ class TaskEdit < ActiveRecord::Base
 
   def self.record_changes!(task)
     task.changes.each do |f, (o, n)|
-      # task.editor ||= User.task_master
-      if RELEVANT_FIELDS.include?(f) && task.editor
+      task.editor ||= User.butler
+      if RELEVANT_FIELDS.include?(f)
         edit = self.create! :editor_id => task.editor.id, :task_id => task.id,
                             :field => f, :old_value => o, :new_value => n
         edit.notify_subscribers(task)        
