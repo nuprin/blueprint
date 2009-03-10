@@ -9,10 +9,14 @@ var Spec = {
 $(function() {
   $("#spec_body").wysiwyg({
     controls: {
-      insertOrderedList:   {visible: true},
-      insertUnorderedList: {visible: true},
-      h1mozilla: {visible: false},
-      h1: {visible: false}
+      insertOrderedList:    {visible: true},
+      insertUnorderedList:  {visible: true},
+      h1mozilla:            {visible: false},
+      h1:                   {visible: false},
+      insertHorizontalRule: {visible: true},
+      indent:               {visible: true},
+      outdent:              {visible: true},
+      html:                 {visible: true}
     },
     css: "/stylesheets/projects/spec/body.css"
   });
