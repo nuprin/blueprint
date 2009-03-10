@@ -9,6 +9,7 @@ class TaskEdit < ActiveRecord::Base
 
   def self.record_changes!(task)
     task.changes.each do |f, (o, n)|
+      # task.editor ||= User.task_master
       if RELEVANT_FIELDS.include?(f) && task.editor
         edit = self.create! :editor_id => task.editor.id, :task_id => task.id,
                             :field => f, :old_value => o, :new_value => n
@@ -22,14 +23,8 @@ class TaskEdit < ActiveRecord::Base
                  :field => "subscriptions", :new_value => subscription.user_id
   end
 
-  # TODO [chris]: Eliminate SUPPORTED_FIELDS as we move over emails.
-  EMAIL_FIELDS = [
-    "assignee_id", "description", "due_date", "estimate", "status", "title"
-  ]
   def notify_subscribers(task)
-    if EMAIL_FIELDS.include?(self.field)
-      deliver_method = "deliver_#{self.field}_edit"
-      task.mass_mailer.ignoring(task.editor).send(deliver_method, self)
-    end
+    deliver_method = "deliver_#{self.field}_edit"
+    task.mass_mailer.ignoring(task.editor).send(deliver_method, self)
   end
 end
