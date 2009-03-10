@@ -1,0 +1,8 @@
+<%= @edit.editor.name %> renamed the task from "<%= @edit.old_value %>" to "<%= @edit.new_value %>".
+
+View this task:
+<%= task_url(@edit.task) %>
+
+----
+<%= task_footer(@edit.task) %>
+

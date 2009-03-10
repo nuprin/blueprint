@@ -24,7 +24,7 @@ class TaskEdit < ActiveRecord::Base
 
   # TODO [chris]: Eliminate SUPPORTED_FIELDS as we move over emails.
   EMAIL_FIELDS = [
-    "assignee_id", "description", "due_date", "estimate", "status"
+    "assignee_id", "description", "due_date", "estimate", "status", "title"
   ]
   def notify_subscribers(task)
     if EMAIL_FIELDS.include?(self.field)

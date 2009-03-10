@@ -67,6 +67,14 @@ class TaskMailer < ActionMailer::Base
     body       :edit => edit
   end
 
+  def title_edit(recipient, task, edit)
+    recipients recipient_email(recipient)
+    from       from_email(edit.editor)
+    subject    task_subject(edit.task)
+    reply_to   REPLY_TO
+    body       :edit => edit
+  end
+
   def new_subscription(subscription, editor)
     recipients recipient_email(subscription.user)
     from       from_email(editor)
