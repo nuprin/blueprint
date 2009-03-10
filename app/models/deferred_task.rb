@@ -1,6 +1,8 @@
 class DeferredTask < ActiveRecord::Base
+  belongs_to :creator, :class_name => 'User'
   belongs_to :task
 
+  validates_presence_of :creator_id
   validates_presence_of :prioritize_at
   validates_presence_of :task_id
 
@@ -14,9 +16,18 @@ class DeferredTask < ActiveRecord::Base
     self.destroy    
   end
   
-  after_create :park_task
+  def friendly_prioritize_at
+    self.prioritize_at.getlocal.strftime("%b %e at %I:%M%p")
+  end
   
+  after_create :park_task
+
   def park_task
     self.task.park!
+  end
+  
+  after_create do |deferred_task|
+    deferred_task.task.mass_mailer.ignoring(deferred_task.creator).
+      deliver_task_deferred(deferred_task)
   end
 end

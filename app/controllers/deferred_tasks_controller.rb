@@ -3,8 +3,8 @@ class DeferredTasksController < ApplicationController
     parse_custom_time
     begin
       dt = DeferredTask.create!(params[:deferred_task])
-      flash[:notice] = "The task will be parked until " +
-        "#{dt.prioritize_at.getlocal.strftime("%b %e at %I:%M%p")}."
+      flash[:notice] =
+        "The task will be parked until #{dt.friendly_prioritize_at}."
     rescue ActiveRecord::RecordInvalid
       flash[:notice] =
         "There was an error in parking your task. Please try again."

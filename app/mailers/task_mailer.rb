@@ -75,6 +75,14 @@ class TaskMailer < ActionMailer::Base
     body       :editor => editor, :task => subscription.task
   end
 
+  def task_deferred(recipient, task, deferred_task)
+    recipients recipient_email(recipient)
+    from       from_email(deferred_task.creator)
+    subject    task_subject(task)
+    reply_to   REPLY_TO
+    body       :deferred_task => deferred_task
+  end
+
   private
   
   def task_subject(task)

@@ -3,7 +3,7 @@
   <p><strong>Park this task, and then reprioritize it:</strong></p>
   <% form_for :deferred_task, :url => deferred_tasks_path do |f| %>
     <%= f.hidden_field :task_id %>
-
+    <%= f.hidden_field :creator_id, :value => viewer.id %>
     <ul>
       <% t0 = Chronic.parse("tomorrow 6:00am") %>
       <li>
