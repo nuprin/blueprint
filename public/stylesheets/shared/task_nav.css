@@ -1,3 +1,4 @@
 .task_list .cursor td {
   background-color: #CCFFF8;
+  background-image: none !important;
 }
