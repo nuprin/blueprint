@@ -43,9 +43,9 @@ class User < ActiveRecord::Base
   end
 
   SCRUM_TIME = if Date.today.wday == 1
-    Chronic.parse("Last Friday 12:00pm").getutc
+    Chronic.parse("Last Friday 11:45am").getutc
   else
-    Chronic.parse("Yesterday 12:00pm").getutc
+    Chronic.parse("Yesterday 11:45am").getutc
   end
 
   def completed_tasks_since_scrum
