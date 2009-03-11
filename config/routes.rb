@@ -5,6 +5,10 @@ ActionController::Routing::Routes.draw do |map|
     }
   end
 
+  map.namespace(:admin) do |admin|
+    admin.resources :users
+  end
+
   map.resources :bugs, :collection => {
     :completed => :get,
     :parked => :get

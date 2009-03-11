@@ -1,0 +1,30 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Fbuid</th>
+    <th>Email</th>
+    <th>Active</th>
+    <th>Gender</th>
+    <th>Role</th>
+  </tr>
+
+<% for user in @users %>
+  <tr>
+    <td><%=h user.name %></td>
+    <td><%=h user.fbuid %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.active %></td>
+    <td><%=h user.gender %></td>
+    <td><%=h user.role %></td>
+    <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+    <td><%= link_to 'Destroy', admin_user_path(user),
+      :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New user', new_admin_user_path %>

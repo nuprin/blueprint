@@ -1,0 +1,33 @@
+<p>
+  <b>Name:</b>
+  <%=h @test_user.name %>
+</p>
+
+<p>
+  <b>Fbuid:</b>
+  <%=h @test_user.fbuid %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @test_user.email %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%=h @test_user.active %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%=h @test_user.gender %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%=h @test_user.role %>
+</p>
+
+
+<%= link_to 'Edit', edit_test_user_path(@test_user) %> |
+<%= link_to 'Back', test_users_path %>
