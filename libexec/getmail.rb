@@ -8,6 +8,15 @@ def remove_quotation(text)
   (DATE_EX.match(text) ? $1 : text).strip
 end
 
+def delete_email(connection, message_id)
+  connection.store(message_id, "FLAGS", [:Deleted])
+end
+
+def process_comment_text(raw_msg)
+  raw_body = raw_msg.attr["BODY[1]"].gsub("=\r\n", '')
+  remove_quotation(raw_body)
+end
+
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
 connection.login(LOGIN, EMAIL)
 connection.select('INBOX')
@@ -38,31 +47,40 @@ messages.each do |message_id|
   puts from_address
   # Need to catch if the email isn't found!
   user = User.find_by_email(from_address)
-  
-  date_string = envelope.date
-  
-  subj_string = envelope.subject
-  # Only look at messages with Task IDs
-  # TODO: Do we want to just delete the rest?
-  if subj_string =~ /#(\d+)/
-    task_id = $1.to_i
-    puts task_id
-    
-    raw_body = raw_msg.attr["BODY[1]"].gsub("=\r\n", '')
-    comment = remove_quotation(raw_body)
 
-    #create a comment from the info above
-    t = Task.find(task_id)
-    comment_params = {
-      :author_id => user.id, :commentable => t, :text => comment
-    }
-    c = Comment.create!(comment_params)
-    
-    # Delete the message when we're done with it
-    connection.store(message_id, "FLAGS", [:Deleted])
+  # If we can't identify this email address, send an error message to the 
+  # sender.
+  next unless user
+
+  date_string = envelope.date
+  subj_string = envelope.subject
+
+  # TODO: Only look at messages with Task IDs
+  # TODO: Do we want to just delete the rest?
+
+  if subj_string =~ /\(Blueprint\)\s+(.+)\s+Spec/
+    title = $1
+    if p = Project.find_by_title(title)
+      puts "Processing comment for project #{p.id}."
+      # TODO: Implement process_comment_text
+      text = process_comment_text(raw_msg)
+      c = Comment.new(:author_id => user.id, :commentable => p, :text => text)
+      c.save!
+      delete_email(connection, message_id)
+    end
+  elsif subj_string =~ /#(\d+)/
+    task_id = $1.to_i
+    text = process_comment_text(raw_msg)
+    if t = Task.find_by_id(task_id)
+      puts "Processing comment for task #{t.id}."
+      c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
+      c.save!
+      delete_email(connection, message_id)
+    end
   end
 end
 
 connection.logout
+
 # rkabir's local environment requires a separate disconnect call.
 # connection.disconnect
