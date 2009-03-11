@@ -137,6 +137,7 @@ class Task < ActiveRecord::Base
   def self.prioritize_due_tasks
     self.parked.with_due_date.each do |task|
       if task.due_soon? || task.overdue?
+        task.editor = User.butler
         task.prioritize!
       end
     end
