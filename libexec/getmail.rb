@@ -50,15 +50,14 @@ messages.each do |message_id|
 
   # If we can't identify this email address, send an error message to the 
   # sender.
-  next unless user
+  user ||= User.anonymous
 
-  date_string = envelope.date
-  subj_string = envelope.subject
+  subject = envelope.subject
 
   # TODO: Only look at messages with Task IDs
   # TODO: Do we want to just delete the rest?
 
-  if subj_string =~ /\(Blueprint\)\s+(.+)\s+Spec/
+  if subject =~ /\(Blueprint\)\s+(.+)\s+Spec/
     title = $1
     if p = Project.find_by_title(title)
       puts "Processing comment for project #{p.id}."
@@ -68,7 +67,7 @@ messages.each do |message_id|
       c.save!
       delete_email(connection, message_id)
     end
-  elsif subj_string =~ /#(\d+)/
+  elsif subject =~ /#(\d+)/
     task_id = $1.to_i
     text = process_comment_text(raw_msg)
     if t = Task.find_by_id(task_id)

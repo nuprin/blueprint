@@ -101,4 +101,8 @@ class User < ActiveRecord::Base
   def self.butler
     User.find_or_create_by_name("The Butler")
   end
+
+  def self.anonymous
+    User.find_or_create_by_name("Anonymous")
+  end
 end
