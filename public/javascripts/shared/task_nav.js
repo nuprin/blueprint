@@ -49,7 +49,14 @@ var TaskNavigation = {
       next.addClass('cursor');
     }
   },
+  setupSelection: function() {
+    $(".task_list tr").click(function() {
+      $(".task_list tr").removeClass('cursor');
+      $(this).addClass('cursor');
+    })
+  },
   setup: function() {
+    this.setupSelection();
     $(document.body).shortkeys({
       'Enter':   TaskNavigation.open,
       'j':       TaskNavigation.down,
