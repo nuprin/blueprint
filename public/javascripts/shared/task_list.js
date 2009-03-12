@@ -160,6 +160,22 @@ var Fluid = {
   }
 }
 
+// TODO: Refactor.
+var Filter = {
+  setup: function() {
+    $("#filter").change(function() {
+      var val = $(this).val();
+      $(".task_list tr").each(function() {
+        if (val == "all" || $(this).hasClass(val)) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    });
+  }
+}
+
 $(function() {
   Tasks.makeSortable();
   Tasks.setupActions();
@@ -168,4 +184,5 @@ $(function() {
   Tasks.makeCollapsible();
   QuickAdd.setup();
   Fluid.setup();
+  Filter.setup();
 });

@@ -15,6 +15,16 @@
 ]) %>
 
 <div id="task_list">
+  Show:
+  <select id="filter" style="margin-bottom: 15px;">
+    <option value="all">All</option>
+    <% Task.sorted_assignees(@tasks).each do |assignee| %>
+      <option value="<%= assignee.name.downcase %>">
+        <%= assignee.name %>
+      </option>
+    <% end %>
+  </select>
+
   <%# TODO [chris]: "Project" is a hack to hide the initiative column. %>
   <%= render :partial => "/shared/task_list",
              :locals => {:tasks => @tasks, :context => "Project",

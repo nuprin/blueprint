@@ -237,6 +237,11 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def self.sorted_assignees(tasks)
+    assignee_ids = tasks.map(&:assignee_id).compact.uniq
+    User.find(assignee_ids).sort_by(&:name)
+  end
+  
   module UserMethods
     def tasks_completed_by_day(since = 7.days.ago)
       range = [since, Time.now.getutc]
