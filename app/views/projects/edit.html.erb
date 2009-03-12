@@ -45,4 +45,11 @@
   </p>
 <% end %>
 
+<p style="float: right;">
+<%= link_to "Delete Initiative", project_path(@project),
+  :method => :delete, :confirm => "Are you sure? This will delete the attached spec and comments." %>
+</p>
+
+<p>
 <%= link_to 'Back to Initiative', project_path(@project) %>
+</p>

@@ -85,6 +85,13 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end  
 
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    flash[:notice] = "The initiative #{@project.title} has been deleted."
+    redirect_to viewer
+  end
+
   def completed
     @project = Project.find(params[:id])
   end  

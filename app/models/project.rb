@@ -2,17 +2,23 @@ class Project < ActiveRecord::Base
   belongs_to :category, :class_name => "ProjectCategory"
   belongs_to :feature
 
-  has_many :assignees, :through => :tasks, :uniq => true, :order => :name
-  has_many :comments, :as => :commentable
-  has_many :subscriptions, :as => :entity
-  has_many :subscribed_users, :through => :subscriptions, :source => :user,
-    :uniq => true
+  has_many :assignees, :through => :tasks,
+                       :uniq    => true,
+                       :order   => :name
+  has_many :comments, :as        => :commentable,
+                      :dependent => :destroy
+  has_many :subscriptions, :as        => :entity, 
+                           :dependent => :destroy
+  has_many :subscribed_users, :through => :subscriptions, 
+                              :source  => :user,
+                              :uniq    => true
   has_many :task_list, :class_name => 'TaskListItem',
                        :as         => :context,
-                       :order      => :position
+                       :order      => :position,
+                       :dependent  => :destroy
   has_many :tasks
 
-  has_one :specification
+  has_one :specification, :dependent => :destroy
 
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
@@ -97,8 +103,10 @@ class Project < ActiveRecord::Base
       end
     end
   end
-  
-  after_destroy do |project|
-    project.tasks.destroy_all
+
+  before_destroy do |project|
+    project.tasks.each do |task|
+      task.update_attribute(:project_id, nil)
+    end
   end
 end
