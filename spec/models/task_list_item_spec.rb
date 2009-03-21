@@ -33,35 +33,18 @@ describe TaskListItem, " of basic complexity" do
   end
 
   it "should have a correct list" do
-    list_titles(@kristjan.task_list.all.first.list).should == TASK_TITLES
+    list_titles(@kristjan.task_list.all).should == TASK_TITLES
   end
 
-  it "should have the correct contextual list" do
-    list_titles(@kristjan.task_list.all.first.contextual_list).should == 
-      TASK_TITLES                 
-  end
-
-  it "should update the project list if the assignee list changes" do
-    @kristjan.task_list.all.last.update_position(1)
-    titles(@blueprint).should == %w{C A B}
-  end
-  
-  it "should update the assignee list if the project list changes" do
-    @blueprint.task_list.all.last.update_position(1)
-    titles(@kristjan).should == %w{C A B}
-  end
-  
   it "should update lists correctly when assignee moves a task to the bottom" do
-    @kristjan.task_list.all.first.update_position(@kristjan.task_list.size+1)
+    @kristjan.task_list.all.first.insert_at(@kristjan.task_list.size+1)
     @kristjan.reload
     titles(@kristjan).should == %w{B C A}
-    titles(@blueprint).should == %w{B C A}
   end
 
   it "should update lists correctly when project moves a task to the bottom" do
-    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size+1)
+    @blueprint.task_list.all.first.insert_at(@blueprint.task_list.size+1)
     @blueprint.reload
-    titles(@kristjan).should == %w{B C A}
     titles(@blueprint).should == %w{B C A}
   end
 
@@ -98,35 +81,19 @@ describe TaskListItem, " of mild complexity" do
   end
 
   it "should have the correct list" do
-    list_titles(@kristjan.task_list.all.first.list).should == %w{A B C 1 2 3}
-  end
-
-  it "should have a matching contextual list" do
-    list_titles(@kristjan.task_list.all.first.contextual_list).should ==
-      %w{A B C}                 
-    list_titles(@kristjan.task_list.all.last.contextual_list).should ==
-      %w{1 2 3}
+    list_titles(@kristjan.task_list.all).should == %w{A B C 1 2 3}
   end
   
-  it "should update the assignee's list when the project position changes" do
-    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size)
+  it "should be reordered when the project position changes" do
+    @blueprint.task_list.all.first.insert_at(@blueprint.task_list.size)
     @blueprint.reload
     titles(@blueprint).should == %w{B C A}
-    titles(@kristjan).should == %w{B C A 1 2 3}
   end
 
-  it "should update the project's list when the assignee position changes" do  
-    @kristjan.task_list.all.first.update_position(3)
+  it "should be reordered when the assignee position changes" do  
+    @kristjan.task_list.all.first.insert_at(3)
     @kristjan.reload
     titles(@kristjan).should == %w{B C A 1 2 3}
-    titles(@blueprint).should == %w{B C A}
   end
 
-  it "should update the lists when the priority of a task increases by 1" do 
-    @blueprint.task_list.all.first.update_position(@blueprint.task_list.size)
-    @kristjan.task_list[2].update_position(@blueprint.task_list.size-1)
-    @blueprint.reload; @kristjan.reload
-    titles(@kristjan).should == %w{B A C 1 2 3}
-    titles(@blueprint).should == %w{B A C}
-  end
 end

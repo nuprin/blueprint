@@ -182,7 +182,7 @@ class TasksController < ApplicationController
 
   def reorder
     list_item = TaskListItem.find(params[:list_item_id])
-    list_item.update_position(params[:list_item_position])
+    list_item.insert_at(params[:list_item_position])
     render :text => {:status => "ok"}.to_json
   rescue ActiveRecord::RecordNotFound
     render :text => {:status => "item not found"}.to_json
