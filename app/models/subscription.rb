@@ -14,7 +14,8 @@ class Subscription < ActiveRecord::Base
     # to all updates about the relevant task.
     def subscribe_to(entity)
       method = :find_or_create_by_user_id_and_entity_id_and_entity_type 
-      Subscription.send(method, self.id, entity.id, entity.class.name)
+      Subscription.send(method, self.id, entity.id,
+        entity.class.base_class.name)
     end
   end
 
