@@ -6,7 +6,7 @@
 <%= stylesheet_link_tag "shared/modal" %>
 <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 
-<h2<%= " class='#{collapsible}'" if local_assigns[:collapsible] %>>
+<h2>
   <% if local_assigns[:see_all_url] %>
     <%= link_to title, see_all_url %>
   <% elsif !title.blank? %>
@@ -14,8 +14,7 @@
   <% end %>
 </h2>
 <table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
-  <%= " #{context.downcase}_task_list" %>"
-  id="<%= title.dehumanize %>"<%= ' style="display: none;"' if local_assigns[:collapsible] && collapsible == "collapsed" %>>
+  <%= " #{context.downcase}_task_list" %>" id="<%= title.dehumanize %>">
   <% if local_assigns[:task_object] %>
     <tfoot>
       <tr>
