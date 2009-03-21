@@ -58,6 +58,10 @@ ActionController::Routing::Routes.draw do |map|
                   :edit_all => :get,
                   :update_all => :get
                 }
+  map.resources :task_list_items,
+                :member => {
+                  :move_to_top => :put
+                }
   map.resources :users,
                 :member => {
                   :completed => :get,

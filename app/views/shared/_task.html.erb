@@ -75,6 +75,15 @@
             :class => "park_task_link" %>
           </li>
         <% end %>
+        <% if task_list_item_or_task.is_a?(TaskListItem) &&
+              !task_list_item_or_task.first? %>
+          <li>
+            <span class="shortcut">T</span>
+            <%= link_to "Move to Top",
+              move_to_top_task_list_item_path(task_list_item_or_task),
+              :method => :put, :class => "task_move_to_top_link" %>
+          </li>
+        <% end %>
           <li>
             <span class="shortcut">!</span>
             <%= link_to "Delete", task_path(task), :method => :delete,
