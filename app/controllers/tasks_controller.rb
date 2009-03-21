@@ -54,6 +54,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new(params[:task])
+    @task.status = "prioritized"
     @task.assignee_id = viewer.id
   end
 
