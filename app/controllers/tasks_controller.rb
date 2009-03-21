@@ -38,13 +38,9 @@ class TasksController < ApplicationController
     task.mass_mailer.ignoring(task.creator).deliver_task_creation
     context = params[:context]
     if context == "User"
-      li = TaskListItem.for_context(viewer).first(:conditions => {
-        :task_id => task.id
-      })
+      li = viewer.task_list.first(:conditions => {:task_id => task.id})
     elsif context == "Project" && task.project_id
-      li = TaskListItem.for_context(task.project).first(:conditions => {
-        :task_id => task.id
-      })
+      li = task.project.task_list.first(:conditions => {:task_id => task.id})
     end
     render :partial => "/shared/task", :locals => {
       :task_list_item_or_task => (li || task),
