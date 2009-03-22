@@ -8,13 +8,9 @@
   :locals => {:tab_links => project_tab_links} %>
 
 <div id="task_list">
-  <% @projects.each do |project| %>
-  <h2>
-    <%=
-      render(:partial => "modify_project", :locals => {:project => project})
-    %>
-  </h2>
-  <% end %>
+  <table class="list project_list">
+    <%= render(:partial => "project", :collection => @projects) %>
+  </table>
 </div>
 
 <% if_any(@inactive_projects) do |inactive_projects| %>

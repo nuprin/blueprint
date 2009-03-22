@@ -13,7 +13,7 @@
     <%= title %>
   <% end %>
 </h2>
-<table class="task_list<%= " unsortable" if local_assigns[:unsortable] -%>
+<table class="list task_list<%= " unsortable" if local_assigns[:unsortable] -%>
   <%= " #{context.downcase}_task_list" %>" id="<%= title.dehumanize %>">
   <% if local_assigns[:task_object] %>
     <tfoot>
