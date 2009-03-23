@@ -18,7 +18,7 @@
         </ul>      
       </li>
       <li>
-        <%= link_to "INITIATIVES", all_projects_path %>
+        <%= link_to "INITIATIVES", projects_path %>
         <ul style="display: none">
           <% project_nav_links.each do |name, url| %>
             <li><%= link_to name.split.map(&:capitalize).join(" "), url %></li>

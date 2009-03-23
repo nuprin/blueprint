@@ -29,9 +29,6 @@ ActionController::Routing::Routes.draw do |map|
                   :set_inactive => :put,
                   :update_category => :put,
                   :update_title => :put
-                }, :collection => {
-                  :all => :get,
-                  :uncategorized => :get
                 } do |projects|
                   projects.resource :specification
                 end

@@ -31,9 +31,9 @@ class Project < ActiveRecord::Base
   }}
   named_scope :inactive, :conditions => {:status => "inactive"},
                          :order => "title ASC"
-  named_scope :uncategorized, :conditions => {:category_id => nil}
 
   validates_length_of :title, :in => 1...255
+  validates_presence_of :category_id
   validates_uniqueness_of :title,
     :message => "is the same as another initiative. Try a different one?"
   
@@ -92,27 +92,30 @@ class Project < ActiveRecord::Base
   end
 
   before_save do |project|
-    category = ProjectCategory.find_by_id(project.category_id)
-    if project.status_changed? && project.category_id
-      if project.active?
-        category.add_to_list(project)
-      else
-        category.remove_from_list(project)
+    unless project.new_record?
+      category = ProjectCategory.find_by_id(project.category_id)
+      if project.status_changed? && project.category_id
+        if project.active?
+          category.add_to_list(project)
+        else
+          category.remove_from_list(project)
+        end
       end
-    end
-    if project.category_id_changed?
-      if project.category_id_was
-        old_category = ProjectCategory.find(project.category_id_was)
-        old_category.remove_from_list(project)
-      end
-      if project.category_id
-        category.add_to_list(project)
+      if project.category_id_changed?
+        if project.category_id_was
+          old_category = ProjectCategory.find(project.category_id_was)
+          old_category.remove_from_list(project)
+        end
+        if project.category_id
+          category.add_to_list(project)
+        end
       end
     end
   end
 
   after_create do |project|
     Specification.create(:project_id => project.id)
+    project.category.add_to_list(project)
   end
 
   after_save do |project|
