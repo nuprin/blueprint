@@ -1,3 +1,16 @@
+h1 .create_link {
+  background-color: #ccd6e0;
+  background-image: url(../../images/create-initiative.gif);
+  background-position: 6px 5px;
+  background-repeat: no-repeat;
+  border: 1px solid #99adc2;
+  color: #335c85;
+  float: right;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 5px 8px 5px 23px;
+  -moz-border-radius: 5px;
+}
 table.project_list .action_links {
   color: #888;
   font-weight: normal;

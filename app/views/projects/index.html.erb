@@ -3,7 +3,16 @@
 <%= stylesheet_link_tag 'projects/index' %>
 <%= javascript_include_tag 'projects/index' %>
 
-<% @title = "Initiatives" %>
+<% 
+  @title = "Initiatives"
+  @hide_layout_title = true
+%>
+
+<h1>
+  <%= link_to "Create an Initiative", new_project_path,
+    :class => "create_link" %>
+  <%= @title %>
+</h1>
 
 <%= render :partial => "/shared/nav",
            :locals => {:tab_links => project_nav_links} %>
