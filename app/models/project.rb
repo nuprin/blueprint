@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   PHASES = [
-    "Spec", "Estimate", "Coding", "Post-Release Tweaks"
+    "Idea", "Spec", "Spec Review", "Estimate", "Coding", "Released",
+    "Post-Release Tweaks", "Stats Collection"
   ]
 
   belongs_to :category, :class_name => "ProjectCategory"

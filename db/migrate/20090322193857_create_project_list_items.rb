@@ -22,7 +22,7 @@ class CreateProjectListItems < ActiveRecord::Migration
   def self.down
     drop_table :project_list_items
     category_id = ProjectCategory.find_by_name("Uncategorized")
-    Project.update_all "category_id=NULL", "category_id=#{id}"
+    Project.update_all "category_id=NULL", "category_id=#{category_id}"
     ProjectCategory.destroy_all "name='Uncategorized'"
   end
 end
