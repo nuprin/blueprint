@@ -6,17 +6,17 @@
   <td class="name">
     <%= link_to_project(project) %> 
   </td>
+  <td class="due_date">
+    <% if project.due_date %>
+      <%= project.due_date.strftime("%b %e") %>
+    <% end %>
+  </td>
   <td class="phase">
     <span class="editable"><%= project.phase %></span>
     <% form_for :project, project, :url => update_phase_project_path(project),
       :html => {:method => :put, :style => "display: none"} do |f| %>
       <%= f.select :phase, Project::PHASES.map{|p| [p, p]},
           :include_blank => "" %>
-    <% end %>
-  </td>
-  <td class="due_date">
-    <% if project.due_date %>
-      <%= project.due_date.strftime("%b %e") %>
     <% end %>
   </td>
   <td class="action_links">

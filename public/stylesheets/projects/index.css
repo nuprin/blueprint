@@ -17,7 +17,7 @@ table.project_list td.action_links {
   width: 100px;
 }
 table.project_list td.due_date {
-  width: 100px;
+  width: 80px;
 }
 table.project_list td.name {
   width: 415px;
