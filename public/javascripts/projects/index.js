@@ -7,7 +7,12 @@ var Projects = {
         $.post("/project_list_items/reorder", {
           id: ui.item.attr('id').replace(/list_item_/, ''),
           position: ui.item.prevAll().length + 1
-        }, function (data) {}, "json");
+        }, function (data) {
+          $("table.project_list tr").each(function(i) {
+            $(this).find(".position").text(i + 1);
+          });
+          console.log("Done!");
+        }, "json");
       }
     });
   },
