@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def update_category
     @project = Project.find(params[:id])
     @project.update_attribute(:category_id, params[:project][:category_id])
-    render :text => @project.category_name
+    render :text => @project.category.name
   end
 
   def update_phase

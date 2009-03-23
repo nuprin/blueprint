@@ -87,10 +87,6 @@ class Project < ActiveRecord::Base
     self.active.map{|p| [p.title, p.id]}
   end
   
-  def category_name
-    self.category_id ? self.category.name : "Uncategorized"
-  end
-
   def mass_mailer
     MassMailer.new(self)
   end
@@ -127,7 +123,7 @@ class Project < ActiveRecord::Base
   end
 
   after_save do |project|
-    if ["Product", "Engineering"].include?(project.category_name)
+    if ["Product", "Engineering"].include?(@project.category.name)
       u = User.find_by_name("Michel")
       if u
         u.subscribe_to(project) 
