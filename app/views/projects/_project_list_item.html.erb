@@ -1,24 +1,14 @@
 <% project = project_list_item.project %>
 <tr id="list_item_<%= project_list_item.id %>">
-  <td>
+  <td class="name">
     <%= link_to_project(project) %> 
   </td>
-  <td>
-    <span class="project_category">
-      <span class="editable"><%= project.category_name %></span>
-      <% form_for :project, project, :url => update_category_project_path(project),
-        :html => {:method => :put, :style => "display: none"} do |f| %>
-        <%= f.select :category_id, ProjectCategory.form_options,
-          :include_blank => true %>
-      <% end %>
-    </span>    
-  </td>
-  <td>
+  <td class="due_date">
     <% if project.due_date %>
       <%= project.due_date.strftime("%b %e") %>
     <% end %>
   </td>
-  <td class="modify_links">
+  <td class="action_links">
     <%= link_to("Edit", edit_project_path(project)) %>
     &nbsp;&nbsp;
     <%= link_to("Park", set_inactive_project_path(project), :method => :put) %>

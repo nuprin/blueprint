@@ -1,8 +1,9 @@
-table.project_list .modify_links {
+table.project_list .action_links {
   color: #888;
   font-weight: normal;
+  text-align: right;
 }
-table.project_list .modify_links a {
+table.project_list .action_links a {
   color: #888;
 }
 table.project_list .project_category {
@@ -12,7 +13,15 @@ table.project_list .project_category {
 table.project_list .project_category div {
   display: inline;
 }
-
+table.project_list td.action_links {
+  width: 100px;
+}
+table.project_list td.name {
+  width: 530px;
+}
+table.project_list td.due_date {
+  width: 100px;
+}
 #inactive_initiatives {
   background: white;
   padding: 20px;
