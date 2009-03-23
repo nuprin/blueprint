@@ -10,8 +10,13 @@ var Projects = {
         }, function (data) {}, "json");
       }
     });
+  },
+  setupInlineEditing: function() {
+    $(".phase").inlineEditor();
   }
 }
+
 $(function() {
   Projects.makeSortable();
+  Projects.setupInlineEditing();
 })

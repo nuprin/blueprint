@@ -16,10 +16,13 @@ table.project_list .project_category div {
 table.project_list td.action_links {
   width: 100px;
 }
-table.project_list td.name {
-  width: 515px;
-}
 table.project_list td.due_date {
+  width: 100px;
+}
+table.project_list td.name {
+  width: 415px;
+}
+table.project_list td.phase {
   width: 100px;
 }
 table.project_list td.position {

@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
                   :set_active   => :put,
                   :set_inactive => :put,
                   :update_category => :put,
+                  :update_phase => :put,
                   :update_title => :put
                 } do |projects|
                   projects.resource :specification
