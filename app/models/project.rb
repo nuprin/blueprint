@@ -92,12 +92,21 @@ class Project < ActiveRecord::Base
   end
 
   before_save do |project|
+    category = ProjectCategory.find_by_id(project.category_id)
     if project.status_changed? && project.category_id
-      attrs = {:project_id => project.id, :category_id => project.category_id}
       if project.active?
-        ProjectListItem.create!(attrs)
+        category.add_to_list(project)
       else
-        ProjectListItem.destroy_all(attrs)
+        category.remove_from_list(project)
+      end
+    end
+    if project.category_id_changed?
+      if project.category_id_was
+        old_category = ProjectCategory.find(project.category_id_was)
+        old_category.remove_from_list(project)
+      end
+      if project.category_id
+        category.add_to_list(project)
       end
     end
   end
