@@ -27,8 +27,7 @@ module ProjectsHelper
     "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
   ]
   def project_tab_links
-    [["ALL", all_projects_path]] + project_nav_links +
-      [["UNCATEGORIZED", uncategorized_projects_path]]
+    [] + project_nav_links + [["UNCATEGORIZED", uncategorized_projects_path]]
   end
   
   def project_nav_links

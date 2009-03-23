@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag 'shared/header' %>
 <%= stylesheet_link_tag 'shared/task_list' %>
 <%= stylesheet_link_tag 'projects/index' %>
+<%= javascript_include_tag 'projects/index' %>
 
 <% @title = "Initiatives" %>
 
@@ -9,7 +10,7 @@
 
 <div id="task_list">
   <table class="list project_list">
-    <%= render(:partial => "project", :collection => @projects) %>
+    <%= render(:partial => "project_list_item", :collection => @project_list) %>
   </table>
 </div>
 

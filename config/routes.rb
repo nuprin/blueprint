@@ -18,6 +18,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :deliverables
   map.resources :features
   map.resources :git
+  map.resources :project_list_items,
+                :member => {
+                  :reorder => :put
+                }
   map.resources :projects, :member => {
                   :completed => :get,
                   :parked => :get,

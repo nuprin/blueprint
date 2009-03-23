@@ -1,3 +1,18 @@
+table.project_list .modify_links {
+  color: #888;
+  font-weight: normal;
+}
+table.project_list .modify_links a {
+  color: #888;
+}
+table.project_list .project_category {
+  color: #888;
+  font-weight: normal;
+}
+table.project_list .project_category div {
+  display: inline;
+}
+
 #inactive_initiatives {
   background: white;
   padding: 20px;

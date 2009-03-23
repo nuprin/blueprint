@@ -1,21 +1,22 @@
 class ProjectsController < ApplicationController
   def all
-    @projects = Project.active    
-    @inactive_projects = Project.inactive
-    @task_list_state = "collapsed"
-    render :action => "index"
+    redirect_to projects_path
   end
 
   def index
-    @projects = Project.active.for_category(params[:category_id])
+    unless params[:category_id]
+      redirect_to projects_path(:category_id => 
+        ProjectCategory.find_by_name("Product").id)
+      return
+    end
+    pc = ProjectCategory.find(params[:category_id])
+    @project_list = pc.project_list
     @inactive_projects = Project.inactive.for_category(params[:category_id])
-    @task_list_state = "expanded"
   end
 
   def uncategorized
     @projects = Project.active.uncategorized
     @inactive_projects = Project.inactive.uncategorized
-    @task_list_state = "expanded"
     render :action => "index"
   end
 
