@@ -25,11 +25,7 @@ module ProjectsHelper
 
   TAB_ORDER = [
     "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
-  ]
-  def project_tab_links
-    [] + project_nav_links + [["UNCATEGORIZED", uncategorized_projects_path]]
-  end
-  
+  ]  
   def project_nav_links
     (ProjectCategory.all.map do |category|
       [category.name.upcase, projects_path(:category_id => category.id)]

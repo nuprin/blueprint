@@ -14,12 +14,6 @@ class ProjectsController < ApplicationController
     @inactive_projects = Project.inactive.for_category(params[:category_id])
   end
 
-  def uncategorized
-    @projects = Project.active.uncategorized
-    @inactive_projects = Project.inactive.uncategorized
-    render :action => "index"
-  end
-
   def edit
     @project = Project.find(params[:id])
   end
