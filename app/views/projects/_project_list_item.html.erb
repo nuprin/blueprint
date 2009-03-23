@@ -6,6 +6,11 @@
   <td class="name">
     <%= link_to_project(project) %> 
   </td>
+  <td class="phase">
+    <% if project.phase %>
+      <%= project.phase %>
+    <% end %>
+  </td>
   <td class="due_date">
     <% if project.due_date %>
       <%= project.due_date.strftime("%b %e") %>

@@ -7,7 +7,9 @@ module ProjectsHelper
       fields << ["ONGOING"]
     end
     if project.category_id
-      fields << ["CATEGORY", project.category.name]
+      fields << ["CATEGORY",
+        link_to(project.category.name,
+                projects_path(:category_id => project.category_id))]
     end
     if project.feature_id
       fields << ["FEATURE", project.feature.name]

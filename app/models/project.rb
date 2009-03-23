@@ -1,4 +1,8 @@
 class Project < ActiveRecord::Base
+  PHASES = [
+    "Spec", "Estimate", "Coding", "Post-Release Tweaks"
+  ]
+
   belongs_to :category, :class_name => "ProjectCategory"
   belongs_to :feature
 
