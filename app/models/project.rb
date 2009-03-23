@@ -12,6 +12,9 @@ class Project < ActiveRecord::Base
                        :order   => :name
   has_many :comments, :as        => :commentable,
                       :dependent => :destroy
+
+  has_many :project_list_items, :dependent => :destroy
+
   has_many :subscriptions, :as        => :entity, 
                            :dependent => :destroy
   has_many :subscribed_users, :through => :subscriptions, 
