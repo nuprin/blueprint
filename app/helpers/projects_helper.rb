@@ -14,6 +14,9 @@ module ProjectsHelper
     if project.feature_id
       fields << ["FEATURE", project.feature.name]
     end
+    if !project.phase.blank?
+      fields << ["PHASE", project.phase]
+    end
     if project.subscribed_users.any?
       assignees = project.subscribed_users.map do |u|
         link_to_user u
