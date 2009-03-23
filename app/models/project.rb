@@ -91,6 +91,17 @@ class Project < ActiveRecord::Base
     self.subscribed_users.map(&:name).to_sentence
   end
 
+  before_save do |project|
+    if project.status_changed? && project.category_id
+      attrs = {:project_id => project.id, :category_id => project.category_id}
+      if project.active?
+        ProjectListItem.create!(attrs)
+      else
+        ProjectListItem.destroy_all(attrs)
+      end
+    end
+  end
+
   after_create do |project|
     Specification.create(:project_id => project.id)
   end

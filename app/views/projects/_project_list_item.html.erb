@@ -1,5 +1,8 @@
 <% project = project_list_item.project %>
 <tr id="list_item_<%= project_list_item.id %>">
+  <td class="position">
+    <%= i + 1 %>
+  </td>
   <td class="name">
     <%= link_to_project(project) %> 
   </td>

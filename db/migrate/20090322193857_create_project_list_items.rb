@@ -3,8 +3,10 @@ class CreateProjectListItems < ActiveRecord::Migration
     create_table :project_list_items do |t|
       t.integer :project_id,  :null => false
       t.integer :category_id, :null => false
-      t.integer :position,    :null => false
+      t.integer :position
     end
+
+    Project.update_all "status='active'", "status='Active'"
     
     ProjectCategory.all.each do |pc|
       projects = Project.active.for_category(pc.id)

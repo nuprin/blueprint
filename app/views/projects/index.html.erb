@@ -8,11 +8,17 @@
 <%= render :partial => "/shared/nav",
   :locals => {:tab_links => project_tab_links} %>
 
-<div id="task_list">
-  <table class="list project_list">
-    <%= render(:partial => "project_list_item", :collection => @project_list) %>
-  </table>
-</div>
+<% unless @project_list.blank? %>
+  <div id="task_list">
+    <table class="list project_list">
+      <% @project_list.each_with_index do |project_list_item, i| %>
+        <%= render :partial => "project_list_item", :locals => {
+          :project_list_item => project_list_item, :i => i
+        } %>
+      <% end %>
+    </table>
+  </div>
+<% end %>
 
 <% if_any(@inactive_projects) do |inactive_projects| %>
   <div id="inactive_initiatives">
