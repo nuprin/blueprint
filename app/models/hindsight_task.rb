@@ -1,2 +1,0 @@
-class HindsightTask < Task
-end
