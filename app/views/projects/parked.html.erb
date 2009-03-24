@@ -21,7 +21,7 @@
 <% with_layout "layouts/initiative" do %>
   <div id="task_list">
     <% task_object =
-      PrivateTask.new(:status => "parked", :project_id => @project.id) %>
+      Task.new(:status => "parked", :project_id => @project.id) %>
     <%= render :partial => "/shared/task_list",
                :locals => {:title => "",
                            :tasks => @project.parked_tasks,

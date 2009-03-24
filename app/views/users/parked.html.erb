@@ -22,10 +22,7 @@
 <%= render :partial => "user_task_list_tabs", :locals => {:user => @user} %>
 
 <div id="task_list">
-  <% 
-    task_object =
-      PrivateTask.new(:status => "parked", :assignee_id => @user.id)
-  %>
+  <% task_object = Task.new(:status => "parked", :assignee_id => @user.id) %>
   <%= render :partial => "/shared/task_list",
              :locals => {:title       => "",
                          :tasks       => @tasks,
