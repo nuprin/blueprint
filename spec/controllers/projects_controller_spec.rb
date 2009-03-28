@@ -3,10 +3,9 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe ProjectsController do
   integrate_views
 
-  it "should get index" do
-    get :index
-    response.should be_success
-    assigns(:projects).should_not be_nil
+  it "should get all" do
+    get :all
+    response.should redirect_to(projects_path)
   end
   
   it "should get new" do

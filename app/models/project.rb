@@ -123,7 +123,7 @@ class Project < ActiveRecord::Base
   end
 
   after_save do |project|
-    if ["Product", "Engineering"].include?(project.category.name)
+    if "Product & Engineering" == project.category.name
       u = User.find_by_name("Michel")
       if u
         u.subscribe_to(project) 

@@ -29,7 +29,7 @@ module ProjectsHelper
   end
 
   TAB_ORDER = [
-    "PRODUCT", "ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
+    "PRODUCT & ENGINEERING", "ACTIVIST", "BUSINESS DEVELOPMENT"
   ]  
   def project_nav_links
     (ProjectCategory.all.map do |category|

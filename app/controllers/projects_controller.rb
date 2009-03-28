@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   def index
     unless params[:category_id]
       redirect_to projects_path(:category_id => 
-        ProjectCategory.find_by_name("Product").id)
+        ProjectCategory.find_by_name("Product & Engineering").id)
       return
     end
     pc = ProjectCategory.find(params[:category_id])
