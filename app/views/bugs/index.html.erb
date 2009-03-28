@@ -19,7 +19,7 @@
   <select id="filter" style="margin-bottom: 15px;">
     <option value="all">All</option>
     <% Task.sorted_assignees(@tasks).each do |assignee| %>
-      <option value="<%= assignee.name.downcase %>">
+      <option value="assignee<%= assignee.id %>">
         <%= assignee.name %>
       </option>
     <% end %>
