@@ -34,10 +34,12 @@
     <%= f.label :estimate, "Estimate:" %><br />
     <%= f.text_field :estimate %>
   </li>
-  <li>
-    <%= f.label :status, "Prioritized:" %><br />
-    <%= f.check_box :status, {}, "prioritized", "parked" %>
-  </li>
+  <% unless task.completed? %>
+    <li>
+      <%= f.label :status, "Prioritized:" %><br />
+      <%= f.check_box :status, {}, "prioritized", "parked" %>
+    </li>
+  <% end %>
   <li>
     <%= f.label :due_date, "Due Date:" %><br />
     <%= check_box_tag :use_due_date, "1", !!task.due_date,
