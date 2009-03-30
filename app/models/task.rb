@@ -144,10 +144,8 @@ class Task < ActiveRecord::Base
   end
 
   before_create :set_already_completed
-  before_save :adjust_year, :update_lists, :set_type
+  before_save :adjust_year, :update_lists, :set_type, :check_reassignment
   before_update :record_changes
-
-  after_save :check_reassignment
 
   def set_already_completed
     self.completed_at = Time.now.getutc if completed?
