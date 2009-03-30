@@ -20,8 +20,8 @@
     <% end %>
   </td>
   <td class="action_links">
-    <%= link_to("Edit", edit_project_path(project)) %>
-    &nbsp;&nbsp;
     <%= link_to("Park", set_inactive_project_path(project), :method => :put) %>
+    &nbsp;&nbsp;
+    <%= link_to("Edit", edit_project_path(project)) %>
   </td>
 </tr>

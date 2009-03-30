@@ -32,13 +32,16 @@
 <% if_any(@inactive_projects) do |inactive_projects| %>
   <div id="inactive_initiatives">
     <h2>Other Initiatives</h2>
-    <ul class="clearfix">
+    <ul>
     <% inactive_projects.each do |initiative| %>
       <%# TODO [chris]: Rename project_path to initiative_path. %>
       <li class="clearfix">
-        <%= link_to "+ Prioritize",
-          set_active_project_path(initiative), :method => :put,
-          :class => "add" %>
+        <div>
+          <%= link_to "Prioritize",
+            set_active_project_path(initiative), :method => :put,
+            :class => "add" %>&nbsp;&nbsp;
+          <%= link_to "Edit", edit_project_path(initiative) %>
+        </div>
         <%= link_to_project initiative %>
       </li>
     <% end %>

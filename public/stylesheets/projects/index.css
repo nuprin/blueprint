@@ -53,9 +53,13 @@ table.project_list td.position {
   margin-bottom: .5em;
 }
 #inactive_initiatives li {
-  border-bottom: 1px solid #ddd;
-  padding: 11px 0 9px;
+  background: #ddd;
+  border-bottom: 1px solid #fff;
+  padding: 11px 5px 9px 10px;
 }
-#inactive_initiatives .add {
+#inactive_initiatives div {
   float: right;
+}
+#inactive_initiatives div a {
+  color: #666;
 }
