@@ -25,7 +25,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :projects, :member => {
                   :completed => :get,
                   :parked => :get,
-                  :set_active   => :put,
+                  :set_active => :put,
+                  :set_complete => :put,
+                  :set_incomplete => :put,
                   :set_inactive => :put,
                   :update_category => :put,
                   :update_phase => :put,

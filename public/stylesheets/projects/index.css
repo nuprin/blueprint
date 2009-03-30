@@ -27,13 +27,13 @@ table.project_list .project_category div {
   display: inline;
 }
 table.project_list td.action_links {
-  width: 100px;
+  width: 150px;
 }
 table.project_list td.due_date {
   width: 80px;
 }
 table.project_list td.name {
-  width: 415px;
+  width: 365px;
 }
 table.project_list td.phase {
   width: 100px;

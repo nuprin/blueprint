@@ -52,6 +52,18 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def set_complete
+    project = Project.find(params[:id])
+    project.update_attribute(:status, "completed")
+    redirect_to :back
+  end
+
+  def set_incomplete
+    project = Project.find(params[:id])
+    project.update_attribute(:status, "active")
+    redirect_to :back    
+  end
+
   def set_active
     project = Project.find(params[:id])
     project.update_attribute(:status, "active")
