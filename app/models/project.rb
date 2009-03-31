@@ -30,7 +30,7 @@ class Project < ActiveRecord::Base
 
   named_scope :active, :conditions => {:status => "active"},
                        :order => "title ASC"
-
+  named_scope :completed, :conditions => {:status => "completed"}
   named_scope :followed_by, lambda { |user| {
     :conditions => {:id => user.subscribed_project_ids}
   }}

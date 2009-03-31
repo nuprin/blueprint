@@ -11,6 +11,9 @@ h1 .create_link {
   padding: 5px 8px 5px 23px;
   -moz-border-radius: 5px;
 }
+table.project_list {
+  margin-bottom: 0;
+}
 table.project_list .action_links {
   color: #888;
   font-weight: normal;
@@ -44,22 +47,29 @@ table.project_list td.position {
   text-align: center;
   width: 15px;
 }
-#inactive_initiatives {
+.project_list_container {
   background: white;
-  padding: 20px;
+  padding: 0 20px 20px;
 }
-#inactive_initiatives h2 {
+.project_list_container h2 {
   line-height: 13px;
   margin-bottom: .5em;
 }
-#inactive_initiatives li {
+ul.projects li {
   background: #ddd;
   border-bottom: 1px solid #fff;
   padding: 11px 5px 9px 10px;
 }
-#inactive_initiatives div {
+ul.projects div {
   float: right;
 }
-#inactive_initiatives div a {
+ul.projects div a {
   color: #666;
+}
+#content {
+  background: white;
+}
+#task_list {
+  background: #ced8e2;
+  margin-bottom: 20px;
 }

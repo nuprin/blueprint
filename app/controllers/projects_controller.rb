@@ -12,6 +12,7 @@ class ProjectsController < ApplicationController
     pc = ProjectCategory.find(params[:category_id])
     @project_list = pc.project_list
     @inactive_projects = Project.inactive.for_category(params[:category_id])
+    @completed_projects = Project.completed.for_category(params[:category_id])
   end
 
   def edit
