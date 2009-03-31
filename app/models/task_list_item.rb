@@ -8,7 +8,7 @@ class TaskListItem < ActiveRecord::Base
 
   validate :cannot_be_subtask
   validates_presence_of :task
-  validates_presence_of :context_type
+  validates_presence_of :context
 
   validates_uniqueness_of :task_id, :scope => [:context_id, :context_type],
     :message => "cannot be added twice to the same task list"
