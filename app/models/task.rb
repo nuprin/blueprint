@@ -2,8 +2,8 @@ class Task < ActiveRecord::Base
   is_indexed :fields => [:title, :description]
 
   KINDS = [
-    "bug", "copy", "design", "experiment", "feature", "inquiry", "spec", 
-    "stats"
+    "bug", "copy", "design", "estimate", "experiment", "feature", "inquiry", 
+    "spec", "stats"
   ]
 
   CURRENT_RANGE = [
