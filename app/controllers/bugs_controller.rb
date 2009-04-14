@@ -1,6 +1,6 @@
 class BugsController < ApplicationController
   def index
-    @tasks = Bug.task_list
+    @task_list_items = Bug.task_list
   end
 
   def completed

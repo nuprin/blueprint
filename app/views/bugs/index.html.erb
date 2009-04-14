@@ -18,7 +18,7 @@
   Show:
   <select id="filter" style="margin-bottom: 15px;">
     <option value="all">All</option>
-    <% Task.sorted_assignees(@tasks).each do |assignee| %>
+    <% Task.sorted_assignees(@task_list_items.map(&:task)).each do |assignee| %>
       <option value="assignee<%= assignee.id %>">
         <%= assignee.name %>
       </option>
@@ -27,6 +27,6 @@
 
   <%# TODO [chris]: "Project" is a hack to hide the initiative column. %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:tasks => @tasks, :context => "Project",
+             :locals => {:tasks => @task_list_items, :context => "Project",
                :task_object => Task.new(:kind => "bug", :status => "prioritized")} %>
 </div>

@@ -223,6 +223,11 @@ class Task < ActiveRecord::Base
     if task.project_id && task.assignee_id
       task.assignee.subscribe_to(task.project)
     end
+    if task.kind == "bug"
+      Bug.add_to_bug_task_list(task)
+    else
+      Bug.remove_from_bug_task_list(task)      
+    end
   end
 
   after_destroy do |task|
