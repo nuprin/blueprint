@@ -27,7 +27,7 @@
 
   <%# TODO [chris]: "Project" is a hack to hide the initiative column. %>
   <%= render :partial => "/shared/task_list",
-             :locals => {:tasks => @task_list_item || @tasks,
+             :locals => {:tasks => @task_list_items || @tasks,
                :context => "Project",
                :task_object => Task.new(:kind => "bug", :status => "prioritized")} %>
 </div>
