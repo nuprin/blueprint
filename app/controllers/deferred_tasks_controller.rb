@@ -1,13 +1,15 @@
 class DeferredTasksController < ApplicationController
   def create
-    parse_custom_time
     begin
+      parse_custom_time
       dt = DeferredTask.create!(params[:deferred_task])
       flash[:notice] =
         "The task will be parked until #{dt.friendly_prioritize_at}."
     rescue ActiveRecord::RecordInvalid
       flash[:notice] =
         "There was an error in parking your task. Please try again."
+    rescue => ex
+      flash[:notice] = ex.message
     end
     redirect_to :back
   end
@@ -24,7 +26,13 @@ class DeferredTasksController < ApplicationController
   def parse_custom_time
     if params[:deferred_task][:prioritize_at] == "custom"
       t = params[:custom_time]
-      params[:deferred_task][:prioritize_at] = Chronic.parse(t).getutc
+      parsed_time = Chronic.parse(t)
+      if parsed_time
+        params[:deferred_task][:prioritize_at] = parsed_time.getutc
+      else
+        raise "Sorry, I don't understand what &ldquo;#{params[:custom_time]}" +
+          "&rdquo;  means."
+      end
     end
   end
 end
