@@ -11,7 +11,7 @@
   <p>
     Due Date:<br />
     <%= check_box_tag :use_due_date, "1", !!@project.due_date %>
-    This initiative is due on:
+    <%= label_tag :use_due_date, "This initiative is due on:" %>
     <%= f.date_select :due_date, :order => [:month, :day, :year] %>
   </p>
   <p>
