@@ -220,7 +220,8 @@ class Task < ActiveRecord::Base
   end
 
   after_save do |task|
-    if task.project_id && task.assignee_id
+    task.check_reassignment
+    if task.assignee_id && task.project_id
       task.assignee.subscribe_to(task.project)
     end
     if task.kind == "bug"
