@@ -147,6 +147,11 @@ class Task < ActiveRecord::Base
   before_save :adjust_year, :update_lists, :set_type, :check_reassignment
   before_update :record_changes
 
+  # We need to check reassignment before and after saving to account for
+  # reassignment and a new task creation, respectively. There probably is a
+  # cleaner way to do this.
+  after_save :check_reassignment
+
   def set_already_completed
     self.completed_at = Time.now.getutc if completed?
   end
@@ -220,7 +225,6 @@ class Task < ActiveRecord::Base
   end
 
   after_save do |task|
-    task.check_reassignment
     if task.assignee_id && task.project_id
       task.assignee.subscribe_to(task.project)
     end
