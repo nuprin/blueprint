@@ -12,7 +12,8 @@ class TaskEdit < ActiveRecord::Base
       if RELEVANT_FIELDS.include?(f) && task.editor
         edit = self.create! :editor_id => task.editor.id, :task_id => task.id,
                             :field => f, :old_value => o, :new_value => n
-        edit.notify_subscribers(task)        
+        task.editor.subscribe_to(task) unless task.editor == User.butler
+        edit.notify_subscribers(task)
       end
     end
   end
