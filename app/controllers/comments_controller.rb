@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  skip_before_filter :require_login, :only => :create
   def create
     begin
       comment = Comment.create!(params[:comment])
@@ -15,5 +16,5 @@ class CommentsController < ApplicationController
     comment.destroy
     flash[:notice] = "Your comment has been deleted."
     redirect_to :back
-  end  
+  end
 end
