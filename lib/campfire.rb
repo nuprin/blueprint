@@ -4,7 +4,7 @@ require 'tinder'
 module Campfire
   SUBDOMAIN = 'causes'
   ROOM_NAME = 'Office'
-  USERNAME  = ENV.fetch('CAMPFIRE_USER', 'jimmy@project-agape.com')
+  USERNAME  = ENV.fetch('CAMPFIRE_USER', 'butler@causes.com')
   PASSWORD  = ENV.fetch('CAMPFIRE_PASS', 'bagd0nass')
 
   def self.connect_and_login(user=USERNAME, pass=PASSWORD)
