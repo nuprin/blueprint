@@ -99,6 +99,11 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.save!
+    
+    Campfire.speak <<-HTML
+      #{self.editor.name} marked
+      "#{self.title}" complete. http://blueprint/tasks/#{self.id}
+    HTML
   end
 
   def park!
