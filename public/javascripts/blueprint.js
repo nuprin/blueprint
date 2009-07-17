@@ -3,7 +3,7 @@ var KeyboardShortcuts = {
   setup: function() {
     $(document.body).shortkeys({
       'a': function() {
-        $(".quick_add_link:eq(0)").trigger("click");      
+        $(".quick_add_link:eq(0)").trigger("click");
       },
       'b': function() {
         location.href = "/bugs";
@@ -37,6 +37,16 @@ var KeyboardShortcuts = {
   }
 };
 
+var FlashMessage = {
+  hideAfterDelay: function () {
+    if ($('#container > p.notice').size() > 0) {
+      setTimeout(function (el) {
+        $('#container > p.notice').slideUp();
+      }, 2000);
+    }
+  }
+};
+
 $(function() {
   $('ul.sf-menu').superfish({
     delay:      0,
@@ -48,4 +58,5 @@ $(function() {
     }
   });
   KeyboardShortcuts.setup();
+  FlashMessage.hideAfterDelay();
 });
