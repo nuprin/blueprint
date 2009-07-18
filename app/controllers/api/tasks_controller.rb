@@ -97,6 +97,11 @@ class Api::TasksController < ApplicationController
   # GET /api/tasks/comments/id.json
   def comments
     @comments = @task.comments
+    # Also need to add a username mapping to all the comments so the client
+    # knows who wrote the comment. (instead of just an id)
+    @comments.each do |comment|
+      comment['author_name'] = User.find(comment.author_id).name
+    end
 
     respond_to do |format|
       format.xml  { render :xml => @comments}

@@ -15,25 +15,30 @@ COMMANDS = {
 }
 
 # Printing Helpers
+def output_comments(comments)
+  comments.each do |comment|
+    output_comment(comment)
+  end
+end
+
+def output_comment(comment)
+  puts format("%s\n%s\n  %s", comment['updated_at'], comment['text'],
+                              comment['author_name'])
+end
+
 def output_task(task)
-  y task
+  puts format("%s:%s", task['id'], task['title'])
 end
 
 def output_tasks(tasks)
   tasks.each do |task|
-    puts "#{task['id']}:#{task['title']}"
-  end
-end
-
-def output_comments(comments)
-  comments.each do |comment|
-    y comment
+    output_task(task)
   end
 end
 
 def output_projects(projects)
   projects.each do |project|
-    puts "#{project['id']}:#{project['title']}"
+    puts format("%s:%s", project['id'], project['title'])
   end
 end
 
