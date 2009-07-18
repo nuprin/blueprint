@@ -1,12 +1,16 @@
 class Api::TasksController < ApplicationController
+  skip_before_filter :require_login
   # GET /api/tasks
   # GET /api/tasks.xml
   def index
-    @tasks = Task.find(:all)
+    task = build_task_from_options(params)
+    conditions = task_to_conditions(task)
+    @tasks = Task.find(:all, :conditions => conditions)
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tasks }
+      format.json { render :json => @tasks }
     end
   end
 
@@ -18,6 +22,7 @@ class Api::TasksController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @task }
+      format.json { render :json => @task }
     end
   end
 
@@ -37,22 +42,26 @@ class Api::TasksController < ApplicationController
 #    @task = Task.find(params[:id])
 #  end
 #
-#  # POST /api/tasks
-#  # POST /api/tasks.xml
-#  def create
-#    @task = Task.new(params[:task])
-#
-#    respond_to do |format|
-#      if @task.save
-#        flash[:notice] = 'Task was successfully created.'
-#        format.html { redirect_to(@task) }
-#        format.xml  { render :xml => @task, :status => :created, :location => @task }
-#      else
-#        format.html { render :action => "new" }
-#        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
+  # POST /api/tasks
+  # POST /api/tasks.xml
+  # POST /api/tasks.json
+  def create
+    task = build_task_from_options(params)
+    attributes = task_to_conditions(task) # this allows for supplying user by name
+
+    @task = Task.new(params[:task].merge(attributes))
+
+    respond_to do |format|
+      if @task.save
+        flash[:notice] = 'Task was successfully created.'
+        format.html { redirect_to(@task) }
+        format.xml  { render :xml => @task, :status => :created, :location => @task }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 #
 #  # PUT /api/tasks/1
 #  # PUT /api/tasks/1.xml
@@ -75,6 +84,7 @@ class Api::TasksController < ApplicationController
 #  # DELETE /api/tasks/1.xml
 #  def destroy
 #    @task = Task.find(params[:id])
+#
 #    @task.destroy
 #
 #    respond_to do |format|
@@ -82,10 +92,56 @@ class Api::TasksController < ApplicationController
 #      format.xml  { head :ok }
 #    end
 #  end
+#
 
+  def comment
+    task = Task.find(params[:id])
+    status = :ok
+    message = ""
+
+    if params[:author_email]
+      author = User.find_by_email(params[:author_email])
+    elsif params[:user]
+      author = User.find_by_name(params[:user])
+    else
+      # TODO: Error out if no one is marked as closing this task.
+      status = :bad_request
+    end
+
+    Comment.create!(
+      :author => author,
+      :text => params[:text],
+      :commentable => task
+    )
+
+    task.editor = author
+
+    respond_to do |format|
+      format.xml  { head status, :message => message }
+      format.json { head status, :message => message }
+    end
+  end
+
+  # PARAMS:
+  # req: id => task id
+  # opt: comment => text
+  # opt: author_email => author's email address
+  # opt: user => user's name
+  #
+  # either author_email or user is required
   def mark_complete
     task = Task.find(params[:id])
-    author = User.find_by_email(params[:author_email])
+    status = :ok
+    message = ""
+
+    if params[:author_email]
+      author = User.find_by_email(params[:author_email])
+    elsif params[:user]
+      author = User.find_by_name(params[:user])
+    else
+      # TODO: Error out if no one is marked as closing this task.
+      status = :bad_request
+    end
 
     if task.status != 'completed'
       if !params[:comment].blank? && author
@@ -101,7 +157,8 @@ class Api::TasksController < ApplicationController
     end
 
     respond_to do |format|
-      format.xml  { head :ok }
+      format.xml  { head status, :message => message }
+      format.json { head status, :message => message }
     end
   end
 
@@ -112,5 +169,46 @@ class Api::TasksController < ApplicationController
     authenticate_or_request_with_http_basic do |username, password|
       username == "blueprint-api-client" && password == "callipygian"
     end
+  end
+
+  private
+
+  # PARAMS:
+  #   user_name - supply a string (GET/POST)
+  #   status - completed, parked or prioritized (GET/POST)
+  #   project_id - supply an id (GET/POST)
+  #   date - due date of task (POST)
+  #   hours - hours (POST)
+  def build_task_from_options(options={})
+    t = Task.new
+    if options[:user]
+      user = User.find_by_name(options[:user])
+      t.assignee_id = user.id
+    end
+
+    if options[:status]
+      t.status = options[:status]
+    end
+
+    if options[:project_id]
+      project = Project.find(options[:project_id])
+      t.project_id = project.id
+    end
+
+    if options[:date]
+      date = Time.parse(date)
+      t.due_date = date
+    end
+
+    t
+  end
+
+  def task_to_conditions(task)
+    conditions = {}
+    attributes = task.attributes.select { |key, val| !val.blank? }
+    attributes.each do |key, val|
+      conditions[key] = val
+    end
+    conditions
   end
 end
