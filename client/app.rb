@@ -79,10 +79,18 @@ end
 
 def add_comment(c, args)
   task_id = args.split(" ").last
-  comments = comments_string(c.list_comments(:id => task_id))
+  begin
+    comments = comments_string(c.list_comments(:id => task_id))
+  rescue NoMethodError => e
+    puts e
+  end
   comments = comments.map { |line| line.gsub(/^/, "#" ) }
   comment = edit(comments)
   comment = parse_comments(comment)
+  if comment.empty?
+    puts "Can't post empty comment"
+    return
+  end
   puts "Posting #{comment} to task :#{task_id}"
   c.add_comment(:id => task_id, :author_email => AUTHOR_EMAIL, :text => comment)
 end
