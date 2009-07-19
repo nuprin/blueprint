@@ -44,11 +44,8 @@ class Api::TasksController < ApplicationController
   # POST /api/tasks.xml
   # POST /api/tasks.json
   def create
-    task = build_task_from_options(params)
-    attributes = task_to_conditions(task) # this allows for supplying user by name
-
-    @task = Task.new(params[:task].merge(attributes))
-
+    @task = build_task_from_options(params)
+    @task.prioritize!
     respond_to do |format|
       if @task.save
         flash[:notice] = 'Task was successfully created.'
@@ -188,16 +185,19 @@ class Api::TasksController < ApplicationController
     user = nil
 
     # Find the assigned user to this task
-    if params[:author_email]
-      user = User.find_by_email(params[:author_email])
-    elsif params[:user]
-      user = User.find_by_name(params[:user])
+    if options[:author_email]
+      author = User.find_by_email(options[:author_email])
+      task.creator_id = author.id
     end
 
-    task.assignee_id = user.id if user
+    if options[:assignee_email]
+      assignee = User.find_by_email(options[:assignee_email])
+      task.assignee_id = assignee.id
+    end
+
     task_to_conditions(task, :include_nil => true).each do |attr, val|
       attr = attr.to_sym
-      task.update_attributes(attr => options[attr]) if options.include?(attr)
+      task[attr] = options[attr] if options.include?(attr)
     end
     task
   end

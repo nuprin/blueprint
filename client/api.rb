@@ -18,13 +18,19 @@ class BlueprintClient < Bricklayer::Base
   remote_method :task, :override_parameters => {:action => "tasks"},
                 :required_parameters => [:id]
 
+  service_url "#{API_PATH}/tasks"
+  remote_method :new_task, :override_parameters => {:action => "create"},
+                :required_parameters => [:title, :description, :author_email,
+                                         :assignee_email],
+                :request_method => :post
+
   service_url "#{API_PATH}/tasks/{action}/{id}"
-  remote_method :add_comment, 
+  remote_method :add_comment,
                 :override_parameters => {:action => "comment"},
                 :required_parameters => [:id, :text, :author_email],
                 :request_method => :post
 
-  remote_method :mark_complete, 
+  remote_method :mark_complete,
                 :override_parameters => {:action => "mark_complete"},
                 :required_parameters => [:id, :text, :author_email],
                 :request_method => :post
