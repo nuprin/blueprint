@@ -16,14 +16,14 @@ KINDS = [
 KIND_ID = "KIND:"
 TITLE_ID = "TITLE:"
 ASSIGNEE_ID = "ASSIGNEE:"
-ESTIMATE_ID = "ESTIMATE:"
 PROJECT_ID = "PROJECT:"
+ESTIMATE_ID = "ESTIMATE:"
 TASK_TEMPLATE =
 """
 #{TITLE_ID}
 #{ASSIGNEE_ID} ASSIGNEE
-#{ESTIMATE_ID}
-#{PROJECT_ID}
+##{PROJECT_ID} PROJECT
+##{ESTIMATE_ID} ESTIMATE
 ## DESCRIPTION ##
 
 """.strip()
@@ -148,10 +148,25 @@ def new_task(cl, con, args)
   author_email = con.user_email!
   assignee_email = args.first
   assignee_email = con.user_email if assignee_email.nil?
-  task_text = edit(TASK_TEMPLATE.gsub(/ASSIGNEE$/, assignee_email))
+  project_id = con.project_id
+  # Insert data into the template
+  task_data = TASK_TEMPLATE.dup
+  task_data.gsub!(/ASSIGNEE$/, assignee_email)
+  if project_id
+    task_data.gsub!(/PROJECT$/, project_id.to_s)
+    task_data.gsub!(/##{PROJECT_ID}/, PROJECT_ID)
+  end
+
+  # User edits the template file
+  task_text = edit(task_data)
   task_params = parse_task(remove_comments(task_text))
   task_params[:author_email] = author_email 
-  cl.new_task(task_params)
+  if task_params[:title] == "" || task_params[:assignee_email] == ""
+    puts "You must supply a Title & Assignee at the minimum"
+    return
+  else
+    cl.new_task(task_params)
+  end
 end
 
 def reprioritize(cl, con, args)
