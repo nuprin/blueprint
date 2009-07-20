@@ -102,7 +102,7 @@ module Bricklayer
       begin
         res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req, direct_data_post) }
         case res
-        when Net::HTTPSuccess #, Net::HTTPRedirection
+        when Net::HTTPSuccess, Net::HTTPRedirection
           if response_callback
             if wants_back == :body
               return response_callback.call(res.body)

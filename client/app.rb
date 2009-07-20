@@ -131,8 +131,8 @@ end
 
 def mark_complete(cl, con, args)
   author_email = con.user_email!
-  comment = edit("# Marking #{task_id} complete")
   task_id = args.last
+  comment = edit("")
   puts "Marking task :#{task_id} complete"
   cl.mark_complete(
     :id => task_id,
@@ -147,7 +147,6 @@ def new_task(cl, con, args)
   task_text = edit(TASK_TEMPLATE.gsub(/ASSIGNEE$/, assignee_email))
   task_params = parse_task(remove_comments(task_text))
   task_params[:author_email] = author_email 
-  pp task_params
   cl.new_task(task_params)
 end
 

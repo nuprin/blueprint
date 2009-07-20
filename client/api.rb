@@ -23,7 +23,7 @@ class BlueprintClient < Bricklayer::Base
   remote_method :task, :override_parameters => {:action => "tasks"},
                 :required_parameters => [:id]
 
-  service_url "#{API_PATH}/tasks"
+  service_url "#{API_PATH}/tasks/{action}"
   remote_method :new_task, :override_parameters => {:action => "create"},
                 :required_parameters => [:title, :description, :author_email,
                                          :assignee_email],
