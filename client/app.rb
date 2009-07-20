@@ -234,6 +234,10 @@ while line = Readline.readline("bp #{con}> ", true)
   args = components.size > 1 ? components.last : ""
   args = args.split
   begin
+    if COMMANDS[command].nil?
+      puts "Unrecognized command: #{command}"
+      next
+    end
     method(COMMANDS[command]).call(cl, con, args)
   rescue InsufficientContextException => ice
     puts "Insufficient context for this command: try again with more args"
