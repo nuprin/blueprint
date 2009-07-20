@@ -3,10 +3,15 @@ require 'rubygems'
 require 'json'
 
 class BlueprintClient < Bricklayer::Base
-  ARRAY_JSON_PARSER = Proc.new{|json_response| JSON.parse(json_response).map{|item| item.first.last} }
-  ITEM_JSON_PARSER = Proc.new{|json_response| JSON.parse(json_response).first.last}
+  ARRAY_JSON_PARSER = Proc.new do |json_response|
+    JSON.parse(json_response).map{|item| item.first.last}
+  end
 
-  API_PATH="http://marl:3000/api"
+  ITEM_JSON_PARSER = Proc.new do |json_response|
+    JSON.parse(json_response).first.last
+  end
+
+  API_PATH="http://blueprint/api"
   service_url "#{API_PATH}/{action}.json", &ARRAY_JSON_PARSER
   remote_method :list_tasks, :override_parameters => {:action => "tasks"}
   remote_method :list_projects, :override_parameters => {:action => "projects"}
