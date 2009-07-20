@@ -79,8 +79,9 @@ def output_comments(comments)
   puts comments_string(comments)
 end
 
-def output_task(task)
+def output_task(task, description=false)
   puts format("%s:%s", task['id'], task['title'])
+  puts task['description'] if description
 end
 
 def output_tasks(tasks)
@@ -203,7 +204,7 @@ end
 def task(cl, con, args)
   task_id = args.first
   task = cl.task(:id => task_id)
-  output_task(task)
+  output_task(task, true)
   comments = cl.list_comments(:id => task_id)
   output_comments(comments)
 end
