@@ -8,6 +8,7 @@ class TasksController < ApplicationController
     ignore_due_date_if_requested(params[:task])
     begin
       @task = Task.new(params[:task])
+      puts "\n\n#{params.inspect}\n\n"
       @task.save!
       (params[:cc] || []).each do |cc_id|
         @task.subscriptions.create(:user_id => cc_id)

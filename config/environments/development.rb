@@ -16,5 +16,13 @@ config.action_view.debug_rjs                         = true
 config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+ActionMailer::Base.raise_delivery_errors = true
 config.action_mailer.default_url_options = {:host => HOST}
+ActionMailer::Base.delivery_method = :sendmail
+ActionMailer::Base.perform_deliveries = true
+
+# Email account credentials
+EMAIL_LOGIN = 'blueprint.tester@gmail.com'
+EMAIL_PASSWORD = 'causes.com'
+EMAIL_REPLY_TO = EMAIL_LOGIN
+

@@ -1,7 +1,7 @@
 require 'net/imap'
 
-LOGIN = 'philbot@project-agape.com'
-EMAIL = 'arefin'
+LOGIN = EMAIL_LOGIN
+EMAIL = EMAIL_PASSWORD
 
 DATE_EX = /(.*)^On.*wrote:/m
 def remove_quotation(text)
@@ -17,6 +17,41 @@ def process_comment_text(raw_msg)
   remove_quotation(raw_body)
 end
 
+def get_addresses_from_struct(struct_list)
+  emails = []
+  (struct_list || []).each { |struct|
+    emails << struct.mailbox + "@" + struct.host
+  }
+  return emails
+end
+
+def get_asignee_email_from_body(body)
+  return if body==nil
+  $1.strip if body.downcase =~ /^ *to\:(.+)/
+end
+
+def get_cc_emails_from_body(body)
+  return [] if body==nil
+  lines=body.split("\n")
+  return [] if lines.length<2
+  second_line=lines[1]
+  second_line.downcase.strip =~ /^ *cc\:(.+)$/
+  return [] if $1==nil
+  emails = $1.split(",")
+  for i in 0..emails.length
+    emails[i] = emails[i].strip if emails[i]
+  end
+  emails
+end
+
+def add_to_task_cc_list(task, email_list)
+  (email_list || []).each do |cc_email|
+    user = User.find_by_email(cc_email)
+    task.subscriptions.create(:user_id => user.id) if user
+    puts "#{user.name} will receive notification about this task." if user
+  end
+end
+
 connection = Net::IMAP.new('imap.gmail.com', 993, true)
 connection.login(LOGIN, EMAIL)
 connection.select('INBOX')
@@ -30,9 +65,9 @@ messages.each do |message_id|
   # This will come in an array, of length 1 and raw_msg is FetchData.
   raw_msg = connection.fetch(message_id,fetch_params)[0]
   envelope = raw_msg.attr["ENVELOPE"]
+  body = raw_msg.attr["BODY[1]"]
   
-  from_struct = envelope.from[0]
-  from_address = from_struct.mailbox + "@" + from_struct.host
+  from_address = get_addresses_from_struct(envelope.from)[0]
 
   # TODO: here we could crunch through to get out the ID from the reply-to 
   # address.
@@ -54,6 +89,8 @@ messages.each do |message_id|
 
   subject = envelope.subject
 
+  puts "Subject: #{subject}"
+
   # TODO: Only look at messages with Task IDs
   # TODO: Do we want to just delete the rest?
 
@@ -65,6 +102,7 @@ messages.each do |message_id|
       text = process_comment_text(raw_msg)
       c = Comment.new(:author_id => user.id, :commentable => p, :text => text)
       c.save!
+      add_to_task_cc_list(p,get_addresses_from_struct(envelope.cc))
       delete_email(connection, message_id)
     end
   elsif subject =~ /#(\d+)/
@@ -74,8 +112,23 @@ messages.each do |message_id|
       puts "Processing comment for task #{t.id}."
       c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
       c.save!
+      add_to_task_cc_list(t,get_addresses_from_struct(envelope.cc))
       delete_email(connection, message_id)
     end
+  elsif subject =~ /\((.+)\)(.+)/
+    directive = $1.downcase
+    title = $2.strip
+    assignee = User.find_by_email(get_asignee_email_from_body(body))||User.anonymous
+    description = body
+    if directive == "create"
+      puts "Creating new task: #{title}, created by #{user.name}, assigned to #{assignee.name}"
+      task = Task.new(:title => title, :status => "prioritized", :creator_id => user.id, :assignee_id => assignee.id, :description => description)
+      task.save!
+      puts "Task created with id #{task.id}"
+      task.mass_mailer.deliver_task_creation
+      add_to_task_cc_list(task, get_cc_emails_from_body(body))
+      #delete_email(connection, message_id)
+    end  
   end
 end
 
