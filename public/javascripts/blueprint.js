@@ -42,7 +42,7 @@ var FlashMessage = {
     if ($('#container > p.notice').size() > 0) {
       setTimeout(function (el) {
         $('#container > p.notice').slideUp();
-      }, 2000);
+      }, 5000);
     }
   }
 };

@@ -1,8 +1,10 @@
 #!/usr/bin/ruby
 
 require 'api'
+require 'lib'
 require 'readline'
 require 'digest/md5'
+require 'pp'
 
 # A task has
 # title, description, kind, status, project_id, creator_id, assignee_id
@@ -13,30 +15,54 @@ KINDS = [
 ]
 KIND_ID = "KIND:"
 TITLE_ID = "TITLE:"
-ASSIGNEE_ID = "USER:"
+ASSIGNEE_ID = "ASSIGNEE:"
 ESTIMATE_ID = "ESTIMATE:"
 PROJECT_ID = "PROJECT:"
 TASK_TEMPLATE =
 """
-#{TITLE_ID} TITLE
+#{TITLE_ID}
 #{ASSIGNEE_ID} ASSIGNEE
-#{ESTIMATE_ID} ESTIMATE
-#{PROJECT_ID} PROJECT
+#{ESTIMATE_ID}
+#{PROJECT_ID}
 ## DESCRIPTION ##
 
 """.strip()
 
-AUTHOR_EMAIL = "okay@causes.com"
-COMMANDS = {
-  "list" => :list,
-  "userlist" => :userlist,
-  "task" => :task,
-  "projectlist" => :project_list,
-  "addcomment" => :add_comment,
-  "markcomplete" => :mark_complete,
-  "new" => :new_task
-}
+DEFAULT_DOMAIN="causes.com"
 
+COMMANDS = {
+  "l" => :list,
+  "list" => :list,
+  "ts" => :list,
+
+  "task" => :task,
+  "t" => :task,
+
+  "rp" => :reprioritize,
+
+  "projectlist" => :project_list,
+  "pl" => :project_list,
+  "ps" => :project_list,
+
+  "addcomment" => :add_comment,
+
+  "markcomplete" => :mark_complete,
+  "c" => :mark_complete,
+
+  "new" => :new_task,
+  "n" => :new_task,
+
+  "newcomplete" => :new_complete_task,
+  "nc" => :new_complete_task,
+
+  "setproject" => :set_project,
+  "sp" => :set_project,
+
+  "setuser" => :set_user,
+  "su" => :set_user,
+
+  "help" => :help
+}
 
 def comment_string(comment)
   s = format("%s\n%s\n  %s\n", comment['updated_at'], comment['text'],
@@ -47,6 +73,7 @@ def comments_string(comments)
   comments = comments.map { |comment| comment_string(comment) }
   comments.join
 end
+
 # Printing Helpers
 def output_comments(comments)
   puts comments_string(comments)
@@ -68,96 +95,104 @@ def output_projects(projects)
   end
 end
 
+# Context Functions
+def set_project(cl, con, args)
+  project_id = nil
+  project_id = args[0] if args.size > 0
+  con.project_id = project_id
+end
+
+def set_user(cl, con, args)
+  con.user_email = "#{args[0]}@#{DEFAULT_DOMAIN}"
+end
+
 # Editing Functions
 
 # if no user is supplied, create it for the default user, otherwise give it to
 # another user.
-def add_task(c, args)
+def add_task(cl, con, args)
   # a task should open in a new editor window. Format of a new task
   task_string = edit("")
 end
 
-def add_comment(c, args)
-  task_id = args.split(" ").last
-  begin
-    comments = comments_string(c.list_comments(:id => task_id))
-  rescue NoMethodError => e
-    puts e
-  end
+def add_comment(cl, con, args)
+  author_email = con.user_email!
+  task_id = args.last
+  comments = comments_string(cl.list_comments(:id => task_id))
   comments = comments.map { |line| line.gsub(/^/, "#" ) }
   comment = edit(comments)
-  comment = parse_comments(comment)
+  comment = remove_comments(comment)
   if comment.empty?
     puts "Can't post empty comment"
     return
   end
   puts "Posting #{comment} to task :#{task_id}"
-  c.add_comment(:id => task_id, :author_email => AUTHOR_EMAIL, :text => comment)
+  cl.add_comment(
+    :id => task_id,
+    :author_email => author_email,
+    :text => comment)
 end
 
-def mark_complete(c, args)
+def mark_complete(cl, con, args)
+  author_email = con.user_email!
+  task_id = args.last
   comment = edit("")
-  task_id = args.split(" ").last
   puts "Marking task :#{task_id} complete"
-  c.mark_complete(:id => task_id, :author_email => AUTHOR_EMAIL, :text => comment)
+  cl.mark_complete(
+    :id => task_id,
+    :author_email => author_email,
+    :text => comment)
 end
 
-def new_task(c, args)
-  author_id = AUTHOR_EMAIL
-  assignee_id = args.split(" ").first
-  assignee_id = AUTHOR_EMAIL if assignee_id.nil?
-  task_text = edit(TASK_TEMPLATE.gsub(/ASSIGNEE/, assignee_id))
-  task_params = parse_task(parse_comments(task_text))
-  task_params[:author_email] = author_id
-  c.new_task(task_params)
+def new_task(cl, con, args)
+  author_email = con.user_email!
+  assignee_email = args.first
+  assignee_email = con.user_email if assignee_email.nil?
+  task_text = edit(TASK_TEMPLATE.gsub(/ASSIGNEE$/, assignee_email))
+  task_params = parse_task(remove_comments(task_text))
+  task_params[:author_email] = author_email 
+  cl.new_task(task_params)
+end
+
+def reprioritize(cl, con, args)
+  rp_task = args[0]
+  rel_pos = args[1]
+  base_task = args[2]
 end
 
 # Retrieving Functions
-def list(c, args)
-  tasks = c.list_tasks
+def list(cl, con, args)
+  argh = {}
+  argh[:status] = "prioritized"
+  argh[:assignee_email] = "#{args[1]}@#{DEFAULT_DOMAIN}" if args.length == 2
+  argh[:status] = args[0] if args.length >= 1
+
+  if argh[:assignee_email] == nil && con.project_id == nil
+    argh[:assignee_email] = con.user_email!
+  end
+
+  argh[:project_id] = con.project_id
+  tasks = cl.list_tasks(argh)
   output_tasks(tasks)
 end
 
-def project_list(c, args)
+def project_list(cl, con, args)
   call_args = {}
   if args.length > 0
     call_args["status"] = args
   end
-  projects = c.list_projects(call_args)
+  projects = cl.list_projects(call_args)
   output_projects(projects)
 end
 
-def task(c, args)
-  task_id = args.split(" ").first
-  task = c.task(:id => task_id)
+def task(cl, con, args)
+  task_id = args.first
+  task = cl.task(:id => task_id)
   output_task(task)
-  comments = c.list_comments(:id => task_id)
+  comments = cl.list_comments(:id => task_id)
   output_comments(comments)
 end
 
-def userlist(c, args)
-  tasks = c.list_tasks(:assignee_email => args)
-  output_tasks(tasks)
-end
-
-# Open a file in EDITOR and read its contents when done editing
-def edit(text)
-  digest = Digest::MD5.hexdigest("#{rand(2**30)}")
-  filename = "/tmp/#{digest}"
-  tmp_file = File.new(filename, "w")
-  tmp_file.write(text)
-  tmp_file.close
-  system(ENV["EDITOR"], filename)
-  tmp_file = File.new(filename, "r")
-  edited_text = tmp_file.read
-end
-
-def parse_comments(text)
-  text = text.select do |line|
-    line =~ /^[^#]+/
-  end
-  text
-end
 # Parse the edited task
 # Title: (mandatory)
 # Due: (can be commented out)
@@ -190,11 +225,17 @@ def parse_task(text)
   task
 end
 
-c = BlueprintClient.new
+cl = BlueprintClient.new
+con = Context.new
 
-while line = Readline.readline('bp> ', true)
+while line = Readline.readline("bp #{con}> ", true)
   components = line.split(' ', 2)
   command = components.first
   args = components.size > 1 ? components.last : ""
-  method(COMMANDS[command]).call(c, args)
+  args = args.split
+  begin
+    method(COMMANDS[command]).call(cl, con, args)
+  rescue InsufficientContextException => ice
+    puts "Insufficient context for this command: try again with more args"
+  end
 end
