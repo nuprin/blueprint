@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace(:api) do |api|
+    api.resources :projects
     api.resources :tasks, :member => {
+      :comment => :put,
+      :comments => :get,
       :mark_complete => :put
     }
   end

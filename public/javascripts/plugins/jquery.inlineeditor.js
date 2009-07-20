@@ -20,6 +20,7 @@
         editable.html(data);
         editable.removeClass(settings.errorClass);
         clickable.removeClass("editing");
+        $(document.body).sortable('enable');
         if (settings.onSuccessFn) {
           settings.onSuccessFn(clickable);
         }
@@ -61,6 +62,7 @@
         form.css("display", "inline");
         inputField.blur(onBlur);
         clickable.addClass("editing");
+        $(document.body).sortable('disable');
       }
 
       var onBlur = function(e) {
@@ -68,6 +70,7 @@
           form.hide();
           editable.show();
           clickable.removeClass("editing");
+          $(document.body).sortable('enable');
         }
       }
 

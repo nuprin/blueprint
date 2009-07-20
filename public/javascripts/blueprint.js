@@ -3,7 +3,7 @@ var KeyboardShortcuts = {
   setup: function() {
     $(document.body).shortkeys({
       'a': function() {
-        $(".quick_add_link:eq(0)").trigger("click");      
+        $(".quick_add_link:eq(0)").trigger("click");
       },
       'b': function() {
         location.href = "/bugs";
@@ -12,18 +12,18 @@ var KeyboardShortcuts = {
         location.href = "/projects/all";
       },
       'n': function() {
-        location.href = "/tasks/new"
+        location.href = "/tasks/new";
       },
       's': function() {
-        location.href = "/users/" + VIEWER_ID + "/subscribed?status=prioritized"
+        location.href = "/users/"+ VIEWER_ID +"/subscribed?status=prioritized";
       },
       'y': function() {
         location.href = "/";
       },
       '¿': function() {
         $("#q").focus();
-      },
-    })
+      }
+    });
     // TODO: MOve this over to shortkeys when it supports the concept of a
     // "universal" shortcut, a shortcut that works regardless of whether you're
     // on a form field or not.
@@ -31,11 +31,21 @@ var KeyboardShortcuts = {
       if (user.keyboard.character() == "esc") {
         event.preventDefault();
         $("#task_title").blur();
-        $(".quick_cancel_link:eq(0)").trigger("click")
+        $(".quick_cancel_link:eq(0)").trigger("click");
       }
-    })
+    });
   }
-}
+};
+
+var FlashMessage = {
+  hideAfterDelay: function () {
+    if ($('#container > p.notice').size() > 0) {
+      setTimeout(function (el) {
+        $('#container > p.notice').slideUp();
+      }, 5000);
+    }
+  }
+};
 
 $(function() {
   $('ul.sf-menu').superfish({
@@ -48,4 +58,5 @@ $(function() {
     }
   });
   KeyboardShortcuts.setup();
-})
+  FlashMessage.hideAfterDelay();
+});

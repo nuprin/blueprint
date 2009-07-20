@@ -5,7 +5,7 @@ var TaskNavigation = {
   open: function() {
     url = $(".cursor td:eq(1) a");
     if (0 < url.length) {
-      location.href = url.get(0).href
+      location.href = url.get(0).href;
     }
   },  
   edit: function() {
@@ -25,7 +25,7 @@ var TaskNavigation = {
   complete: function() {
     $(".cursor .task_complete_form").submit();
   },
-  delete: function() {
+  deleteTask: function() {
     $(".cursor .task_delete_link").click();
   },
   up: function() {
@@ -72,7 +72,7 @@ var TaskNavigation = {
       'p':       TaskNavigation.parkOrPrioritize,
       't':       TaskNavigation.moveToTop,
       'x':       TaskNavigation.complete,
-      'Shift+1': TaskNavigation.delete,
+      'Shift+1': TaskNavigation.deleteTask
     }, {moreKeys: {
       'Enter': 13,
       'Shift': 16,

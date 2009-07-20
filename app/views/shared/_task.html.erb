@@ -18,13 +18,11 @@
   <td class="drag_handle">
     <% if task.completed? %>
       <%= image_tag 'check.gif' %>
-    <% elsif task.assignee == viewer || task.assignee_id.nil? %>
+    <% else %>
       <% form_tag complete_task_path(task), :class => "task_complete_form" do %>
         <%= check_box_tag "complete_task_id", false, false,
           :onclick => "$(this).parents('form').submit(); return false;" %>
       <% end %>
-    <% else %>
-      <%= image_tag 'drag_handle.gif' %>
     <% end %>
   </td>
   <td class="task_name<%= " deferred_task" if task.parked? && 
