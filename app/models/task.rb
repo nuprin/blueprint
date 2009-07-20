@@ -99,10 +99,14 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.save!
-    
+    self.tell_campfire if Rails.env == "production"
+  end
+
+  def tell_campfire
+    project = self.project_id ? " (#{self.project.title})" : ""
     Campfire.speak <<-HTML
       #{self.editor.name} marked
-      "#{self.title}" complete. http://blueprint/tasks/#{self.id}
+      "#{self.title}" complete. http://blueprint/tasks/#{self.id}#{project}
     HTML
   end
 
