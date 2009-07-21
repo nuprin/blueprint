@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  FORWARD_HOURS_PER_DAY = 5.5
   PHASES = [
     "Idea", "Spec", "Spec Review", "Estimate", "Coding", "Released",
     "Post-Release Tweaks", "Stats Collection"
@@ -73,6 +74,11 @@ class Project < ActiveRecord::Base
   def remove_from_list(task)
     TaskListItem.destroy_all :task_id => task, :context_id => self.id,
                              :context_type => self.class.name
+  end
+
+  def days_left
+    (self.tasks.prioritized.map(&:estimate).compact.sum /
+     FORWARD_HOURS_PER_DAY).round(1)
   end
 
   def estimate
