@@ -1,10 +1,12 @@
 #!/usr/bin/ruby
 
-require 'api'
-require 'lib'
-require 'readline'
 require 'digest/md5'
 require 'pp'
+require 'readline'
+
+require 'api'
+require 'lib'
+require 'command_completer'
 
 # A task has
 # title, description, kind, status, project_id, creator_id, assignee_id
@@ -30,39 +32,24 @@ TASK_TEMPLATE =
 
 DEFAULT_DOMAIN="causes.com"
 
-COMMANDS = {
-  "l" => :list,
-  "list" => :list,
-  "ts" => :list,
+# Global Variables
+CL = BlueprintClient.new
+CON = Context.new
+CC = CommandCompleter.new
 
-  "task" => :task,
-  "t" => :task,
+CC.add_command("add_comment", :add_comment)
+CC.add_command("complete", :mark_complete)
+CC.add_command("help", :help)
+CC.add_command("list", :list)
+CC.add_command("mark_complete", :mark_complete)
+CC.add_command("new_task", :new_task)
+CC.add_command("project_list", :project_list)
+CC.add_command("re_prioritize", :reprioritize)
+CC.add_command("set_project", :set_project)
+CC.add_command("set_user", :set_user)
+CC.add_command("task", :task)
 
-  "rp" => :reprioritize,
 
-  "projectlist" => :project_list,
-  "pl" => :project_list,
-  "ps" => :project_list,
-
-  "addcomment" => :add_comment,
-
-  "markcomplete" => :mark_complete,
-  "c" => :mark_complete,
-
-  "new" => :new_task,
-  "n" => :new_task,
-
-  "newcomplete" => :new_complete_task,
-  "nc" => :new_complete_task,
-
-  "setproject" => :set_project,
-  "sp" => :set_project,
-
-  "setuser" => :set_user,
-  "su" => :set_user,
-
-  "help" => :help
-}
 
 def comment_string(comment)
   s = format("%s\n%s\n  %s\n", comment['updated_at'], comment['text'],
@@ -75,6 +62,13 @@ def comments_string(comments)
 end
 
 # Printing Helpers
+def help(cl, con, args)
+  commands = CC.commands.map(&:command)
+  commands.sort.each do |command|
+    puts command
+  end
+end
+
 def output_comments(comments)
   puts comments_string(comments)
 end
@@ -108,7 +102,6 @@ def set_user(cl, con, args)
 end
 
 # Editing Functions
-
 # if no user is supplied, create it for the default user, otherwise give it to
 # another user.
 def add_task(cl, con, args)
@@ -241,20 +234,27 @@ def parse_task(text)
   task
 end
 
-cl = BlueprintClient.new
-con = Context.new
-
-while line = Readline.readline("bp #{con}> ", true)
+while line = Readline.readline("bp #{CON}> ", true)
   components = line.split(' ', 2)
   command = components.first
   args = components.size > 1 ? components.last : ""
   args = args.split
   begin
-    if COMMANDS[command].nil?
+    possible_commands = CC.find_command(command)
+    if possible_commands.empty?
       puts "Unrecognized command: #{command}"
       next
+    elsif possible_commands.size > 1
+      puts "Ambiguous directive: (could be one of the following)"
+      possible_commands.each do |pcommand|
+        puts pcommand.command
+      end
+      next
+    else
+      exec_command = possible_commands.first
+      puts "executing exec_command.command"
     end
-    method(COMMANDS[command]).call(cl, con, args)
+    method(exec_command.callback).call(CL, CON, args)
   rescue InsufficientContextException => ice
     puts "Insufficient context for this command: try again with more args"
   end
