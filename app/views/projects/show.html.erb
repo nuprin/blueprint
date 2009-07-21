@@ -23,6 +23,9 @@
   <div id="task_list">
     <% task_object =
       Deliverable.new(:status => "prioritized", :project_id => @project.id) %>
+    <div class="days_left">
+      <%= pluralize(@project.days_left, "eng day") %> left on this project
+    </div>
     <%= render :partial => "/shared/task_list",
                :locals => {:title => "",
                            :tasks => @project.task_list,
