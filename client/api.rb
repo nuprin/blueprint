@@ -11,7 +11,7 @@ class BlueprintClient < Bricklayer::Base
     JSON.parse(json_response).first.last
   end
 
-  API_PATH="http://marl:3000/api"
+  API_PATH="http://blueprint/api"
   service_url "#{API_PATH}/{action}.json", &ARRAY_JSON_PARSER
   remote_method :list_tasks, :override_parameters => {:action => "tasks"}
   remote_method :list_projects, :override_parameters => {:action => "projects"}

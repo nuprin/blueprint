@@ -80,8 +80,10 @@ def output_comments(comments)
 end
 
 def output_task(task, extended=false)
+  user = task['assignee_email'].split('@').first
+
   task_string = format("%s:%s", task['id'], task['title'])
-  task_string += " #{task['assignee_email']}" if task['assignee_email']
+  task_string = user.to_s + "\t#{task_string}"
   task_string += " $#{task['due_date']}" if task['due_date']
   task_string += " #{task['estimate']}h" if task['estimate']
   puts task_string
