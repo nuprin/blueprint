@@ -1,8 +1,10 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'digest/md5'
 require 'pp'
 require 'readline'
+require 'rubygems'
+require 'activesupport'
 
 require 'api'
 require 'lib'
@@ -20,12 +22,16 @@ TITLE_ID = "TITLE:"
 ASSIGNEE_ID = "ASSIGNEE:"
 PROJECT_ID = "PROJECT:"
 ESTIMATE_ID = "ESTIMATE:"
+STATUS_ID = "STATUS:"
+DUEDATE_ID = "DUE DATE:"
 TASK_TEMPLATE =
 """
-#{TITLE_ID}
+#{TITLE_ID} TITLE
 #{ASSIGNEE_ID} ASSIGNEE
+##{DUEDATE_ID} DUEDATE
 ##{PROJECT_ID} PROJECT
 ##{ESTIMATE_ID} ESTIMATE
+##{STATUS_ID} STATUS
 ## DESCRIPTION ##
 
 """.strip()
@@ -42,6 +48,7 @@ CC.add_command("complete", :mark_complete)
 CC.add_command("help", :help)
 CC.add_command("list", :list)
 CC.add_command("mark_complete", :mark_complete)
+CC.add_command("edit_task", :edit_task)
 CC.add_command("new_task", :new_task)
 CC.add_command("project_list", :project_list)
 CC.add_command("re_prioritize", :reprioritize)
@@ -49,8 +56,7 @@ CC.add_command("set_project", :set_project)
 CC.add_command("set_user", :set_user)
 CC.add_command("task", :task)
 
-
-
+# String Formatting Helpers
 def comment_string(comment)
   s = format("%s\n%s\n  %s\n", comment['updated_at'], comment['text'],
                        comment['author_name'])
@@ -73,9 +79,13 @@ def output_comments(comments)
   puts comments_string(comments)
 end
 
-def output_task(task, description=false)
-  puts format("%s:%s", task['id'], task['title'])
-  puts task['description'] if description
+def output_task(task, extended=false)
+  task_string = format("%s:%s", task['id'], task['title'])
+  task_string += " #{task['assignee_email']}" if task['assignee_email']
+  task_string += " $#{task['due_date']}" if task['due_date']
+  task_string += " #{task['estimate']}h" if task['estimate']
+  puts task_string
+  puts task['description'] if extended
 end
 
 def output_tasks(tasks)
@@ -102,13 +112,6 @@ def set_user(cl, con, args)
 end
 
 # Editing Functions
-# if no user is supplied, create it for the default user, otherwise give it to
-# another user.
-def add_task(cl, con, args)
-  # a task should open in a new editor window. Format of a new task
-  task_string = edit("")
-end
-
 def add_comment(cl, con, args)
   author_email = con.user_email!
   task_id = args.last
@@ -138,24 +141,29 @@ def mark_complete(cl, con, args)
     :text => comment)
 end
 
-def new_task(cl, con, args)
+def edit_task(cl, con, args)
   author_email = con.user_email!
-  assignee_email = args.first
-  assignee_email = con.user_email if assignee_email.nil?
-  project_id = con.project_id
-  # Insert data into the template
-  task_data = TASK_TEMPLATE.dup
-  task_data.gsub!(/ASSIGNEE$/, assignee_email)
-  if project_id
-    task_data.gsub!(/PROJECT$/, project_id.to_s)
-    task_data.gsub!(/##{PROJECT_ID}/, PROJECT_ID)
-  end
+  task_id = args.first
+  task = cl.task(:id => task_id)
+  task_data = task_to_template(task)
+  task_text = edit(task_data)
+  task_params = parse_task(task_text)
+  task_params['id'] = task_id
+  cl.edit_task(task_params)
+end
 
+def new_task(cl, con, args)
+  task = HashWithIndifferentAccess.new
+  task['author_email'] = con.user_email!
+  task['assignee_email'] = args.first || con.user_email
+  task['project_id'] = con.project_id
+
+  task_data = task_to_template(task)
   # User edits the template file
   task_text = edit(task_data)
   task_params = parse_task(remove_comments(task_text))
-  task_params[:author_email] = author_email 
-  if task_params[:title] == "" || task_params[:assignee_email] == ""
+  task_params['author_email'] = task['author_email']
+  if task_params['title'] == "" || task_params['assignee_email'] == ""
     puts "You must supply a Title & Assignee at the minimum"
     return
   else
@@ -172,15 +180,15 @@ end
 # Retrieving Functions
 def list(cl, con, args)
   argh = {}
-  argh[:status] = "prioritized"
-  argh[:assignee_email] = "#{args[1]}@#{DEFAULT_DOMAIN}" if args.length == 2
-  argh[:status] = args[0] if args.length >= 1
+  argh['status'] = "prioritized"
+  argh['assignee_email'] = "#{args[1]}@#{DEFAULT_DOMAIN}" if args.length == 2
+  argh['status'] = args[0] if args.length >= 1
 
-  if argh[:assignee_email] == nil && con.project_id == nil
-    argh[:assignee_email] = con.user_email!
+  if argh['assignee_email'] == nil && con.project_id == nil
+    argh['assignee_email'] = con.user_email!
   end
 
-  argh[:project_id] = con.project_id
+  argh['project_id'] = con.project_id
   tasks = cl.list_tasks(argh)
   output_tasks(tasks)
 end
@@ -217,21 +225,36 @@ def parse_task(text)
     line = line.strip()
     case line
       when /^#{KIND_ID}/
-        task[:kind] = line.gsub(/^#{KIND_ID}/, "").strip()
+        task['kind'] = line.gsub(/^#{KIND_ID}/, "").strip()
       when /^#{TITLE_ID}/
-        task[:title] = line.gsub(/^#{TITLE_ID}/, "").strip()
-      when /^#{ESTIMATE_ID}/
-        task[:estimate] = line.gsub(/^#{ESTIMATE_ID}/, "").strip()
+        task['title'] = line.gsub(/^#{TITLE_ID}/, "").strip()
       when /^#{PROJECT_ID}/
-        task[:project_id] = line.gsub(/^#{PROJECT_ID}/, "").strip()
+        task['project_id'] = line.gsub(/^#{PROJECT_ID}/, "").strip()
+      when /^#{DUEDATE_ID}/
+        task['due_date'] = line.gsub(/^#{DUEDATE_ID}/, "").strip()
+      when /^#{ESTIMATE_ID}/
+        task['estimate'] = line.gsub(/^#{ESTIMATE_ID}/, "").strip().to_i
       when /^#{ASSIGNEE_ID}/
-        task[:assignee_email] = line.gsub(/^#{ASSIGNEE_ID}/, "").strip()
+        task['assignee_email'] = line.gsub(/^#{ASSIGNEE_ID}/, "").strip()
       else
-        description += line
+        description += "#{line}\n"
     end
   end
-  task[:description] = description
+  task['description'] = description
   task
+end
+
+def task_to_template(task)
+  # Insert data into the template
+  task_data = TASK_TEMPLATE.dup
+  task_data.gsub!(/ASSIGNEE$/, task['assignee_email'].to_s)
+  task_data.gsub!(/DUEDATE$/, task['due_date'].to_s)
+  task_data.gsub!(/ESTIMATE$/, task['estimate'].to_s)
+  task_data.gsub!(/PROJECT$/, task['project_id'].to_s.to_s)
+  task_data.gsub!(/STATUS$/, task['status'].to_s)
+  task_data.gsub!(/TITLE$/, task['title'].to_s)
+  task_data += "\n#{task['description']}" if task['description']
+  task_data
 end
 
 while line = Readline.readline("bp #{CON}> ", true)
@@ -252,7 +275,7 @@ while line = Readline.readline("bp #{CON}> ", true)
       next
     else
       exec_command = possible_commands.first
-      puts "executing exec_command.command"
+      puts "executing #{exec_command.command}"
     end
     method(exec_command.callback).call(CL, CON, args)
   rescue InsufficientContextException => ice
