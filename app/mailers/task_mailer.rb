@@ -2,6 +2,7 @@ class TaskMailer < ActionMailer::Base
 
   include MailerHelper
   include TaskMailerHelper
+  helper ApplicationHelper
 
   REPLY_TO = "blueprint@causes.com"
   
@@ -106,7 +107,16 @@ class TaskMailer < ActionMailer::Base
     reply_to   REPLY_TO
     body       :task => task
   end
-  
+
+  def recent_edits(recipient, task, edits)
+    recipients   recipient_email(recipient)
+    from         REPLY_TO
+    subject      task_subject(task)
+    reply_to     REPLY_TO
+    content_type "text/html"
+    body         :task => task, :edits => edits
+  end
+
   private
   
   def task_subject(task)
