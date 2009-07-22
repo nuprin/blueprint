@@ -28,6 +28,7 @@ class TaskEdit < ActiveRecord::Base
 
   def self.notify_subscribers_of_recent_edits(since)
     self.since(since).group_by(&:task).each do |task, edits|
+      puts "Sending edits for task #{task.id}."
       editors = edits.map(&:editor).uniq
       uninterested_users = []
       if editors.size == 1
@@ -35,5 +36,9 @@ class TaskEdit < ActiveRecord::Base
       end
       task.mass_mailer.ignoring(uninterested_users).deliver_recent_edits(edits)
     end
+  end
+  
+  def self.description_changed?(edits)
+    edits.map(&:field).include?("description")
   end
 end

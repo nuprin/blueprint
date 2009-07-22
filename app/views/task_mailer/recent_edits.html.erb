@@ -1,19 +1,26 @@
 <% if @edits.size > 1 %>
-  <p>The following changes have been made to the task:</p>
+  <p><strong>The following changes have been made to the task:</strong></p>
   <% if @edits.any? -%>
   <ul>
   <% @edits.each do |edit| -%>
   <% partial = "task_edits/#{edit.field}_edit" -%>
-    <li><%= render :partial => partial, :locals => {:edit => edit} %></li>
+    <li>
+      <%= strip_links render(:partial => partial, :locals => {:edit => edit}) %>
+    </li>
   <% end %>
   </ul>
   <% end -%>
 <% else %>
   <% edit = @edits.first %>
   <p>
-  <%= render :partial => "task_edits/#{edit.field}_edit",
-    :locals => {:edit => edit} %>
+  <%= strip_links render(:partial => "task_edits/#{edit.field}_edit",
+    :locals => {:edit => edit}) %>
   </p>
+<% end %>
+
+<% if TaskEdit.description_changed?(@edits) %>
+  <p><strong>Updated Description</strong></p>
+  <%= @task.description %>
 <% end %>
 
 <p>
