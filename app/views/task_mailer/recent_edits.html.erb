@@ -4,15 +4,17 @@
   <ul>
   <% @edits.each do |edit| -%>
   <% partial = "task_edits/#{edit.field}_edit" -%>
-    <li><%= render :partial => partial, :locals => {:edit => edit} %></li>
+    <li>
+      <%= strip_links render(:partial => partial, :locals => {:edit => edit}) %>
+    </li>
   <% end %>
   </ul>
   <% end -%>
 <% else %>
   <% edit = @edits.first %>
   <p>
-  <%= render :partial => "task_edits/#{edit.field}_edit",
-    :locals => {:edit => edit} %>
+  <%= strip_links render(:partial => "task_edits/#{edit.field}_edit",
+    :locals => {:edit => edit}) %>
   </p>
 <% end %>
 
