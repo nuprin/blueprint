@@ -36,4 +36,8 @@ class TaskEdit < ActiveRecord::Base
       task.mass_mailer.ignoring(uninterested_users).deliver_recent_edits(edits)
     end
   end
+  
+  def self.description_changed?(edits)
+    edits.map(&:field).include?("description")
+  end
 end
