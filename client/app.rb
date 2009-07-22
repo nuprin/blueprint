@@ -56,6 +56,23 @@ CC.add_command("set_project", :set_project)
 CC.add_command("set_user", :set_user)
 CC.add_command("task", :task)
 
+class HashWithIndifferentAccess 
+  def to_string_hash
+    hash = {}
+    stringify_keys.each do |key|
+      hash[key] = self[key]
+    end
+  end
+
+  def to_symbol_hash
+    hash = {}
+    symbolize_keys.each do |key|
+      hash[key] = self[key]
+    end
+  end
+end
+
+
 # String Formatting Helpers
 def comment_string(comment)
   s = format("%s\n%s\n  %s\n", comment['updated_at'], comment['text'],
@@ -155,14 +172,14 @@ def edit_task(cl, con, args)
   task = cl.task(:id => task_id)
   task_data = task_to_template(task)
   task_text = edit(task_data)
-  task_params = parse_task(task_text)
-  task_params['id'] = task_id
-  cl.edit_task(task_params)
+  task_params = HashWithIndifferentAccess.new
+  task_params.update(parse_task(task_text))
+  task_params[:id] = task_id
+  cl.edit_task(task_params.to_symbol_hash)
 end
 
 def new_task(cl, con, args)
   task = HashWithIndifferentAccess.new
-  task['author_email'] = con.user_email!
   task['assignee_email'] = args.first || con.user_email
   task['project_id'] = con.project_id
 
@@ -170,12 +187,12 @@ def new_task(cl, con, args)
   # User edits the template file
   task_text = edit(task_data)
   task_params = parse_task(remove_comments(task_text))
-  task_params['author_email'] = task['author_email']
+  task_params[:author_email] = con.user_email!
   if task_params['title'] == "" || task_params['assignee_email'] == ""
     puts "You must supply a Title & Assignee at the minimum"
     return
   else
-    cl.new_task(task_params)
+    cl.new_task(task_params.to_symbol_hash)
   end
 end
 
@@ -226,42 +243,45 @@ end
 # The rest of the lines are all the description
 
 def parse_task(text)
-  task = {}
+  task = HashWithIndifferentAccess.new
   description = ""
   text.each do |line|
     next if line =~ /^#/
     line = line.strip()
     case line
       when /^#{KIND_ID}/
-        task['kind'] = line.gsub(/^#{KIND_ID}/, "").strip()
+        task[:kind] = line.gsub(/^#{KIND_ID}/, "").strip()
       when /^#{TITLE_ID}/
-        task['title'] = line.gsub(/^#{TITLE_ID}/, "").strip()
+        task[:title] = line.gsub(/^#{TITLE_ID}/, "").strip()
       when /^#{PROJECT_ID}/
-        task['project_id'] = line.gsub(/^#{PROJECT_ID}/, "").strip()
+        task[:project_id] = line.gsub(/^#{PROJECT_ID}/, "").strip()
       when /^#{DUEDATE_ID}/
-        task['due_date'] = line.gsub(/^#{DUEDATE_ID}/, "").strip()
+        task[:due_date] = line.gsub(/^#{DUEDATE_ID}/, "").strip()
       when /^#{ESTIMATE_ID}/
-        task['estimate'] = line.gsub(/^#{ESTIMATE_ID}/, "").strip().to_i
+        task[:estimate] = line.gsub(/^#{ESTIMATE_ID}/, "").strip().to_i
       when /^#{ASSIGNEE_ID}/
-        task['assignee_email'] = line.gsub(/^#{ASSIGNEE_ID}/, "").strip()
+        task[:assignee_email] = line.gsub(/^#{ASSIGNEE_ID}/, "").strip()
       else
         description += "#{line}\n"
     end
   end
-  task['description'] = description
+  task[:description] = description
   task
 end
 
 def task_to_template(task)
   # Insert data into the template
+  task_params = HashWithIndifferentAccess.new
+  task_params.update(task)
+
   task_data = TASK_TEMPLATE.dup
-  task_data.gsub!(/ASSIGNEE$/, task['assignee_email'].to_s)
-  task_data.gsub!(/DUEDATE$/, task['due_date'].to_s)
-  task_data.gsub!(/ESTIMATE$/, task['estimate'].to_s)
-  task_data.gsub!(/PROJECT$/, task['project_id'].to_s.to_s)
-  task_data.gsub!(/STATUS$/, task['status'].to_s)
-  task_data.gsub!(/TITLE$/, task['title'].to_s)
-  task_data += "\n#{task['description']}" if task['description']
+  task_data.gsub!(/ASSIGNEE$/, task_params[:assignee_email].to_s)
+  task_data.gsub!(/DUEDATE$/, task_params[:due_date].to_s)
+  task_data.gsub!(/ESTIMATE$/, task_params[:estimate].to_s)
+  task_data.gsub!(/PROJECT$/, task_params[:project_id].to_s.to_s)
+  task_data.gsub!(/STATUS$/, task_params[:status].to_s)
+  task_data.gsub!(/TITLE$/, task_params[:title].to_s)
+  task_data += "\n#{task_params[:description]}" if task_params[:description]
   task_data
 end
 
