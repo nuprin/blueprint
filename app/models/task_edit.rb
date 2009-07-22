@@ -28,6 +28,7 @@ class TaskEdit < ActiveRecord::Base
 
   def self.notify_subscribers_of_recent_edits(since)
     self.since(since).group_by(&:task).each do |task, edits|
+      puts "Sending edits for task #{task.id}."
       editors = edits.map(&:editor).uniq
       uninterested_users = []
       if editors.size == 1
