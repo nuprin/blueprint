@@ -178,8 +178,8 @@ class Api::TasksController < ApplicationController
 
   private
   def add_task_data(task)
-    task[:author_email] = task.creator.email
-    task[:assignee_email] = task.assignee.email
+    task[:author_email] = task.creator.email if task.creator
+    task[:assignee_email] = task.assignee.email if task.assignee
 
     task
   end
