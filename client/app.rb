@@ -67,6 +67,11 @@ def comments_string(comments)
   comments.join
 end
 
+def ellipsize(str, len=80)
+  len -= "..".size
+  str.size > len ? str[0..len]+".." : str
+end
+
 # Printing Helpers
 def help(cl, con, args)
   commands = CC.commands.map(&:command)
@@ -80,10 +85,11 @@ def output_comments(comments)
 end
 
 def output_task(task, extended=false)
-  user = task['assignee_email'].split('@').first
+  email = task['assignee_email']
+  user = email ? email.split('@').first[0..6] : ""
 
-  task_string = format("%s:%s", task['id'], task['title'])
-  task_string = user.to_s + "\t#{task_string}"
+  task_string = format("|%s|%s", task['id'], ellipsize(task['title'], 50))
+  task_string = user + "\t#{task_string}" if user
   task_string += " $#{task['due_date']}" if task['due_date']
   task_string += " #{task['estimate']}h" if task['estimate']
   puts task_string
