@@ -23,3 +23,10 @@
 #project_mission {
   margin-bottom: .5em;
 }
+.days_left {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: right;
+  width: 100%;
+  margin-bottom: 10px;
+}

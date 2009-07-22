@@ -34,6 +34,9 @@ class BlueprintClient < Bricklayer::Base
                 :override_parameters => {:action => "comment"},
                 :required_parameters => [:id, :text, :author_email],
                 :request_method => :post
+  remote_method :edit_task, :override_parameters => {:action => "update"},
+                :required_parameters => [:id],
+                :request_method => :post
 
   remote_method :mark_complete,
                 :override_parameters => {:action => "mark_complete"},

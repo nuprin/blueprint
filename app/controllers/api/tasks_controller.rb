@@ -6,7 +6,10 @@ class Api::TasksController < ApplicationController
   def index
     task = build_task_from_options(params)
     conditions = task_to_conditions(task)
-    @tasks = Task.find(:all, :conditions => conditions)
+    @tasks = Task.find(:all, :conditions => conditions).each do |task| 
+      add_task_data(task)
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tasks }
@@ -17,6 +20,7 @@ class Api::TasksController < ApplicationController
   # GET /api/tasks/1
   # GET /api/tasks/1.xml
   def show
+    @task = add_task_data(@task)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @task }
@@ -60,20 +64,19 @@ class Api::TasksController < ApplicationController
 #
 #  # PUT /api/tasks/1
 #  # PUT /api/tasks/1.xml
-#  def update
-#    @task = Task.find(params[:id])
-#
-#    respond_to do |format|
-#      if @task.update_attributes(params[:task])
-#        flash[:notice] = 'Task was successfully updated.'
+  def update
+    @task = build_task_from_options(params)
+    respond_to do |format|
+      if @task.save
+        flash[:notice] = 'Task was successfully updated.'
 #        format.html { redirect_to(@task) }
-#        format.xml  { head :ok }
-#      else
+        format.xml  { head :ok }
+      else
 #        format.html { render :action => "edit" }
-#        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
-#      end
-#    end
-#  end
+        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
 #
 #  # DELETE /api/tasks/1
 #  # DELETE /api/tasks/1.xml
@@ -174,6 +177,12 @@ class Api::TasksController < ApplicationController
   end
 
   private
+  def add_task_data(task)
+    task[:author_email] = task.creator.email if task.creator
+    task[:assignee_email] = task.assignee.email if task.assignee
+
+    task
+  end
 
   # PARAMS:
   # takes all params a task can use to create a new one
@@ -181,7 +190,11 @@ class Api::TasksController < ApplicationController
   # author_email as a string
   # user as a string
   def build_task_from_options(options={})
-    task = Task.new
+    if options[:id]
+      task = Task.find(options[:id])
+    else
+      task = Task.new
+    end
     user = nil
 
     # Find the assigned user to this task
@@ -193,6 +206,11 @@ class Api::TasksController < ApplicationController
     if options[:assignee_email]
       assignee = User.find_by_email(options[:assignee_email])
       task.assignee_id = assignee.id
+    end
+
+    if options[:due_date]
+      task.due_date = Date.parse(options[:due_date])
+      options.delete(:due_date)
     end
 
     task_to_conditions(task, :include_nil => true).each do |attr, val|
