@@ -29,6 +29,7 @@ CC.add_command("project_list", :project_list)
 CC.add_command("re_prioritize", :reprioritize)
 CC.add_command("set_project", :set_project)
 CC.add_command("set_user", :set_user)
+CC.add_command("show", :task)
 CC.add_command("task", :task)
 
 class HashWithIndifferentAccess 
@@ -256,6 +257,8 @@ end
 while line = Readline.readline("bp #{CON}> ", true)
   components = line.split(' ', 2)
   command = components.first
+  # Do nothing if the command is empty
+  next if command.nil? || command.strip().empty?
   args = components.size > 1 ? components.last : ""
   args = args.split
   begin
