@@ -8,33 +8,8 @@ require 'activesupport'
 
 require 'api'
 require 'lib'
+require 'template'
 require 'command_completer'
-
-# A task has
-# title, description, kind, status, project_id, creator_id, assignee_id
-# estimate, due_data
-KINDS = [
-  "bug", "copy", "design", "estimate", "experiment", "feature", "inquiry",
-  "spec", "stats"
-]
-KIND_ID = "KIND:"
-TITLE_ID = "TITLE:"
-ASSIGNEE_ID = "ASSIGNEE:"
-PROJECT_ID = "PROJECT:"
-ESTIMATE_ID = "ESTIMATE:"
-STATUS_ID = "STATUS:"
-DUEDATE_ID = "DUE DATE:"
-TASK_TEMPLATE =
-"""
-#{TITLE_ID} TITLE
-#{ASSIGNEE_ID} ASSIGNEE
-##{DUEDATE_ID} DUEDATE
-##{PROJECT_ID} PROJECT
-##{ESTIMATE_ID} ESTIMATE
-##{STATUS_ID} STATUS
-## DESCRIPTION ##
-
-""".strip()
 
 DEFAULT_DOMAIN="causes.com"
 
@@ -171,9 +146,8 @@ def edit_task(cl, con, args)
   task_id = args.first
   task = cl.task(:id => task_id)
   task_data = task_to_template(task)
-  task_text = edit(task_data)
-  task_params = HashWithIndifferentAccess.new
-  task_params.update(parse_task(task_text))
+  task_text = edit(task_data.to_template)
+  task_params = TaskTemplate.from_template(task_text)
   task_params[:id] = task_id
   cl.edit_task(task_params.to_symbol_hash)
 end
@@ -185,8 +159,8 @@ def new_task(cl, con, args)
 
   task_data = task_to_template(task)
   # User edits the template file
-  task_text = edit(task_data)
-  task_params = parse_task(remove_comments(task_text))
+  task_text = edit(task_data.to_template)
+  task_params = TaskTemplate.from_template(task_text)
   task_params[:author_email] = con.user_email!
   if task_params['title'] == "" || task_params['assignee_email'] == ""
     puts "You must supply a Title & Assignee at the minimum"
@@ -271,18 +245,9 @@ end
 
 def task_to_template(task)
   # Insert data into the template
-  task_params = HashWithIndifferentAccess.new
+  task_params = TaskTemplate.new
   task_params.update(task)
-
-  task_data = TASK_TEMPLATE.dup
-  task_data.gsub!(/ASSIGNEE$/, task_params[:assignee_email].to_s)
-  task_data.gsub!(/DUEDATE$/, task_params[:due_date].to_s)
-  task_data.gsub!(/ESTIMATE$/, task_params[:estimate].to_s)
-  task_data.gsub!(/PROJECT$/, task_params[:project_id].to_s.to_s)
-  task_data.gsub!(/STATUS$/, task_params[:status].to_s)
-  task_data.gsub!(/TITLE$/, task_params[:title].to_s)
-  task_data += "\n#{task_params[:description]}" if task_params[:description]
-  task_data
+  task_params
 end
 
 while line = Readline.readline("bp #{CON}> ", true)
