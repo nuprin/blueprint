@@ -101,7 +101,7 @@ class Template
   def to_symbol_hash
     h = {}
     @fields.each do |f|
-      h[f.id.to_sym] = f.value
+      h[f.id.to_sym] = f.value if f.value && f.value.strip().any?
     end
     @hidden_fields.each do |key, value|
       h[key.to_sym] = value
