@@ -100,8 +100,11 @@ class Template
 
   def to_symbol_hash
     h = {}
-    self.each do |key|
-      h[key.to_sym] = self[key]
+    @fields.each do |f|
+      h[f.id.to_sym] = f.value
+    end
+    @hidden_fields.each do |key, value|
+      h[key.to_sym] = value
     end
     h
   end

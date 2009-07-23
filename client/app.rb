@@ -162,10 +162,13 @@ def new_task(cl, con, args)
   task_text = edit(task_data.to_template)
   task_params = TaskTemplate.from_template(task_text)
   task_params[:author_email] = con.user_email!
+  y task_params
   if task_params['title'] == "" || task_params['assignee_email'] == ""
     puts "You must supply a Title & Assignee at the minimum"
     return
   else
+    puts task_params[:assignee_email]
+    puts task_params.to_symbol_hash[:assignee_email]
     cl.new_task(task_params.to_symbol_hash)
   end
 end
