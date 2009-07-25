@@ -24,6 +24,7 @@ def parse_ini_file(path)
   tamed.dup.each do |tkey, tval|
     tvlist = tval.split(/[\r\n]+/)
     tamed[tkey] = tvlist.inject({}) do |hash, val|
+      yield hash if val.index('=') == nil || val.strip[0] == '#'
       k, v = val.split(/=/)
       hash[k.strip]=v.strip
       hash
