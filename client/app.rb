@@ -33,13 +33,20 @@ CC.add_command("show", :task)
 CC.add_command("task", :task)
 
 # String Formatting Helpers
+def line_delimiter
+  "#{"-" * 50}\n"
+end
+
+
 def comment_string(comment)
   s = format("[%s] %s\n%s\n\n", comment['author_name'], comment['updated_at'],
                                 comment['text'])
 end
 
 def comments_string(comments)
-  comments = comments.map { |comment| comment_string(comment) }
+  comments = comments.map do |comment|
+    comment_string(comment) + line_delimiter
+  end
   comments.join
 end
 
@@ -65,22 +72,25 @@ end
 
 def output_task(task, extended=false)
   email = task['assignee_email']
+  time_str = nil
+  time_str = Time.parse(task['due_date']).strftime("%b %d") if task['due_date']
 
-  task_string = format(":%s %s", task['id'], ellipsize(task['title'], 50))
-
-  if task['due_date']
-    time_str = Time.parse(task['due_date']).strftime("%b %d")
-    task_string += " #{time_str}"
+  if extended
+    task_string = format(":%s\n%s", task['id'], task['title'])
+    task_string += "\n#{line_delimiter}"
+    task_string += "\nDue: #{time_str}"if time_str
+    task_string += "\nEstimate: #{task['estimate']}h" if task['estimate']
+  else
+    task_string = format(":%s %s", task['id'], ellipsize(task['title'], 50))
+    task_string += " #{time_str}" if time_str
+    task_string += " #{task['estimate']}h" if task['estimate']
   end
-
-  task_string += " #{task['estimate']}h" if task['estimate']
 
   puts task_string
   puts task['description'] if extended
 end
 
 def output_tasks(tasks)
-
   tasks_for_user = Hash.new
   tasks.each do |task|
     assignee = task['assignee_email']
@@ -89,6 +99,7 @@ def output_tasks(tasks)
     tasks_for_user[assignee] << task
   end
 
+  puts ""
   users = tasks_for_user.keys.sort
   users.each do |user_email|
     assignee = user_email.split('@').first
@@ -241,7 +252,7 @@ while line = Readline.readline("bp #{CON}> ", true)
       possible_commands.each { |pcommand| puts pcommand.command }
     else
       exec_command = possible_commands.first
-      puts "executing #{exec_command.command}\n\n"
+      puts "executing #{exec_command.command}\n"
       method(exec_command.callback).call(CL, CON, args)
     end
 
