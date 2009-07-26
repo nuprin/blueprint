@@ -55,9 +55,11 @@ class Api::TasksController < ApplicationController
         flash[:notice] = 'Task was successfully created.'
         format.html { redirect_to(@task) }
         format.xml  { render :xml => @task, :status => :created, :location => @task }
+        format.json { render :json => @task, :status => :created, :location => @task }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
+        format.json { render :json => @task.errors, :status => :unprocessable_entity }
       end
     end
   end
