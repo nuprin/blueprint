@@ -25,23 +25,9 @@ def get_addresses_from_struct(struct_list)
   return emails
 end
 
-def get_asignee_email_from_body(body)
+def get_asignee_name_from_body(body)
   return if body==nil
   $1.strip if body.downcase =~ /^ *to\:(.+)/
-end
-
-def get_cc_emails_from_body(body)
-  return [] if body==nil
-  lines=body.split("\n")
-  return [] if lines.length<2
-  second_line=lines[1]
-  second_line.downcase.strip =~ /^ *cc\:(.+)$/
-  return [] if $1==nil
-  emails = $1.split(",")
-  for i in 0..emails.length
-    emails[i] = emails[i].strip if emails[i]
-  end
-  emails
 end
 
 def add_to_task_cc_list(task, email_list)
@@ -86,6 +72,7 @@ messages.each do |message_id|
   # If we can't identify this email address, send an error message to the 
   # sender.
   user ||= User.anonymous
+  puts user.inspect
 
   subject = envelope.subject
 
@@ -102,7 +89,6 @@ messages.each do |message_id|
       text = process_comment_text(raw_msg)
       c = Comment.new(:author_id => user.id, :commentable => p, :text => text)
       c.save!
-      add_to_task_cc_list(p,get_addresses_from_struct(envelope.cc))
       delete_email(connection, message_id)
     end
   elsif subject =~ /#(\d+)/
@@ -112,13 +98,13 @@ messages.each do |message_id|
       puts "Processing comment for task #{t.id}."
       c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
       c.save!
-      add_to_task_cc_list(t,get_addresses_from_struct(envelope.cc))
       delete_email(connection, message_id)
     end
   elsif subject =~ /\((.+)\)(.+)/
     directive = $1.downcase
     title = $2.strip
-    assignee = User.find_by_email(get_asignee_email_from_body(body))||User.anonymous
+    assignee = User.find_by_name(get_asignee_name_from_body(body))
+    assignee = user if assignee == User.anonymous
     description = body
     if directive == "create"
       puts "Creating new task: #{title}, created by #{user.name}, assigned to #{assignee.name}"
@@ -126,9 +112,8 @@ messages.each do |message_id|
       task.save!
       puts "Task created with id #{task.id}"
       task.mass_mailer.deliver_task_creation
-      add_to_task_cc_list(task, get_cc_emails_from_body(body))
-      #delete_email(connection, message_id)
-    end  
+      delete_email(connection, message_id)
+    end
   end
 end
 
