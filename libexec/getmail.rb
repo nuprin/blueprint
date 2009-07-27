@@ -43,7 +43,7 @@ connection.login(LOGIN, EMAIL)
 connection.select('INBOX')
 messages = connection.search(['ALL'])
 
-# The following is a hack that basically pulls in a single part from a 
+# The following is a hack that basically pulls in a single part from a
 # MIME/multipart message seems to work with gmail for now.
 fetch_params = ['ENVELOPE', 'BODY[1]']
 
@@ -52,10 +52,10 @@ messages.each do |message_id|
   raw_msg = connection.fetch(message_id,fetch_params)[0]
   envelope = raw_msg.attr["ENVELOPE"]
   body = raw_msg.attr["BODY[1]"]
-  
+
   from_address = get_addresses_from_struct(envelope.from)[0]
 
-  # TODO: here we could crunch through to get out the ID from the reply-to 
+  # TODO: here we could crunch through to get out the ID from the reply-to
   # address.
 =begin
   recipients = envelope.to
@@ -63,13 +63,13 @@ messages.each do |message_id|
       if r.mailbox.index("+").nil?
           reply_to_task = Integer(r.mailbox.split["+"][1])
   }
-=end    
+=end
 
   puts from_address
   # Need to catch if the email isn't found!
   user = User.find_by_email(from_address)
 
-  # If we can't identify this email address, send an error message to the 
+  # If we can't identify this email address, send an error message to the
   # sender.
   user ||= User.anonymous
   puts user.inspect
