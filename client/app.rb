@@ -8,33 +8,8 @@ require 'activesupport'
 
 require 'api'
 require 'lib'
+require 'template'
 require 'command_completer'
-
-# A task has
-# title, description, kind, status, project_id, creator_id, assignee_id
-# estimate, due_data
-KINDS = [
-  "bug", "copy", "design", "estimate", "experiment", "feature", "inquiry",
-  "spec", "stats"
-]
-KIND_ID = "KIND:"
-TITLE_ID = "TITLE:"
-ASSIGNEE_ID = "ASSIGNEE:"
-PROJECT_ID = "PROJECT:"
-ESTIMATE_ID = "ESTIMATE:"
-STATUS_ID = "STATUS:"
-DUEDATE_ID = "DUE DATE:"
-TASK_TEMPLATE =
-"""
-#{TITLE_ID} TITLE
-#{ASSIGNEE_ID} ASSIGNEE
-##{DUEDATE_ID} DUEDATE
-##{PROJECT_ID} PROJECT
-##{ESTIMATE_ID} ESTIMATE
-##{STATUS_ID} STATUS
-## DESCRIPTION ##
-
-""".strip()
 
 DEFAULT_DOMAIN="causes.com"
 
@@ -54,39 +29,33 @@ CC.add_command("project_list", :project_list)
 CC.add_command("re_prioritize", :reprioritize)
 CC.add_command("set_project", :set_project)
 CC.add_command("set_user", :set_user)
+CC.add_command("show", :task)
 CC.add_command("task", :task)
 
-class HashWithIndifferentAccess 
-  def to_string_hash
-    hash = {}
-    stringify_keys.each do |key|
-      hash[key] = self[key]
-    end
-  end
-
-  def to_symbol_hash
-    hash = {}
-    symbolize_keys.each do |key|
-      hash[key] = self[key]
-    end
-  end
+# String Formatting Helpers
+def line_delimiter
+  "#{"-" * 50}\n"
 end
 
 
-# String Formatting Helpers
 def comment_string(comment)
-  s = format("%s\n%s\n  %s\n", comment['updated_at'], comment['text'],
-                       comment['author_name'])
+  s = format("[%s] %s\n%s\n\n", comment['author_name'], comment['updated_at'],
+                                comment['text'])
 end
 
 def comments_string(comments)
-  comments = comments.map { |comment| comment_string(comment) }
+  comments = comments.map do |comment|
+    comment_string(comment) + line_delimiter
+  end
   comments.join
 end
 
 def ellipsize(str, len=80)
   len -= "..".size
-  str.size > len ? str[0..len]+".." : str
+  size_diff = len - str.size
+  padding = size_diff > 0 ?  " " * (size_diff + "..".size + 1) : ".."
+
+  "#{str[0..len]}#{padding}"
 end
 
 # Printing Helpers
@@ -103,20 +72,44 @@ end
 
 def output_task(task, extended=false)
   email = task['assignee_email']
-  user = email ? email.split('@').first[0..6] : ""
+  time_str = nil
+  time_str = Time.parse(task['due_date']).strftime("%b %d") if task['due_date']
 
-  task_string = format("|%s|%s", task['id'], ellipsize(task['title'], 50))
-  task_string = user + "\t#{task_string}" if user
-  task_string += " $#{task['due_date']}" if task['due_date']
-  task_string += " #{task['estimate']}h" if task['estimate']
+  if extended
+    task_string = format(":%s\n%s", task['id'], task['title'])
+    task_string += "\n#{line_delimiter}"
+    task_string += "\nDue: #{time_str}"if time_str
+    task_string += "\nEstimate: #{task['estimate']}h" if task['estimate']
+  else
+    task_string = format(":%s %s", task['id'], ellipsize(task['title'], 50))
+    task_string += " #{time_str}" if time_str
+    task_string += " #{task['estimate']}h" if task['estimate']
+  end
+
   puts task_string
   puts task['description'] if extended
 end
 
 def output_tasks(tasks)
+  tasks_for_user = Hash.new
   tasks.each do |task|
-    output_task(task)
+    assignee = task['assignee_email']
+    assignee ||= "unassigned@causes.com"
+    tasks_for_user[assignee] ||= []
+    tasks_for_user[assignee] << task
   end
+
+  puts ""
+  users = tasks_for_user.keys.sort
+  users.each do |user_email|
+    assignee = user_email.split('@').first
+    puts "(#{assignee})"
+    tasks_for_user[user_email].each do |task|
+      output_task(task)
+    end
+    puts ""
+  end
+
 end
 
 def output_projects(projects)
@@ -145,7 +138,7 @@ def add_comment(cl, con, args)
   comment = edit(comments)
   comment = remove_comments(comment)
   if comment.empty?
-    puts "Can't post empty comment"
+    puts "You can't post empty comment"
     return
   end
   puts "Posting #{comment} to task :#{task_id}"
@@ -170,29 +163,35 @@ def edit_task(cl, con, args)
   author_email = con.user_email!
   task_id = args.first
   task = cl.task(:id => task_id)
-  task_data = task_to_template(task)
-  task_text = edit(task_data)
-  task_params = HashWithIndifferentAccess.new
-  task_params.update(parse_task(task_text))
-  task_params[:id] = task_id
-  cl.edit_task(task_params.to_symbol_hash)
+
+  task_data = TaskTemplate.new
+  task_data.update(task)
+
+  task_text = edit(task_data.to_template)
+
+  task_data = TaskTemplate.from_template(task_text)
+  task_data[:id] = task_id
+
+  cl.edit_task(task_data.to_symbol_hash)
 end
 
 def new_task(cl, con, args)
-  task = HashWithIndifferentAccess.new
+  task = {}
   task['assignee_email'] = args.first || con.user_email
   task['project_id'] = con.project_id
 
-  task_data = task_to_template(task)
+  task_data = TaskTemplate.new
+  task_data.update(task)
   # User edits the template file
-  task_text = edit(task_data)
-  task_params = parse_task(remove_comments(task_text))
-  task_params[:author_email] = con.user_email!
-  if task_params['title'] == "" || task_params['assignee_email'] == ""
-    puts "You must supply a Title & Assignee at the minimum"
-    return
+  task_text = edit(task_data.to_template)
+  task_data = TaskTemplate.from_template(task_text)
+  task_data[:author_email] = con.user_email!
+
+  if task_data['title'] == ""
+    puts "You must supply a Title"
   else
-    cl.new_task(task_params.to_symbol_hash)
+    task = cl.new_task(task_data.to_symbol_hash)
+    output_task(task)
   end
 end
 
@@ -235,77 +234,28 @@ def task(cl, con, args)
   output_comments(comments)
 end
 
-# Parse the edited task
-# Title: (mandatory)
-# Due: (can be commented out)
-# Priority: (can be commented out)
-# Feature: (can be commented out)
-# The rest of the lines are all the description
-
-def parse_task(text)
-  task = HashWithIndifferentAccess.new
-  description = ""
-  text.each do |line|
-    next if line =~ /^#/
-    line = line.strip()
-    case line
-      when /^#{KIND_ID}/
-        task[:kind] = line.gsub(/^#{KIND_ID}/, "").strip()
-      when /^#{TITLE_ID}/
-        task[:title] = line.gsub(/^#{TITLE_ID}/, "").strip()
-      when /^#{PROJECT_ID}/
-        task[:project_id] = line.gsub(/^#{PROJECT_ID}/, "").strip()
-      when /^#{DUEDATE_ID}/
-        task[:due_date] = line.gsub(/^#{DUEDATE_ID}/, "").strip()
-      when /^#{ESTIMATE_ID}/
-        task[:estimate] = line.gsub(/^#{ESTIMATE_ID}/, "").strip().to_i
-      when /^#{ASSIGNEE_ID}/
-        task[:assignee_email] = line.gsub(/^#{ASSIGNEE_ID}/, "").strip()
-      else
-        description += "#{line}\n"
-    end
-  end
-  task[:description] = description
-  task
-end
-
-def task_to_template(task)
-  # Insert data into the template
-  task_params = HashWithIndifferentAccess.new
-  task_params.update(task)
-
-  task_data = TASK_TEMPLATE.dup
-  task_data.gsub!(/ASSIGNEE$/, task_params[:assignee_email].to_s)
-  task_data.gsub!(/DUEDATE$/, task_params[:due_date].to_s)
-  task_data.gsub!(/ESTIMATE$/, task_params[:estimate].to_s)
-  task_data.gsub!(/PROJECT$/, task_params[:project_id].to_s.to_s)
-  task_data.gsub!(/STATUS$/, task_params[:status].to_s)
-  task_data.gsub!(/TITLE$/, task_params[:title].to_s)
-  task_data += "\n#{task_params[:description]}" if task_params[:description]
-  task_data
-end
-
 while line = Readline.readline("bp #{CON}> ", true)
   components = line.split(' ', 2)
   command = components.first
+  # Do nothing if the command is empty
+  next if command.nil? || command.strip().empty?
+
   args = components.size > 1 ? components.last : ""
   args = args.split
   begin
     possible_commands = CC.find_command(command)
+
     if possible_commands.empty?
       puts "Unrecognized command: #{command}"
-      next
     elsif possible_commands.size > 1
       puts "Ambiguous directive: (could be one of the following)"
-      possible_commands.each do |pcommand|
-        puts pcommand.command
-      end
-      next
+      possible_commands.each { |pcommand| puts pcommand.command }
     else
       exec_command = possible_commands.first
-      puts "executing #{exec_command.command}"
+      puts "executing #{exec_command.command}\n"
+      method(exec_command.callback).call(CL, CON, args)
     end
-    method(exec_command.callback).call(CL, CON, args)
+
   rescue InsufficientContextException => ice
     puts "Insufficient context for this command: try again with more args"
   end
