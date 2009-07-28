@@ -3,6 +3,8 @@
 require 'digest/md5'
 require 'pp'
 require 'readline'
+require 'abbrev'
+
 require 'rubygems'
 require 'activesupport'
 
@@ -17,21 +19,6 @@ DEFAULT_DOMAIN="causes.com"
 CL = BlueprintClient.new
 CON = Context.new
 CC = CommandCompleter.new
-
-CC.add_command("add_comment", :add_comment)
-CC.add_command("complete", :mark_complete)
-CC.add_command("help", :help)
-CC.add_command("list", :list)
-CC.add_command("mark_complete", :mark_complete)
-CC.add_command("edit_task", :edit_task)
-CC.add_command("new_task", :new_task)
-CC.add_command("project_list", :project_list)
-CC.add_command("re_prioritize", :reprioritize)
-CC.add_command("set_project", :set_project)
-CC.add_command("set_user", :set_user)
-CC.add_command("show", :task)
-CC.add_command("task", :task)
-
 # String Formatting Helpers
 def line_delimiter
   "#{"-" * 50}\n"
@@ -234,7 +221,27 @@ def task(cl, con, args)
   output_comments(comments)
 end
 
-while line = Readline.readline("bp #{CON}> ", true)
+def setup
+  CC.add_command("add_comment", :add_comment)
+  CC.add_command("complete", :mark_complete)
+  CC.add_command("help", :help)
+  CC.add_command("list", :list)
+  CC.add_command("mark_complete", :mark_complete)
+  CC.add_command("edit_task", :edit_task)
+  CC.add_command("new_task", :new_task)
+  CC.add_command("project_list", :project_list)
+  CC.add_command("re_prioritize", :reprioritize)
+  CC.add_command("set_project", :set_project)
+  CC.add_command("set_user", :set_user)
+  CC.add_command("show", :task)
+  CC.add_command("task", :task)
+
+  # readline setup
+  Readline.completion_proc = lambda { |tok| CC.find_command(tok).map(&:command) }
+  Readline.completion_append_character
+end
+
+def handle_line(line)
   components = line.split(' ', 2)
   command = components.first
   # Do nothing if the command is empty
@@ -242,6 +249,7 @@ while line = Readline.readline("bp #{CON}> ", true)
 
   args = components.size > 1 ? components.last : ""
   args = args.split
+
   begin
     possible_commands = CC.find_command(command)
 
@@ -255,8 +263,17 @@ while line = Readline.readline("bp #{CON}> ", true)
       puts "executing #{exec_command.command}\n"
       method(exec_command.callback).call(CL, CON, args)
     end
-
   rescue InsufficientContextException => ice
     puts "Insufficient context for this command: try again with more args"
   end
+
 end
+
+def main
+    while line = Readline.readline("bp #{CON}> ", true)
+      handle_line(line)
+    end
+end
+
+setup
+main
