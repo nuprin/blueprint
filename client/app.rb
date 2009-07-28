@@ -237,7 +237,10 @@ def setup
   CC.add_command("task", :task)
 
   # readline setup
-  Readline.completion_proc = lambda { |tok| CC.find_command(tok).map(&:command) }
+  Readline.completion_proc = Proc.new do  |tok|
+   commands = CC.find_command(tok).map(&:command)
+   commands.map { |c| c.gsub(/_/, '') }
+  end
   Readline.completion_append_character
 end
 
