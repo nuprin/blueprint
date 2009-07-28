@@ -12,6 +12,10 @@ class CommandCompleter
   def find_command(command_substr)
     @commands.select { |command| command.regex.match(command_substr) }
   end
+
+  def commands
+    @commands.map(&:command)
+  end
 end
 
 class Command
