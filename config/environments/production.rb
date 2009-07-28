@@ -31,3 +31,6 @@ HIDE_ENVIRONMENT_NAME_BANNER = true
 EMAIL_LOGIN = 'philbot@project-agape.com'
 EMAIL_PASSWORD = 'arefin'
 EMAIL_REPLY_TO = 'blueprint@causes.com'
+
+# Max size of a 'description' column
+MAX_BODY_SIZE = 5000

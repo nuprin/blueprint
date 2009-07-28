@@ -30,6 +30,13 @@ def get_asignee_name_from_body(body)
   $1.strip if body.downcase =~ /^ *to\:(.+)/
 end
 
+def trim_body(body)
+  return if body==nil
+  ret = body.gsub(/^ to\:.+/,"")
+  ret = ret[0..MAX_BODY_SIZE-4]+"..." if ret.length > MAX_BODY_SIZE
+  ret
+end
+
 def add_to_task_cc_list(task, email_list)
   (email_list || []).each do |cc_email|
     user = User.find_by_email(cc_email)
@@ -103,9 +110,8 @@ messages.each do |message_id|
   elsif subject =~ /\((.+)\)(.+)/
     directive = $1.downcase
     title = $2.strip
-    assignee = User.find_by_name(get_asignee_name_from_body(body))
-    assignee = user if assignee == User.anonymous
-    description = body
+    assignee = User.find_by_name(get_asignee_name_from_body(body)) || user
+    description = trim_body(body)
     if directive == "create"
       puts "Creating new task: #{title}, created by #{user.name}, assigned to #{assignee.name}"
       task = Task.new(:title => title, :status => "prioritized", :creator_id => user.id, :assignee_id => assignee.id, :description => description)

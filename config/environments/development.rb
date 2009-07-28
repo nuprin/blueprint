@@ -26,3 +26,6 @@ EMAIL_LOGIN = 'blueprint.tester@gmail.com'
 EMAIL_PASSWORD = 'causes.com'
 EMAIL_REPLY_TO = EMAIL_LOGIN
 
+# Max size of a 'description' column
+MAX_BODY_SIZE = 5000
+
