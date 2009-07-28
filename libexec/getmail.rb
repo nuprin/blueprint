@@ -32,7 +32,7 @@ end
 
 def trim_body(body)
   return if body==nil
-  ret = body.gsub(/^ to\:.+/,"")
+  ret = body.gsub(/^ *to\:.+/,"")
   ret = ret[0..MAX_BODY_SIZE-4]+"..." if ret.length > MAX_BODY_SIZE
   ret
 end
