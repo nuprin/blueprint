@@ -47,7 +47,8 @@ end
 
 # Printing Helpers
 def help(cl, con, args)
-  commands = CC.commands.map(&:command)
+  commands = CC.commands
+  puts 'Available commands'
   commands.sort.each do |command|
     puts command
   end
