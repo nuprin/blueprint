@@ -104,8 +104,8 @@ messages.each do |message_id|
     if t = Task.find_by_id(task_id)
       puts "Processing comment for task #{t.id}."
       if text=="complete"
-        t.complete!
         t.editor = user
+        t.complete!
       else
         c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
         c.save!
