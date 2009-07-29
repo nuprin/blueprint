@@ -1,5 +1,5 @@
 module MailerHelper
-  FROM_EMAIL           = "blueprint@causes.com"
+  FROM_EMAIL           = EMAIL_REPLY_TO
   FROM_EMAIL_WITH_NAME = "Blueprint <#{FROM_EMAIL}>"
 
   def self.included(base)

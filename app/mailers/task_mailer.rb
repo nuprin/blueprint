@@ -4,7 +4,7 @@ class TaskMailer < ActionMailer::Base
   include TaskMailerHelper
   helper ApplicationHelper
 
-  REPLY_TO = "blueprint@causes.com"
+  REPLY_TO = EMAIL_REPLY_TO
   
   def task_creation(recipient, task)
     recipients recipient_email(recipient)

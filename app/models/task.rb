@@ -61,7 +61,7 @@ class Task < ActiveRecord::Base
                                        :allow_nil => true
 
   validates_length_of :title, :in => 1...255
-  validates_length_of :description, :maximum => 5000, :allow_nil => true
+  validates_length_of :description, :maximum => MAX_BODY_SIZE, :allow_nil => true
 
   def to_s
     title

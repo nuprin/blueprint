@@ -1,5 +1,5 @@
 class ReportMailer < ActionMailer::Base
-  REPLY_TO = "Blueprint <blueprint@causes.com>"
+  REPLY_TO = EMAIL_REPLY_TO
   def scrum_report
     from       REPLY_TO
     reply_to   REPLY_TO
