@@ -103,8 +103,13 @@ messages.each do |message_id|
     text = process_comment_text(raw_msg)
     if t = Task.find_by_id(task_id)
       puts "Processing comment for task #{t.id}."
-      c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
-      c.save!
+      if text=="complete"
+        t.complete!
+        t.editor = user
+      else
+        c = Comment.new(:author_id => user.id, :commentable => t, :text => text)
+        c.save!
+      end
       delete_email(connection, message_id)
     end
   elsif subject =~ /\((.+)\)(.+)/
