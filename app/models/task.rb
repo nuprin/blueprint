@@ -99,7 +99,7 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.save!
-    self.tell_campfire if Rails.env == "production"
+    self.send_later(:tell_campfire) if Rails.env == "production"
   end
 
   def tell_campfire
