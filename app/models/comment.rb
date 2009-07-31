@@ -35,11 +35,7 @@ class Comment < ActiveRecord::Base
   end
   
   after_save do |comment|
-    comment.send_later(:send_comment_email)
+    comment.commentable.mass_mailer.ignoring(comment.author).
+      deliver_new_comment(comment)
   end
-
-  def send_comment_email
-    commentable.mass_mailer.ignoring(author).deliver_new_comment(self)
-  end
-
 end
