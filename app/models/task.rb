@@ -214,10 +214,6 @@ class Task < ActiveRecord::Base
     MassMailer.new(self)
   end
 
-  def send_task_creation_email
-    mass_mailer.ignoring(creator).deliver_task_creation
-  end
-
   def displayed_type
     self.is_a?(Deliverable) ? "Deliverable" : "Task"
   end
