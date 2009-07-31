@@ -35,6 +35,7 @@ class TasksController < ApplicationController
     # Rails quirk: For security reasons, type cannot be assigned in create or
     # update_attribute calls.
     task.type = params[:task][:type]
+    task.save!
     task.send_later(:send_task_creation_email)
     context = params[:context]
     if context == "User"
