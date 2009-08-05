@@ -80,7 +80,8 @@ def edit(text)
   tmp_file = File.new(filename, "w")
   tmp_file.write(text)
   tmp_file.close
-  system(ENV["EDITOR"], filename)
+  editor = ENV["EDITOR"] || "vim"
+  system(editor, filename)
   tmp_file = File.new(filename, "r")
   edited_text = tmp_file.read
   # We're intentionally not deleting files for now
