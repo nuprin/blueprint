@@ -64,10 +64,12 @@ def output_task(task, extended=false)
   time_str = Time.parse(task['due_date']).strftime("%b %d") if task['due_date']
 
   if extended
-    task_string = format(":%s\n%s", task['id'], task['title'])
+    task_string = format(":%s %s", task['id'], task['title'])
     task_string += "\n#{line_delimiter}"
     task_string += "\nDue: #{time_str}"if time_str
     task_string += "\nEstimate: #{task['estimate']}h" if task['estimate']
+    task_string += "\nCreated: #{Time.parse(task['created_at']).to_date} by "
+    task_string += "#{task['author_email'].split('@').first}"
   else
     task_string = format(":%s %s", task['id'], ellipsize(task['title'], 50))
     task_string += " #{time_str}" if time_str
