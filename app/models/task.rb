@@ -99,13 +99,13 @@ class Task < ActiveRecord::Base
     self.status = "completed"
     self.completed_at = Time.now.getutc
     self.save!
-    self.tell_campfire if Rails.env == "production"
+    self.send_later(:tell_campfire, editor.name) if Rails.env == "production"
   end
 
-  def tell_campfire
+  def tell_campfire(editor_name)
     project = self.project_id ? " (#{self.project.title})" : ""
     Campfire.speak <<-HTML
-      #{self.editor.name} marked
+      #{editor_name} marked
       "#{self.title}" complete. http://blueprint/tasks/#{self.id}#{project}
     HTML
   end
@@ -212,6 +212,10 @@ class Task < ActiveRecord::Base
 
   def mass_mailer
     MassMailer.new(self)
+  end
+
+  def send_task_creation_email
+    mass_mailer.ignoring(creator).deliver_task_creation
   end
 
   def displayed_type

@@ -13,7 +13,7 @@ class TasksController < ApplicationController
       (params[:cc] || []).each do |cc_id|
         @task.subscriptions.create(:user_id => cc_id)
       end
-      @task.mass_mailer.ignoring(@task.creator).deliver_task_creation
+      @task.send_later(:send_task_creation_email)
     rescue ActiveRecord::RecordInvalid
       render :action => "new"
       return
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
     # update_attribute calls.
     task.type = params[:task][:type]
     task.save!
-    task.mass_mailer.ignoring(task.creator).deliver_task_creation
+    task.send_later(:send_task_creation_email)
     context = params[:context]
     if context == "User"
       li = viewer.task_list.first(:conditions => {:task_id => task.id})
