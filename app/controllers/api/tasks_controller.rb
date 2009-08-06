@@ -182,6 +182,7 @@ class Api::TasksController < ApplicationController
   def add_task_data(task)
     task[:author_email] = task.creator.email if task.creator
     task[:assignee_email] = task.assignee.email if task.assignee
+    task[:project_title] = task.project.title if task.project
 
     task
   end

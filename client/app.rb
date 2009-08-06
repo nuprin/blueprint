@@ -80,7 +80,28 @@ def output_task(task, extended=false)
   puts task['description'] if extended
 end
 
-def output_tasks(tasks)
+def output_tasks_by_project(tasks)
+  tasks_for_project = Hash.new
+  tasks.each do |task|
+    project = task['project_title']
+    project ||= "__unprojected__"
+    tasks_for_project[project] ||= []
+    tasks_for_project[project] << task
+  end
+
+  puts ""
+  projects = tasks_for_project.keys.sort
+  projects.each do |project|
+    puts "[#{project}]"
+    tasks_for_project[project].each do |task|
+      output_task(task)
+    end
+    puts ""
+  end
+
+end
+
+def output_tasks_by_user(tasks)
   tasks_for_user = Hash.new
   tasks.each do |task|
     assignee = task['assignee_email']
@@ -99,7 +120,6 @@ def output_tasks(tasks)
     end
     puts ""
   end
-
 end
 
 def output_projects(projects)
@@ -204,7 +224,11 @@ def list(cl, con, args)
 
   argh['project_id'] = con.project_id
   tasks = cl.list_tasks(argh)
-  output_tasks(tasks)
+  if con.project_id.nil?
+    output_tasks_by_project(tasks)
+  else
+    output_tasks_by_user(tasks)
+  end
 end
 
 def project_list(cl, con, args)
