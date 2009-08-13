@@ -110,7 +110,7 @@ class TaskMailer < ActionMailer::Base
 
   def recent_edits(recipient, task, edits)
     recipients   recipient_email(recipient)
-    from         REPLY_TO
+    from         FROM_EMAIL_WITH_NAME
     subject      task_subject(task)
     reply_to     REPLY_TO
     content_type "text/html"
