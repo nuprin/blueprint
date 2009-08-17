@@ -1,12 +1,6 @@
 <div id="header">
   <h1><%= link_to image_tag("logo.gif"), "/" %></h1>
 
-  <div id="environment_name" align="center">
-      <% unless HIDE_ENVIRONMENT_NAME_BANNER %>
-         <h2><label><%= ENV['RAILS_ENV'] %></label></h2>
-      <% end %>
-  </div>
-
   <div id="search">
     <% form_tag search_path, :method => :get do %>
       <label for="q">Search:</label>
