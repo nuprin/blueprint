@@ -4,7 +4,7 @@
     <strong><%= user.name %>'s Completed Tasks</strong>
     <ul>
       <% tasks.each do |task| %>
-        <li><%= link_to task.title, task_url(task) %></li>
+        <li><%= link_to h(task.title), task_url(task) %></li>
       <% end %>
     </ul><br />
   <% end %>

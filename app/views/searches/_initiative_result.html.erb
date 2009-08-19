@@ -2,7 +2,7 @@
   <div class="task_id">&nbsp;</div>
   <div class="core_info">
     <div class="title">
-      <%= link_to highlight_query(result.title), project_path(result) %>
+      <%= link_to highlight_query(h(result.title)), project_path(result) %>
       (<%= pluralize(result.tasks.size, 'task') %>)
       <span class="category">&mdash; <%= result.category.name %></span>
     </div>

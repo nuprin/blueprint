@@ -2,8 +2,8 @@
 <%= stylesheet_link_tag "tasks/show" %>
 <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 <%= javascript_include_tag "tasks/show" %>
-<% 
-  @title = @task.title 
+<%
+  @title = h(@task.title)
   @hide_layout_title = true
 %>
 
@@ -12,7 +12,7 @@
 <% if @task.project_id || @task.parent_id %>
   <div id="breadcrumbs">
     <% if @task.project_id %>
-      <%= link_to @task.project.title.upcase, project_path(@task.project) %>
+      <%= link_to h(@task.project.title.upcase), project_path(@task.project) %>
     <% end %>
     <% if @task.project_id && @task.parent_id %>
       &rarr;

@@ -26,7 +26,7 @@
           <li class="divider">&nbsp;</li>
           <li><h3>YOUR INITIATIVES</h3></li>
           <% Project.active.followed_by(viewer).sort_by(&:title).each do |p| %>
-            <li><%= link_to p.title, project_path(p) %></li>
+            <li><%= link_to h(p.title), project_path(p) %></li>
           <% end %>
         </ul>
       </li>

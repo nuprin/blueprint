@@ -1,15 +1,15 @@
 <%# The project changed. %>
 <% if edit.old_value && edit.new_value %>
   <%= link_to_user edit.editor %> changed the initiative from
-  <strong>&ldquo;<%= Project.find(edit.old_value).title %>&rdquo;</strong>
+  <strong>&ldquo;<%= h Project.find(edit.old_value).title %>&rdquo;</strong>
   to
-  <strong>&ldquo;<%= Project.find(edit.new_value).title %>&rdquo;</strong>.
+  <strong>&ldquo;<%= h Project.find(edit.new_value).title %>&rdquo;</strong>.
 <%# The project was removed. %>
 <% elsif edit.old_value %>
   <%= link_to_user edit.editor %> removed the initiative
-  <strong>&ldquo;<%= Project.find(edit.old_value).title %>&rdquo;</strong>.
+  <strong>&ldquo;<%= h Project.find(edit.old_value).title %>&rdquo;</strong>.
 <%# A project was added. %>
 <% else %>
   <%= link_to_user edit.editor %> added the initiative
-  <strong>&ldquo;<%= Project.find(edit.new_value).title %>&rdquo;</strong>.
+  <strong>&ldquo;<%= h Project.find(edit.new_value).title %>&rdquo;</strong>.
 <% end %>

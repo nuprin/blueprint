@@ -4,7 +4,7 @@
 <%= javascript_include_tag "plugins/jquery.wysiwyg" %>
 <%= javascript_include_tag "projects/spec" %>
 
-<% @title = @project.title %>
+<% @title = h(@project.title) %>
 
 <%= render :partial => "/projects/project_nav",
            :locals => {:project => @project} %>

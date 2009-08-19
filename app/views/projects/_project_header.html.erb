@@ -1,7 +1,7 @@
 <%= javascript_include_tag "projects/header" %>
 <h1>
   <span id="project_title">
-    <span class="editable"><%= project.title %></span>
+    <span class="editable"><%= h(project.title) %></span>
     <% form_for :project, :html => {:method => :put},
       :url => update_title_project_path(project) do |f| %>
       <%= f.text_field :title %>

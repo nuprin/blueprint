@@ -67,7 +67,7 @@
             <%= f.text_field :description,
               :value => "This is an automatically generated " +
               "task for following up with bug ##{task.id}. " +
-              "(#{task.title})" %>
+              "(#{h(task.title)})" %>
           </div>
         <% end %>
       </fieldset>
