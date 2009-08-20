@@ -1,14 +1,17 @@
 #content h1 {
   background-image: url(../../images/task-list-header-bkgd.gif);
+  background: white;
   margin: 0;
-  padding: 20px 20px 55px;
+  padding: 25px 20px 40px;
 }
 #tabs {
-  background-image: url(../../images/task-list-header-bkgd.gif);
-  padding: 0 20px;
+  background: white;
+  border-bottom: 1px solid #3959ab;
+/*  background-image: url(../../images/task-list-header-bkgd.gif);*/
+  margin: 0 20px;
 }
 #tabs a {
-  background: #e0e6ed;
+  background: #f1f1f1;
   color: #444;
   display: block;
   float: left;
@@ -19,7 +22,8 @@
   padding: 0 12px;
 }
 #tabs a.current {
-  background: #ced8e2;
+  background: #3959ab;
+  color: white;
 }
 #tabs .secondary {
   float: right;

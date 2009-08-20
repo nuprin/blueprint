@@ -25,22 +25,23 @@
   </head>
   <body>
     <div id="container">
-      <div id="globe"></div>
       <%= render :partial => "/global/header" %>
-      <%= render :partial => "/global/nav" %>
       <% if flash[:notice] %>
         <p class="notice"><%= flash[:notice] %></p>
       <% end %>
-      <div id="content">
-        <% if @title && !@hide_layout_title %>
-          <h1><%= @title %></h1>
-        <% end %>
-        <%= yield %>
+      <div id="paper_bkgd">
+        <div id="content">
+          <% if @title && !@hide_layout_title %>
+            <h1><%= @title %></h1>
+          <% end %>
+          <%= yield %>
+        </div>
       </div>
+      <div id="paper_bottom"></div>
     </div>
     <div id="footer">
       <span id="slogan">IT'S ALL PART OF THE PLAN</span>
-      &copy; Causes 2008
+      &copy; Causes <%= Date.today.year %>
     </div>
   </body>
 </html>

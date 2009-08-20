@@ -1,5 +1,5 @@
 a, a:visited {
-  color: #036;
+  color: #04a;
 }
 a {
   text-decoration: none;
@@ -9,11 +9,11 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
-  background-color: #012;
+  background-color: #ccc;
+  background-image: url(../images/layout/grid.gif);
+  background-position: -10px -10px;
   font-size: 12px;
-  margin: 20px auto;
-  padding: 0;
-  width: 800px;
+  position: relative;
 }
 h1 {
   margin-bottom: 2em;
@@ -59,7 +59,6 @@ input[type=text], textarea {
   padding: 0 10px;
 }
 .sf-menu>li {
-  border-right: 1px solid #012;
   float: left;
   width: 120px;
 }
@@ -79,13 +78,16 @@ input[type=text], textarea {
   top: 14px;
   right: 10px;
   text-indent: -9999px;
-  width: 15px;
+  width: 12px;
+}
+a:hover .sf-sub-indicator {
+  background-position: left top;
 }
 .sf-with-ul {
   position: relative;
 }
 .sfHover ul a:hover {
-  background: #3c4650;
+  background: #3959ab;
   color: white;
 }
 #add_button img {
@@ -103,62 +105,78 @@ input[type=text], textarea {
 #container {
   background: #fff;
   position: relative;
+  margin: 0 auto;
+  width: 840px;
 }
 #content {
   padding: 20px;
+}
+#paper_bkgd {
+  background-image: url(../images/layout/paper-back.gif);
+  background-repeat: repeat-y;
+  padding: 0 20px;
+}
+#paper_bottom {
+  background-color: #ccc;
+  background-image: url(../images/layout/paper-bottom.gif);
+  background-repeat: no-repeat;
+  height: 5px;
+  padding-bottom: 20px;
+}
+#divider {
+  background-image: url(../images/layout/header-content-divider.gif);
+  background-repeat: no-repeat;
+  height: 23px;
 }
 #filters {
   float: left;
 }
 #filters>li>a {
-  background-image: url(../images/nav-bkgd.gif);
-  color: #ccc;
+  color: white;
   font-weight: bold;
 }
 #filters>li>a:hover {
-  background-image: url(../images/nav-bkgd-hover.gif);  
+  background: white;
+  color: #3959ab;
 }
 #footer {
-  border: 1px solid #33414e;
-  color: #33414e;
-  margin: 20px 0 30px;
-  padding: 9px 10px 10px;
+  background: #bbb;
+  border-top: 1px dotted #eee;
+  color: #666;
+  margin: 50px 0 0;
+  line-height: 60px;
+  padding: 0 10px;
   text-align: right;
+  font-family: "Gill Sans";
+  letter-spacing: 0.2em;
+  
 }
 #footer #slogan {
   float: left;
-  font-family: "Gill Sans";
-  letter-spacing: 0.2em;
-}
-#globe {
-  background-image: url(../images/globe.gif);
-  height: 124px;
-  left: -132px;
-  position: absolute;
-  top: 0;
-  width: 122px;
 }
 #header {
-  background: #012;
-  padding-bottom: 15px;
+  background-color: #3959ab;
+  background-image: url(../images/layout/blue-sheet.gif);
+  padding: 20px 40px 30px;
   text-align: right;
 }
 #header a {
   display: block;
   float: left;
-  height: 23px;
+  height: 25px;
   overflow: hidden;
   text-indent: -9999px;  
-  width: 200px;
+  width: 170px;
 }
 #header h1 {
   float: left;
   margin-bottom: 0;
 }
 #nav {
-  background: #3c4650;
-  border-bottom: 1px solid #012;
-  font-family: Helvetica;
+  background: #3959ab;
+  background-image: url(../images/layout/blue-sheet.gif);
+  margin: 0;
+  padding: 0 40px;
 }
 #nav h3 {
   color: #999;
@@ -167,6 +185,9 @@ input[type=text], textarea {
   margin: 0;
   padding: 0 10px;
 }
+#nav #filters>li {
+  border-left: 1px solid white;
+}
 #nav li.divider {
   background: #ccc;
   height: 1px;
@@ -174,9 +195,6 @@ input[type=text], textarea {
 }
 #nav #add_button {
   float: right;
-}
-#nav #filters>li>a {
-  color: white;
 }
 #notifications {
   float: left;
@@ -196,10 +214,13 @@ input[type=text], textarea {
 #search label {
   color: white;
 }
+#search input[type=image] {
+  vertical-align: top;
+}
 #search input[type=text] {
-  background: #33414e;
-  border: 1px solid #666;
+  background: #7289ce;
+  border: 1px solid #b7c3e7;
   color: white;
   margin-left: 8px;
-  padding: 4px;
+  width: 220px;
 }

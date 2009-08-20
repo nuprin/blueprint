@@ -1,10 +1,15 @@
 <div id="header">
-  <h1><%= link_to image_tag("logo.gif"), "/" %></h1>
+  <h1><%= link_to image_tag("layout/logo.gif"), "/" %></h1>
 
   <div id="search">
     <% form_tag search_path, :method => :get do %>
       <label for="q">Search:</label>
-      <%= text_field_tag :q, params[:q] %>
+      <%= text_field_tag :q, params[:q] %><%= 
+        image_submit_tag "layout/search.gif" %>
     <% end %>
   </div>
 </div>
+
+<%= render :partial => "/global/nav" %>
+
+<div id="divider"></div>
