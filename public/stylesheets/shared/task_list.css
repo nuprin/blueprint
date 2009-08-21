@@ -66,6 +66,10 @@ table.task_list tr.deadline_today td {
 table.task_list .deadline_today .task_menu_container {
   font-weight: normal;
 }
+table.task_list .deadline_tomorrow .menu_arrow,
+table.task_list .deadline_today .menu_arrow {
+  background-image: url("../../images/task-dropdown-due-soon.png");
+}
 table.task_list .deadline_tomorrow .active .menu_arrow,
 table.task_list .deadline_today .active .menu_arrow {
   background-image: url("../../images/task-dropdown-active.gif");
@@ -232,7 +236,7 @@ table.prioritized .deliverable .empty.task_estimate {
   position: relative;
 }
 .task_menu_container .menu_arrow {
-  background-image: url(../../images/task-dropdown.gif);
+  background-image: url(../../images/task-dropdown.png);
   background-position: 0 0;
   background-repeat: no-repeat;
   display: block;
@@ -241,6 +245,9 @@ table.prioritized .deliverable .empty.task_estimate {
   text-indent: -9999px;
   width: 20px;
 }
+.cursor .task_menu_container .menu_arrow {
+  background-image: url(../../images/task-dropdown-cursor.gif);  
+}
 .task_menu_container.active .menu_arrow {
   background-image: url(../../images/task-dropdown-active.gif);
 }
@@ -248,19 +255,19 @@ table.prioritized .deliverable .empty.task_estimate {
   display: block;
 }
 .task_menu_container .task_menu_items {
-  background: #ddd;
-  border: 1px solid #ccc;
-  border-width: 0 1px 1px 0;
+  background: #eee;
+  border: 1px solid #898989;
   display: none;
   position: absolute;
   z-index: 10000;
 }
 .task_menu_container .task_menu_items a {
+  color: #04a;
   display: block;
   padding: 6px 5px;
 }
 .task_menu_container .task_menu_items a:hover {
-  background: #3c4650;
+  background: #3059ab;
   color: white;
 }
 .task_menu_container .task_menu_items li {
