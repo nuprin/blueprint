@@ -53,24 +53,18 @@ table.task_list .task_estimate {
   width: 60px;
   text-align: right;
 }
-table.task_list .deadline_tomorrow td {
+table.task_list tr.deadline_tomorrow td {
   background-color: #faf396;
   border-bottom: 1px solid #e1db87;
-  color: #333 !important;
+  color: #333;
 }
-table.task_list .deadline_today td {
+table.task_list tr.deadline_today td {
   background-color: #fbc5bd;
   border-bottom: 1px solid #e1a49c;
-  color: #333 !important;
+  color: #333;
 }
 table.task_list .deadline_today .task_menu_container {
   font-weight: normal;
-}
-table.task_list .deadline_tomorrow .menu_arrow {
-  background-image: url("../../images/task-dropdown-due-soon.gif");
-}
-table.task_list .deadline_today .menu_arrow {
-  background-image: url("../../images/task-dropdown-due-today.gif");
 }
 table.task_list .deadline_tomorrow .active .menu_arrow,
 table.task_list .deadline_today .active .menu_arrow {
@@ -111,10 +105,6 @@ table.task_list th {
   line-height: 29px;
   text-align: left;
 }
-table.task_list tfoot a {
-  color: #40678d;
-  font-weight: normal;
-}
 table.task_list .quick_add_form,
 table.task_list .editing .quick_add_link {
   display: none;
@@ -139,21 +129,19 @@ table.user_task_list td.task_name {
   width: 369px;
 }
 .quick_add_items li {
-  background-color: #678;
+  background-color: #3059ab;
   background-image: url("../../images/quick-add-x.gif");
-  background-position: right 2px;
+  background-position: right top;
   background-repeat: no-repeat;
-  border: 1px solid #8592a0;
   color: white;
   cursor: pointer;
   display: block;
   float: left;
   font-size: 9px;
   line-height: 9px;
-  margin: 4px 5px 0 0;
-  padding: 6px 25px 4px 8px;
+  margin: 3px 5px 0 0;
+  padding: 7px 32px 5px 8px;
   text-transform: uppercase;
-  -moz-border-radius: 2px;
 }
 table.task_list input[type=text] {
   padding: 1px;

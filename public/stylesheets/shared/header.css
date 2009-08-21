@@ -6,13 +6,12 @@
 }
 #tabs {
   background: white;
-  border-bottom: 1px solid #3959ab;
-/*  background-image: url(../../images/task-list-header-bkgd.gif);*/
+  border-bottom: 1px solid #666;
   margin: 0 20px;
 }
 #tabs a {
-  background: #f1f1f1;
-  color: #444;
+  background: #ddd;
+  color: #777;
   display: block;
   float: left;
   font-size: 13px;
@@ -22,9 +21,16 @@
   padding: 0 12px;
 }
 #tabs a.current {
-  background: #3959ab;
+  background: #666;
+  color: white;
+}
+#tabs a:hover {
+  background: #3059ab;
   color: white;
 }
 #tabs .secondary {
   float: right;
+}
+#tabs .secondary a {
+  margin-right: 0;
 }

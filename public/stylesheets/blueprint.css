@@ -113,8 +113,11 @@ a:hover .sf-sub-indicator {
 }
 #paper_bkgd {
   background-image: url(../images/layout/paper-back.gif);
+  background-position: -1px top;
   background-repeat: repeat-y;
-  padding: 0 20px;
+  border: 1px dotted #e0e0e0;
+  border-width: 0 1px;
+  padding: 0 19px;
 }
 #paper_bottom {
   background-color: #ccc;
@@ -125,7 +128,10 @@ a:hover .sf-sub-indicator {
 }
 #divider {
   background-image: url(../images/layout/header-content-divider.gif);
+  background-position: -1px top;
   background-repeat: no-repeat;
+  border: 1px dotted #e0e0e0;
+  border-width: 0 1px;
   height: 23px;
 }
 #filters {

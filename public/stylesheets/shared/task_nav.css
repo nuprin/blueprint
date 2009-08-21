@@ -1,4 +1,8 @@
 .task_list .cursor td {
-  background-color: #CCFFF8;
-  background-image: none !important;
+  background-color: #3059ab !important;
+}
+.task_list .cursor,
+.task_list .cursor a,
+.task_list .cursor td {
+  color: white !important;
 }
