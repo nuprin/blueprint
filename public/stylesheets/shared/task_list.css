@@ -41,9 +41,15 @@ table.task_list .editable+form {
   display: none;
 }
 table.task_list .drag_handle {
-  text-align: center;
-  padding: 0;
-  width: 31px;
+  background-image: url(../../images/drag-handle.gif);
+  background-position: 2px top;
+  background-repeat: no-repeat;
+  text-align: right;
+  padding: 0 7px 0 0;
+  width: 25px;
+}
+table.task_list .drag_handle.completed {
+  background-image: none;
 }
 table.task_list .task_assignee {
   width: 75px;
@@ -187,7 +193,6 @@ table.prioritized .deliverable .empty.task_estimate {
   line-height: 9px;
   padding: 3px 5px 0;
   text-transform: uppercase;
-  -moz-border-radius: 2px;
 }
 .tags .bug {
   background: #fcc;

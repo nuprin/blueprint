@@ -15,7 +15,7 @@
 <tr class="task <%= task.class.name.downcase %> <%= deadline_class %> <%= "assignee#{task.assignee_id}" if task.assignee_id %>"
   id="list_item_<%= task_list_item_or_task.id %>"
   task_id="<%= task.id %>">
-  <td class="drag_handle">
+  <td class="drag_handle<%= ' completed' if task.completed? %>">
     <% if task.completed? %>
       <%= image_tag 'check.gif' %>
     <% else %>
