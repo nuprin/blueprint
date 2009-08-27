@@ -3,12 +3,16 @@
 
 <div class="clearfix" id="tabs">
   <div class="secondary">
-    <% path = project_specification_path(@project) %>
-    <% if current_page?(path) %>
-      <%= link_to "SPEC", path, :class => "current" %>
+    <% if @project.external_spec? %>
+      <%= link_to "SPEC", @project.cleaned_spec_url, :target => :blank %>
     <% else %>
-      <%= link_to "SPEC", path %>
-    <% end %>    
+      <% path = project_specification_path(@project) %>
+      <% if current_page?(path) %>
+        <%= link_to "SPEC", path, :class => "current" %>
+      <% else %>
+        <%= link_to "SPEC", path %>
+      <% end %>    
+    <% end %>
   </div>
   <%
     [

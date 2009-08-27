@@ -11,6 +11,10 @@
     <%= f.text_field :mission %>
   </p>
   <p>
+    <%= f.label :spec_url, "Spec URL" %>:<br />
+    http:// <%= f.text_field :spec_url %>
+  </p>
+  <p>
     <%= f.label :category_id %>:<br />
     <%= f.select :category_id, ProjectCategory.form_options %>
   </p>

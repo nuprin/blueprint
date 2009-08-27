@@ -101,26 +101,41 @@ class Project < ActiveRecord::Base
     self.subscribed_users.map(&:name).to_sentence
   end
 
-  before_save do |project|
-    unless project.new_record?
-      category = ProjectCategory.find_by_id(project.category_id)
-      if project.status_changed? && project.category_id
-        if project.active?
-          category.add_to_list(project)
-        else
-          category.remove_from_list(project)
-        end
-      end
-      if project.category_id_changed?
-        if project.category_id_was
-          old_category = ProjectCategory.find(project.category_id_was)
-          old_category.remove_from_list(project)
-        end
-        if project.category_id
-          category.add_to_list(project)
-        end
-      end
+  def cleaned_spec_url
+    self.spec_url = self.spec_url.strip
+    if !self.spec_url.starts_with?('http://')
+      'http://' + self.spec_url
+    else
+      self.spec_url
     end
+  end
+
+  def external_spec?
+    !self.spec_url.blank?
+  end
+
+  before_save :refresh_category_lists
+    
+  def refresh_category_lists
+    unless self.new_record?
+      category = ProjectCategory.find_by_id(self.category_id)
+      if self.status_changed? && self.category_id
+        if self.active?
+          category.add_to_list(self)
+        else
+          category.remove_from_list(self)
+        end
+      end
+      if self.category_id_changed?
+        if self.category_id_was
+          old_category = ProjectCategory.find(self.category_id_was)
+          old_category.remove_from_list(self)
+        end
+        if self.category_id
+          category.add_to_list(self)
+        end
+      end
+    end    
   end
 
   after_create do |project|

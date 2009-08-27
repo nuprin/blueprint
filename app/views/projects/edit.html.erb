@@ -10,13 +10,17 @@
   </p>
   <p>
     Due Date:<br />
-    <%= check_box_tag :use_due_date, "1", !!@project.due_date %>
+    <%= check_box_tag :use_due_date, "1", !!@project.due_date %>&nbsp;
     <%= label_tag :use_due_date, "This initiative is due on:" %>
     <%= f.date_select :due_date, :order => [:month, :day, :year] %>
   </p>
   <p>
     <%= f.label :mission %>:<br />
     <%= f.text_field :mission %>
+  </p>
+  <p>
+    <%= f.label :spec_url, "Spec URL" %>:<br />
+    http:// <%= f.text_field :spec_url %>
   </p>
   <p>
     <%= f.label :feature_id %>:<br />
