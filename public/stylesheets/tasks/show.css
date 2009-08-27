@@ -226,9 +226,6 @@ h2 {
 #task_primary_info {
   padding: 22px 16px 30px;  
 }
-#content, #task_links {
-  background-image: url("../../images/task-background.gif");
-}
 #content {
   border-bottom: 1px solid #eee;
   padding: 40px 45px 100px;

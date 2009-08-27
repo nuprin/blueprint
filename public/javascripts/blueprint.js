@@ -39,11 +39,9 @@ var KeyboardShortcuts = {
 
 var FlashMessage = {
   hideAfterDelay: function () {
-    if ($('#container > p.notice').size() > 0) {
-      setTimeout(function (el) {
-        $('#container > p.notice').slideUp();
-      }, 5000);
-    }
+    setTimeout(function (el) {
+      $('#flash_container').slideUp();
+    }, 5000);
   }
 };
 

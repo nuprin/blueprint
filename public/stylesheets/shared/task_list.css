@@ -125,7 +125,11 @@ table.task_list .quick_add_form input[type=text] {
   width: 300px;
 }
 table.task_list .quick_add_link {
-  font-size: 11px;
+  background-image: url(../../images/add-task.gif);
+  background-position: left -1px;
+  background-repeat: no-repeat;
+  margin-left: 13px;
+  padding-left: 18px;
 }
 table.task_list .editing .quick_add_form {
   display: block;

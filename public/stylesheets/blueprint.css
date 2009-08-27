@@ -47,13 +47,6 @@ input[type=text], textarea {
   position: absolute;
   min-width: 140px;
 }
-.notice {
-  background: #060;
-  color: white;
-  line-height: 40px;
-  margin: 0;
-  padding: 0 20px;
-}
 .sf-menu a {
   display: block;
   padding: 0 10px;
@@ -119,10 +112,18 @@ a:hover .sf-sub-indicator {
   border-width: 0 1px;
   padding: 0 19px;
 }
+#paper_bkgd_top {
+  background-image: url(../images/layout/header-content-divider.gif);
+  background-position: left 4px;
+  height: 2px;
+}
 #paper_bottom {
   background-color: #ccc;
   background-image: url(../images/layout/paper-bottom.gif);
+  background-position: -1px top;
   background-repeat: no-repeat;
+  border: 1px dotted #e0e0e0;
+  border-width: 0 1px 1px;
   height: 5px;
   padding-bottom: 20px;
 }
@@ -132,7 +133,7 @@ a:hover .sf-sub-indicator {
   background-repeat: no-repeat;
   border: 1px dotted #e0e0e0;
   border-width: 0 1px;
-  height: 23px;
+  height: 19px;
 }
 #filters {
   float: left;
@@ -145,9 +146,22 @@ a:hover .sf-sub-indicator {
   background: white;
   color: #3959ab;
 }
+#flash_container {
+  background: #ccc;
+  padding: 0 19px;
+}
+#flash_container .notice {
+  background: #fcee21;
+  color: #333;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 16px 20px 12px;
+  -moz-box-shadow: 0 0 2px #333;
+}
 #footer {
   background: #bbb;
-  border-top: 1px dotted #eee;
+  border-top: 1px dotted #e0e0e0;
   color: #666;
   margin: 50px 0 0;
   line-height: 60px;
@@ -163,7 +177,10 @@ a:hover .sf-sub-indicator {
 #header {
   background-color: #3959ab;
   background-image: url(../images/layout/blue-sheet.gif);
-  padding: 20px 40px 30px;
+  background-position: -1px top;
+  border: 1px dotted #e0e0e0;
+  border-width: 0 1px;
+  padding: 20px 39px 30px;
   text-align: right;
 }
 #header a {
@@ -181,8 +198,11 @@ a:hover .sf-sub-indicator {
 #nav {
   background: #3959ab;
   background-image: url(../images/layout/blue-sheet.gif);
+  background-position: -1px top;
+  border: 1px dotted #eee;
+  border-width: 0 1px;
   margin: 0;
-  padding: 0 40px;
+  padding: 0 39px;
 }
 #nav h3 {
   color: #999;

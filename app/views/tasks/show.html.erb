@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag "shared/modal" %>
 <%= stylesheet_link_tag "tasks/show" %>
+<%= stylesheet_link_tag "tasks/show_new" %>
 <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 <%= javascript_include_tag "tasks/show" %>
 <% 
@@ -7,6 +8,12 @@
   @hide_layout_title = true
 %>
 
+<% with_locals :task => @task do |t| %>
+  <%= t.render :partial => "task_main" %>
+  <%= t.render :partial => "task_news" %>
+<% end %>
+
+<!--
 <%= render :partial => "deferred_task_message", :locals => {:task => @task} %>
 
 <% if @task.project_id || @task.parent_id %>
@@ -156,3 +163,4 @@
 
 <%= render :partial => "confirm_completion_dialog",
            :locals => {:task => @task} %>
+-->
