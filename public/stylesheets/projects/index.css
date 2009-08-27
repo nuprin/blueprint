@@ -30,14 +30,14 @@ table.project_list .project_category div {
   display: inline;
 }
 table.project_list td.action_links {
-  width: 150px;
+  width: 180px;
 }
 table.project_list td.due_date {
   width: 80px;
 }
 table.project_list td.name {
   padding-left: 0;
-  width: 363px;
+  width: 333px;
 }
 table.project_list td.phase {
   width: 100px;

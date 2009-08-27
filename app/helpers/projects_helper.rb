@@ -38,4 +38,18 @@ module ProjectsHelper
       TAB_ORDER.index(name) || 1000
     end
   end
+  
+  def link_to_project_spec(project, name = nil)
+    name ||= "Spec"
+    if project.external_spec?
+      link_to name, project.cleaned_spec_url, :target => :blank
+    else
+      path = project_specification_path(project)
+      if current_page?(path)
+        link_to name, path, :class => "current"
+      else
+        link_to name, path
+      end
+    end
+  end
 end

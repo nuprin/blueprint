@@ -41,7 +41,8 @@
               set_active_project_path(initiative), :method => :put,
               :class => "add" %>
               &nbsp;&nbsp;
-            <%= link_to "Edit", edit_project_path(initiative) %>
+            <%= link_to "Edit", edit_project_path(initiative) %>&nbsp;&nbsp;
+            <%= link_to_project_spec(initiative) %>
           </div>
           <%= link_to_project initiative %>
         </li>
@@ -61,7 +62,8 @@
           <%= link_to "Prioritize",
             set_active_project_path(initiative), :method => :put,
             :class => "add" %>&nbsp;&nbsp;
-          <%= link_to "Edit", edit_project_path(initiative) %>
+          <%= link_to "Edit", edit_project_path(initiative) %>&nbsp;&nbsp;
+          <%= link_to_project_spec(initiative) %>
         </div>
         <%= link_to_project initiative %>
       </li>
