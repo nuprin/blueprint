@@ -12,7 +12,7 @@
   </p>
   <p>
     <%= f.label :spec_url, "Spec URL" %>:<br />
-    http:// <%= f.text_field :spec_url %>
+    <%= f.text_field :spec_url, :value => "http://" %>
   </p>
   <p>
     <%= f.label :category_id %>:<br />
