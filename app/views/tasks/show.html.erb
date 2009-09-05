@@ -3,6 +3,7 @@
 <%= stylesheet_link_tag "tasks/show_new" %>
 <%= javascript_include_tag "plugins/jquery.simplemodal-1.2.2.js"%>
 <%= javascript_include_tag "tasks/show" %>
+
 <% 
   @title = @task.title 
   @hide_layout_title = true
@@ -11,6 +12,7 @@
 <% with_locals :task => @task do |t| %>
   <%= t.render :partial => "task_main" %>
   <%= t.render :partial => "task_news" %>
+  <%= t.render :partial => "confirm_completion_dialog" %>
 <% end %>
 
 <!--

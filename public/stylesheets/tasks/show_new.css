@@ -1,0 +1,79 @@
+a.complete_button {
+  background: #3059ab;
+  border: 1px solid #ddd;
+  color: white;
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 16px;
+  padding: 9px 20px 7px;
+  -moz-box-shadow: 0 0 2px #333;
+}
+#primary_col {
+  float: left;
+  padding: 25px 20px;
+  width: 470px;
+}
+#primary_col h1 {
+  margin-bottom: 5px;
+}
+#secondary_col {
+  float: right;
+  padding: 0;
+  width: 190px;
+}
+#secondary_col h3 {
+  float: left;
+  font-size: 12px;
+}
+#secondary_col > ul > li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 8px 8px;
+}
+#secondary_col li {
+  text-align: right;
+}
+#secondary_col li.primary_button_row {
+  text-align: center;
+}
+#secondary_col li .empty {
+  
+}
+#secondary_col > ul {
+  border-left: 3px double #ddd;
+}
+#secondary_col .blank_link {
+  background: #f3f3f3;
+  color: #aaa;
+  display: block;
+  margin: -10px -8px -8px;
+  padding: 10px 8px 8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+#secondary_col #utility_menu li {
+  padding: 0 0 10px;
+  text-align: left;
+}
+#secondary_col #utility_menu li:first-child {
+  padding-top: 7px;
+}
+#task_header {
+  margin-bottom: 20px;
+}
+#task_main {
+  border-left: 3px double #ddd;
+  border-right: 3px double #ddd;
+  border-top: 1px solid #ccc;
+}
+#task_news {
+  border-bottom: 1px solid #ccc;
+  border-left: 3px double #ddd;
+  border-right: 3px double #ddd;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+}
+#task_news h2 {
+  font-size: 16px;
+  margin-bottom: 1em;
+}

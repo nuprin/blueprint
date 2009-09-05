@@ -33,13 +33,9 @@ h2 {
   display: block;
 }
 .events_list li {
-  border-bottom: 1px dotted #ccc;
+  border-bottom: 1px dashed #d6d6d6;
   margin-bottom: 10px;
   padding-bottom: 10px;
-}
-.task_field {
-  border: 1px solid #ddd;
-  border-top: none;
 }
 .task_field h2 {
   text-transform: uppercase;
@@ -55,7 +51,7 @@ h2 {
   color: #222;
 }
 .taskedit .date {
-  color: #666;
+  color: #898989;
   float: left;
   width: 125px;
 }
@@ -103,17 +99,12 @@ h2 {
 #comments, #description {
   line-height: 140%;
 }
-#comments {
-  border-top: 1px solid #ddd;
-  margin-top: 1px;
-  padding: 12px 16px;
-}
 .comment .delete_link {
   color: #999;
   font-size: 10px;
 }
 .comment .date {
-  color: #666;
+  color: #898989;
   margin-bottom: 5px;
 }
 .comment .meta {
@@ -228,8 +219,8 @@ h2 {
 }
 #content {
   border-bottom: 1px solid #eee;
-  padding: 40px 45px 100px;
-  width: 710px;
+  padding: 40px 40px 60px;
+  width: 720px;
 }
 #following {
   padding: 2px 0 27px;

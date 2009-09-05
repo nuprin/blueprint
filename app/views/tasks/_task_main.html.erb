@@ -1,7 +1,90 @@
-<div id="task_main">
+<div class="clearfix" id="task_main">
   <div id="primary_col">
-    <h1><%= task.title %></h1>
+    <div id="task_header">
+      <h1><%= task.title %></h1>
+      <% if @task.kind == "bug" %>
+        <%= link_to "Bug", bugs_path %>
+      <% else %>
+        <%= @task.kind.capitalize %>
+      <% end %>
+      |
+      Created by <%= link_to_user @task.creator %>
+      at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
+    </div>
+    <div>
+      <%= format_text(@task.description) %>
+    </div>
   </div>
   <div id="secondary_col">
+    <ul>
+      <li>
+        <h3>No.</h3>
+        <span class="task_num"><%= @task.id %></span>
+      </li>
+      <li>
+        <% if @task.project_id %>
+          <h3>Project</h3>
+          <%= link_to_project @task.project %>
+        <% else %>
+          <%= link_to "Add a project&hellip;", "",
+            :class => "blank_link" %>
+        <% end %>
+      </li>
+      <li>
+        <% if @task.assignee_id %>
+          <h3>Assigned To</h3>
+          <%= link_to_user @task.assignee %>
+        <% else %>
+          <%= link_to "Assign to&hellip;", "",
+            :class => "blank_link"%>
+        <% end %>
+      </li>
+      <li>
+        <% if @task.due_date %>
+          <h3>Due On</h3>
+          <%= @task.due_date.strftime("%b %e") %>
+        <% else %>
+          <%= link_to "Set due date&hellip;", "",
+            :class => "blank_link" %>
+        <% end %>
+      </li>
+      <li>
+        <% if @task.estimate %>
+          <h3>Estimate</h3>
+          <%= @task.estimate %>
+        <% else %>
+          <%= link_to "Add estimate&hellip;", "",
+            :class => "blank_link" %>
+        <% end %>
+      </li>
+      <li>
+        <h3>Subscribed</h3>
+        <% if_any(task.subscriptions) do |subscriptions| %>
+          <ul>
+            <% subscriptions.each do |sub| %>
+              <li>
+                <%= render :partial => "task_subscription_name",
+                           :locals => {:sub => sub} %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </li>
+      <% unless @task.completed? %>
+        <li class="primary_button_row">
+          <%= link_to "Mark Complete", "",
+            :class => "complete_button", :id => "complete_link" %>
+        </li>
+      <% end %>
+      <li>
+        <ul id="utility_menu">
+          <li><%= link_to "Mark Incomplete", "" %></li>
+          <li><%= link_to "Edit Task", edit_task_path(task) %></li>
+          <li><%= link_to "Subscribe", "" %></li>
+          <li><%= link_to "Park", "" %></li>
+          <li><%= link_to "Reassign", "" %></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </div>
