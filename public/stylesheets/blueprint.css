@@ -180,7 +180,7 @@ a:hover .sf-sub-indicator {
   background-position: -1px top;
   border: 1px dotted #e0e0e0;
   border-width: 0 1px;
-  padding: 20px 39px 30px;
+  padding: 20px 39px 25px;
   text-align: right;
 }
 #header a {
@@ -210,6 +210,12 @@ a:hover .sf-sub-indicator {
   font-weight: normal;
   margin: 0;
   padding: 0 10px;
+}
+#nav #add_task_link {
+  color: white;
+  float: right;
+  font-weight: bold;
+  margin-top: 10px;
 }
 #nav #filters>li {
   border-left: 1px solid white;

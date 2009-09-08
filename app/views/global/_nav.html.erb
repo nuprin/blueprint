@@ -1,5 +1,9 @@
 <% if viewer.real? %>
   <div class="clearfix" id="nav">
+
+    <%= link_to "<span>+</span> ADD TASK", new_task_path,
+      :id => "add_task_link" %>
+
     <ul class="nav sf-menu clearfix" id="filters">
       <li>
         <%= link_to "YOU", user_path(viewer) %>
@@ -36,9 +40,6 @@
       </li>
       <li>
         <%= link_to "BUGS", bugs_path %>
-      </li>
-      <li>
-        <%= link_to "ADD TASK", new_task_path %>
       </li>
     </ul>
   </div>
