@@ -2,12 +2,14 @@
   <div id="primary_col">
     <div id="task_header">
       <h1><%= task.title %></h1>
-      <% if @task.kind == "bug" %>
-        <%= link_to "Bug", bugs_path %>
-      <% else %>
-        <%= @task.kind.capitalize %>
+      <% if !@task.kind.blank? %>
+        <% if @task.kind == "bug" %>
+          <%= link_to "Bug", bugs_path %>
+        <% else %>
+          <%= @task.kind.capitalize %>
+        <% end %>
+        |
       <% end %>
-      |
       Created by <%= link_to_user @task.creator %>
       at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
     </div>
@@ -78,7 +80,16 @@
       <% end %>
       <li>
         <ul id="utility_menu">
-          <li><%= link_to "Mark Incomplete", "" %></li>
+          <% if task.completed? %>
+            <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
+               :method => :post %></li>
+          <% elsif task.parked? %>
+            <li><%= link_to "Prioritize", prioritize_task_path(task),
+               :method => :post, :class => "task_prioritize_link" %></li>
+          <% elsif task.prioritized? %>
+            <li><%= link_to "Park", park_task_path(task), :method => :post,
+              :class => "task_park_link" %></li>
+          <% end %>
           <li><%= link_to "Edit Task", edit_task_path(task) %></li>
           <li><%= link_to "Subscribe", "" %></li>
           <li><%= link_to "Park", "" %></li>

@@ -125,7 +125,7 @@ a:hover .sf-sub-indicator {
   border: 1px dotted #e0e0e0;
   border-width: 0 1px 1px;
   height: 5px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 }
 #divider {
   background-image: url(../images/layout/header-content-divider.gif);

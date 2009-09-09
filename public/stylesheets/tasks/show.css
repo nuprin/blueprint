@@ -123,6 +123,15 @@ h2 {
 #comments {
   background: white;
 }
+#confirm_completion {
+  background: white;
+  border: 1px solid #999;
+  padding: 30px;
+}
+#confirm_completion h2 {
+  font-size: 20px;
+  margin-bottom: 1em;
+}
 #confirm_completion fieldset {
   border: none;
   margin-bottom: 10px;
@@ -131,7 +140,6 @@ h2 {
 #confirm_completion legend {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
   padding: 0;
 }
 #confirm_completion label span {

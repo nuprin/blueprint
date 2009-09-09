@@ -27,6 +27,11 @@ var TaskShortkeys = {
 $(function(){
   $("#complete_link").click(function(e) {
     e.preventDefault();
+    // $("#confirm_completion").show().animate({top: 100});
+    // $(".simplemodal-close").click(function(e) {
+    //   e.preventDefault();
+    //   $("#confirm_completion").animate({top: -200});
+    // });
     $("#confirm_completion").modal();
     $("#final_comment_text").val($("#comment_text").val());
     $("#final_comment_text").focus();
