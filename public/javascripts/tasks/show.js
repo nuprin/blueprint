@@ -24,18 +24,31 @@ var TaskShortkeys = {
   }
 }
 
+function focusChangeComment(parentId) {
+  $(parentId + " #change_comment_text").val($("#comment_text").val());
+  $(parentId + " #change_comment_text").focus();
+}
+
 $(function(){
   $("#complete_link").click(function(e) {
     e.preventDefault();
-    // $("#confirm_completion").show().animate({top: 100});
-    // $(".simplemodal-close").click(function(e) {
-    //   e.preventDefault();
-    //   $("#confirm_completion").animate({top: -200});
-    // });
     $("#confirm_completion").modal();
-    $("#final_comment_text").val($("#comment_text").val());
-    $("#final_comment_text").focus();
-  })
+    focusChangeComment("#confirm_completion");
+  });
+  var linkIds = ["mark_incomplete_link", "prioritize_link", "park_link"];
+  for (var i = 0; i < linkIds.length; i++) {
+    $("#" + linkIds[i]).click(function(e) {
+      var id = $(this).attr("id");
+      e.preventDefault();
+      $("#change_task_header").
+        text(TASK_ACTION_INFO[id].header);
+      $("#change_task_submit_name").
+        attr("value", TASK_ACTION_INFO[id].submitText);
+      $("#change_comment_form").attr("action", TASK_ACTION_INFO[id].url);
+      $("#change_task_dialog").modal();
+      focusChangeComment("#change_task_dialog");
+    });    
+  }
   $("#task_primary_info h1").inlineEditor();
   $("#task_logistics li").inlineEditor();
   $("#description").inlineEditor({onSuccessFn: function(elem) {

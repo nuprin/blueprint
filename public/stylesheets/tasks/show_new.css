@@ -15,7 +15,8 @@ a.complete_button {
   width: 470px;
 }
 #primary_col h1 {
-  margin-bottom: 5px;
+  line-height: 36px;
+  margin-bottom: 10px;
 }
 #secondary_col {
   float: right;
@@ -52,11 +53,11 @@ a.complete_button {
   text-transform: uppercase;
 }
 #secondary_col #utility_menu li {
-  padding: 0 0 10px;
+  padding: 10px 0 0;
   text-align: left;
 }
 #secondary_col #utility_menu li:first-child {
-  padding-top: 7px;
+  padding-top: 0;
 }
 #task_header {
   margin-bottom: 20px;

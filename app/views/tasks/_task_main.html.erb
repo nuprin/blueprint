@@ -81,19 +81,15 @@
       <li>
         <ul id="utility_menu">
           <% if task.completed? %>
-            <li><%= link_to "Mark Incomplete", prioritize_task_path(task),
-               :method => :post %></li>
+            <li><%= link_to_function "Mark Incomplete",
+                "", :id => "mark_incomplete_link" %></li>
           <% elsif task.parked? %>
-            <li><%= link_to "Prioritize", prioritize_task_path(task),
-               :method => :post, :class => "task_prioritize_link" %></li>
+            <li><%= link_to_function "Prioritize", "",
+              :id => "prioritize_link" %></li>
           <% elsif task.prioritized? %>
-            <li><%= link_to "Park", park_task_path(task), :method => :post,
-              :class => "task_park_link" %></li>
+            <li><%= link_to "Park", "", :id => "park_link" %></li>
           <% end %>
           <li><%= link_to "Edit Task", edit_task_path(task) %></li>
-          <li><%= link_to "Subscribe", "" %></li>
-          <li><%= link_to "Park", "" %></li>
-          <li><%= link_to "Reassign", "" %></li>
         </ul>
       </li>
     </ul>

@@ -9,10 +9,31 @@
   @hide_layout_title = true
 %>
 
+<script type="text/javascript">
+  var TASK_ACTION_INFO = {
+    'mark_incomplete_link': {
+      header: "Mark Incomplete",
+      url: "<%= prioritize_task_path(@task) %>",
+      submitText: "Mark Incomplete"
+    },
+    'park_link': {
+      header: "Park Task",
+      url: "<%= park_task_path(@task) %>",
+      submitText: "Park"
+    },
+    'prioritize_link': {
+      header: "Prioritize Task",
+      url: "<%= prioritize_task_path(@task) %>",
+      submitText: "Prioritize"
+    }
+  }
+</script>
+
 <% with_locals :task => @task do |t| %>
   <%= t.render :partial => "task_main" %>
   <%= t.render :partial => "task_news" %>
   <%= t.render :partial => "confirm_completion_dialog" %>
+  <%= t.render :partial => "final_comment_dialog" %>
 <% end %>
 
 <!--

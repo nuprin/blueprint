@@ -1,0 +1,19 @@
+<div id="change_task_dialog" style="display: none;">
+  <h2 id="change_task_header">Change Task</h2>
+  <% form_tag prioritize_task_path(task), :id => "change_comment_form" do %>
+    <fieldset>
+      <% fields_for :change_comment do |f| %>
+        <legend>Why are you making this change? (Optional)</legend>
+        <%= f.hidden_field :author_id, :value => viewer.id %>
+        <%= f.hidden_field :commentable_type, :value => "Task" %>
+        <%= f.hidden_field :commentable_id, :value => task.id %>
+        <%= f.text_area :text, :rows => nil %>
+      <% end %>
+    </fieldset>
+    <div class="submit">
+      <%= link_to "Cancel", "",
+        :class => "simplemodal-close", :title => "Cancel", :tabindex => -1 %> or
+        <%= submit_tag "Complete", :id => "change_task_submit_name" %>
+    </div>
+  <% end %>
+</div>

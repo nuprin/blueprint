@@ -120,22 +120,27 @@ h2 {
   margin: 10px 0;
   padding: 9px;
 }
-#comments {
-  background: white;
-}
+#change_task_dialog,
 #confirm_completion {
   background: white;
   border: 1px solid #999;
   padding: 30px;
 }
-#confirm_completion h2 {
-  font-size: 20px;
-  margin-bottom: 1em;
-}
-#confirm_completion fieldset {
+.simplemodal-container fieldset {
   border: none;
   margin-bottom: 10px;
   padding: 0;
+}
+.simplemodal-container textarea {
+  margin: 5px 0 10px;
+  width: 490px;
+}
+#comments {
+  background: white;
+}
+#confirm_completion h2 {
+  font-size: 20px;
+  margin-bottom: 1em;
 }
 #confirm_completion legend {
   font-size: 14px;
@@ -144,10 +149,6 @@ h2 {
 }
 #confirm_completion label span {
   color: #999;
-}
-#confirm_completion textarea {
-  margin: 5px 0 10px;
-  width: 490px;
 }
 #content {
   padding-left: 0;
