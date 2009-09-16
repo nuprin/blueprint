@@ -23,13 +23,21 @@
         <h3>No.</h3>
         <span class="task_num"><%= @task.id %></span>
       </li>
-      <li>
+      <li class="clearfix">
+        <h3>Project</h3>
+        <span class="editable">
         <% if @task.project_id %>
-          <h3>Project</h3>
-          <%= link_to_project @task.project %>
-        <% else %>
-          <%= link_to "Add a project&hellip;", "",
-            :class => "blank_link" %>
+            <%= link_to_project @task.project %>
+        <% end %>
+        </span>
+        <% form_for :task, @task, :url => update_project_task_path(@task),
+          :html => {:method => :put} do |f| %>
+          <%= hidden_field_tag :include_link, 1 %>
+          <%= f.select :project_id,
+            Project.all_for_select + [["No Initiative", ""]],
+              :include_blank => "Add initiative..." %>
+          <%= f.submit "Save" %> or
+          <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
       <li>

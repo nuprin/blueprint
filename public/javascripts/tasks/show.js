@@ -50,7 +50,7 @@ $(function(){
     });    
   }
   $("#task_primary_info h1").inlineEditor();
-  $("#task_logistics li").inlineEditor();
+  $("#secondary_col li").inlineEditor({submitFormOnChange: false});
   $("#description").inlineEditor({onSuccessFn: function(elem) {
     elem.find(".editable").removeClass("empty");
   }});

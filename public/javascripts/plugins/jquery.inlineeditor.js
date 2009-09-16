@@ -14,6 +14,7 @@
     return this.each(function() {  
       var inputField;
       var settings = $.extend({}, $.fn.inlineEditor.defaults, options);
+
       var onSuccess = function(data) {
         form.hide();
         editable.show();
@@ -49,7 +50,7 @@
           form.submit();
         }
       }
-
+      
       var onDblClick = function(e) {
         if (e.target.tagName == "A") {
           return;
@@ -59,6 +60,7 @@
         processInput();
         processSelect();
         processTextArea();
+        form.submit(onSubmit);
         form.css("display", "inline");
         inputField.blur(onBlur);
         clickable.addClass("editing");
@@ -74,6 +76,11 @@
         }
       }
 
+      var onCancel = function() {
+        form.hide();
+        editable.show();
+      }
+
       var adjustWidths = function() {
         textInput.width(clickable.width());
         select.width(clickable.width());
@@ -84,7 +91,6 @@
         if (textInput.length > 0) {
           inputField = textInput;
           textInput.focus().select();
-          form.submit(onSubmit);        
         }
       }
 
@@ -92,7 +98,9 @@
         if (select.length > 0) {
           inputField = select;
           select.focus();
-          select.change(onChange);
+          if (settings.submitFormOnChange) {
+            select.change(onChange);
+          }
         }
       }
 
@@ -100,8 +108,13 @@
         if (textarea.length > 0) {
           inputField = textarea;
           inputField.focus();
-          form.submit(onSubmit);
         }
+      }
+
+      var setupCancel = function() {
+        form.find(".inlineCancel").each(function() {
+          $(this).click(onCancel);
+        })
       }
 
       var clickable = $(this);
@@ -119,6 +132,8 @@
       if (editable.html() && editable.html().length > 0)
         form.hide();
       editable.attr("title", settings.title);
+
+      setupCancel();
       clickable.dblclick(onDblClick);
     });
   };
@@ -127,5 +142,6 @@
 $.fn.inlineEditor.defaults = {
   errorClass: "inlineError",
   title: "Double-Click to Edit",
-  useAjax: true
+  useAjax: true,
+  submitFormOnChange: true
 };

@@ -26,6 +26,7 @@ a.complete_button {
 #secondary_col h3 {
   float: left;
   font-size: 12px;
+  margin-bottom: 0;
 }
 #secondary_col > ul > li {
   border-bottom: 1px solid #eee;
@@ -39,6 +40,9 @@ a.complete_button {
 }
 #secondary_col li .empty {
   
+}
+#secondary_col select {
+  width: 170px;
 }
 #secondary_col > ul {
   border-left: 3px double #ddd;
