@@ -40,44 +40,52 @@
           <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
-      <li>
+      <li class="clearfix">
+        <h3>Assigned To</h3>
+        <span class="editable">
         <% if @task.assignee_id %>
-          <h3>Assigned To</h3>
           <%= link_to_user @task.assignee %>
-        <% else %>
-          <%= link_to "Assign to&hellip;", "",
-            :class => "blank_link"%>
+        <% end %>
+        </span>
+        <% form_for :task, @task,
+          :url => update_assignee_task_path(@task),
+          :html => {:method => :put} do |f| %>
+          <%= hidden_field_tag :include_link, 1 %>
+          <%= f.select :assignee_id,
+            User.sorted.map{|u| [u.name, u.id]} + [["Nobody", ""]],
+              :include_blank => "Assign..." %>
+          <%= f.submit "Save" %> or
+          <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
-      <li>
-        <% if @task.due_date %>
-          <h3>Due On</h3>
-          <%= @task.due_date.strftime("%b %e") %>
-        <% else %>
-          <%= link_to "Set due date&hellip;", "",
-            :class => "blank_link" %>
+      <li class="clearfix">
+        <h3>Due On</h3>
+        <span class="editable">
+          <% if @task.due_date %>
+            <%= @task.due_date.strftime("%b %e") %>
+          <% end %>
+        </span>
+        <% form_for :task, @task,
+          :url => update_due_date_task_path(@task),
+          :html => {:method => :put} do |f| %>
+          <%= f.text_field :due_date %>
+          <%= f.submit "Save" %> or
+          <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
-      <li>
+      <li class="clearfix">
+        <h3>Estimate</h3>
+        <span class="editable">
         <% if @task.estimate %>
-          <h3>Estimate</h3>
           <%= @task.estimate %>
-        <% else %>
-          <%= link_to "Add estimate&hellip;", "",
-            :class => "blank_link" %>
         <% end %>
-      </li>
-      <li>
-        <h3>Subscribed</h3>
-        <% if_any(task.subscriptions) do |subscriptions| %>
-          <ul>
-            <% subscriptions.each do |sub| %>
-              <li>
-                <%= render :partial => "task_subscription_name",
-                           :locals => {:sub => sub} %>
-              </li>
-            <% end %>
-          </ul>
+        </span>
+        <% form_for :task, @task,
+            :url => update_estimate_task_path(@task),
+            :html => {:method => :put} do |f| %>
+          <%= f.text_field :estimate %>
+          <%= f.submit "Save" %> or
+          <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
       <% unless @task.completed? %>

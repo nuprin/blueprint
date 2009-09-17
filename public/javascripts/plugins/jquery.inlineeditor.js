@@ -61,7 +61,7 @@
         processSelect();
         processTextArea();
         form.submit(onSubmit);
-        form.css("display", "inline");
+        form.css("display", "");
         inputField.blur(onBlur);
         clickable.addClass("editing");
         $(document.body).sortable('disable');

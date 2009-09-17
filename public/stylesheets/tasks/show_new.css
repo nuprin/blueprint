@@ -35,6 +35,16 @@ a.complete_button {
 #secondary_col li {
   text-align: right;
 }
+#secondary_col li form {
+  clear: both;
+  display: block;
+  margin: 20px 0 0;
+  text-align: left;
+}
+#secondary_col li input,
+#secondary_col li select {
+  margin-bottom: 4px;
+}
 #secondary_col li.primary_button_row {
   text-align: center;
 }

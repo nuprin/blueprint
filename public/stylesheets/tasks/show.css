@@ -33,7 +33,7 @@ h2 {
   display: block;
 }
 .events_list li {
-  border-bottom: 1px dashed #d6d6d6;
+  border-bottom: 1px solid #eee;
   margin-bottom: 10px;
   padding-bottom: 10px;
 }
@@ -80,7 +80,7 @@ h2 {
 }
 #cc {
   background: white;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #eee;
   margin-bottom: 12px;
   padding-top: 6px;
 }
@@ -88,8 +88,13 @@ h2 {
   float: right;
 }
 /* Default overrides */
+#cc_list {
+  display: block;
+  margin-left: 125px;
+}
 #cc #cc_list .cc {
   margin: 0 5px 5px 0;
+  white-space: nowrap;
 }
 #cc #cc_list .remove_link {
   color: #036;
@@ -232,10 +237,11 @@ h2 {
   width: 720px;
 }
 #following {
-  padding: 2px 0 27px;
+  margin-bottom: 11px;
 }
 #following label {
   color: #666;
+  float: left;
 }
 #narrow_col {
   float: left;

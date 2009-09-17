@@ -13,13 +13,13 @@
       <% end %>
     </div>
   <% end %>
-  <h2>Discussion & Updates</h2>
   <div id="following">
     <label>Following:</label>
     <span class="clearfix" id='cc_list'>
-      <% task.subscriptions.each do |sub| %>
+      <% task.subscriptions.each_with_index do |sub, i| %>
         <%= render :partial => "task_subscription_name",
-                   :locals => {:sub => sub} %>
+                   :locals => {:sub => sub, :i => i,
+                               :len => task.subscriptions.size} %>
       <% end %>
     </span>
   </div>
