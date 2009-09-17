@@ -9,6 +9,14 @@ a.complete_button {
   padding: 9px 20px 7px;
   -moz-box-shadow: 0 0 2px #333;
 }
+.events_list li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+.events_list .taskedit {
+  font-size: 11px;
+  padding: 5px 0;
+}
 #primary_col {
   float: left;
   padding: 25px 20px;

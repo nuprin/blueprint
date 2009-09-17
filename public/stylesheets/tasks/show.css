@@ -32,20 +32,8 @@ h2 {
 .edit_task.editing input {
   display: block;
 }
-.events_list li {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-}
 .task_field h2 {
   text-transform: uppercase;
-}
-.taskedit,
-.taskedit a {
-  color: gray;
-}
-.taskedit a {
-  border-bottom: 1px dotted gray;
 }
 .taskedit strong {
   color: #222;
@@ -81,7 +69,6 @@ h2 {
 #cc {
   background: white;
   border-bottom: 1px solid #eee;
-  margin-bottom: 12px;
   padding-top: 6px;
 }
 #cc #add_subscriptions {
