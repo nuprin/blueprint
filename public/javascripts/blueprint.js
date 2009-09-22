@@ -55,6 +55,7 @@ $(function() {
       $(this).height($(this).height() + 20);
     }
   });
+  $("#q").hint();
   KeyboardShortcuts.setup();
   FlashMessage.hideAfterDelay();
 });
