@@ -35,6 +35,8 @@ $(function(){
     $("#confirm_completion").modal();
     focusChangeComment("#confirm_completion");
   });
+
+  // Set up comment behavior for Park, Prioritize, and Mark Incomplete
   var linkIds = ["mark_incomplete_link", "prioritize_link", "park_link"];
   for (var i = 0; i < linkIds.length; i++) {
     $("#" + linkIds[i]).click(function(e) {
@@ -49,11 +51,27 @@ $(function(){
       focusChangeComment("#change_task_dialog");
     });    
   }
-  $("#task_primary_info h1").inlineEditor();
-  $("#secondary_col li").inlineEditor({submitFormOnChange: false});
-  $("#description").inlineEditor({onSuccessFn: function(elem) {
-    elem.find(".editable").removeClass("empty");
-  }});
-  $("#status_container").inlineEditor();
+
+  // Make title editable inline.
+  $("#task_main h1").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false
+  });
+  
+  // Make Project, Assignee, Due Date, and Estimate editable inline.
+  $("#secondary_col li.editable_field").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false,
+    onSuccessFn: function(elem) {
+      $("#post_submit_dialog").modal();
+      $("#post_submit_dialog").find("textarea").focus();
+    }
+  });
+
+  $("#task_description_container").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false, 
+    onSuccessFn: function(elem) {
+      $("#task_description_container .editable").removeClass("empty");
+    }
+  });
+
   TaskShortkeys.setup();
 })

@@ -46,20 +46,6 @@ h2 {
 .taskedit .text {
   font-style: italic;
 }
-#add_comment_form {
-  padding: 10px 0;
-}
-#add_comment_form textarea {
-  height: 6em;
-  margin-bottom: 10px;
-  width: 558px;
-}
-#add_comment_form .submit_bar {
-  text-align: right;
-}
-#add_comment_form .file_field {
-  float: left;
-}
 #breadcrumbs {
   border-top: 3px double #ddd;
   line-height: 30px;
@@ -88,7 +74,7 @@ h2 {
   cursor: pointer;
   font-size: 9px;
 }
-#comments, #description {
+#comments {
   line-height: 140%;
 }
 .comment .delete_link {
@@ -125,7 +111,7 @@ h2 {
 }
 .simplemodal-container textarea {
   margin: 5px 0 10px;
-  width: 490px;
+  width: 424px;
 }
 #comments {
   background: white;
@@ -165,11 +151,6 @@ h2 {
 #deferred_task_message .button-to {
   float: right;
   margin-left: 5px;
-}
-#description .empty {
-  background: #eee;
-  border: 1px solid #ddd;
-  height: 5em;
 }
 #description #task_submit {
   margin-top: 10px;
@@ -304,4 +285,8 @@ h2 {
 }
 #task_links {
   padding-top: 20px;
+}
+#task_title form {
+  font-size: 13px;
+  font-weight: normal;
 }

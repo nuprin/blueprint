@@ -61,12 +61,12 @@ table.task_list .task_estimate {
 }
 table.task_list tr.deadline_tomorrow td {
   background-color: #faf396;
-  border-bottom: 1px solid #e1db87;
+  border-bottom: 1px solid #fff;
   color: #333;
 }
 table.task_list tr.deadline_today td {
   background-color: #fbc5bd;
-  border-bottom: 1px solid #e1a49c;
+  border-bottom: 1px solid #fff;
   color: #333;
 }
 table.task_list .deadline_today .task_menu_container {

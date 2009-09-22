@@ -14,16 +14,42 @@ a.complete_button {
   padding: 10px 0;
 }
 .events_list .taskedit {
+  color: #888;
   font-size: 11px;
-  padding: 5px 0;
+  padding: 8px 0 4px;
+}
+.events_list .taskedit .text {
+  line-height: 14px;
+  margin-left: 125px;
+}
+#add_comment_form {
+  margin-left: 125px;
+  padding: 10px 0;
+}
+#add_comment_form textarea {
+  height: 6em;
+  margin-bottom: 10px;
+  width: 540px;
+}
+#add_comment_form .submit_bar {
+  text-align: right;
+}
+#add_comment_form .file_field {
+  float: left;
+}
+#creator {
+  color: #666;
 }
 #primary_col {
   float: left;
   padding: 25px 20px;
   width: 470px;
 }
+#primary_col form {
+  display: none;
+}
 #primary_col h1 {
-  line-height: 36px;
+  line-height: 34px;
   margin-bottom: 10px;
 }
 #secondary_col {
@@ -38,22 +64,25 @@ a.complete_button {
 }
 #secondary_col > ul > li {
   border-bottom: 1px solid #eee;
-  padding: 10px 8px 8px;
+  padding: 10px 8px 0;
 }
 #secondary_col li {
   text-align: right;
 }
+#secondary_col li .info_row {
+  margin-bottom: 8px;
+}
 #secondary_col li form {
   clear: both;
   display: block;
-  margin: 20px 0 0;
   text-align: left;
 }
 #secondary_col li input,
 #secondary_col li select {
-  margin-bottom: 4px;
+  margin: 0 0 4px;
 }
 #secondary_col li.primary_button_row {
+  padding-bottom: 10px;
   text-align: center;
 }
 #secondary_col li .empty {
@@ -75,16 +104,43 @@ a.complete_button {
   text-transform: uppercase;
 }
 #secondary_col #utility_menu li {
-  padding: 10px 0 0;
+  padding: 0 0 8px;
   text-align: left;
 }
-#secondary_col #utility_menu li:first-child {
-  padding-top: 0;
+#task_description {
+  margin-bottom: 10px;
+}
+#task_description,
+#task_description_container {
+  font-size: 14px;
+  line-height: 18px;
+}
+#task_description {
+  height: 250px;
+  margin-bottom: 10px;
+  width: 482px;
+}
+#task_description_container form {
+  font-size: 12px;
+}
+.divider {
+  background: #ccc;
+  height: 1px;
+  margin: 15px 0;
+  width: 40px;
+}
+#task_description_container .empty {
+  background: #eee;
+  border: 1px dotted #e3e3e3;
+  height: 5em;
 }
 #task_header {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 #task_main {
+  background-image: url(../../images/task-main-bkgd.gif);
+  background-position: right top;
+  background-repeat: repeat-y;
   border-left: 3px double #ddd;
   border-right: 3px double #ddd;
   border-top: 1px solid #ccc;
