@@ -32,7 +32,6 @@
           <p class="notice"><%= flash[:notice] %></p>
         </div>
       <% end %>
-      <div id="paper_bkgd_top"></div>
       <div id="paper_bkgd">
         <div id="content">
           <% if @title && !@hide_layout_title %>
@@ -41,7 +40,6 @@
           <%= yield %>
         </div>
       </div>
-      <div id="paper_bottom"></div>
     </div>
   </body>
 </html>

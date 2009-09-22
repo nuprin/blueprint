@@ -9,9 +9,7 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
-  background-color: #ccc;
-  background-image: url(../images/layout/grid.gif);
-  background-position: -10px -10px;
+  background-image: url(../images/layout/wood-6.jpg);
   font-size: 12px;
   position: relative;
 }
@@ -96,44 +94,17 @@ a:hover .sf-sub-indicator {
   right: 0;
 }
 #container {
-  background: #fff;
   position: relative;
   margin: 0 auto;
-  width: 840px;
+  width: 800px;
 }
 #content {
   padding: 20px;
 }
 #paper_bkgd {
-  background-image: url(../images/layout/paper-back.gif);
-  background-position: -1px top;
-  background-repeat: repeat-y;
-  border: 1px dotted #e0e0e0;
-  border-width: 0 1px;
-  padding: 0 19px;
-}
-#paper_bkgd_top {
-  background-image: url(../images/layout/header-content-divider.gif);
-  background-position: left 4px;
-  height: 2px;
-}
-#paper_bottom {
-  background-color: #ccc;
-  background-image: url(../images/layout/paper-bottom.gif);
-  background-position: -1px top;
-  background-repeat: no-repeat;
-  border: 1px dotted #e0e0e0;
-  border-width: 0 1px 1px;
-  height: 5px;
-  padding-bottom: 40px;
-}
-#divider {
-  background-image: url(../images/layout/header-content-divider.gif);
-  background-position: -1px top;
-  background-repeat: no-repeat;
-  border: 1px dotted #e0e0e0;
-  border-width: 0 1px;
-  height: 19px;
+  background: white;
+  margin-bottom: 60px;
+  -moz-box-shadow: 0 0 2px #333;
 }
 #filters {
   float: left;
@@ -176,14 +147,13 @@ a:hover .sf-sub-indicator {
 }
 #header {
   background-color: #3959ab;
-  background-image: url(../images/layout/blue-sheet.gif);
-  background-position: -1px top;
-  border: 1px dotted #e0e0e0;
-  border-width: 0 1px;
-  padding: 20px 39px 25px;
-  text-align: right;
+  border: 1px solid white;
+  border-width: 0 1px 1px;
+  margin-bottom: 20px;
+  padding: 20px 20px 0;
+  -moz-box-shadow: 0 0 2px #333;
 }
-#header a {
+#header #logo {
   display: block;
   float: left;
   height: 25px;
@@ -191,18 +161,13 @@ a:hover .sf-sub-indicator {
   text-indent: -9999px;  
   width: 170px;
 }
+#header #search_and_logo {
+  margin-bottom: 20px;
+  text-align: right;
+}
 #header h1 {
   float: left;
   margin-bottom: 0;
-}
-#nav {
-  background: #3959ab;
-  background-image: url(../images/layout/blue-sheet.gif);
-  background-position: -1px top;
-  border: 1px dotted #eee;
-  border-width: 0 1px;
-  margin: 0;
-  padding: 0 39px;
 }
 #nav h3 {
   color: #999;
