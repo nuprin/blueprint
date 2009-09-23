@@ -9,7 +9,7 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
-  background-image: url(../images/layout/wood-6.jpg);
+  background-image: url(../images/layout/wood-7.jpg);
   font-size: 12px;
   position: relative;
 }
@@ -99,7 +99,7 @@ a:hover .sf-sub-indicator {
   width: 800px;
 }
 #content {
-  padding: 20px;
+  padding: 30px 20px;
 }
 #paper_bkgd {
   background: white;
@@ -118,8 +118,7 @@ a:hover .sf-sub-indicator {
   color: #3959ab;
 }
 #flash_container {
-  background: #ccc;
-  padding: 0 19px;
+  padding: 0 20px;
 }
 #flash_container .notice {
   background: #fcee21;
