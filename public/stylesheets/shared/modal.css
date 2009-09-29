@@ -2,6 +2,7 @@
   background: white;
   width: 500px;
   -moz-box-shadow: 0 0 2px #333;
+  -webkit-box-shadow: 0 0 2px #333;
 }
 .simplemodal-container h2 {
   color: #333;

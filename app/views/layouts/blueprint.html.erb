@@ -29,10 +29,10 @@
       <%= render :partial => "/global/header" %>
       <% if flash[:notice] %>
         <div id="flash_container">
-          <p class="notice"><%= flash[:notice] %></p>
+          <p class="notice shadow"><%= flash[:notice] %></p>
         </div>
       <% end %>
-      <div id="paper_bkgd">
+      <div class="shadow" id="paper_bkgd">
         <div id="content">
           <% if @title && !@hide_layout_title %>
             <h1><%= @title %></h1>
