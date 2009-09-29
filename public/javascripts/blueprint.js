@@ -45,11 +45,27 @@ var FlashMessage = {
   }
 };
 
+var Navigation = {
+  onShow: function(elem) {
+    $(this).prev().toggleClass("hover");
+  },
+  onHide: function() {
+    $(this).prev().toggleClass("hover");
+  }
+};
+
 $(function() {
   $('ul.sf-menu').superfish({
-    delay:      0,
-    speed:      'fast'
+    delay:  0,
+    speed:  'fast'
   });
+
+  $("#filters > li").hover(function() {
+    $(this).find(">a").toggleClass("hover");
+  }, function() {
+    $(this).find(">a").toggleClass("hover");
+  });
+
   $("textarea").keydown(function(event) {
     if (user.keyboard.character() == "enter") {
       $(this).height($(this).height() + 20);

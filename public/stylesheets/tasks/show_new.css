@@ -156,3 +156,7 @@ a.complete_button {
   font-size: 16px;
   margin-bottom: 1em;
 }
+#task_status {
+  display: block;
+  margin: 0 auto 10px;
+}

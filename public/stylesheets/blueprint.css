@@ -38,7 +38,7 @@ input[type=text], textarea {
   margin: 0 0 1em 20px;
 }
 .sf-menu ul {
-  background: #ddd;
+  background: #eee;
   border: 1px solid #aaa;
   border-width: 0 1px 1px 0;
   line-height: 25px;
@@ -71,7 +71,7 @@ input[type=text], textarea {
   text-indent: -9999px;
   width: 12px;
 }
-a:hover .sf-sub-indicator {
+a.hover .sf-sub-indicator {
   background-position: left top;
 }
 .sf-with-ul {
@@ -113,7 +113,7 @@ a:hover .sf-sub-indicator {
   color: white;
   font-weight: bold;
 }
-#filters>li>a:hover {
+#filters>li>a.hover {
   background: white;
   color: #3959ab;
 }
@@ -146,7 +146,7 @@ a:hover .sf-sub-indicator {
 }
 #header {
   background-color: #3959ab;
-  border: 1px solid white;
+  border: 1px solid #b7c3e7;
   border-width: 0 1px 1px;
   margin-bottom: 20px;
   padding: 20px 20px 0;

@@ -36,7 +36,7 @@
         <%= f.submit "Save", :tabindex => 2 %> or
         <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
       <% end %>
-    </div>
+    </div>    
   </div>
   <div id="secondary_col">
     <ul>
@@ -119,7 +119,13 @@
           <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
-      <% unless @task.completed? %>
+      <% if @task.stampable? %>
+        <li>
+          <%= image_tag "tasks/show/#{@task.stamp_name}.png",
+            :id => "task_status" %>
+        </li>
+      <% end %>
+      <% if @task.prioritized? %>
         <li class="primary_button_row">
           <%= link_to "Mark Complete", "",
             :class => "complete_button", :id => "complete_link" %>
@@ -127,6 +133,11 @@
       <% end %>
       <li>
         <ul id="utility_menu">
+          <% if !task.completed? && !task.prioritized? %>
+            <li>
+              <%= link_to "Mark Complete", "", :id => "complete_link" %>
+            </li>
+          <% end %>
           <% if task.completed? %>
             <li><%= link_to_function "Mark Incomplete",
                 "", :id => "mark_incomplete_link" %></li>
