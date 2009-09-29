@@ -42,7 +42,7 @@ a.complete_button {
 }
 #primary_col {
   float: left;
-  padding: 25px 20px;
+  padding: 25px 20px 0;
   width: 470px;
 }
 #primary_col form {
@@ -119,6 +119,9 @@ a.complete_button {
   height: 250px;
   margin-bottom: 10px;
   width: 482px;
+}
+#task_description_container {
+  padding-bottom: 100px;
 }
 #task_description_container form {
   font-size: 12px;
