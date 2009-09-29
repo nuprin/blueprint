@@ -1,26 +1,41 @@
 #content h1 {
   background-image: url(../../images/task-list-header-bkgd.gif);
+  background: white;
   margin: 0;
-  padding: 20px 20px 55px;
+  padding: 30px 20px;
 }
 #tabs {
-  background-image: url(../../images/task-list-header-bkgd.gif);
-  padding: 0 20px;
+  background-image: url(../../images/tab-bkgd.gif);
+  background-position: bottom left;
+  background-repeat: repeat-x;
+  margin: 0 20px 20px;
+  padding-left: 10px;
 }
 #tabs a {
-  background: #e0e6ed;
-  color: #444;
+  background-image: url(../../images/task-list-header-bkgd.gif);
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
+  color: #777;
   display: block;
   float: left;
   font-size: 13px;
   font-weight: bold;
-  line-height: 30px;
-  margin-right: 4px;
-  padding: 0 12px;
+  margin-right: 5px;
+  padding: 9px 12px 7px;
 }
 #tabs a.current {
-  background: #ced8e2;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid white;
+  background: #fff;
+  color: #333;
+}
+#tabs a:hover {
+  background: #3059ab;
+  color: white;
 }
 #tabs .secondary {
   float: right;
+}
+#tabs .secondary a {
+  margin-right: 0;
 }

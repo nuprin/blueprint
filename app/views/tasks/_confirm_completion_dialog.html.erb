@@ -2,7 +2,7 @@
   <h2>Complete Task</h2>
   <% form_tag complete_task_path(task), :id => "complete_form" do %>
     <fieldset>
-      <% fields_for :final_comment do |f| %>
+      <% fields_for :change_comment do |f| %>
         <legend>Add a Comment</legend>
         <%= f.hidden_field :author_id, :value => viewer.id %>
         <%= f.hidden_field :commentable_type, :value => "Task" %>

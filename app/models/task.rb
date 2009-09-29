@@ -95,6 +95,22 @@ class Task < ActiveRecord::Base
     Date.today == self.due_date
   end
 
+  def stampable?
+    self.completed? || self.parked?
+  end
+  
+  def stamp_name
+    if self.completed?
+      "completed"
+    elsif self.deferred_task
+      "deferred"
+    elsif self.parked?
+      "parked"
+    else
+      ""
+    end
+  end
+
   def complete!
     self.status = "completed"
     self.completed_at = Time.now.getutc

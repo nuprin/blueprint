@@ -1,5 +1,8 @@
 <%= javascript_include_tag "projects/header" %>
 <h1>
+  <div class="days_left">
+    <%= pluralize(@project.days_left, "eng day") %> left on this project
+  </div>
   <span id="project_title">
     <span class="editable"><%= h(project.title) %></span>
     <% form_for :project, :html => {:method => :put},

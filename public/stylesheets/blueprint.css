@@ -1,5 +1,5 @@
 a, a:visited {
-  color: #036;
+  color: #04a;
 }
 a {
   text-decoration: none;
@@ -9,11 +9,9 @@ body, input[type=text], textarea {
   font-family: Helvetica, Verdana, Tahoma, sans-serif;
 }
 body {
-  background-color: #012;
+  background-image: url(../images/layout/wood-7.jpg);
   font-size: 12px;
-  margin: 20px auto;
-  padding: 0;
-  width: 800px;
+  position: relative;
 }
 h1 {
   margin-bottom: 2em;
@@ -40,26 +38,18 @@ input[type=text], textarea {
   margin: 0 0 1em 20px;
 }
 .sf-menu ul {
-  background: #ddd;
+  background: #eee;
   border: 1px solid #aaa;
   border-width: 0 1px 1px 0;
   line-height: 25px;
   position: absolute;
   min-width: 140px;
 }
-.notice {
-  background: #060;
-  color: white;
-  line-height: 40px;
-  margin: 0;
-  padding: 0 20px;
-}
 .sf-menu a {
   display: block;
   padding: 0 10px;
 }
 .sf-menu>li {
-  border-right: 1px solid #012;
   float: left;
   width: 120px;
 }
@@ -79,13 +69,16 @@ input[type=text], textarea {
   top: 14px;
   right: 10px;
   text-indent: -9999px;
-  width: 15px;
+  width: 12px;
+}
+a.hover .sf-sub-indicator {
+  background-position: left top;
 }
 .sf-with-ul {
   position: relative;
 }
 .sfHover ul a:hover {
-  background: #3c4650;
+  background: #3959ab;
   color: white;
 }
 #add_button img {
@@ -101,64 +94,79 @@ input[type=text], textarea {
   right: 0;
 }
 #container {
-  background: #fff;
   position: relative;
+  margin: 0 auto;
+  width: 800px;
 }
 #content {
-  padding: 20px;
+  padding: 30px 20px;
+}
+#paper_bkgd {
+  background: white;
+  margin-bottom: 60px;
+  -moz-box-shadow: 0 0 2px #333;
 }
 #filters {
   float: left;
 }
 #filters>li>a {
-  background-image: url(../images/nav-bkgd.gif);
-  color: #ccc;
+  color: white;
   font-weight: bold;
 }
-#filters>li>a:hover {
-  background-image: url(../images/nav-bkgd-hover.gif);  
+#filters>li>a.hover {
+  background: white;
+  color: #3959ab;
+}
+#flash_container {
+  padding: 0 20px;
+}
+#flash_container .notice {
+  background: #fcee21;
+  color: #333;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding: 16px 20px 12px;
+  -moz-box-shadow: 0 0 2px #333;
 }
 #footer {
-  border: 1px solid #33414e;
-  color: #33414e;
-  margin: 20px 0 30px;
-  padding: 9px 10px 10px;
+  background: #bbb;
+  border-top: 1px dotted #e0e0e0;
+  color: #666;
+  margin: 50px 0 0;
+  line-height: 60px;
+  padding: 0 10px;
   text-align: right;
+  font-family: "Gill Sans";
+  letter-spacing: 0.2em;
+  
 }
 #footer #slogan {
   float: left;
-  font-family: "Gill Sans";
-  letter-spacing: 0.2em;
-}
-#globe {
-  background-image: url(../images/globe.gif);
-  height: 124px;
-  left: -132px;
-  position: absolute;
-  top: 0;
-  width: 122px;
 }
 #header {
-  background: #012;
-  padding-bottom: 15px;
-  text-align: right;
+  background-color: #3959ab;
+  border: 1px solid #b7c3e7;
+  border-width: 0 1px 1px;
+  margin-bottom: 20px;
+  padding: 20px 20px 0;
+  -moz-box-shadow: 0 0 2px #333;
 }
-#header a {
+#header #logo {
   display: block;
   float: left;
-  height: 23px;
+  height: 25px;
   overflow: hidden;
   text-indent: -9999px;  
-  width: 200px;
+  width: 170px;
+}
+#header #search_and_logo {
+  margin-bottom: 20px;
+  text-align: right;
 }
 #header h1 {
   float: left;
   margin-bottom: 0;
-}
-#nav {
-  background: #3c4650;
-  border-bottom: 1px solid #012;
-  font-family: Helvetica;
 }
 #nav h3 {
   color: #999;
@@ -167,6 +175,15 @@ input[type=text], textarea {
   margin: 0;
   padding: 0 10px;
 }
+#nav #add_task_link {
+  color: white;
+  float: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#nav #filters>li {
+  border-left: 1px solid #b7c3e7;
+}
 #nav li.divider {
   background: #ccc;
   height: 1px;
@@ -174,9 +191,6 @@ input[type=text], textarea {
 }
 #nav #add_button {
   float: right;
-}
-#nav #filters>li>a {
-  color: white;
 }
 #notifications {
   float: left;
@@ -196,10 +210,13 @@ input[type=text], textarea {
 #search label {
   color: white;
 }
+#search input[type=image] {
+  vertical-align: top;
+}
 #search input[type=text] {
-  background: #33414e;
-  border: 1px solid #666;
+  background: #7289ce;
+  border: 1px solid #b7c3e7;
   color: white;
   margin-left: 8px;
-  padding: 4px;
+  width: 220px;
 }

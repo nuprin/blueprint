@@ -53,7 +53,7 @@ var TaskNavigation = {
     }
   },
   setupSelection: function() {
-    $(".task_list tr").click(function() {
+    $(".task_list tbody tr").click(function() {
       $(".task_list tr").removeClass('cursor');
       $(this).addClass('cursor');
     })

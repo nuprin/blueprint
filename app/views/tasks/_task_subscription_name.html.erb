@@ -1,10 +1,6 @@
 <span class='cc'>
-  <% if sub.user_id == viewer.id %>
-    <strong><%= sub.user.name %></strong>
-    <%= link_to "Remove", subscription_path(sub), :method => "delete",
-      :confirm => "Are you sure? You will no longer receive emails " +
-                  "about this task.", :class => "remove_link" %>
-  <% else %>
-    <%= sub.user.name %>
-  <% end %>
-</span>
+  <%= link_to_user sub.user %><%= link_to image_tag("subscription-x.gif"),
+    subscription_path(sub), :method => "delete",
+    :confirm => "Are you sure? #{sub.user.name} will no longer receive " +
+                "emails about this task.", :class => "remove_link" %>
+</span>&nbsp;

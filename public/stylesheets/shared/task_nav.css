@@ -1,4 +1,12 @@
 .task_list .cursor td {
-  background-color: #CCFFF8;
-  background-image: none !important;
+  background-color: #3059ab !important;
+}
+.task_list .cursor,
+.task_list .cursor a,
+.task_list .cursor td,
+.task_list .cursor .task_menu_items a:hover {
+  color: white !important;
+}
+.task_list .cursor .task_menu_items a {
+  color: #04a !important;
 }

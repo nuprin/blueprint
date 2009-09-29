@@ -1,0 +1,17 @@
+<div id="post_submit_dialog" style="display: none;">
+  <h2 id="change_task_header">Change Saved</h2>
+  <% form_for :comment, Comment.form_for_object(task, viewer),
+    :url => {:controller => "comments", :action => :create} do |f| %>
+    <%= f.hidden_field :commentable_id %>
+    <%= f.hidden_field :commentable_type %>
+    <%= f.hidden_field :author_id %>
+    <%= hidden_field_tag :redirect_url, task_path(task) %>
+    <%= f.label :text, "Why did you make this change? (Optional)" %>
+    <%= f.text_area :text, :rows => nil, :cols => nil, :tabindex => 1 %>
+    <div class="submit clearfix">
+      <%= link_to "Skip", "", :class => "simplemodal-close",
+        :tabindex => -1 %> or
+      <%= f.submit "Post Comment", :tabindex => 2 %>
+    </div>
+  <% end %>
+</div>

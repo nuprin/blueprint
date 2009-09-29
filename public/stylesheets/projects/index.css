@@ -57,7 +57,7 @@ table.project_list td.position {
   margin-bottom: .5em;
 }
 ul.projects li {
-  background: #ddd;
+  background: #eee;
   border-bottom: 1px solid #fff;
   padding: 11px 5px 9px 10px;
 }
@@ -77,6 +77,5 @@ ul.projects li.completed {
   background: white;
 }
 #task_list {
-  background: #ced8e2;
   margin-bottom: 20px;
 }

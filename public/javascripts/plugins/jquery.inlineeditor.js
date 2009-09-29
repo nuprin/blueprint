@@ -14,6 +14,49 @@
     return this.each(function() {  
       var inputField;
       var settings = $.extend({}, $.fn.inlineEditor.defaults, options);
+      var editElement;
+
+      var setup = function() {
+        adjustWidths();
+        form.find("input").blur(onBlur);
+        form.find("select").blur(onBlur);
+        form.find("textarea").blur(onBlur);
+        form.submit(onChange);
+        setupCancel();
+
+        if (editable.html() && editable.html().length > 0)
+          form.hide();
+        editable.attr("title", settings.title);
+
+
+        // Double-click Mode: Double-click to trigger, remove focus to hide.
+        if (settings.doubleClickMode) {
+          clickable.dblclick(displayForm);
+        // Edit Mode: Click edit to trigger, explicitliy click cancel to hide.
+        } else {
+          setupEditLink();
+        }
+      }
+
+      var setupEditLink = function() {
+        editElement = $("<span>edit</span>");
+        editElement.hide();
+        editElement.attr("class", "edit_link");
+        clickable.css({position: "relative"});
+        clickable.mouseover(function() {
+          if (clickable.hasClass("editing")) {
+            editElement.hide();
+          } else {
+            editElement.show();
+          }
+        });
+        clickable.mouseout(function() {
+          editElement.hide();          
+        });
+        clickable.append(editElement);
+        editElement.click(displayForm);
+      }
+
       var onSuccess = function(data) {
         form.hide();
         editable.show();
@@ -33,13 +76,6 @@
         editable.addClass(settings.errorClass);
       }
 
-      var onSubmit = function(e) {
-        if (settings.useAjax) {
-          e.preventDefault();
-          form.ajaxSubmit({success: onSuccess, error: onError});
-        }
-      }
-
       var onChange = function(e) {
         if (settings.useAjax) {
           e.preventDefault();
@@ -49,33 +85,36 @@
           form.submit();
         }
       }
-
-      var onDblClick = function(e) {
+      
+      var displayForm = function(e) {
         if (e.target.tagName == "A") {
           return;
         }
-        adjustWidths();
         editable.hide();
+        form.show();
         processInput();
         processSelect();
         processTextArea();
-        form.css("display", "inline");
-        inputField.blur(onBlur);
+        $(".edit_link").hide();
         clickable.addClass("editing");
         $(document.body).sortable('disable');
       }
 
       var onBlur = function(e) {
         if (form.find("input[type=submit]").length == 0) {
-          form.hide();
-          editable.show();
-          clickable.removeClass("editing");
-          $(document.body).sortable('enable');
+          onCancel();
         }
       }
 
+      var onCancel = function() {
+        form.hide();
+        editable.show();
+        clickable.removeClass("editing");
+        $(document.body).sortable('enable');
+      }
+
       var adjustWidths = function() {
-        textInput.width(clickable.width());
+        textInput.width(clickable.width() - 10);
         select.width(clickable.width());
         textarea.width(clickable.width());        
       }
@@ -83,8 +122,7 @@
       var processInput = function() {
         if (textInput.length > 0) {
           inputField = textInput;
-          textInput.focus().select();
-          form.submit(onSubmit);        
+          textInput.focus().select();            
         }
       }
 
@@ -92,7 +130,9 @@
         if (select.length > 0) {
           inputField = select;
           select.focus();
-          select.change(onChange);
+          if (settings.submitFormOnChange) {
+            select.change(onChange);
+          }
         }
       }
 
@@ -100,8 +140,13 @@
         if (textarea.length > 0) {
           inputField = textarea;
           inputField.focus();
-          form.submit(onSubmit);
         }
+      }
+
+      var setupCancel = function() {
+        form.find(".inlineCancel").each(function() {
+          $(this).click(onCancel);
+        })
       }
 
       var clickable = $(this);
@@ -110,22 +155,14 @@
       var textInput = form.find("input[type=text]");
       var textarea = form.find("textarea");
       var editable = clickable.find(".editable");
-      
-      var styles = ["font-size", "font-weight"];
-      for (var i in styles) {
-        textInput.css(styles[i], clickable.css(styles[i]));
-      }
-      
-      if (editable.html() && editable.html().length > 0)
-        form.hide();
-      editable.attr("title", settings.title);
-      clickable.dblclick(onDblClick);
+      setup();
     });
   };
 })(jQuery);
 
 $.fn.inlineEditor.defaults = {
   errorClass: "inlineError",
-  title: "Double-Click to Edit",
-  useAjax: true
+  useAjax: true,
+  submitFormOnChange: true,
+  doubleClickMode: true
 };

@@ -13,7 +13,7 @@
 }
 #project_footer {
   background-image: url(../../images/task-list-header-bkgd.gif);
-  border-top: 1px solid #bbb;
+  border-top: 1px solid #eee;
   margin: 20px 0 0;
   padding: 12px 20px 10px;
 }
@@ -24,9 +24,8 @@
   margin-bottom: .5em;
 }
 .days_left {
+  float: right;
   font-size: 14px;
-  font-weight: bold;
-  text-align: right;
-  width: 100%;
-  margin-bottom: 10px;
+  font-weight: normal;
+  margin-top: 8px;
 }

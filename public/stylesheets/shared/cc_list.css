@@ -1,7 +1,7 @@
 #cc_list li {
-  background-color: #678;
+  background-color: #3059ab;
   background-image: url("../../images/quick-add-x.gif");
-  background-position: right 2px;
+  background-position: right -1px;
   background-repeat: no-repeat;
   border: 1px solid #8592a0;
   color: white;
@@ -11,7 +11,6 @@
   font-size: 9px;
   line-height: 9px;
   margin: 4px 5px 0 0;
-  padding: 6px 25px 4px 8px;
+  padding: 8px 32px 4px 8px;
   text-transform: uppercase;
-  -moz-border-radius: 2px;
 }

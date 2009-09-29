@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_filter :find_model
+  before_filter :find_model,
+                :create_change_comment_if_present
 
   rescue_from ActiveRecord::RecordNotFound,
               :with => :redirect_from_deleted_task
@@ -135,9 +136,6 @@ class TasksController < ApplicationController
   end
 
   def complete
-    if params[:final_comment] && !params[:final_comment][:text].blank?
-      Comment.create!(params[:final_comment])
-    end
     create_followup_task_if_requested
     @task.complete!
     flash[:notice] = "The task &ldquo;#{@task.title}&rdquo; has been marked " +
@@ -190,6 +188,12 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def create_change_comment_if_present
+    if params[:change_comment] && !params[:change_comment][:text].blank?
+      Comment.create!(params[:change_comment])
+    end
+  end
 
   def create_followup_task_if_requested
     if params[:followup].to_i == 1

@@ -39,24 +39,39 @@ var KeyboardShortcuts = {
 
 var FlashMessage = {
   hideAfterDelay: function () {
-    if ($('#container > p.notice').size() > 0) {
-      setTimeout(function (el) {
-        $('#container > p.notice').slideUp();
-      }, 5000);
-    }
+    setTimeout(function (el) {
+      $('#flash_container').slideUp();
+    }, 5000);
+  }
+};
+
+var Navigation = {
+  onShow: function(elem) {
+    $(this).prev().toggleClass("hover");
+  },
+  onHide: function() {
+    $(this).prev().toggleClass("hover");
   }
 };
 
 $(function() {
   $('ul.sf-menu').superfish({
-    delay:      0,
-    speed:      'fast'
+    delay:  0,
+    speed:  'fast'
   });
+
+  $("#filters > li").hover(function() {
+    $(this).find(">a").toggleClass("hover");
+  }, function() {
+    $(this).find(">a").toggleClass("hover");
+  });
+
   $("textarea").keydown(function(event) {
     if (user.keyboard.character() == "enter") {
       $(this).height($(this).height() + 20);
     }
   });
+  $("#q").hint();
   KeyboardShortcuts.setup();
   FlashMessage.hideAfterDelay();
 });

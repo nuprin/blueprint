@@ -16,7 +16,7 @@
 
 <div id="task_list">
   Show:
-  <select id="filter" style="margin-bottom: 15px;">
+  <select id="filter" style="margin: 10px 0 5px;">
     <option value="all">All</option>
     <% Task.sorted_assignees(@tasks).each do |assignee| %>
       <option value="assignee<%= assignee.id %>">

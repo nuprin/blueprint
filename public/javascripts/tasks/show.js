@@ -24,18 +24,54 @@ var TaskShortkeys = {
   }
 }
 
+function focusChangeComment(parentId) {
+  $(parentId + " #change_comment_text").val($("#comment_text").val());
+  $(parentId + " #change_comment_text").focus();
+}
+
 $(function(){
   $("#complete_link").click(function(e) {
     e.preventDefault();
     $("#confirm_completion").modal();
-    $("#final_comment_text").val($("#comment_text").val());
-    $("#final_comment_text").focus();
-  })
-  $("#task_primary_info h1").inlineEditor();
-  $("#task_logistics li").inlineEditor();
-  $("#description").inlineEditor({onSuccessFn: function(elem) {
-    elem.find(".editable").removeClass("empty");
-  }});
-  $("#status_container").inlineEditor();
+    focusChangeComment("#confirm_completion");
+  });
+
+  // Set up comment behavior for Park, Prioritize, and Mark Incomplete
+  var linkIds = ["mark_incomplete_link", "prioritize_link", "park_link"];
+  for (var i = 0; i < linkIds.length; i++) {
+    $("#" + linkIds[i]).click(function(e) {
+      var id = $(this).attr("id");
+      e.preventDefault();
+      $("#change_task_header").
+        text(TASK_ACTION_INFO[id].header);
+      $("#change_task_submit_name").
+        attr("value", TASK_ACTION_INFO[id].submitText);
+      $("#change_comment_form").attr("action", TASK_ACTION_INFO[id].url);
+      $("#change_task_dialog").modal();
+      focusChangeComment("#change_task_dialog");
+    });    
+  }
+
+  // Make title editable inline.
+  $("#task_main h1").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false
+  });
+  
+  // Make Project, Assignee, Due Date, and Estimate editable inline.
+  $("#secondary_col li.editable_field").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false,
+    onSuccessFn: function(elem) {
+      $("#post_submit_dialog").modal();
+      $("#post_submit_dialog").find("textarea").focus();
+    }
+  });
+
+  $("#task_description_container").inlineEditor({
+    submitFormOnChange: false, doubleClickMode: false, 
+    onSuccessFn: function(elem) {
+      $("#task_description_container .editable").removeClass("empty");
+    }
+  });
+
   TaskShortkeys.setup();
 })

@@ -32,49 +32,19 @@ h2 {
 .edit_task.editing input {
   display: block;
 }
-.events_list li {
-  border-bottom: 1px dotted #ccc;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-}
-.task_field {
-  border: 1px solid #ddd;
-  border-top: none;
-}
 .task_field h2 {
   text-transform: uppercase;
-}
-.taskedit,
-.taskedit a {
-  color: gray;
-}
-.taskedit a {
-  border-bottom: 1px dotted gray;
 }
 .taskedit strong {
   color: #222;
 }
 .taskedit .date {
-  color: #666;
+  color: #898989;
   float: left;
   width: 125px;
 }
 .taskedit .text {
   font-style: italic;
-}
-#add_comment_form {
-  padding: 10px 0;
-}
-#add_comment_form textarea {
-  height: 6em;
-  margin-bottom: 10px;
-  width: 558px;
-}
-#add_comment_form .submit_bar {
-  text-align: right;
-}
-#add_comment_form .file_field {
-  float: left;
 }
 #breadcrumbs {
   border-top: 3px double #ddd;
@@ -84,36 +54,35 @@ h2 {
 }
 #cc {
   background: white;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 12px;
+  border-bottom: 1px solid #eee;
   padding-top: 6px;
 }
 #cc #add_subscriptions {
   float: right;
 }
 /* Default overrides */
+#cc_list {
+  display: block;
+  margin-left: 125px;
+}
 #cc #cc_list .cc {
   margin: 0 5px 5px 0;
+  white-space: nowrap;
 }
 #cc #cc_list .remove_link {
   color: #036;
   cursor: pointer;
   font-size: 9px;
 }
-#comments, #description {
-  line-height: 140%;
-}
 #comments {
-  border-top: 1px solid #ddd;
-  margin-top: 1px;
-  padding: 12px 16px;
+  line-height: 140%;
 }
 .comment .delete_link {
   color: #999;
   font-size: 10px;
 }
 .comment .date {
-  color: #666;
+  color: #898989;
   margin-bottom: 5px;
 }
 .comment .meta {
@@ -129,26 +98,35 @@ h2 {
   margin: 10px 0;
   padding: 9px;
 }
-#comments {
+#change_task_dialog,
+#confirm_completion {
   background: white;
+  border: 1px solid #999;
+  padding: 30px;
 }
-#confirm_completion fieldset {
+.simplemodal-container fieldset {
   border: none;
   margin-bottom: 10px;
   padding: 0;
 }
+.simplemodal-container textarea {
+  margin: 5px 0 10px;
+  width: 424px;
+}
+#comments {
+  background: white;
+}
+#confirm_completion h2 {
+  font-size: 20px;
+  margin-bottom: 1em;
+}
 #confirm_completion legend {
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 5px;
   padding: 0;
 }
 #confirm_completion label span {
   color: #999;
-}
-#confirm_completion textarea {
-  margin: 5px 0 10px;
-  width: 490px;
 }
 #content {
   padding-left: 0;
@@ -173,11 +151,6 @@ h2 {
 #deferred_task_message .button-to {
   float: right;
   margin-left: 5px;
-}
-#description .empty {
-  background: #eee;
-  border: 1px solid #ddd;
-  height: 5em;
 }
 #description #task_submit {
   margin-top: 10px;
@@ -226,19 +199,17 @@ h2 {
 #task_primary_info {
   padding: 22px 16px 30px;  
 }
-#content, #task_links {
-  background-image: url("../../images/task-background.gif");
-}
 #content {
   border-bottom: 1px solid #eee;
-  padding: 40px 45px 100px;
-  width: 710px;
+  padding: 40px 40px 60px;
+  width: 720px;
 }
 #following {
-  padding: 2px 0 27px;
+  margin-bottom: 11px;
 }
 #following label {
   color: #666;
+  float: left;
 }
 #narrow_col {
   float: left;
@@ -314,4 +285,8 @@ h2 {
 }
 #task_links {
   padding-top: 20px;
+}
+#task_title form {
+  font-size: 13px;
+  font-weight: normal;
 }
