@@ -18,11 +18,8 @@ textarea {
   margin-bottom: 2em;
 }
 #form_container {
-  background: #f0f0f0;
-  border-bottom: 1px solid #e3e3e3;
-  border-top: 1px solid #e3e3e3;
   margin: 20px -20px 0;
-  padding: 30px 100px 40px;
+  padding: 0 100px 40px;
 }
 .secondary_fields li, #submit_tags li {
   float: left;
@@ -39,8 +36,10 @@ textarea {
 #submit_tags {
   border-top: 2px solid #ddd;
   padding-top: 15px;
-  text-align: right;
   vertical-align: middle;
+}
+#submit_tags .right {
+  float: right;
 }
 #cc_text, #task_description, #task_title {
   border: 2px solid #ddd;

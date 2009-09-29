@@ -9,8 +9,12 @@
     <%= render :partial => "task_form_fields",
                :locals => {:f => f, :task => @task} %>
     <div class="clearfix" id="submit_tags">
-       <%= link_to 'Back to Task', task_path(@task) %> or
-       <%= f.submit "Save Changes" %>
+      <div class="right">
+        <%= link_to "Delete Task", task_path(@task), :method => :delete,
+          :confirm => "Are you sure you want to delete this task?" %>
+      </div>
+      <%= f.submit "Save Changes" %> or
+      <%= link_to 'Back to Task', task_path(@task) %>
     </div>
   <% end %>
 </div>
