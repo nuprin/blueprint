@@ -40,7 +40,6 @@
 
       var setupEditLink = function() {
         editElement = $("<span>edit</span>");
-        editElement.hide();
         editElement.attr("class", "edit_link");
         clickable.css({position: "relative"});
         clickable.mouseover(function() {
@@ -54,6 +53,7 @@
           editElement.hide();          
         });
         clickable.append(editElement);
+        editElement.hide();
         editElement.click(displayForm);
       }
 
