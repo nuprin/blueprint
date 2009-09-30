@@ -18,6 +18,12 @@ class Task < ActiveRecord::Base
   belongs_to :parent, :class_name => "Task"
   belongs_to :project
 
+  has_attached_file :image,
+    :styles => { :large => "360x360>" },
+    :url  => "/assets/tasks/:id/:style/:basename.:extension",
+    :path =>
+      ":rails_root/public/assets/tasks/:id/:style/:basename.:extension"
+
   has_one :deferred_task
   has_one :specification
 

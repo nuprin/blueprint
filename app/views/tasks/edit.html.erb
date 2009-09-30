@@ -5,7 +5,7 @@
 
 <div id="form_container">
   <% form_for(:task, @task, :url => task_path(@task),
-    :html => {:method => :put}) do |f| %>
+    :html => {:method => :put, :multipart => true}) do |f| %>
     <%= render :partial => "task_form_fields",
                :locals => {:f => f, :task => @task} %>
     <div class="clearfix" id="submit_tags">

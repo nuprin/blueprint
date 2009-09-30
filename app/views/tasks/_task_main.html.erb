@@ -26,6 +26,9 @@
       </span>
     </div>
     <div class="divider"></div>
+    <% if task.image.exists? %>
+      <%= image_tag(task.image.url(:large)) %>
+    <% end %>
     <div id="task_description_container">
       <div class="editable<%= ' empty' if @task.description.blank? %>">
         <%= format_text(@task.description) %>
