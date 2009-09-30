@@ -20,10 +20,10 @@
         <% end %>
         |
       <% end %>
-      <div id="creator">
+      <span id="creator">
         Created by <%= link_to_user @task.creator %>
         at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
-      </div>
+      </span>
     </div>
     <div class="divider"></div>
     <div id="task_description_container">
