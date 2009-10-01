@@ -19,7 +19,7 @@ class Task < ActiveRecord::Base
   belongs_to :project
 
   has_attached_file :image,
-    :styles => { :large => "360x360>" },
+    :styles => { :large => "470x470>" },
     :url  => "/assets/tasks/:id/:style/:basename.:extension",
     :path =>
       ":rails_root/public/assets/tasks/:id/:style/:basename.:extension"

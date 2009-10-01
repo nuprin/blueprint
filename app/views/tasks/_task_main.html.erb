@@ -12,29 +12,30 @@
         <% end %>
       </h1>
 
-      <% if !@task.kind.blank? %>
-        <% if @task.kind == "bug" %>
-          <%= link_to "Bug", bugs_path %>
-        <% else %>
-          <%= @task.kind.capitalize %>
+      <span class="meta">
+        <% if !task.kind.blank? %>
+          <% if task.kind == "bug" %>
+            <%= link_to "Bug", bugs_path %>
+          <% else %>
+            <%= task.kind.capitalize %>
+          <% end %>
+          |
         <% end %>
-        |
-      <% end %>
-      <span id="creator">
-        Created by <%= link_to_user @task.creator %>
-        at <%= @task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
+          Created by <%= link_to_user task.creator %>
+          at <%= task.created_at.getlocal.strftime("%b %e %I:%M%p") %>
       </span>
     </div>
     <div class="divider"></div>
     <% if task.image.exists? %>
-      <%= image_tag(task.image.url(:large)) %>
+      <%= link_to image_tag(task.image.url(:large)), task.image.url,
+                  :target => :blank, :id => "task_screenshot" %>
     <% end %>
     <div id="task_description_container">
-      <div class="editable<%= ' empty' if @task.description.blank? %>">
-        <%= format_text(@task.description) %>
+      <div class="editable<%= ' empty' if task.description.blank? %>">
+        <%= format_text(task.description) %>
       </div>
-      <% form_for(:task, @task, :html => {:method => :put},
-        :url => update_description_task_path(@task)) do |f| %>
+      <% form_for(:task, task, :html => {:method => :put},
+        :url => update_description_task_path(task)) do |f| %>
         <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
         <%= f.submit "Save", :tabindex => 2 %> or
         <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
@@ -46,19 +47,19 @@
       <li>
         <div class="info_row clearfix">
           <h3>No.</h3>
-          <span class="task_num"><%= @task.id %></span>
+          <span class="task_num"><%= task.id %></span>
         </div>
       </li>
       <li class="editable_field clearfix">
         <div class="info_row clearfix">
           <h3>Project</h3>
           <span class="editable">
-          <% if @task.project_id %>
-              <%= link_to_project @task.project %>
+          <% if task.project_id %>
+              <%= link_to_project task.project %>
           <% end %>
           </span>
         </div>
-        <% form_for :task, @task, :url => update_project_task_path(@task),
+        <% form_for :task, task, :url => update_project_task_path(task),
           :html => {:method => :put} do |f| %>
           <%= hidden_field_tag :include_link, 1 %>
           <%= f.select :project_id,
@@ -72,13 +73,13 @@
         <div class="info_row clearfix">
           <h3>Assigned To</h3>
           <span class="editable">
-          <% if @task.assignee_id %>
-            <%= link_to_user @task.assignee %>
+          <% if task.assignee_id %>
+            <%= link_to_user task.assignee %>
           <% end %>
           </span>
         </div>
-        <% form_for :task, @task,
-          :url => update_assignee_task_path(@task),
+        <% form_for :task, task,
+          :url => update_assignee_task_path(task),
           :html => {:method => :put} do |f| %>
           <%= hidden_field_tag :include_link, 1 %>
           <%= f.select :assignee_id,
@@ -92,13 +93,13 @@
         <div class="info_row clearfix">
           <h3>Due On</h3>
           <span class="editable">
-            <% if @task.due_date %>
-              <%= @task.due_date.strftime("%b %e") %>
+            <% if task.due_date %>
+              <%= task.due_date.strftime("%b %e") %>
             <% end %>
           </span>
         </div>
-        <% form_for :task, @task,
-          :url => update_due_date_task_path(@task),
+        <% form_for :task, task,
+          :url => update_due_date_task_path(task),
           :html => {:method => :put} do |f| %>
           <%= f.text_field :due_date %>
           <%= f.submit "Save" %> or
@@ -109,26 +110,26 @@
         <div class="info_row clearfix">
           <h3>Estimate</h3>
           <span class="editable">
-          <% if @task.estimate %>
-            <%= @task.estimate %>
+          <% if task.estimate %>
+            <%= task.estimate %>
           <% end %>
           </span>
         </div>
-        <% form_for :task, @task,
-            :url => update_estimate_task_path(@task),
+        <% form_for :task, task,
+            :url => update_estimate_task_path(task),
             :html => {:method => :put} do |f| %>
           <%= f.text_field :estimate %>
           <%= f.submit "Save" %> or
           <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
         <% end %>
       </li>
-      <% if @task.stampable? %>
+      <% if task.stampable? %>
         <li>
-          <%= image_tag "tasks/show/#{@task.stamp_name}.png",
+          <%= image_tag "tasks/show/#{task.stamp_name}.png",
             :id => "task_status" %>
         </li>
       <% end %>
-      <% if @task.prioritized? %>
+      <% if task.prioritized? %>
         <li class="primary_button_row">
           <%= link_to "Mark Complete", "",
             :class => "complete_button", :id => "complete_link" %>

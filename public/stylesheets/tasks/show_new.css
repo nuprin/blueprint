@@ -22,6 +22,9 @@ a.complete_button {
   line-height: 14px;
   margin-left: 125px;
 }
+.meta {
+  color: #666;
+}
 #add_comment_form {
   margin-left: 125px;
   padding: 10px 0;
@@ -36,9 +39,6 @@ a.complete_button {
 }
 #add_comment_form .file_field {
   float: left;
-}
-#creator {
-  color: #666;
 }
 #primary_col {
   float: left;
@@ -125,6 +125,9 @@ a.complete_button {
 }
 #task_description_container form {
   font-size: 12px;
+}
+#task_screenshot {
+  margin-bottom: 10px;
 }
 .divider {
   background: #ccc;

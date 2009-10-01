@@ -11,7 +11,8 @@
 </script>
 <h1>Add a Task</h1>
 <div id="form_container">
-  <% form_for(@task) do |f| %>
+  <% form_for(:task, @task, :url => tasks_path,
+    :html => {:multipart => true}) do |f| %>
     <% if @task.parent_id %>
       <% if @task.project_id %>
         <p>Project: <strong><%= link_to_project @task.project %></strong></p>
