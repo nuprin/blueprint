@@ -7,7 +7,6 @@ a.complete_button {
   font-weight: bold;
   line-height: 16px;
   padding: 9px 20px 7px;
-  -moz-box-shadow: 0 0 2px #333;
 }
 .events_list li {
   border-bottom: 1px solid #eee;
