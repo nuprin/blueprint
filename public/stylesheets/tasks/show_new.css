@@ -26,13 +26,14 @@ a.complete_button {
   color: #666;
 }
 #add_comment_form {
-  margin-left: 125px;
-  padding: 10px 0;
+  background-image: url(../../images/task-list-header-bkgd.gif);
+  padding: 15px 10px 15px 125px;
 }
 #add_comment_form textarea {
+  border: 1px solid #bbb;
   height: 6em;
   margin-bottom: 10px;
-  width: 540px;
+  width: 525px;
 }
 #add_comment_form .submit_bar {
   text-align: right;
