@@ -11,7 +11,12 @@ class TaskMailer < ActionMailer::Base
     from       from_email(task.creator)
     subject    task_subject(task)
     reply_to   REPLY_TO
-    body       :task => task, :recipient => recipient
+    maybe_attach_image(task)
+    part :content_type => "text/plain",
+         :body =>
+            render_message("task_creation", :task => task,
+              :recipient => recipient)
+
   end
 
   def new_comment(recipient, task, comment)
@@ -19,71 +24,12 @@ class TaskMailer < ActionMailer::Base
     from       from_email(comment.author)
     subject    task_subject(task)
     reply_to   REPLY_TO
-    if comment.image_file_name
-      attachment :content_type => comment.image_content_type,
-                 :body         => File.read(comment.image.path)
-    end
+    maybe_attach_image(comment)
     part :content_type => "text/plain",
          :body =>
             render_message("new_comment", :comment => comment, :task => task)
   end
 
-  def assignee_id_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def due_date_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def estimate_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def status_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def description_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def title_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-
-  def project_id_edit(recipient, task, edit)
-    recipients recipient_email(recipient)
-    from       from_email(edit.editor)
-    subject    task_subject(edit.task)
-    reply_to   REPLY_TO
-    body       :edit => edit
-  end
-  
   def new_subscription(subscription, editor)
     recipients recipient_email(subscription.user)
     from       from_email(editor)
@@ -118,15 +64,16 @@ class TaskMailer < ActionMailer::Base
   end
 
   private
-  
-  def task_subject(task)
-    # TODO [chris]: Remove after there's little activity for tasks created
-    # before this date.
-    if task.created_at >= Time.parse("January 15, 2009 11:00:00").getutc
-      "(Blueprint ##{task.id}) #{task.title}"
-    else
-      "(##{task.id}) #{task.title}"      
+
+  def maybe_attach_image(attachable)
+    if attachable.image.exists?
+      attachment :content_type => attachment.image_content_type,
+                 :body         => File.read(attachable.image.path)
     end
+  end
+
+  def task_subject(task)
+    "(Blueprint ##{task.id}) #{task.title}"
   end
 
   def task_editor_email(task)
