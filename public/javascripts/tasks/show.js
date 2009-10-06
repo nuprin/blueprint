@@ -67,7 +67,7 @@ $(function(){
   });
 
   $("#task_description_container").inlineEditor({
-    submitFormOnChange: false, doubleClickMode: false, 
+    doubleClickMode: false, useAjax: false,
     onSuccessFn: function(elem) {
       $("#task_description_container .editable").removeClass("empty");
     }

@@ -34,9 +34,13 @@
       <div class="editable<%= ' empty' if task.description.blank? %>">
         <%= format_text(task.description) %>
       </div>
-      <% form_for(:task, task, :html => {:method => :put},
-        :url => update_description_task_path(task)) do |f| %>
+      <% form_for(:task, task, :html => {:method => :put, :multipart => true},
+        :url => task_path(task)) do |f| %>
         <%= f.text_area :description, :rows => nil, :tabindex => 1 %>
+        <p>
+          <%= f.label :image, "Add a screenshot" %>
+          <%= f.file_field :image %>
+        </p>
         <%= f.submit "Save", :tabindex => 2 %> or
         <%= link_to_function "Cancel", "", :class => "inlineCancel" %>
       <% end %>
