@@ -4,6 +4,13 @@
   margin: 0;
   padding: 30px 20px;
 }
+#search form input {
+  margin: 0;
+}
+#search form input[type=text] {
+  height: 15px;
+  padding: 6px 5px 5px;
+}
 #tabs {
   background-image: url(../../images/tab-bkgd.gif);
   background-position: bottom left;
