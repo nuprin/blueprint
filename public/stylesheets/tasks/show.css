@@ -99,7 +99,8 @@ h2 {
   padding: 9px;
 }
 #change_task_dialog,
-#confirm_completion {
+#confirm_completion,
+#post_submit_dialog {
   background: white;
   border: 1px solid #999;
   padding: 30px;
