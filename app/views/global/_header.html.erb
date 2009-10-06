@@ -1,14 +1,15 @@
-<div class="shadow" id="header">
-  <div id="search_and_logo">
-    <h1><%= link_to image_tag("layout/logo.gif"), "/", :id => "logo" %></h1>
-    <div id="search">
-      <% form_tag search_path, :method => :get do %>
-        <%= text_field_tag :q, params[:q],
-          :title => "Search Tasks & Projects" %><%= 
-          image_submit_tag "layout/search.gif" %>
-      <% end %>
+<div class="shadow" id="header_container">
+  <div id="header">
+    <div id="search_and_logo">
+      <h1><%= link_to image_tag("layout/logo.gif"), "/", :id => "logo" %></h1>
+      <div id="search">
+        <% form_tag search_path, :method => :get do %>
+          <%= text_field_tag :q, params[:q],
+            :title => "Search Tasks & Projects" %><%= 
+            image_submit_tag "layout/search.gif" %>
+        <% end %>
+      </div>
     </div>
+    <%= render :partial => "/global/nav" %>
   </div>
-  <%= render :partial => "/global/nav" %>
 </div>
-

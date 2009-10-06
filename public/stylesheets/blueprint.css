@@ -148,9 +148,6 @@ a.hover .sf-sub-indicator {
 }
 #header {
   background-color: #3959ab;
-  border: 1px solid #b7c3e7;
-  border-width: 0 1px 1px;
-  margin-bottom: 20px;
   padding: 20px 20px 0;
 }
 #header #logo {
@@ -168,6 +165,14 @@ a.hover .sf-sub-indicator {
 #header h1 {
   float: left;
   margin-bottom: 0;
+}
+#header_container {
+  background: #b7c3e7;
+/*  border: 1px solid #b7c3e7;*/
+  border: 1px solid #3959ab;
+  border-width: 0 4px 4px;  
+  margin-bottom: 20px;
+  padding: 0 1px 1px;
 }
 #nav h3 {
   color: #999;
