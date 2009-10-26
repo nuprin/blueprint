@@ -32,10 +32,25 @@ class Comment < ActiveRecord::Base
 
   after_create do |comment|
     comment.author.subscribe_to(comment.commentable)
+    comment.subscribe_anyone_mentioned
   end
   
   after_save do |comment|
     comment.send_later(:send_comment_email)
+  end
+
+  def subscribe_anyone_mentioned
+    self.mentioned_users.each do |user|
+      user.subscribe_to(self.commentable)
+      # TODO [chris]: Ensure that a TaskEdit is created and that the new
+      # user is notified.
+    end
+  end
+
+  def mentioned_users
+    User.active.select do |user|
+      self.text.include?(user.name)
+    end
   end
 
   def send_comment_email

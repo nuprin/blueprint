@@ -3,8 +3,7 @@ class CommentsController < ApplicationController
   def create
     begin
       comment = Comment.create!(params[:comment])
-      flash[:notice] = "Your comment has been created. You will also receive " +
-                       "email notifications about future changes to this task."
+      flash[:notice] = "Your comment has been created."
     rescue ActiveRecord::RecordInvalid
       flash[:notice] = "Your comment must have either text or photo."
     end
