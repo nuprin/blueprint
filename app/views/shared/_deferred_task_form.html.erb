@@ -14,7 +14,8 @@
           "(#{t0.strftime("%b %e %I:00%p")})</span>" %>
       </li>
       <% t1 = Chronic.parse("next monday 6:00am") %>
-      <% unless t0 == t1 %>
+      <%# Chronic bug. next monday does not always return true. %>
+      <% if t1 && t0 != t1 %>
         <li>
           <%= f.radio_button :prioritize_at, t1,
             :id => "deferred_task_prioritize_at_1" %>
