@@ -49,7 +49,7 @@ class Comment < ActiveRecord::Base
 
   def mentioned_users
     User.active.select do |user|
-      self.text.include?(user.name)
+      self.text.downcase.include?(user.name.downcase)
     end
   end
 
