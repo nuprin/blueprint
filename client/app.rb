@@ -272,6 +272,7 @@ def setup
 end
 
 def handle_line(line)
+  return if line.strip == ''
   components = line.split(' ', 2)
   command = components.first
   # Do nothing if the command is empty
