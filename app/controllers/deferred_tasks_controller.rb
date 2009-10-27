@@ -8,8 +8,6 @@ class DeferredTasksController < ApplicationController
     rescue ActiveRecord::RecordInvalid
       flash[:notice] =
         "There was an error in parking your task. Please try again."
-    rescue => ex
-      flash[:notice] = ex.message
     end
     redirect_to :back
   end
