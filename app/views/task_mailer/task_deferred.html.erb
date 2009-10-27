@@ -1,7 +1,7 @@
 <%= @deferred_task.creator.name %> deferred the task. It will be reprioritized again on <%= @deferred_task.friendly_prioritize_at %>.
 
 View this task:
-<%= task_url(@task) %>
+<%= task_url(@deferred_task.task) %>
 
 ----
 <%= task_footer(@deferred_task.task) %>
