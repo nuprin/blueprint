@@ -2,11 +2,16 @@ module TaskMailerHelper
   def task_type(task)
     task.kind.blank? ? "task" : task.kind
   end
-  
+
   def task_footer(task)
     fields = []
     if !task.kind.blank?
       fields << ["Kind", task.kind.capitalize]
+    end
+    if task.assignee
+      fields << ["Assigned To", task.assignee.name]
+    else
+      fields << ["Unassigned"]
     end
     if !task.subscribed_user_names.blank?
       fields << ["Subscribed", task.subscribed_user_names]
