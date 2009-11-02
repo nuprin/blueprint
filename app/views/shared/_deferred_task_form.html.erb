@@ -5,7 +5,7 @@
     <%= f.hidden_field :task_id %>
     <%= f.hidden_field :creator_id, :value => viewer.id %>
     <ul>
-      <% t0 = Chronic.parse("tomorrow 6:00am") %>
+      <% t0 = Chronic.parse("tomorrow 6:00am")||Time.today %>
       <li>
         <%= f.radio_button :prioritize_at, t0,
           :id => "deferred_task_prioritize_at_0", :checked => "checked" %>
@@ -13,7 +13,7 @@
           "Tomorrow <span class='details'>" +
           "(#{t0.strftime("%b %e %I:00%p")})</span>" %>
       </li>
-      <% t1 = Chronic.parse("next monday 6:00am") %>
+      <% t1 = Chronic.parse("next monday 6:00am")||Time.today %>
       <%# Chronic bug. next monday does not always return true. %>
       <% if t1 && t0 != t1 %>
         <li>
