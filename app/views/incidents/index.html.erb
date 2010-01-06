@@ -13,7 +13,7 @@
 <% for incident in @incidents %>
   <tr>
     <td><%=h incident.title %></td>
-    <td><%=h incident.description %></td>
+    <td><%=h incident.description.first(100) %></td>
     <td><%=h incident.started_at.getlocal %></td>
     <td><%=h incident.ended_at.getlocal %></td>
     <td><%= link_to 'Show', incident %></td>
