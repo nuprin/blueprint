@@ -11,12 +11,14 @@ class TaskMailer < ActionMailer::Base
     from       from_email(task.creator)
     subject    task_subject(task)
     reply_to   REPLY_TO
-    maybe_attach_image(task)
     part :content_type => "text/plain",
          :body =>
             render_message("task_creation", :task => task,
               :recipient => recipient)
-
+    if task.image.exists?
+      attachment :content_type => task.image_content_type,
+                 :body         => File.read(task.image.path)
+    end
   end
 
   def new_comment(recipient, task, comment)
@@ -24,10 +26,13 @@ class TaskMailer < ActionMailer::Base
     from       from_email(comment.author)
     subject    task_subject(task)
     reply_to   REPLY_TO
-    maybe_attach_image(comment)
     part :content_type => "text/plain",
          :body =>
             render_message("new_comment", :comment => comment, :task => task)
+    if comment.image.exists?
+      attachment :content_type => comment.image_content_type,
+                 :body         => File.read(comment.image.path)
+    end    
   end
 
   def new_subscription(subscription, editor)
@@ -64,13 +69,6 @@ class TaskMailer < ActionMailer::Base
   end
 
   private
-
-  def maybe_attach_image(attachable)
-    if attachable.image.exists?
-      attachment :content_type => attachment.image_content_type,
-                 :body         => File.read(attachable.image.path)
-    end
-  end
 
   def task_subject(task)
     "(Blueprint ##{task.id}) #{task.title}"
