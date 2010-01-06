@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :incidents
+
   map.namespace(:api) do |api|
     api.resources :projects
     api.resources :tasks, :member => {

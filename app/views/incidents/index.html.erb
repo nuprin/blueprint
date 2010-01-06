@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag "incidents/index" %>
+
+<h1>Incidents (<%= @incidents.size %>)</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+  </tr>
+
+<% for incident in @incidents %>
+  <tr>
+    <td><%=h incident.title %></td>
+    <td><%=h incident.description %></td>
+    <td><%=h incident.started_at.getlocal %></td>
+    <td><%=h incident.ended_at.getlocal %></td>
+    <td><%= link_to 'Show', incident %></td>
+    <td><%= link_to 'Edit', edit_incident_path(incident) %></td>
+    <td><%= link_to 'Destroy', incident, :confirm => 'Are you sure?',
+      :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Declare an Incident', new_incident_path %>

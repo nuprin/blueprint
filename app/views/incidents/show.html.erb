@@ -1,0 +1,18 @@
+<p>
+  <b>Title:</b>
+  <%=h @incident.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @incident.description %>
+</p>
+
+<p>
+  <b>Ended at:</b>
+  <%=h @incident.ended_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_incident_path(@incident) %> |
+<%= link_to 'Back', incidents_path %>
