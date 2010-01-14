@@ -1,6 +1,16 @@
 .add_link {
   float: right;
 }
+.attachment {
+  margin-top: 10px;
+}
+.attachment_link {
+  background-image: url(../../images/tasks/show/link.gif);
+  background-position: left 1px;
+  background-repeat: no-repeat;
+  font-weight: bold;
+  padding: 3px 0 2px 22px;
+}
 #content h1, #content h1 input[type="text"] {
   font-size: 32px;
   margin-bottom: 0;
