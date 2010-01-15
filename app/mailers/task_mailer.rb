@@ -17,7 +17,8 @@ class TaskMailer < ActionMailer::Base
               :recipient => recipient)
     if task.image.exists?
       attachment :content_type => task.image_content_type,
-                 :body         => File.read(task.image.path)
+                 :body         => File.read(task.image.path),
+                 :filename     => task.image_file_name
     end
   end
 
@@ -31,7 +32,8 @@ class TaskMailer < ActionMailer::Base
             render_message("new_comment", :comment => comment, :task => task)
     if comment.image.exists?
       attachment :content_type => comment.image_content_type,
-                 :body         => File.read(comment.image.path)
+                 :body         => File.read(comment.image.path),
+                 :filename     => comment.image_file_name
     end    
   end
 
